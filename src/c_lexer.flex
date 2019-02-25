@@ -22,8 +22,8 @@ auto { return AUTO; }
 ">" { return T_GREATER_THAN; }
 "<=" { return T_LESS_THAN_EQ; }
 ">=" { return T_GREATER_THAN_EQ; }
-"==" { return T_EQUALS; }
-"!=" { return T_NOT_EQUALS; }
+"==" { return T_EQ_EQ; }
+"!=" { return T_NOT_EQ; }
 
 "&" { return T_AND; }
 "&&" { return T_AND_AND; }
@@ -31,6 +31,19 @@ auto { return AUTO; }
 "||" { return T_OR_OR; }
 "^" { return T_XOR; }
 
+"=" { return T_EQ; }
+"+=" { return T_PLUS_EQ; }
+"-=" { return T_MINUS_EQ; }
+"*=" { return T_MULTIPLY_EQ; }
+"/=" { return T_DIVIDE_EQ; }
+"%=" { return T_MODULO_EQ; }
+"&=" { return T_AND_EQ; }
+"|=" { return T_OR_EQ; }
+"^=" { return T_XOR_EQ; }
+"<<=" { return T_LSHIFT_EQ; }
+">>=" { return T_RSHIFT_EQ; }
+
+"," { return T_COMMA; }
 
 %%
 
