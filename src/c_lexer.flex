@@ -78,6 +78,13 @@ while { return T_WHILE; }
 ":" { return T_COLON; }
 "?" { return T_QUESTION; }
 
+"(" { return T_LBRACKET; }
+")" { return T_RBRACKET; }
+"[" { return T_LSQUARE_BRACKET; }
+"]" { return T_RSQUARE_BRACKET; }
+"{" { return T_LCURLY_BRACE; }
+"}" { return T_RCURLY_BRACE; }
+
 %%
 
 void yyerror (char const *s)
