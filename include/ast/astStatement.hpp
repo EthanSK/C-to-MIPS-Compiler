@@ -1,27 +1,22 @@
-#ifndef ast_expression_hpp
-#define ast_expression_hpp
+#ifndef astStatement_hpp
+#define astStatement_hpp
 
+#include <vector>
 #include <string>
 #include <iostream>
-#include <map>
-
 #include <memory>
 
-class Expression;
+class Statement;
+typedef std::unique_ptr<Statement> StatementPtr;
 
-typedef const Expression *ExpressionPtr;
-
-class Expression
+class Statement
 {
 public:
-    virtual ~Expression() { }
+	virtual ~Statement() { }
+	virtual void printCode(std::ostream &os) const = 0;
 
-    //! Tell and expression to print itself to the given stream
-    virtual void print(std::ostream &dst) const = 0;
-
-    //! Evaluate the tree using the given mapping of variables to numbers
-    virtual double evaluate(const std::map<std::string,double> &bindings) const = 0;
+protected:
+	std::vector<StatementPtr> branches;
 };
-
 
 #endif
