@@ -15,14 +15,22 @@ auto { return AUTO; }
 "*" { return T_MULTIPLY; }
 "/" { return T_DIVIDE; }
 "%" { return T_MODULO; }
-<< { return T_LSHIFT; }
->> { return T_RSHIFT; }
-< { return T_LESS_THAN; }
-> { return T_GREATER_THAN; }
-<= { return T_LESS_THAN_EQ; }
->= { return T_GREATER_THAN_EQ; }
-== { return T_EQUALS; }
-!= { return T_NOT_EQUALS; }
+"<<" { return T_LSHIFT; }
+">>" { return T_RSHIFT; }
+
+"<" { return T_LESS_THAN; }
+">" { return T_GREATER_THAN; }
+"<=" { return T_LESS_THAN_EQ; }
+">=" { return T_GREATER_THAN_EQ; }
+"==" { return T_EQUALS; }
+"!=" { return T_NOT_EQUALS; }
+
+"&" { return T_AND; }
+"&&" { return T_AND_AND; }
+"|" { return T_OR; }
+"||" { return T_OR_OR; }
+"^" { return T_XOR; }
+
 
 %%
 
