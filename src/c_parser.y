@@ -16,6 +16,7 @@
 }
 
 %token AUTO
+%token T_PLUS T_MINUS T_MULTIPLY T_DIVIDE T_MODULO
 
 %type <expr> EXPR
 

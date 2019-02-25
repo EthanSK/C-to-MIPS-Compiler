@@ -3,3 +3,7 @@ bin
 *.o
 *.d
 
+src/c_lexer.yy.cpp
+src/c_parser.output
+src/c_parser.tab.cpp
+src/c_parser.tab.hpp

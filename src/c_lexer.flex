@@ -10,6 +10,12 @@ extern "C" int fileno(FILE *stream);
 
 auto { return AUTO; }
 
+"+" { return T_PLUS; }
+"-" { return T_MINUS; }
+"*" { return T_MULTIPLY; }
+"/" { return T_DIVIDE; }
+"%" { return T_MODULO; }
+
 %%
 
 void yyerror (char const *s)
