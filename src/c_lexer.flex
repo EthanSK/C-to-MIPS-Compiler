@@ -8,7 +8,7 @@ extern "C" int fileno(FILE *stream);
 
 %%
 
-//token go here
+//tokens go here
 
 %%
 
