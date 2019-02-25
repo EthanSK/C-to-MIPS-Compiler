@@ -15,8 +15,8 @@ public:
 	virtual ~Statement();
 	friend std::ostream& operator<<(std::ostream& os, const Statement& statement);
 
-private:
-	virtual void printCode(std::ostream &os) const = 0; //called in << overload
+protected:
+	virtual void printCode(std::ostream &os) const = 0; //prints c90 code so we can compare against input code //called in << overload
 
 protected:
 	std::vector<StatementPtr> branches;
