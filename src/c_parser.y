@@ -2,7 +2,7 @@
   #include "ast.hpp"
   #include <cassert>
 
-  extern const Expression *g_root;
+  extern StatementPtr g_root;
 
   int yylex(void);
   void yyerror(const char *);
@@ -10,23 +10,29 @@
 
 %union
 {
-  const Expression *expr;
+  StatementPtr expr;
   double number;
   std::string *string;
 }
 
-//Token go here
+%token AUTO
+
+%type <expr> EXPR
+
+%start ROOT
+
 %%
 
-//Grammar goes here
+ROOT : EXPR {  }
+EXPR : AUTO {  }
 
 %%
 
-const Expression *g_root; // Definition of variable (to match declaration earlier)
+StatementPtr g_root; // Definition of variable (to match declaration earlier)
 
-const Expression *parseAST()
+StatementPtr parseAST()
 {
-  g_root = 0;
+  g_root = NULL;
   yyparse();
   return g_root;
 }

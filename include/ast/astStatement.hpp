@@ -7,7 +7,7 @@
 #include <memory>
 
 class Statement;
-typedef std::unique_ptr<Statement> StatementPtr;
+typedef const Statement* StatementPtr;
 
 class Statement
 {
