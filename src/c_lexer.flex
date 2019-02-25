@@ -8,7 +8,38 @@ extern "C" int fileno(FILE *stream);
 
 %%
 
-auto { return AUTO; }
+auto { return T_AUTO; }
+break { return T_BREAK; }
+case { return T_CASE; }
+char { return T_CHAR; }
+const { return T_CONST; }
+continue { return T_CONTINUE; }
+default { return T_DEFAULT; }
+do { return T_DO; }
+double { return T_DOUBLE; }
+else { return T_ELSE; }
+enum { return T_ENUM; }
+extern { return T_EXTERN; }
+float { return T_FLOAT; }
+for { return T_FOR; }
+goto { return T_GOTO; }
+if { return T_IF; }
+int { return T_INT; }
+long { return T_LONG; }
+register { return T_REGISTER; }
+return { return T_RETURN; }
+short { return T_SHORT; }
+signed { return T_SIGNED; }
+sizeof { return T_SIZEOF; }
+static { return T_STATIC; }
+struct { return T_STRUCT; }
+switch { return T_SWITCH; }
+typedef { return T_TYPEDEF; }
+union { return T_UNION; }
+unsigned { return T_UNSIGNED; }
+void { return T_VOID; }
+volatile { return T_VOLATILE; }
+while { return T_WHILE; }
 
 "+" { return T_PLUS; }
 "-" { return T_MINUS; }
