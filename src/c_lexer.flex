@@ -47,6 +47,11 @@ auto { return AUTO; }
 ":" { return T_COLON; }
 "?" { return T_QUESTION; }
 
+"!" { return T_NOT; }
+"~" { return T_INVERT; }
+"++" { return T_PLUS_PLUS; }
+"--" { return T_MINUS_MINUS; }
+
 %%
 
 void yyerror (char const *s)
