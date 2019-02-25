@@ -12,7 +12,7 @@ typedef const Statement* StatementPtr;
 class Statement
 {
 public:
-	virtual ~Statement() { }
+	virtual ~Statement();
 	friend std::ostream& operator<<(std::ostream& os, const Statement& statement);
 
 private:
