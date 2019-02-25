@@ -44,6 +44,8 @@ auto { return AUTO; }
 ">>=" { return T_RSHIFT_EQ; }
 
 "," { return T_COMMA; }
+":" { return T_COLON; }
+"?" { return T_QUESTION; }
 
 %%
 
