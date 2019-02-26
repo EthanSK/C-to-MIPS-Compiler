@@ -5,9 +5,10 @@
 #include <string>
 #include <iostream>
 #include <memory>
-#include "../binaryOperator.hpp"
 
-class AddOperator : BinaryOperator
+#include "binaryOperator.hpp"
+
+class BinaryAddOperator : BinaryOperator
 { 
     void printCode(std::ostream &os) const override;
 }; 
