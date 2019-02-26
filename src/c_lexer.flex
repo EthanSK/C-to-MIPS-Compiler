@@ -76,6 +76,7 @@ while { return T_WHILE; }
 
 "," { return T_COMMA; }
 ":" { return T_COLON; }
+";" { return T_SEMICOLON; }
 "?" { return T_QUESTION; }
 
 "(" { return T_LBRACKET; }
