@@ -74,6 +74,8 @@ while { return T_WHILE; }
 "<<=" { return T_LSHIFT_EQ; }
 ">>=" { return T_RSHIFT_EQ; }
 
+"." { return T_DOT; }
+"->" { return T_ARROW; }
 "," { return T_COMMA; }
 ":" { return T_COLON; }
 ";" { return T_SEMICOLON; }
