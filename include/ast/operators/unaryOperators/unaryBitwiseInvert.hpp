@@ -3,7 +3,7 @@
 
 #include "unaryOperator.hpp"
 
-class unaryBitwiseInvert : UnaryOperator
+class UnaryBitwiseInvert : UnaryOperator
 { 
     void printCode(std::ostream &os) const override;
 }; 
