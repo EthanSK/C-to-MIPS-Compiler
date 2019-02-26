@@ -1,9 +1,9 @@
-#ifndef unaryAdd_hpp
-#define unaryAdd_hpp
+#ifndef unaryMinus_hpp
+#define unaryMinus_hpp
 
 #include "unaryOperator.hpp"
 
-class UnaryAdd : UnaryOperator
+class UnaryMinus : UnaryOperator
 { 
     void printCode(std::ostream &os) const override;
 }; 

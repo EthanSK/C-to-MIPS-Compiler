@@ -1,9 +1,9 @@
-#ifndef unaryAdd_hpp
-#define unaryAdd_hpp
+#ifndef unaryNot_hpp
+#define unaryNot_hpp
 
 #include "unaryOperator.hpp"
 
-class UnaryAdd : UnaryOperator
+class UnaryNot : UnaryOperator
 { 
     void printCode(std::ostream &os) const override;
 }; 
