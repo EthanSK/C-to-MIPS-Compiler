@@ -1,6 +1,9 @@
 CPPFLAGS += -std=c++11 -W -Wall -g -Wno-unused-parameter
 CPPFLAGS += -I include
 
+# Avoid warning about register being deprecated on C++17
+CPPFLAGS += -Wno-deprecated-register
+
 all : bin/main
 
 src/c_parser.tab.cpp src/c_parser.tab.hpp : src/c_parser.y

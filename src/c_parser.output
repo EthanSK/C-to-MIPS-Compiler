@@ -20,7 +20,7 @@ $accept (4)
     on left: 0
 ROOT (5)
     on left: 1, on right: 0
-EXPR (6)
+EXPR <expr> (6)
     on left: 2, on right: 1
 
 
