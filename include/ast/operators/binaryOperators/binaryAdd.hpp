@@ -1,11 +1,8 @@
-#ifndef add_hpp
-#define add_hpp
+#ifndef binaryAdd_hpp
+#define binaryAdd_hpp
 
-#include <vector>
-#include <string>
+
 #include <iostream>
-#include <memory>
-
 #include "binaryOperator.hpp"
 
 class BinaryAddOperator : BinaryOperator
