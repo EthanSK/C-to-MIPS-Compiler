@@ -105,7 +105,7 @@ while { return T_WHILE; }
 {DIGIT}+\.{DIGIT}*[fF]? { yylval.number = std::stod(yytext); return T_NUMBER; }
 {DIGIT}*\.{DIGIT}+[fF]? { yylval.number = std::stod(yytext); return T_NUMBER; }
 
-\"[^\"]*\" { yylval.string = new std::string(yytext, 1, strlen(yytext) - 2); }
+L?\"(\\.|[^\\"])*\" { yylval.string = new std::string(yytext, 1, strlen(yytext) - 2); }
 
 %%
 
