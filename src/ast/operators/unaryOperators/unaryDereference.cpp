@@ -1,6 +1,6 @@
 #include "unaryDereference.hpp"
 
-void unaryDereference::printCode(std::ostream &os) const
+void UnaryDereference::printCode(std::ostream &os) const
 {
 	os << "*(" << getOperand() << ")";
 }
