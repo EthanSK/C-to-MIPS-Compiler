@@ -8,6 +8,10 @@ extern "C" int fileno(FILE *stream);
 
 %%
 
+[0-9] DIGIT
+[0-9A-Fa-f] HEXDIGIT
+[_A-Za-z] NONDIGIT
+
 auto { return T_AUTO; }
 break { return T_BREAK; }
 case { return T_CASE; }
