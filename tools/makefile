@@ -25,5 +25,3 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 clean:
 	rm -rf $(OBJ_DIR)
 	rm -rf $(BIN_DIR)
-	rm -rf $(TST_DIR)
-	make -C $(PARSE_DIR) clean
