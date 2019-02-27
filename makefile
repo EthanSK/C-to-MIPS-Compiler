@@ -1,24 +1,38 @@
 CPPFLAGS += -std=c++11 -W -Wall -g -Wno-unused-parameter
-CPPFLAGS += -I include
+CXX = g++
 
 # Avoid warning about register being deprecated on C++17
 CPPFLAGS += -Wno-deprecated-register
 
-all : bin/main
+SRC_DIR = src
+INC_DIR = include
+BUILD_DIR = build
+TMP_DIR = $(BUILD_DIR)/tmp
+OBJ_DIR = $(BUILD_DIR)/obj
+BIN_DIR = bin
 
-src/c_parser.tab.cpp src/c_parser.tab.hpp : src/c_parser.y
-	bison -v -d src/c_parser.y -o src/c_parser.tab.cpp
+pre_build : 
+	chmod u+x tools/flattenSrcFiles.sh 
+	tools/flattenSrcFiles.sh $(SRC_DIR) $(TMP_DIR) cpp
+	tools/flattenSrcFiles.sh $(INC_DIR) $(TMP_DIR) hpp
+	tools/flattenSrcFiles.sh $(SRC_DIR) $(TMP_DIR) flex
+	tools/flattenSrcFiles.sh $(SRC_DIR) $(TMP_DIR) y
 
-src/c_lexer.yy.cpp : src/c_lexer.flex src/c_parser.tab.hpp
-	flex -o src/c_lexer.yy.cpp  src/c_lexer.flex
-	
-bin/main : src/main.o src/c_parser.tab.o src/c_lexer.yy.o src/c_parser.tab.o
-	mkdir -p bin
-	g++ $(CPPFLAGS) -o bin/main $^
+# build/%.o : src/%.cpp src/%.hpp
+# 	mkdir -p build
+# 	$(CXX) $(CPPFLAGS) -std=c++11 -c $< -o $@
 
+# simulator: build/simulator.o build/helpers.o build/memory.o build/registers.o build/instructions.o  
+# 	mkdir -p bin
+# 	$(CXX) $(CPPFLAGS) -std=c++11 build/simulator.o build/helpers.o build/memory.o build/registers.o build/instructions.o -o bin/mips_simulator
+
+# testbench: 
+# 	mkdir -p bin
+# 	rm -f bin/mips_testbench
+# 	cp -a test/testbench.sh bin/mips_testbench
+# 	chmod 755 bin/mips_testbench
 
 clean :
-	rm src/*.o
-	rm bin/*
-	rm src/*.tab.cpp
-	rm src/*.yy.cpp
+	rm -rf $(BUILD_DIR)
+	rm -rf $(BIN_DIR)
+	rm -rf *.o
