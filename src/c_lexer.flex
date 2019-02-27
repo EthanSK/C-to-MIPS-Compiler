@@ -102,6 +102,8 @@ while { return T_WHILE; }
 0[xX]{HEXDIGIT}+ { yylval.number = std::stoi(yytext, nullptr, 16); return T_NUMBER_LIT; }
 {DIGIT}+ { yylval.number = std:stoi(yytext, nullptr, 10); return T_NUMBER_LIT; }
 
+{DIGIT}+\.{DIGIT}*[fF] { yylval.number = std::stod(yytext); return T_NUMBER; }
+{DIGIT}*\.{DIGIT}+[fF] { yylval.number = std::stod(yytext); return T_NUMBER; }
 
 %%
 
