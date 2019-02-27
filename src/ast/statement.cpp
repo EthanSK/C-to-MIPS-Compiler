@@ -1,4 +1,4 @@
-#include "../../include/ast/astStatement.hpp"
+#include "astStatement.hpp"
 
 
 std::ostream &operator<<(std::ostream &os, const Statement &statement)

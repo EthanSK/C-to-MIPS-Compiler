@@ -10,7 +10,7 @@ mkdir -p "$destFolder"
 for srcFile in $srcFiles
 do
     fileName=$(basename "$srcFile")
-    cp -f $srcFile "$destFolder/$filename"
+    rsync --update $srcFile "$destFolder/$filename"
 done
 
 

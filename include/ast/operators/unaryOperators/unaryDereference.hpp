@@ -1,7 +1,7 @@
 #ifndef unaryDereference_hpp
 #define unaryDereference_hpp
 
-#include "unaryDereference.hpp"
+#include "unaryOperator.hpp"
 
 class unaryDereference : UnaryOperator
 { 
