@@ -11,6 +11,14 @@ TMP_DIR = $(BUILD_DIR)/tmp
 OBJ_DIR = $(BUILD_DIR)/obj
 BIN_DIR = bin
 
+SRC_FILES = $(shell tools/filenamesForMakefile.sh $(SRC_DIR) $(TMP_DIR) cpp)
+OBJ_FILES = $(patsubst $(TMP_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRC_FILES))
+
+COMPILER_NAME = c_compiler
+COMPILER_OUT = $(BIN_DIR)/$(COMPILER_NAME)
+
+bin/c_compiler: $(COMPILER_OUT)
+
 pre_build : 
 	chmod u+x tools/flattenSrcFiles.sh 
 	tools/flattenSrcFiles.sh $(SRC_DIR) $(TMP_DIR) cpp
@@ -18,19 +26,15 @@ pre_build :
 	tools/flattenSrcFiles.sh $(SRC_DIR) $(TMP_DIR) flex
 	tools/flattenSrcFiles.sh $(SRC_DIR) $(TMP_DIR) y
 
-# build/%.o : src/%.cpp src/%.hpp
-# 	mkdir -p build
-# 	$(CXX) $(CPPFLAGS) -std=c++11 -c $< -o $@
+$(OBJ_FILES) : $(SRC_FILES) pre_build
+	mkdir -p $(OBJ_DIR)
+	$(CXX) $(CPPFLAGS) -std=c++11 -c $< -o $@
 
-# simulator: build/simulator.o build/helpers.o build/memory.o build/registers.o build/instructions.o  
-# 	mkdir -p bin
-# 	$(CXX) $(CPPFLAGS) -std=c++11 build/simulator.o build/helpers.o build/memory.o build/registers.o build/instructions.o -o bin/mips_simulator
+$(COMPILER_OUT): $(OBJ_FILES) 
+	mkdir -p $(BIN_DIR)
+	$(CXX) $(CPPFLAGS) -o $@ $^
 
-# testbench: 
-# 	mkdir -p bin
-# 	rm -f bin/mips_testbench
-# 	cp -a test/testbench.sh bin/mips_testbench
-# 	chmod 755 bin/mips_testbench
+.PHONY : clean
 
 clean :
 	rm -rf $(BUILD_DIR)
