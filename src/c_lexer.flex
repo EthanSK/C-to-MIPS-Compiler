@@ -6,13 +6,13 @@ extern "C" int fileno(FILE *stream);
 #include "c_parser.tab.hpp"
 %}
 
-%%
+DIGIT [0-9]
+HEXDIGIT [0-9A-Fa-f]
+OCTDIGIT [0-7]
+NONDIGIT [_A-Za-z]
+INTSUFFIX [uUlL]
 
-[0-9] DIGIT
-[0-9A-Fa-f] HEXDIGIT
-[0-7] OCTDIGIT
-[_A-Za-z] NONDIGIT
-[uUlL] INTSUFFIX
+%%
 
 auto { return T_AUTO; }
 break { return T_BREAK; }
@@ -101,12 +101,12 @@ while { return T_WHILE; }
 
 0{OCTDIGIT}+{INTSUFFIX}? { yylval.number = std::stoi(yytext, nullptr, 8); return T_NUMBER_LIT; }
 0[xX]{HEXDIGIT}+{INTSUFFIX}? { yylval.number = std::stoi(yytext, nullptr, 16); return T_NUMBER_LIT; }
-{DIGIT}+{INTSUFFIX}? { yylval.number = std:stoi(yytext, nullptr, 10); return T_NUMBER_LIT; }
+{DIGIT}+{INTSUFFIX}? { yylval.number = std::stoi(yytext, nullptr, 10); return T_NUMBER_LIT; }
 
-{DIGIT}+\.{DIGIT}*[fF]? { yylval.number = std::stod(yytext); return T_NUMBER; }
-{DIGIT}*\.{DIGIT}+[fF]? { yylval.number = std::stod(yytext); return T_NUMBER; }
+{DIGIT}+\.{DIGIT}*[fF]? { yylval.number = std::stod(yytext); return T_NUMBER_LIT; }
+{DIGIT}*\.{DIGIT}+[fF]? { yylval.number = std::stod(yytext); return T_NUMBER_LIT; }
 
-L?\"(\\.|[^\\"])*\" { yylval.string = new std::string(yytext, 1, strlen(yytext) - 2); }
+L?\"(\\.|[^\\"])*\" { yylval.string = new std::string(yytext, 1, strlen(yytext) - 2); return T_STRING_LIT; }
 
 %%
 
