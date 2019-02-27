@@ -1,9 +1,9 @@
-#ifndef unaryDereference_hpp
-#define unaryDereference_hpp
+#ifndef unaryAddress_hpp
+#define unaryAddress_hpp
 
 #include "unaryOperator.hpp"
 
-class UnaryDereference : UnaryOperator
+class UnaryAddress : UnaryOperator
 { 
     void printCode(std::ostream &os) const override;
 }; 

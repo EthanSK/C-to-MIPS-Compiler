@@ -1,9 +1,9 @@
-#ifndef unaryDereference_hpp
-#define unaryDereference_hpp
+#ifndef unaryPostIncrement_hpp
+#define unaryPostIncrement_hpp
 
 #include "unaryOperator.hpp"
 
-class UnaryDereference : UnaryOperator
+class UnaryPostIncrement : UnaryOperator
 { 
     void printCode(std::ostream &os) const override;
 }; 
