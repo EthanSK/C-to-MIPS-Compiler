@@ -1,5 +1,4 @@
 #!/bin/bash
-
 srcFolder=$1
 destFolder=$2
 fileExt=$3
