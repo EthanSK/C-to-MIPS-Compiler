@@ -97,6 +97,10 @@ while { return T_WHILE; }
 "++" { return T_PLUS_PLUS; }
 "--" { return T_MINUS_MINUS; }
 
+0[xX]{HEXDIGIT}+ { yylval.number = std::stoi(yytext, nullptr, 16); return T_NUMBER_LIT; }
+{DIGIT}+ { yylval.number = std:stoi(yytext, nullptr, 10); return T_NUMBER_LIT; }
+
+
 %%
 
 void yyerror (char const *s)
