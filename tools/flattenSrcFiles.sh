@@ -9,7 +9,7 @@ mkdir -p "$destFolder"
 for srcFile in $srcFiles
 do
     fileName=$(basename "$srcFile")
-    rsync --update $srcFile "$destFolder/$filename"
+    rsync --update $srcFile "$destFolder/$fileName"
 done
 
 

@@ -20,7 +20,7 @@ bin/c_compiler :
 	cp -f ${MAKE_TOOL} ${BUILD_DIR}/makefile
 	make -C ${BUILD_DIR} BIN_DIR=../${BIN_DIR} COMPILER_NAME=${COMPILER_NAME}
 
-.PHONY : clean pre_build 
+.PHONY : clean pre_build bin/c_compiler
 clean :
 	rm -rf $(BUILD_DIR)
 	rm -rf $(BIN_DIR)
