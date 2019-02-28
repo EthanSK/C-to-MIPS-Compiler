@@ -39,6 +39,15 @@
 ROOT : EXPR {  }
 EXPR : T_AUTO {  }
 
+UNARY_OPERATOR
+	: T_AND
+	| T_MULTIPLY
+	| T_PLUS
+	| T_MINUS
+	| T_INVERT
+	| T_NOT
+	;
+
 %%
 
 StatementPtr g_root; // Definition of variable (to match declaration earlier)
