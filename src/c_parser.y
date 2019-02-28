@@ -12,6 +12,7 @@
 {
   StatementPtr expr;
   double number;
+  yytokentype token;
   std::string *string;
 }
 
@@ -30,14 +31,17 @@
 
 %token T_NOT T_INVERT T_PLUS_PLUS T_MINUS_MINUS
 
-%type <expr> EXPR
+%type <expr> EXPR ASSIGNEMENT_EXPRESSION UNARY_EXPRESSION
+
+%type <token> ASSIGNEMENT_OPERATOR
+%type <token> T_EQ T_MULTIPLY_EQ T_DIVIDE_EQ T_MODULO_EQ T_PLUS_EQ T_MINUS_EQ T_LSHIFT_EQ T_RSHIFT_EQ T_AND_AND T_XOR_EQ T_OR_EQ
 
 %start ROOT
 
 %%
 
 ROOT : EXPR {  }
-EXPR : T_AUTO {  }
+EXPR : ASSIGNEMENT_OPERATOR {  }
 
 UNARY_OPERATOR
 	: T_AND
@@ -48,9 +52,20 @@ UNARY_OPERATOR
 	| T_NOT
 	;
 
+ASSIGNEMENT_EXPRESSION
+	: CONDITIONAL_EXPRESSION
+	| UNARY_EXPRESSION ASSIGNEMENT_OPERATOR ASSIGNEMENT_EXPRESSION
+  {
+    switch ($2)
+    {
+      case T_EQ: $$ = new BinaryAssignement($1, $3);
+    }
+  }
+	;
+
 ASSIGNEMENT_OPERATOR
-	: T_EQ
-	| T_MULTIPLY_EQ
+	: T_EQ { $$ = $1; std::cout << $$; }
+	| T_MULTIPLY_EQ { $$ = T_MULTIPLY_EQ; std::cout << $$; }
 	| T_DIVIDE_EQ
 	| T_MODULO_EQ
 	| T_PLUS_EQ
