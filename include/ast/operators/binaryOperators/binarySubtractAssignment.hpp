@@ -1,11 +1,11 @@
-#ifndef binaryMultiply_hpp
-#define binaryMultiply_hpp
+#ifndef binarySubtractAssignment_hpp
+#define binarySubtractAssignment_hpp
 
 
 #include <iostream>
 #include "binaryOperator.hpp"
 
-class BinaryMultiply : BinaryOperator
+class BinarySubtractAssignment : BinaryOperator
 { 
     void printCode(std::ostream &os) const override;
 }; 
