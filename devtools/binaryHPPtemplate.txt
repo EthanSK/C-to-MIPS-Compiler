@@ -1,0 +1,13 @@
+#ifndef binary%s_hpp
+#define binary%s_hpp
+
+
+#include <iostream>
+#include "binaryOperator.hpp"
+
+class Binary%s : BinaryOperator
+{ 
+    void printCode(std::ostream &os) const override;
+}; 
+     
+#endif 
