@@ -123,6 +123,11 @@ ASSIGNEMENT_OPERATOR
 	| T_OR_EQ { $$ = T_OR_EQ; }
 	;
 
+EXPRESSION_STATEMENT
+	: T_SEMICOLON
+	| EXPRESSION T_SEMICOLON
+	;
+
 %%
 
 StatementPtr g_root; // Definition of variable (to match declaration earlier)
