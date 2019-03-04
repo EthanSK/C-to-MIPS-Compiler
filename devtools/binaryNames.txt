@@ -1,5 +1,7 @@
 Divide /
 Modulo %
+Multiply *
+Add +
 Subtract -
 BitwiseLeftShift <<
 BitwiseRightShift >>
@@ -15,10 +17,10 @@ BitwiseOr |
 ConditionalOr ||
 BitwiseXor ^
 Assignment =
-AdditionAssignment +=
-SubtractionAssignment -=
-MultiplicationAssignment *=
-DivisionAssignment /=
+AddAssignment +=
+SubtractAssignment -=
+MultiplyAssignment *=
+DivideAssignment /=
 ModuloAssignment %=
 BitwiseAndAssignment &=
 BitwiseOrAssignment |=
