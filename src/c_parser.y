@@ -58,14 +58,24 @@ ASSIGNEMENT_EXPRESSION
   {
     switch ($2)
     {
-      case T_EQ: $$ = new BinaryAssignement($1, $3);
+      case T_EQ: $$ = new BinaryAssignement($1, $3); break;
+      case T_MULTIPLY_EQ: $$ = new BinaryMultiplyAssignement($1, $3); break;
+      case T_DIVIDE_EQ: $$ = new BinaryDivideAssignement($1, $3); break;
+      case T_MODULO_EQ: $$ = new BinaryModuloAssignement($1, $3); break;
+      case T_PLUS_EQ: $$ = new BinaryAddAssignement($1, $3); break;
+      case T_MINUS_EQ: $$ = new BinarySubtractAssignement($1, $3); break;
+      case T_LSHIFT_EQ: $$ = new BinaryBitwiseLeftShiftAssignement($1, $3); break;
+      case T_RSHIFT_EQ: $$ = new BinaryBitwiseRightShiftAssignement($1, $3); break;
+      case T_AND_AND: $$ = new BinaryBitwiseAndAssignment($1, $3); break;
+      case T_XOR_EQ: $$ = new BinaryBitwiseXorAssignment($1, $3); break;
+      case T_OR_EQ: $$ = new BinaryBitwiseOrAssignment($1, $3); break;
     }
   }
 	;
 
 ASSIGNEMENT_OPERATOR
-	: T_EQ { $$ = $1; std::cout << $$; }
-	| T_MULTIPLY_EQ { $$ = T_MULTIPLY_EQ; std::cout << $$; }
+	: T_EQ
+	| T_MULTIPLY_EQ { $$ = T_MULTIPLY_EQ; }
 	| T_DIVIDE_EQ
 	| T_MODULO_EQ
 	| T_PLUS_EQ
