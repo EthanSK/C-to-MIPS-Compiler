@@ -51,7 +51,7 @@ EXPRESSION : ASSIGNEMENT_OPERATOR {  }
 PRIMARY_EXPRESSION
 	: T_VARIABLE
 	| T_NUMBER_LIT
-  | T_CHAR_LIT
+  	| T_CHAR_LIT
 	| T_STRING_LIT
 	| T_LBRACKET EXPRESSION T_RBRACKET { $$ = $2 }
 	;
@@ -72,6 +72,17 @@ UNARY_EXPRESSION
 	| T_PLUS_PLUS UNARY_EXPRESSION { $$ = new UnaryPreIncrement($2); }
 	| T_MINUS_MINUS UNARY_EXPRESSION { $$ = new UnaryPreDecrement($2); }
 	| UNARY_OPERATOR CAST_EXPRESSION
+	{
+		switch ($1)
+		{
+			case T_AND: $$ = new UnaryAddress($2); break;
+			case T_MULTIPLY: $$ = new UnaryDereference($2); break;
+			case T_PLUS: $$ = new UnaryPlus($2); break;
+			case T_MINUS: $$ = new UnaryMinus($2); break;
+			case T_INVERT: $$ = new UnaryBitwiseInvert($2); break;
+			case T_NOT: $$ = new UnaryNot($2); break;
+		}
+	}
 	| T_SIZEOF UNARY_EXPRESSION
 	| T_SIZEOF T_LBRACKET TYPE_NAME T_RBRACKET
 	;
