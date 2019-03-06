@@ -5,7 +5,7 @@
 #include <string>
 #include <iostream>
 #include <memory>
-#include "astStatement.hpp"
+#include "statement.hpp"
 
 class BinaryOperator : Statement
 {
