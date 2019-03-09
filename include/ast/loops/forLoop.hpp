@@ -10,7 +10,7 @@
 class ForLoop : Statement //will have branch[0] initializatino,, branch[1] condition, branch[2] increment/decr, branch[3] execution block
 {
   protected:
-    virtual void printCode(std::ostream &os) const = 0;
+    virtual void printC(std::ostream &os) const = 0;
 };
 
 #endif

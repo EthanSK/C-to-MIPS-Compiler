@@ -10,7 +10,7 @@
 class DoWhileLoop : Statement //will have branch[0] execution block branch[1] condition block
 {
   protected:
-    virtual void printCode(std::ostream &os) const = 0;
+    virtual void printC(std::ostream &os) const = 0;
 };
 
 #endif

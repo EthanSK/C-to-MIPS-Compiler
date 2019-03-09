@@ -1,6 +1,6 @@
 #include "scopeBlock.hpp"
 
-void ScopeBlock::printCode(std::ostream &os) const
+void ScopeBlock::printC(std::ostream &os) const
 {
     os << "\n{\n";
     for(size_t i = 0; i < branches.size(); i++)

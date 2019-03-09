@@ -1,6 +1,6 @@
 #include "binary%s.hpp"
 
-void Binary%s::printCode(std::ostream &os) const
+void Binary%s::printC(std::ostream &os) const
 {
 	os << "(" << getLeft() << " %s " << getRight() << ")";
 }

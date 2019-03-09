@@ -3,7 +3,7 @@
 
 std::ostream &operator<<(std::ostream &os, const Statement &statement)
 {
-     statement.printCode(os);
+     statement.printC(os);
      return os;
 }  
 

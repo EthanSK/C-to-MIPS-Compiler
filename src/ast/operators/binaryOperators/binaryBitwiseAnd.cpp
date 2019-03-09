@@ -1,6 +1,6 @@
 #include "binaryBitwiseAnd.hpp"
 
-void BinaryBitwiseAnd::printCode(std::ostream &os) const
+void BinaryBitwiseAnd::printC(std::ostream &os) const
 {
 	os << "(" << getLeft() << " & " << getRight() << ")";
 }

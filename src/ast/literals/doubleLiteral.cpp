@@ -1,6 +1,6 @@
 #include "doubleLiteral.hpp"
 
-void DoubleLiteral::printCode(std::ostream &os) const
+void DoubleLiteral::printC(std::ostream &os) const
 {
 	os << value;
 }

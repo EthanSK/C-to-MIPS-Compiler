@@ -1,6 +1,6 @@
 #include "integerLiteral.hpp"
 
-void IntegerLiteral::printCode(std::ostream &os) const
+void IntegerLiteral::printC(std::ostream &os) const
 {
 	os << value;
 }

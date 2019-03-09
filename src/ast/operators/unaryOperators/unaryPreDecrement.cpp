@@ -1,6 +1,6 @@
 #include "unaryPreDecrement.hpp"
 
-void UnaryPreDecrement::printCode(std::ostream &os) const
+void UnaryPreDecrement::printC(std::ostream &os) const
 {
 	os << "--(" << getOperand() << ")";
 }

@@ -1,6 +1,6 @@
 #include "stringLiteral.hpp"
 
-void StringLiteral::printCode(std::ostream &os) const
+void StringLiteral::printC(std::ostream &os) const
 {
 	os << "\"" << value << "\"";
 }

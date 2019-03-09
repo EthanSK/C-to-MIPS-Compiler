@@ -10,7 +10,7 @@
 class ScopeBlock : Statement //aka compound statement, used to represent content between curly braces everywhere eg loops, conditions, pure scope, etc...
 {
   protected:
-    void printCode(std::ostream &os) const override;
+    void printC(std::ostream &os) const override;
 };
 
 #endif

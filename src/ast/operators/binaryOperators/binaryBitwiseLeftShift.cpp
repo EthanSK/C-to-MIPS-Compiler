@@ -1,6 +1,6 @@
 #include "binaryBitwiseLeftShift.hpp"
 
-void BinaryBitwiseLeftShift::printCode(std::ostream &os) const
+void BinaryBitwiseLeftShift::printC(std::ostream &os) const
 {
 	os << "(" << getLeft() << " << " << getRight() << ")";
 }

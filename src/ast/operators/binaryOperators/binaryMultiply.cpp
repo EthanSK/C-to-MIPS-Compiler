@@ -1,6 +1,6 @@
 #include "binaryMultiply.hpp"
 
-void BinaryMultiply::printCode(std::ostream &os) const
+void BinaryMultiply::printC(std::ostream &os) const
 {
 	os << "(" << getLeft() << " * " << getRight() << ")";
 }

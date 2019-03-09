@@ -1,6 +1,6 @@
 #include "unaryAddress.hpp"
 
-void UnaryAddress::printCode(std::ostream &os) const
+void UnaryAddress::printC(std::ostream &os) const
 {
 	os << "&(" << getOperand() << ")";
 }

@@ -7,7 +7,7 @@
 
 class BinaryConditionalOr : BinaryOperator
 { 
-    void printCode(std::ostream &os) const override;
+    void printC(std::ostream &os) const override;
 }; 
      
 #endif 

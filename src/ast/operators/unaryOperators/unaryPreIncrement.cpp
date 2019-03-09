@@ -1,6 +1,6 @@
 #include "unaryPreIncrement.hpp"
 
-void UnaryPreIncrement::printCode(std::ostream &os) const
+void UnaryPreIncrement::printC(std::ostream &os) const
 {
 	os << "++(" << getOperand() << ")";
 }

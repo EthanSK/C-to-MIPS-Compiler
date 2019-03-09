@@ -1,6 +1,6 @@
 #include "unaryPostDecrement.hpp"
 
-void UnaryPostDecrement::printCode(std::ostream &os) const
+void UnaryPostDecrement::printC(std::ostream &os) const
 {
 	os << "(" << getOperand() << ")--";
 }

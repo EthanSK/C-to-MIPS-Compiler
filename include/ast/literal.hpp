@@ -10,7 +10,7 @@
 class Literal : Statement //Literal is an interface for all the literal types
 {
   protected:
-    virtual void printCode(std::ostream &os) const = 0;
+    virtual void printC(std::ostream &os) const = 0;
 };
 
 #endif

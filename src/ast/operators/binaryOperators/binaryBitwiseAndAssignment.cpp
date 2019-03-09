@@ -1,6 +1,6 @@
 #include "binaryBitwiseAndAssignment.hpp"
 
-void BinaryBitwiseAndAssignment::printCode(std::ostream &os) const
+void BinaryBitwiseAndAssignment::printC(std::ostream &os) const
 {
 	os << "(" << getLeft() << " &= " << getRight() << ")";
 }

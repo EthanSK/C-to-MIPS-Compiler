@@ -10,7 +10,7 @@
 class WhileLoop : Statement //will have branch[0] condition branch[1] execution block
 {
   protected:
-    virtual void printCode(std::ostream &os) const = 0;
+    virtual void printC(std::ostream &os) const = 0;
 };
 
 #endif

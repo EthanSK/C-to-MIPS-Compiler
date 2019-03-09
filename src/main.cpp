@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
     
     // Parse the AST
     StatementPtr ast = parseAST();
-	//ast->printCode(std::cout);
+	//ast->printC(std::cout);
     std::cout << ast << std::endl;
     return 0;
 }

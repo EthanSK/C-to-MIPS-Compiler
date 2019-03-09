@@ -1,6 +1,6 @@
 #include "binaryMultiplyAssignment.hpp"
 
-void BinaryMultiplyAssignment::printCode(std::ostream &os) const
+void BinaryMultiplyAssignment::printC(std::ostream &os) const
 {
 	os << "(" << getLeft() << " *= " << getRight() << ")";
 }

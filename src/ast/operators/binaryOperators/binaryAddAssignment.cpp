@@ -1,6 +1,6 @@
 #include "binaryAddAssignment.hpp"
 
-void BinaryAddAssignment::printCode(std::ostream &os) const
+void BinaryAddAssignment::printC(std::ostream &os) const
 {
 	os << "(" << getLeft() << " += " << getRight() << ")";
 }

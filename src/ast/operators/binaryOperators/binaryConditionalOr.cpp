@@ -1,6 +1,6 @@
 #include "binaryConditionalOr.hpp"
 
-void BinaryConditionalOr::printCode(std::ostream &os) const
+void BinaryConditionalOr::printC(std::ostream &os) const
 {
 	os << "(" << getLeft() << " || " << getRight() << ")";
 }

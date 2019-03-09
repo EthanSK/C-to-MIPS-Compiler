@@ -1,6 +1,6 @@
 #include "binaryModuloAssignment.hpp"
 
-void BinaryModuloAssignment::printCode(std::ostream &os) const
+void BinaryModuloAssignment::printC(std::ostream &os) const
 {
 	os << "(" << getLeft() << " %= " << getRight() << ")";
 }
