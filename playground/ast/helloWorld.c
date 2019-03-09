@@ -6,6 +6,10 @@ int main()
    for(i = 0; i < 50; i++)
    {
       zzz++;
+      if (i > 5){
+         break;
+      }
+      i++;
    }
    
 
