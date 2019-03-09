@@ -1,7 +1,12 @@
 // #include <stdio.h>
 int main()
 {
-   // printf() displays the string inside quotation
+{
+   int z;
+   z = 3;
+   z++;
+}
+
    int a = 5;
    a++;
    int b = 6;
