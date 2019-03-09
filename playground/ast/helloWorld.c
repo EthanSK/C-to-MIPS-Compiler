@@ -1,6 +1,13 @@
 // #include <stdio.h>
 int main()
 {
+   int zzz = 0;
+   int i = 0;
+   for(i = 0; i < 50; i++)
+   {
+      zzz++;
+   }
+   
 
 float (*op[42])(float, float); //this gets converted to 1 vardecl node 
 
