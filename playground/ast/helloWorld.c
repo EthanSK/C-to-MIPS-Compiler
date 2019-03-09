@@ -10,6 +10,14 @@ int main()
          int b = 4;
          b += 4;
          b >>= 6; 
+      } else if (z < 3){
+         int a = 2;
+      }
+
+      if ( z > 5) {
+         z--;
+      }else{
+         z = 1;
       }
       
    }
