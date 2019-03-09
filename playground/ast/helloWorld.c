@@ -1,6 +1,9 @@
 // #include <stdio.h>
 int main()
 {
+
+float (*op[42])(float, float); //this gets converted to 1 vardecl node 
+
 {
    int z;
    z = 3;
