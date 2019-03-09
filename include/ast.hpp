@@ -1,7 +1,7 @@
 #ifndef ast_hpp
 #define ast_hpp
 
-#include "astStatement.hpp"
+#include "statement.hpp"
 
 extern const Statement *parseAST();
 

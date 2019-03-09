@@ -1,5 +1,5 @@
-#ifndef astStatement_hpp
-#define astStatement_hpp
+#ifndef statement_hpp
+#define statement_hpp
 
 #include <vector>
 #include <string>

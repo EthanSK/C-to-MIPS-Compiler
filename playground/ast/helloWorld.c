@@ -1,11 +1,20 @@
 // #include <stdio.h>
 int main()
 {
-   // printf() displays the string inside quotation
+{
+   int z;
+   z = 3;
+   z++;
    {
-      int z = 4;
-      int y = 11;
+      if (z < 4) {
+         int b = 4;
+         b += 4;
+         b >>= 6; 
+      }
+      
    }
+}
+
    int a = 5;
    a++;
    int b = 6;
