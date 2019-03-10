@@ -10,7 +10,8 @@
 
 class Variable : public Statement //if variable was declared with literal value, it will be the branches[0]
 {
-  protected: 
+  protected:
+    std::string name; 
     virtual void printC(std::ostream &os) const = 0; 
 };
 

@@ -21,10 +21,12 @@ union Poop2{
 };
 int main()
 { 
-   int zzz = 0;
-   int i = 0;
+   int zzz = 3;
+   int i = 2;
+   int result = i + zzz;
    char kkkkk = 'kkkkkkkkkkk';
-   int aaao[6] = {1 , 3, 5, 5, 5, 6};
+   int aaao[6] = {1,3, 5, 5, 5, 6};
+   double weirdarray[3];
    for (i = 0; i < 50; i++)
    {
       zzz++;

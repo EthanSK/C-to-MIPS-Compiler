@@ -1,5 +1,5 @@
-#ifndef primitiveType_hpp
-#define primitiveType_hpp
+#ifndef primitiveVariable_hpp
+#define primitiveVariable_hpp
 
 #include <vector>
 #include <string>
@@ -21,7 +21,7 @@ class PrimitiveVariable : public Variable //branch[0] contains the literal value
     };
     Type type;
     PrimitiveVariable(Type _type) : type(_type) {};//must be init'ed with a type value or makes no sense
-    std::string typeToString() const; //converts the Type enum case to a string value that can be used in printC or elsewhere. not in the base Variable class because for eg the arrayvariable class that inherits from this can use primitivevar typeToString within printC as well, but makes no sense to use arrayvariable typetostring coz would be int [50] when we wanna print int a[50]
+    std::string typeToString() const; 
 
   protected: 
     void printC(std::ostream &os) const; 

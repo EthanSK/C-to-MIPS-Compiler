@@ -1,5 +1,5 @@
-#ifndef primitiveType_hpp
-#define primitiveType_hpp
+#ifndef arrayVariable_hpp
+#define arrayVariable_hpp
 
 #include <vector>
 #include <string>
@@ -7,20 +7,18 @@
 #include <memory>
 #include "statement.hpp"
 #include "literal.hpp"
+#include "primitiveVariable.hpp" 
 #include "variable.hpp"
-#include "primitiveVariable.hpp"
 
-
-class ArrayVariable : public Variable //branch[0] contains the literal value if at all. 
+class ArrayVariable : public Variable //the branches contain the array elements that can be literals. if there are no branches, the array was not init'ed with anything. no actually we need an init list branch and then have the literals there, because an array can be defined by say adding two other arrays etc.
 {
-  public:
-    PrimitiveVariable type;
-    int size;
-  //  ArrayVariable(PrimitiveVariable::Type _type, int _size) : type(_type), size(_size) {};//must be init'ed with a type value or makes no sense
-//  std::string typeToString() const; //converts the Type enum case to a string value that can be used in printC or elsewhere. not in the base Variable class because for eg the arrayvariable class that inherits from this can use primitivevar typeToString within printC as well, but makes no sense to use arrayvariable typetostring coz would be int [50] when we wanna print int a[50]
-
-  protected: 
-    void printC(std::ostream &os) const; 
+public:
+  PrimitiveVariable::Type elementType;
+  int size;
+  ArrayVariable(PrimitiveVariable::Type _elementType, int _size) : elementType(_elementType), size(_size){};
+  //we don't need a typeToString method. think about it, when decoding in codegen, we use elementType and size info thats it
+protected:
+  void printC(std::ostream &os) const;
 };
 
 #endif

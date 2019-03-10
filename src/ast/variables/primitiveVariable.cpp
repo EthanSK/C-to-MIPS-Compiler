@@ -14,3 +14,15 @@ std::string PrimitiveVariable::typeToString() const
         return "UNKNOWN TYPE";
     }
 }
+
+void PrimitiveVariable::printC(std::ostream &os) const
+{
+    if (branches.size() > 0) //then we know it was given a value at declaration
+    {
+        os << typeToString() << " " << name << " = " << branches[0];
+    }
+    else
+    {
+        os << typeToString() << " " << name;
+    }
+}
