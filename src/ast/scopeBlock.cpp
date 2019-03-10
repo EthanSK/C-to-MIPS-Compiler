@@ -5,7 +5,7 @@ void ScopeBlock::printCode(std::ostream &os) const
     os << "\n{\n";
     for(size_t i = 0; i < branches.size(); i++)
     {
-        os << branches[i] << std::endl;
+        os << branches[i] << << ";\n";
     }
     os << "\n}" << std::endl; //to flush the buffer
 }
