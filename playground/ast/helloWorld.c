@@ -1,4 +1,24 @@
 // #include <stdio.h>
+
+
+char lololo(int pp){
+   return 'a';
+}
+
+enum Test{
+   lol1,
+   lol3
+};
+
+struct Poop{
+   int a;
+   double b;
+};
+
+union Poop2{
+   int a;
+   double b;
+};
 int main()
 { 
    int zzz = 0;
