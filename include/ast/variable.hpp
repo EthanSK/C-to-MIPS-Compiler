@@ -11,16 +11,7 @@
 class Variable : Statement //if variable was declared with literal value, it will be the branches[0]
 {
   public:
-    enum VariableType//can be accessed outside this classe using Variable::VariableType or straight cases as Variable::_float;
-    { //sholud have helper function to convert to string value
-        _int, //can't use C++ keywords as enum cases
-        _float
-    };
-    VariableType variableType;
-
-    Variable(VariableType _variableType) : variableType(_variableType) {}  
-
-    std::string typeToString();
+   std::string type; //indicateds if its an int, float, char[69], 'float (*[42])(float, float, etc...
 
   protected: 
     virtual void printC(std::ostream &os) const = 0; 
