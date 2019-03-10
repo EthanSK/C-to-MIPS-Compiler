@@ -4,6 +4,7 @@ int main()
    int zzz = 0;
    int i = 0;
    char kkkkk = 'kkkkkkkkkkk';
+   int aaao[6] = {1 , 3, 5, 5, 5, 6};
    for (i = 0; i < 50; i++)
    {
       zzz++;
