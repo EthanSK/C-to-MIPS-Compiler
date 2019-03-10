@@ -7,7 +7,7 @@
 #include <memory>
 #include "statement.hpp"
 
-class Literal : Statement //Literal is an interface for all the literal types
+class Literal : public Statement //Literal is an interface for all the literal types
 {
   protected:
     virtual void printC(std::ostream &os) const = 0;

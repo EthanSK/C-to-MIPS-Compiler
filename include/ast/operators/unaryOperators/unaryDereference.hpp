@@ -3,7 +3,7 @@
 
 #include "unaryOperator.hpp"
 
-class UnaryDereference : UnaryOperator
+class UnaryDereference : public UnaryOperator
 { 
     void printC(std::ostream &os) const override;
 }; 

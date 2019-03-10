@@ -7,7 +7,7 @@
 #include <memory>
 #include "statement.hpp"
 
-class ForLoop : Statement //will have branch[0] initializatino,, branch[1] condition, branch[2] increment/decr, branch[3] execution block
+class ForLoop : public Statement //will have branch[0] initializatino,, branch[1] condition, branch[2] increment/decr, branch[3] execution block
 {
   protected:
     virtual void printC(std::ostream &os) const = 0;

@@ -3,7 +3,7 @@
 
 #include "unaryOperator.hpp"
 
-class UnaryMinus : UnaryOperator
+class UnaryMinus : public UnaryOperator
 { 
     void printC(std::ostream &os) const override;
 }; 

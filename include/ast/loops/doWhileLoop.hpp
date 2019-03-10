@@ -7,7 +7,7 @@
 #include <memory>
 #include "statement.hpp"
 
-class DoWhileLoop : Statement //will have branch[0] execution block branch[1] condition block
+class DoWhileLoop : public Statement //will have branch[0] execution block branch[1] condition block
 {
   protected:
     virtual void printC(std::ostream &os) const = 0;

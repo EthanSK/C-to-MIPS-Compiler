@@ -4,7 +4,7 @@
 #include <iostream>
 #include "literal.hpp"
 
-class DoubleLiteral : Literal
+class DoubleLiteral : public Literal
 {
   public:
     double value;

@@ -7,7 +7,7 @@
 #include <memory>
 #include "statement.hpp"
 
-class BinaryOperator : Statement
+class BinaryOperator : public Statement
 {
   protected:
     StatementPtr getLeft() const;

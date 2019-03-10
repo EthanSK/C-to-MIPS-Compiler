@@ -4,7 +4,7 @@
 #include <iostream>
 #include "literal.hpp"
 
-class FloatLiteral : Literal
+class FloatLiteral : public Literal
 {
   public:
     float value;

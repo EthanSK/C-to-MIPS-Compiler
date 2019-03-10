@@ -5,7 +5,7 @@
 #include <iostream>
 #include "binaryOperator.hpp"
 
-class BinaryModuloAssignment : BinaryOperator
+class BinaryModuloAssignment : public BinaryOperator
 { 
     void printC(std::ostream &os) const override;
 }; 

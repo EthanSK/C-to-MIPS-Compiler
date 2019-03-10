@@ -4,7 +4,7 @@
 #include <iostream>
 #include "literal.hpp"
 
-class IntegerLiteral : Literal
+class IntegerLiteral : public Literal
 {
   public:
     int value;

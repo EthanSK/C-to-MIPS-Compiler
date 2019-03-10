@@ -4,7 +4,7 @@
 #include <iostream>
 #include "literal.hpp"
 
-class StringLiteral : Literal
+class StringLiteral : public Literal
 {
   public:
     std::string value;

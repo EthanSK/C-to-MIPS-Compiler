@@ -5,7 +5,7 @@
 #include <iostream>
 #include "binaryOperator.hpp"
 
-class BinaryConditionalOr : BinaryOperator
+class BinaryConditionalOr : public BinaryOperator
 { 
     void printC(std::ostream &os) const override;
 }; 

@@ -5,7 +5,7 @@
 #include <iostream>
 #include "binaryOperator.hpp"
 
-class BinaryIsEqualTo : BinaryOperator
+class BinaryIsEqualTo : public BinaryOperator
 { 
     void printC(std::ostream &os) const override;
 }; 

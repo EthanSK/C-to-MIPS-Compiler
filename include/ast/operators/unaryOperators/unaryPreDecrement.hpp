@@ -3,7 +3,7 @@
 
 #include "unaryOperator.hpp"
 
-class UnaryPreDecrement : UnaryOperator
+class UnaryPreDecrement : public UnaryOperator
 { 
     void printC(std::ostream &os) const override;
 }; 

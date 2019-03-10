@@ -7,7 +7,7 @@
 #include <memory>
 #include "statement.hpp"
 
-class WhileLoop : Statement //will have branch[0] condition branch[1] execution block
+class WhileLoop : public Statement //will have branch[0] condition branch[1] execution block
 {
   protected:
     virtual void printC(std::ostream &os) const = 0;

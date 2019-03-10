@@ -7,7 +7,7 @@
 #include <memory>
 #include "statement.hpp"
 
-class ScopeBlock : Statement //aka compound statement, used to represent content between curly braces everywhere eg loops, conditions, pure scope, etc...
+class ScopeBlock : public Statement //aka compound statement, used to represent content between curly braces everywhere eg loops, conditions, pure scope, etc...
 {
   protected:
     void printC(std::ostream &os) const override;

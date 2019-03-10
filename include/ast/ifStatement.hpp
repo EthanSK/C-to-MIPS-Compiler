@@ -7,7 +7,7 @@
 #include <memory>
 #include "statement.hpp"
 
-class IfStatement : Statement //will have branch[0] condition, branch[1] if block, and branch[2] else block
+class IfStatement : public Statement //will have branch[0] condition, branch[1] if block, and branch[2] else block
 {
   protected:
     void printC(std::ostream &os) const override;

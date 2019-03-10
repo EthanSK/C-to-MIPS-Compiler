@@ -8,7 +8,7 @@
 #include <memory>
 #include "statement.hpp"
 
-class UnaryOperator : Statement
+class UnaryOperator : public Statement
 {
   protected:
     StatementPtr getOperand() const;

@@ -11,7 +11,7 @@
 #include "primitiveVariable.hpp"
 
 
-class ArrayVariable : Variable //branch[0] contains the literal value if at all. 
+class ArrayVariable : public Variable //branch[0] contains the literal value if at all. 
 {
   public:
     PrimitiveVariable type;
