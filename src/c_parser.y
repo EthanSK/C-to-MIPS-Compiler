@@ -312,6 +312,11 @@ ENUMERATOR_LIST
 	| ENUMERATOR_LIST T_COMMA ENUMERATOR
 	;
 
+ENUMERATOR
+	: T_IDENTIFIER
+	| T_IDENTIFIER T_EQ CONSTANT_EXPRESSION
+	;
+
 %%
 
 StatementPtr g_root; // Definition of variable (to match declaration earlier)
