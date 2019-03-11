@@ -10,8 +10,7 @@
 #include "primitiveVariable.hpp" 
 #include "variable.hpp"
 
-class ArrayVariable : public Variable //the branches contain the literal value if anythnig, which is most likely going to be an init list
-{
+class ArrayVariable : public Variable {//the value will be in an init list on the right branch of the binary op =
 public:
   PrimitiveVariable::Type elementType;
   int size;

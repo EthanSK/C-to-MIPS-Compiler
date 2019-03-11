@@ -8,7 +8,7 @@
 #include "statement.hpp"
 #include "literal.hpp"
 
-class Variable : public Statement //if variable was declared with literal value, it will be the branches[0]
+class Variable : public Statement 
 {
   protected:
     std::string name; 

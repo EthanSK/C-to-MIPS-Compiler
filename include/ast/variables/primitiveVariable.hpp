@@ -9,12 +9,14 @@
 #include "literal.hpp"
 #include "variable.hpp"
 
-class PrimitiveVariable : public Variable //branch[0] contains the literal value if at all.
+class PrimitiveVariable : public Variable 
 {
 public:
   enum class Type //enum class not enum so we guarantee strongly typed
   {
-    _int, _float, _double
+    _int,
+    _float,
+    _double
   };
   Type type;
   PrimitiveVariable(Type _type) : type(_type){}; //must be init'ed with a type value or makes no sense
