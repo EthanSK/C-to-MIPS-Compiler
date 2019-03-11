@@ -108,7 +108,7 @@ while { return T_WHILE; }
 
 L?\"(\\.|[^\\"])*\" { yylval.string = new std::string(yytext, 1, strlen(yytext) - 2); return T_STRING_LIT; }
 
-{NONDIGIT}({NONDIGIT}|{DIGIT})* { yylval.string = new std::string(yytext); return T_VARIABLE; }
+{NONDIGIT}({NONDIGIT}|{DIGIT})* { yylval.string = new std::string(yytext); return T_IDENTIFIER; }
 
 %%
 
