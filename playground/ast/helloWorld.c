@@ -1,6 +1,6 @@
 // #include <stdio.h>
 
-char lololo(int pp)
+char lololo(int pp, int view)
 {
    return 'a';
 }
