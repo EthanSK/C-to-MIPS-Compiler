@@ -9,7 +9,10 @@
 
 class DoWhileLoop : public Statement //will have branch[0] execution block branch[1] condition block
 {
+
   protected:
+    StatementPtr getScopeBlock() const;
+    StatementPtr getCondition() const;
     virtual void printC(std::ostream &os) const = 0;
 };
 
