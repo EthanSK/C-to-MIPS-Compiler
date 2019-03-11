@@ -317,6 +317,11 @@ ENUMERATOR
 	| T_IDENTIFIER T_EQ CONSTANT_EXPRESSION
 	;
 
+TYPE_QUALIFIER
+	: T_CONST
+	| T_VOLATILE
+	;
+
 %%
 
 StatementPtr g_root; // Definition of variable (to match declaration earlier)
