@@ -13,9 +13,11 @@ Init lists are used for structs, as well as arrays. (don't have to do unions)
 
 */
 
-class InitList : public Literal //branches will be elements of the init list. elements will either be another init list or a terminal literal value
+class InitializerList : public Statement
 {
   public:
+
+    std::vector<StatementPtr> getElements();
     void printC(std::ostream &os) const override;
 };
 
