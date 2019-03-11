@@ -1,31 +1,44 @@
 // #include <stdio.h>
 
-
-char lololo(int pp){
+char lololo(int pp)
+{
    return 'a';
 }
 
-enum Test{
+enum Test
+{
    lol1,
    lol3
 };
 
-struct Poop{
+struct Poop
+{
    int a;
    double b;
 };
 
-union Poop2{
+union Poop2 {
    int a;
    double b;
 };
 int main()
-{ 
+{
+   struct Poop hello = {5, 6.9};
+   struct
+   {
+      int a[3], b;
+   } w[] = {{1}, 2};
+
+   short q[4][3][2] = {
+       {1},
+       {2, 3},
+       {4, 5, 6}};
+
    int zzz = 3;
    int i = 2;
    int result = i + zzz;
    char kkkkk = 'kkkkkkkkkkk';
-   int aaao[6] = {1,3, 5, 5, 5, 6};
+   int aaao[6] = {1, 3, 5, 5, 5, 6};
    double weirdarray[3];
    for (i = 0; i < 50; i++)
    {
