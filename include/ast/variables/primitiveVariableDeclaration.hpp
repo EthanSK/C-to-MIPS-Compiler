@@ -9,7 +9,7 @@
 #include "literal.hpp"
 #include "variable.hpp"
 
-class PrimitiveVariable : public Variable 
+class PrimitiveVariableDeclaration : public VariableDeclaration 
 {
 public:
   enum class Type //enum class not enum so we guarantee strongly typed
@@ -19,7 +19,7 @@ public:
     _double
   };
   Type type;
-  PrimitiveVariable(Type _type) : type(_type){}; //must be init'ed with a type value or makes no sense
+  PrimitiveVariableDeclaration(Type _type) : type(_type){}; //must be init'ed with a type value or makes no sense
   std::string typeToString() const;
 
 protected:

@@ -8,7 +8,7 @@
 #include "statement.hpp"
 #include "literal.hpp"
 
-class Variable : public Statement 
+class VariableDeclaration : public Statement 
 {
   protected:
     std::string name; 
