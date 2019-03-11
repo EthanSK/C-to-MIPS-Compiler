@@ -10,7 +10,7 @@
 #include "primitiveVariable.hpp" 
 #include "variable.hpp"
 
-class ArrayVariable : public Variable //the branches contain the array elements that can be literals. if there are no branches, the array was not init'ed with anything. no actually we need an init list branch and then have the literals there, because an array can be defined by say adding two other arrays etc.
+class ArrayVariable : public Variable //the branches contain the literal value if anythnig, which is most likely going to be an init list
 {
 public:
   PrimitiveVariable::Type elementType;
