@@ -268,6 +268,11 @@ STRUCT_OR_UNION_SPECIFIER
 	| STRUCT_OR_UNION IDENTIFIER
 	;
 
+STRUCT_OR_UNION
+	: T_STRUCT
+	| T_UNION
+	;
+
 %%
 
 StatementPtr g_root; // Definition of variable (to match declaration earlier)
