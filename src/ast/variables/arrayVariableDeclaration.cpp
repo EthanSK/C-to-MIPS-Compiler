@@ -1,4 +1,4 @@
-#include "arrayVariable.hpp"
+#include "arrayVariableDeclaration.hpp"
 
 void ArrayVariableDeclaration::printC(std::ostream &os) const
 {

@@ -1,4 +1,4 @@
-#include "primitiveVariable.hpp"
+#include "primitiveVariableDeclaration.hpp"
 
 std::string PrimitiveVariableDeclaration::typeToString() const
 {

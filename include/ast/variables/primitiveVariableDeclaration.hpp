@@ -7,7 +7,7 @@
 #include <memory>
 #include "statement.hpp"
 #include "literal.hpp"
-#include "variable.hpp"
+#include "variableDeclaration.hpp"
 
 class PrimitiveVariableDeclaration : public VariableDeclaration 
 {

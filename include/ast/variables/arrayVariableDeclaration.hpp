@@ -7,8 +7,8 @@
 #include <memory>
 #include "statement.hpp"
 #include "literal.hpp"
-#include "primitiveVariable.hpp" 
-#include "variable.hpp"
+#include "primitiveVariableDeclaration.hpp" 
+#include "variableDeclaration.hpp"
 
 class ArrayVariableDeclaration : public VariableDeclaration {//the value will be in an init list on the right branch of the binary op =
 public:
