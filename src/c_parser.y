@@ -289,6 +289,11 @@ SPECIFIER_QUALIFIER_LIST
 	| TYPE_QUALIFIER
 	;
 
+STRUCT_DECLARATOR_LIST
+	: STRUCT_DECLARATOR
+	| STRUCT_DECLARATOR_LIST T_COMMA STRUCT_DECLARATOR
+	;
+
 %%
 
 StatementPtr g_root; // Definition of variable (to match declaration earlier)
