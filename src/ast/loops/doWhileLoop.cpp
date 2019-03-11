@@ -1,6 +1,15 @@
 #include "doWhileLoop.hpp"
 
-void DoWhileLoop::printC(std::ostream &os) const 
+StatementPtr DoWhileLoop::getScopeBlock() const
 {
-    os << "do" << branches[0] << "while ( " << branches[1] << ")";
+    return branches[0];
+}
+StatementPtr DoWhileLoop::getCondition() const
+{
+    return branches[1];
+}
+
+void DoWhileLoop::printC(std::ostream &os) const
+{
+    os << "do" << getScopeBlock() << "while ( " << getCondition() << ")";
 }
