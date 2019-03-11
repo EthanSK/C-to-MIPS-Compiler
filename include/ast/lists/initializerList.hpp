@@ -17,7 +17,7 @@ class InitializerList : public Statement
 {
   public:
 
-    std::vector<StatementPtr> getElements();
+    std::vector<StatementPtr> getElements() const;
     void printC(std::ostream &os) const override;
 };
 
