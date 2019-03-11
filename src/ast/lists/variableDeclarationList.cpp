@@ -1,16 +1,16 @@
-#include "initializerList.hpp"
+#include "variableDeclarationList.hpp"
 
-std::vector<StatementPtr> InitializerList::getElements() const {
+std::vector<StatementPtr> VariableDeclarationList::getElements() const {
     return branches;
 } 
 
-void InitializerList::printC(std::ostream &os) const
+void VariableDeclarationList::printC(std::ostream &os) const
 {
     std::vector<StatementPtr> elements = getElements();
-	os << "{";
+	os << "(";
     for(size_t i = 0; i < elements.size(); i++)
     {
         os << elements[i] << ((i == elements.size() - 1) ? "" : ", ");
     }
-    os << "}";
+    os << ")";
 }
