@@ -6,8 +6,10 @@
 
 class DoubleLiteral : public Literal
 {
-  public:
+  private:
     double value;
+  public:
+    double getValue() const;
     void printC(std::ostream &os) const override;
 };
 

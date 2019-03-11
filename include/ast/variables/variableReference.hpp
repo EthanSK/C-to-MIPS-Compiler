@@ -8,11 +8,12 @@
 #include "statement.hpp"
 #include "literal.hpp"
 
-class Variable : public Statement //if variable was declared with literal value, it will be the branches[0]
+class VariableReference : public Statement 
 {
   protected:
     std::string name; 
-    virtual void printC(std::ostream &os) const = 0; 
+    void printC(std::ostream &os) const override; 
+    
 };
 
 #endif
