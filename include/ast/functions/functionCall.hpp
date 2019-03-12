@@ -2,12 +2,13 @@
 #define functionCall_hpp
 
 #include <iostream>
+#include "function.hpp"
 #include "functionParameterList.hpp"
 
-class FunctionCall : public Statement
+class FunctionCall : public Function
 {
 public:
-  FunctionParameterList getParameters() const;
+  StatementPtr getParameters() const override;
   void printC(std::ostream &os) const override;
 };
 

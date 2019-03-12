@@ -12,8 +12,8 @@ class IfStatement : public Statement //will have branch[0] condition, branch[1] 
 {
   protected:
     StatementPtr getCondition() const;
-    ScopeBlock getIfScopeBlock() const;
-    ScopeBlock getElseScopeBlock() const;
+    StatementPtr getIfScopeBlock() const;
+    StatementPtr getElseScopeBlock() const;
     
     void printC(std::ostream &os) const override;
 };

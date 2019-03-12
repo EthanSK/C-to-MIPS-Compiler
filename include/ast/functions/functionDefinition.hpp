@@ -3,15 +3,14 @@
 
 #include <iostream>
 #include "statement.hpp"
-#include "functionParameterList.hpp"
-#include "scopeBlock.hpp"
+#include "function.hpp"
 
-class FunctionDeclaration : public Statement 
+class FunctionDefinition : public Function
 {
-  public:
-    FunctionParameterList getParameters() const;
-    ScopeBlock getScopeBlock() const;
-    void printC(std::ostream &os) const override;
+public:
+  StatementPtr getParameters() const override;
+  StatementPtr getScopeBlock() const;
+  void printC(std::ostream &os) const override;
 };
 
 #endif

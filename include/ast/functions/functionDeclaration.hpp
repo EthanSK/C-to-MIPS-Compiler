@@ -3,13 +3,13 @@
 
 #include <iostream>
 #include "statement.hpp"
-#include "functionParameterList.hpp"
+#include "function.hpp"
 
-class FunctionDeclaration : public Statement 
+class FunctionDeclaration : public Function
 {
-  public:
-    FunctionParameterList getParameters() const;
-    void printC(std::ostream &os) const override;
+public:
+  StatementPtr getParameters() const override;
+  void printC(std::ostream &os) const override;
 };
 
 #endif
