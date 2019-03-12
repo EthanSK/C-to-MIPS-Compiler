@@ -1,7 +1,7 @@
 #include "integerLiteral.hpp"
 
-IntegerLiteral::IntegerLiteral(int value){
-	value = value;
+IntegerLiteral::IntegerLiteral(int _value){
+	value = _value;
 }
 
 int IntegerLiteral::getValue() const

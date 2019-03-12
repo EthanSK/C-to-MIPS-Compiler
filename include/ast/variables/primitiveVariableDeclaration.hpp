@@ -9,17 +9,18 @@
 #include "literal.hpp"
 #include "variableDeclaration.hpp"
 
-class PrimitiveVariableDeclaration : public VariableDeclaration 
+enum class PrimitiveType //enum class not enum so we guarantee strongly typed
+{
+  _int,
+  _float,
+  _double
+};
+
+class PrimitiveVariableDeclaration : public VariableDeclaration
 {
 public:
-  enum class Type //enum class not enum so we guarantee strongly typed
-  {
-    _int,
-    _float,
-    _double
-  };
-  Type type;
-  PrimitiveVariableDeclaration(Type _type, std::string name) : type(_type), VariableDeclaration(name) {};  //must be init'ed with a type value or makes no sense
+  PrimitiveType type;
+  PrimitiveVariableDeclaration(PrimitiveType _type, std::string name) :  VariableDeclaration(name), type(_type){}; //must be init'ed with a type value or makes no sense
   std::string typeToString() const;
 
 protected:

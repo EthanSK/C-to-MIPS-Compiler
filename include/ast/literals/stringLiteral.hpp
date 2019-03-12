@@ -10,7 +10,7 @@ private:
   std::string value;
 
 public:
-  StringLiteral(std::string value);
+  StringLiteral(std::string _value);
   std::string getValue() const;
   void printC(std::ostream &os) const override;
 };

@@ -4,11 +4,11 @@ std::string PrimitiveVariableDeclaration::typeToString() const
 {
     switch (type)
     {
-    case Type::_int:
+    case PrimitiveType::_int:
         return "int";
-    case Type::_float:
+    case PrimitiveType::_float:
         return "float";
-    case Type::_double:
+    case PrimitiveType::_double:
         return "double";
     default:
         return "UNKNOWN TYPE";

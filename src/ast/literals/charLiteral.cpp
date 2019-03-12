@@ -1,7 +1,7 @@
 #include "charLiteral.hpp"
 
-CharLiteral::CharLiteral(int value){
-	value = value; 
+CharLiteral::CharLiteral(int _value){
+	value = _value; 
 }
 int CharLiteral::getValue() const
 {

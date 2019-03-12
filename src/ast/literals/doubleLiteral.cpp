@@ -1,8 +1,8 @@
 #include "doubleLiteral.hpp"
 
-DoubleLiteral::DoubleLiteral(double value)
+DoubleLiteral::DoubleLiteral(double _value)
 {
-	value = value;
+	value = _value;
 }
 double DoubleLiteral::getValue() const
 {

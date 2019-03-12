@@ -10,7 +10,7 @@ private:
   float value;
 
 public:
-  FloatLiteral(float value);
+  FloatLiteral(float _value);
   float getValue() const;
   void printC(std::ostream &os) const override;
 };

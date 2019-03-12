@@ -10,7 +10,7 @@ private:
   int value;
 
 public:
-  IntegerLiteral(int value);
+  IntegerLiteral(int _value);
   int getValue() const;
   void printC(std::ostream &os) const override;
 };

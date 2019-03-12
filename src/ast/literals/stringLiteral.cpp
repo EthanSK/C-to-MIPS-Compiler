@@ -1,8 +1,8 @@
 #include "stringLiteral.hpp"
 
-StringLiteral::StringLiteral(std::string value)
+StringLiteral::StringLiteral(std::string _value)
 {
-	value = value;
+	value = _value;
 }
 
 std::string StringLiteral::getValue() const

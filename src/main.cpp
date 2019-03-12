@@ -25,9 +25,9 @@ int main(int argc, char *argv[])
 
 StatementPtr generateTestAST()
 {
-    StatementPtr ast = new ScopeBlock();
-    StatementPtr test = new ScopeBlock();
-    std::vector<StatementPtr> vec;
-    // ast->branches.push_back(test); //doesn't work
-    vec.push_back(test);   
+    // StatementPtr ast = new ScopeBlock();
+    // StatementPtr test = new ScopeBlock();
+    // std::vector<StatementPtr> vec;
+    // // ast->branches.push_back(test); //doesn't work
+    // vec.push_back(test);   
 }

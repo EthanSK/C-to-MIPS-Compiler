@@ -1,8 +1,8 @@
 #include "floatLiteral.hpp"
 
-FloatLiteral::FloatLiteral(float value)
+FloatLiteral::FloatLiteral(float _value)
 {
-	value = value;
+	value = _value;
 }
 
 float FloatLiteral::getValue() const
