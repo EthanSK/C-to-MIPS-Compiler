@@ -7,6 +7,7 @@
 
 class BinaryBitwiseAnd : public BinaryOperator
 { 
+    using BinaryOperator::BinaryOperator;
     void printC(std::ostream &os) const override;
 }; 
      

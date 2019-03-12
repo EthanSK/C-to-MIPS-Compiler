@@ -7,6 +7,7 @@
 
 class BinaryGreaterThan : public BinaryOperator
 { 
+    using BinaryOperator::BinaryOperator;
     void printC(std::ostream &os) const override;
 }; 
      
