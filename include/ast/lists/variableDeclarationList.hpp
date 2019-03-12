@@ -4,14 +4,13 @@
 #include <iostream>
 #include <vector>
 
-#include "literal.hpp"
-
+#include "variableDeclaration.hpp"
 
 class VariableDeclarationList: public Statement//can be used for functions param list and struct fields
 {
   public:
 
-    std::vector<StatementPtr> getVariables() const;
+    std::vector<StatementPtr> getVariableDeclarations() const;
     virtual void printC(std::ostream &os) const override = 0;
 };
 
