@@ -1,5 +1,5 @@
-#ifndef returnKeyword_hpp
-#define returnKeyword_hpp
+#ifndef continueKeyword_hpp
+#define continueKeyword_hpp
 
 #include <vector>
 #include <string>
@@ -7,10 +7,10 @@
 #include <memory>
 #include "statement.hpp"
 
-class ReturnKeyword : public Statement
+class ContinueKeyword : public Statement 
 {
+    //has no braches and carries no data
   protected:
-    StatementPtr getReturnValue() const;
     virtual void printC(std::ostream &os) const = 0;
 };
 

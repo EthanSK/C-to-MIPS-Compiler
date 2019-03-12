@@ -7,7 +7,7 @@
 #include <memory>
 #include "statement.hpp"
 
-class BreakKeyword : public Statement //will have branch[0] execution block branch[1] condition block
+class BreakKeyword : public Statement
 {
     //has no braches and carries no data
   protected:
