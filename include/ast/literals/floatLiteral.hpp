@@ -6,11 +6,13 @@
 
 class FloatLiteral : public Literal
 {
-  private:
-    float value;
-  public:
-    float getValue() const;
-    void printC(std::ostream &os) const override;
+private:
+  float value;
+
+public:
+  FloatLiteral(float value);
+  float getValue() const;
+  void printC(std::ostream &os) const override;
 };
 
 #endif

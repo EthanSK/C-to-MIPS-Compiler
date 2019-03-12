@@ -8,11 +8,14 @@
 #include "statement.hpp"
 #include "literal.hpp"
 
-class VariableDeclaration : public Statement 
+class VariableDeclaration : public Statement
 {
-  protected:
-    std::string name; 
-    virtual void printC(std::ostream &os) const = 0; 
+public:
+  VariableDeclaration(std::string name);
+
+protected:
+  std::string name;
+  virtual void printC(std::ostream &os) const = 0;
 };
 
 #endif

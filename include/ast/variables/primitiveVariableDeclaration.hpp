@@ -19,7 +19,7 @@ public:
     _double
   };
   Type type;
-  PrimitiveVariableDeclaration(Type _type) : type(_type){}; //must be init'ed with a type value or makes no sense
+  PrimitiveVariableDeclaration(Type _type, std::string name) : type(_type), VariableDeclaration(name) {};  //must be init'ed with a type value or makes no sense
   std::string typeToString() const;
 
 protected:

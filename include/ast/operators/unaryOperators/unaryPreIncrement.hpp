@@ -5,6 +5,7 @@
 
 class UnaryPreIncrement : public UnaryOperator
 { 
+    using UnaryOperator::UnaryOperator;
     void printC(std::ostream &os) const override;
 }; 
      

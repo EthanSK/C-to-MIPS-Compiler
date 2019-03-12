@@ -1,5 +1,11 @@
 #include "ifStatement.hpp"
 
+IfStatement::IfStatement(StatementPtr condition, StatementPtr ifScopeBlock, StatementPtr elseScopeBlock){
+    branches[0] = condition;
+    branches[1] = ifScopeBlock;
+    branches[2] = elseScopeBlock;
+}
+
 StatementPtr IfStatement::getCondition() const{
     return branches[0];
 }

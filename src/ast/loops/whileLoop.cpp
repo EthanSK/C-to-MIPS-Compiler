@@ -1,5 +1,10 @@
 #include "whileLoop.hpp"
 
+WhileLoop::WhileLoop(StatementPtr condition, StatementPtr scopeBlock){
+    branches[0] = condition;
+    branches[1] = scopeBlock; 
+}
+
 StatementPtr WhileLoop::getCondition() const{
     return branches[0];
 }

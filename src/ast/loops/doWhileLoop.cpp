@@ -1,5 +1,9 @@
 #include "doWhileLoop.hpp"
 
+DoWhileLoop::DoWhileLoop(StatementPtr scopeBlock, StatementPtr condition){
+    branches[0] = scopeBlock;
+    branches[1] = condition; 
+}
 StatementPtr DoWhileLoop::getScopeBlock() const
 {
     return branches[0];

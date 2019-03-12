@@ -1,5 +1,9 @@
 #include "initializerList.hpp"
 
+InitializerList::InitializerList(std::vector<StatementPtr> elements){
+    branches = elements;
+}
+
 std::vector<StatementPtr> InitializerList::getElements() const {
     return branches;
 } 

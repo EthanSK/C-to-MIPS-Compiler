@@ -1,5 +1,12 @@
 #include "forLoop.hpp"
 
+ForLoop::ForLoop(StatementPtr init, StatementPtr condition, StatementPtr increment, StatementPtr scopeBlock)
+{
+    branches[0] = init;
+    branches[1] = condition;
+    branches[2] = increment;
+    branches[3] = scopeBlock;
+} 
 StatementPtr ForLoop::getInit() const
 {
     return branches[0];
@@ -20,4 +27,4 @@ StatementPtr ForLoop::getScopeBlock() const
 void ForLoop::printC(std::ostream &os) const
 {
     os << "for (" << getInit() << "; " << getCondition() << "; " << getIncrement() << " )" << getScopeBlock();
-} 
+}

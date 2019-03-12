@@ -9,9 +9,12 @@
 
 class ReturnKeyword : public Statement
 {
-  protected:
-    StatementPtr getReturnValue() const;
-    virtual void printC(std::ostream &os) const = 0;
+public:
+  ReturnKeyword(StatementPtr returnValue);
+
+protected:
+  StatementPtr getReturnValue() const;
+  virtual void printC(std::ostream &os) const = 0;
 };
 
 #endif

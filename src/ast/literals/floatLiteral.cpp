@@ -1,5 +1,10 @@
 #include "floatLiteral.hpp"
 
+FloatLiteral::FloatLiteral(float value)
+{
+	value = value;
+}
+
 float FloatLiteral::getValue() const
 {
 	return value;

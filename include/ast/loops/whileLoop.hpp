@@ -9,11 +9,14 @@
 
 class WhileLoop : public Statement //will have branch[0] condition branch[1] execution block
 {
-  protected:
-    StatementPtr getCondition() const;
-    StatementPtr getScopeBlock() const;
+public:
+  WhileLoop(StatementPtr condition, StatementPtr scopeBlock);
 
-    virtual void printC(std::ostream &os) const = 0;
+protected:
+  StatementPtr getCondition() const;
+  StatementPtr getScopeBlock() const;
+
+  virtual void printC(std::ostream &os) const = 0;
 };
 
 #endif

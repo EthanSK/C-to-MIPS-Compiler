@@ -8,12 +8,14 @@
 #include "statement.hpp"
 #include "literal.hpp"
 
-class VariableReference : public Statement 
+class VariableReference : public Statement
 {
-  protected:
-    std::string name; 
-    void printC(std::ostream &os) const override; 
-    
+public:
+  VariableReference(std::string name);
+
+protected:
+  std::string name;
+  void printC(std::ostream &os) const override;
 };
 
 #endif

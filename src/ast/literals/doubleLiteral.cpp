@@ -1,5 +1,9 @@
 #include "doubleLiteral.hpp"
 
+DoubleLiteral::DoubleLiteral(double value)
+{
+	value = value;
+}
 double DoubleLiteral::getValue() const
 {
 	return value;

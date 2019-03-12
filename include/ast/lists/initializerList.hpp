@@ -16,7 +16,7 @@ Init lists are used for structs, as well as arrays. (don't have to do unions)
 class InitializerList : public Statement
 {
   public:
-
+    InitializerList(std::vector<StatementPtr> elements);
     std::vector<StatementPtr> getElements() const;
     void printC(std::ostream &os) const override;
 };

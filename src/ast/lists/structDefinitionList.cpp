@@ -1,5 +1,6 @@
 #include "structDefinitionList.hpp"
 
+
 void StructDefinitionList::printC(std::ostream &os) const
 {
     std::vector<StatementPtr> elements = getVariableDeclarations();
