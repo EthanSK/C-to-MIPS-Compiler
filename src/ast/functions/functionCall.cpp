@@ -1,6 +1,6 @@
-#include "functionParameterList.hpp"
+#include "functionCall.hpp"
 
-void FunctionParameterList::printC(std::ostream &os) const
+void FunctionCall::printC(std::ostream &os) const
 {
 	os << "(";
     for(size_t i = 0; i < getVariableDeclarations().size(); i++)

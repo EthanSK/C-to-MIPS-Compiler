@@ -2,13 +2,13 @@
 #define functionCall_hpp
 
 #include <iostream>
-#include "literal.hpp"
+#include "functionParameterList.hpp"
 
-class FunctionCall : public 
+class FunctionCall : public Statement
 {
-  public:
-    float getValue() const;
-    void printC(std::ostream &os) const override;
+public:
+  FunctionParameterList getParameters() const;
+  void printC(std::ostream &os) const override;
 };
 
 #endif

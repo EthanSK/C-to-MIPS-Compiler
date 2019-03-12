@@ -1,6 +1,6 @@
 #include "variableDeclarationList.hpp"
 
-std::vector<StatementPtr> VariableDeclarationList::getVariables() const {
+std::vector<StatementPtr> VariableDeclarationList::getVariableDeclarations() const {
     return branches;
 } 
 
