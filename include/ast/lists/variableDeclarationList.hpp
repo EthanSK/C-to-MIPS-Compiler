@@ -7,12 +7,12 @@
 #include "literal.hpp"
 
 
-class VariableDeclarationList: public Statement
+class VariableDeclarationList: public Statement//can be used for functions param list and struct fields
 {
   public:
 
     std::vector<StatementPtr> getElements() const;
-    void printC(std::ostream &os) const override;
+    virtual void printC(std::ostream &os) const override = 0;
 };
 
 #endif
