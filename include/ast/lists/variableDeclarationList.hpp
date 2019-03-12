@@ -11,7 +11,7 @@ class VariableDeclarationList: public Statement//can be used for functions param
 {
   public:
 
-    std::vector<StatementPtr> getElements() const;
+    std::vector<StatementPtr> getVariables() const;
     virtual void printC(std::ostream &os) const override = 0;
 };
 
