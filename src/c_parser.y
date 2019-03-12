@@ -38,6 +38,7 @@
 %type <expr> STORAGE_CLASS_SPECIFIER TYPE_SPECIFIER STRUCT_OR_UNION_SPECIFIER ENUM_SPECIFIER STRUCT_OR_UNION STRUCT_DECLARATION_LIST
 %type <expr> DECLARATION_SPECIFIERS STRUCT_DECLARATION SPECIFIER_QUALIFIER_LIST TYPE_QUALIFIER STRUCT_DECLARATOR
 %type <expr> ENUMERATOR_LIST ENUMERATOR DIRECT_DECLARATOR POINTER PARAMETER_TYPE_LIST TYPE_QUALIFIER_LIST PARAMETER_LIST
+%type <expr> PARAMETER_DECLARATION
 
 %type <token> ASSIGNEMENT_OPERATOR UNARY_OPERATOR
 
@@ -170,22 +171,22 @@ CONDITIONAL_EXPRESSION
 ASSIGNEMENT_EXPRESSION
 	: CONDITIONAL_EXPRESSION
 	| UNARY_EXPRESSION ASSIGNEMENT_OPERATOR ASSIGNEMENT_EXPRESSION
-  {
-    switch ($2)
-    {
-      case T_EQ: $$ = new BinaryAssignement($1, $3); break;
-      case T_MULTIPLY_EQ: $$ = new BinaryMultiplyAssignement($1, $3); break;
-      case T_DIVIDE_EQ: $$ = new BinaryDivideAssignement($1, $3); break;
-      case T_MODULO_EQ: $$ = new BinaryModuloAssignement($1, $3); break;
-      case T_PLUS_EQ: $$ = new BinaryAddAssignement($1, $3); break;
-      case T_MINUS_EQ: $$ = new BinarySubtractAssignement($1, $3); break;
-      case T_LSHIFT_EQ: $$ = new BinaryBitwiseLeftShiftAssignement($1, $3); break;
-      case T_RSHIFT_EQ: $$ = new BinaryBitwiseRightShiftAssignement($1, $3); break;
-      case T_AND_AND: $$ = new BinaryBitwiseAndAssignment($1, $3); break;
-      case T_XOR_EQ: $$ = new BinaryBitwiseXorAssignment($1, $3); break;
-      case T_OR_EQ: $$ = new BinaryBitwiseOrAssignment($1, $3); break;
-    }
-  }
+	{
+		switch ($2)
+		{
+		case T_EQ: $$ = new BinaryAssignement($1, $3); break;
+		case T_MULTIPLY_EQ: $$ = new BinaryMultiplyAssignement($1, $3); break;
+		case T_DIVIDE_EQ: $$ = new BinaryDivideAssignement($1, $3); break;
+		case T_MODULO_EQ: $$ = new BinaryModuloAssignement($1, $3); break;
+		case T_PLUS_EQ: $$ = new BinaryAddAssignement($1, $3); break;
+		case T_MINUS_EQ: $$ = new BinarySubtractAssignement($1, $3); break;
+		case T_LSHIFT_EQ: $$ = new BinaryBitwiseLeftShiftAssignement($1, $3); break;
+		case T_RSHIFT_EQ: $$ = new BinaryBitwiseRightShiftAssignement($1, $3); break;
+		case T_AND_AND: $$ = new BinaryBitwiseAndAssignment($1, $3); break;
+		case T_XOR_EQ: $$ = new BinaryBitwiseXorAssignment($1, $3); break;
+		case T_OR_EQ: $$ = new BinaryBitwiseOrAssignment($1, $3); break;
+		}
+	}
 	;
 
 ASSIGNEMENT_OPERATOR
@@ -352,6 +353,11 @@ TYPE_QUALIFIER_LIST
 PARAMETER_TYPE_LIST
 	: PARAMETER_LIST
 	| PARAMETER_LIST T_COMMA T_ELLIPSIS
+	;
+
+PARAMETER_LIST
+	: PARAMETER_DECLARATION
+	| PARAMETER_LIST T_COMMA PARAMETER_DECLARATION
 	;
 
 %%
