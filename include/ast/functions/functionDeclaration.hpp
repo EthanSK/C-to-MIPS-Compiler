@@ -3,14 +3,23 @@
 
 #include <iostream>
 #include "statement.hpp"
-#include "variableDeclaration.hpp"
+#include "primitiveType.hpp"
 
-class FunctionDeclaration : public VariableDeclaration //think about it, a function is a variable declaration just with parameters 
+class FunctionDeclaration : public Statement
 {
 public:
-  FunctionDeclaration(PrimitiveType _primitiveType, std::string _name, StatementPtr parameters);
+  FunctionDeclaration(PrimitiveType _primitiveType, std::string _name, StatementPtr parameters, bool _isPointer, bool _isExtern);
   StatementPtr getParameters() const;
   void printC(std::ostream &os) const override;
+
+protected:
+  std::string name;
+  PrimitiveType primitiveType;
+
+private:
+  //function can't have array as return type
+  bool isPointer;
+  bool isExtern;
 };
 
 #endif

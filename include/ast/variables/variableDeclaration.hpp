@@ -11,14 +11,24 @@
 class VariableDeclaration : public Statement
 {
 public:
-  VariableDeclaration(PrimitiveType _primitiveType, std::string _name ) : name(_name), primitiveType(_primitiveType){};
+  VariableDeclaration(PrimitiveType _primitiveType, std::string _name, bool _isPointer, bool _isExtern) : arraySize(0), name(_name), primitiveType(_primitiveType), isPointer(_isPointer), isArray(false), isExtern(_isExtern){};
+
+  VariableDeclaration(PrimitiveType _primitiveType, std::string _name, bool _isArray, bool _isExtern, int _arraySize) : arraySize(_arraySize), name(_name), primitiveType(_primitiveType), isPointer(false), isArray(_isArray), isExtern(_isExtern){}; //use this constructor for arrays
+
   std::string primitiveTypeToString() const;
 
 protected:
   std::string name;
   PrimitiveType primitiveType;
+  int arraySize; //if type even is array
 
-  virtual void printC(std::ostream &os) const = 0;
+private: //decided its better to do it like this that have a class for each one that inherits, because there could be many more properties like isPointer isArray to add
+         //the combinations of these three are too hard to keep track of, so its easier, while worse practice, to have them like this and rely on the guaranteed correct input.
+  bool isPointer;
+  bool isArray;
+  bool isExtern;
+
+  virtual void printC(std::ostream &os) const;
 };
 
 #endif
