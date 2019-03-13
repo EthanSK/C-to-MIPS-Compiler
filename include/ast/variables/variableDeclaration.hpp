@@ -11,7 +11,7 @@
 class VariableDeclaration : public Statement
 {
 public:
-  VariableDeclaration(PrimitiveType _primitiveType, std::string _name, bool _isPointer, bool _isExtern) : name(_name), arraySize(0), primitiveType(_primitiveType), isPointer(_isPointer), isArray(false), isExtern(_isExtern){};
+  VariableDeclaration(PrimitiveType _primitiveType, std::string _name, bool _isPointer, bool _isExtern) : name(_name), primitiveType(_primitiveType), arraySize(0), isPointer(_isPointer), isArray(false), isExtern(_isExtern){};
 
   VariableDeclaration(PrimitiveType _primitiveType, std::string _name, bool _isArray, bool _isExtern, int _arraySize) : name(_name), primitiveType(_primitiveType), arraySize(_arraySize), isPointer(false), isArray(_isArray), isExtern(_isExtern){}; //use this constructor for arrays
 

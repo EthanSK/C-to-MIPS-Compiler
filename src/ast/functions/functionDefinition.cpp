@@ -4,13 +4,15 @@
 FunctionDefinition::FunctionDefinition(PrimitiveType _primitiveType, std::string _name, StatementPtr parameters, StatementPtr scopeBlock, bool _isPointer, bool _isExtern) : name(_name), primitiveType(_primitiveType), isPointer(_isPointer), isExtern(_isExtern)
 {
     branches[0] = parameters;
-    branches[1] = scopeBlock;
+    branches[1] = scopeBlock; 
 }
 
 FunctionDefinition::FunctionDefinition(PrimitiveType _primitiveType, std::string _name, StatementPtr parameters, StatementPtr scopeBlock) : name(_name), primitiveType(_primitiveType), isPointer(false), isExtern(false)
 {
-    branches[0] = parameters;
-    branches[1] = scopeBlock;
+
+    branches.push_back(parameters);
+    branches.push_back(scopeBlock);
+
 }
 StatementPtr FunctionDefinition::getParameters() const
 {
