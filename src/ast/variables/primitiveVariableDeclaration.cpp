@@ -1,5 +1,10 @@
 #include "primitiveVariableDeclaration.hpp"
 
+PrimitiveType PrimitiveVariableDeclaration::getPrimitiveType() const
+{
+    return primitiveType;
+}
+
 std::string PrimitiveVariableDeclaration::primitiveTypeToString() const
 {
     switch (primitiveType)
@@ -22,4 +27,4 @@ std::string PrimitiveVariableDeclaration::primitiveTypeToString() const
 void PrimitiveVariableDeclaration::printC(std::ostream &os) const
 {
     os << primitiveTypeToString() << " " << name;
-}
+} 

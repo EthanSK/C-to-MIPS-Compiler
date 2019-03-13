@@ -6,7 +6,6 @@
 #include <iostream>
 #include <memory>
 #include "statement.hpp"
-#include "literal.hpp"
 #include "variableDeclaration.hpp"
 
 enum class PrimitiveType //enum class not enum so we guarantee strongly typed
@@ -22,11 +21,12 @@ enum class PrimitiveType //enum class not enum so we guarantee strongly typed
 class PrimitiveVariableDeclaration : public VariableDeclaration
 {
 public:
-  PrimitiveType primitiveType;
-  PrimitiveVariableDeclaration(PrimitiveType _type, std::string name) :  VariableDeclaration(name), primitiveType(_type){}; //must be init'ed with a primitiveType value or makes no sense
+  PrimitiveVariableDeclaration(PrimitiveType _type, std::string name) : VariableDeclaration(name), primitiveType(_type){}; //must be init'ed with a primitiveType value or makes no sense
   std::string primitiveTypeToString() const;
+  PrimitiveType getPrimitiveType() const;
 
 protected:
+  PrimitiveType primitiveType;
   void printC(std::ostream &os) const;
 };
 

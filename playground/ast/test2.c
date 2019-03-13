@@ -1,6 +1,7 @@
 int main()
 {
-    static const char* a = "hello";
-    auto b = 3.3;
+    int a[5];
+    a[3] = 2;
+    int b = 3;
     return 0;
 }
