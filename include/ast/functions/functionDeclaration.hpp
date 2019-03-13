@@ -4,14 +4,17 @@
 #include <iostream>
 #include "statement.hpp"
 #include "function.hpp"
-#include "primitiveVariableDeclaration.hpp"
+#include "variableDeclaration.hpp"
 
 class FunctionDeclaration : public Function
 {
 public:
-  FunctionDeclaration(std::string name, StatementPtr type,  StatementPtr parameters);
+  FunctionDeclaration(VariableDeclaration _primitiveType, std::string _name, StatementPtr parameters);
   StatementPtr getParameters() const override;
   void printC(std::ostream &os) const override;
+
+protected:
+  VariableDeclaration variableDeclaration;
 };
 
 #endif

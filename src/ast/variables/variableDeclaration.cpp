@@ -1,6 +1,21 @@
 #include "variableDeclaration.hpp"
 
-VariableDeclaration::VariableDeclaration(std::string name)
+
+std::string VariableDeclaration::primitiveTypeToString() const
 {
-    name = name;
+    switch (primitiveType)
+    {
+    case PrimitiveType::_int:
+        return "int";
+    case PrimitiveType::_float:
+        return "float";
+    case PrimitiveType::_double:
+        return "double";
+    case PrimitiveType::_char:
+        return "char";
+    case PrimitiveType::_unsigned:
+        return "unsigned";
+    default:
+        return "UNKNOWN TYPE";
+    }
 }

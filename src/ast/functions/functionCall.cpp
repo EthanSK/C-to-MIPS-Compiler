@@ -1,6 +1,6 @@
 #include "functionCall.hpp"
 
-FunctionCall::FunctionCall(std::string name, StatementPtr parameters) : Function(name) {
+FunctionCall::FunctionCall(std::string _name, StatementPtr parameters) : Function(_name) {
     branches[0] = parameters;
 }  
 StatementPtr FunctionCall::getParameters() const{

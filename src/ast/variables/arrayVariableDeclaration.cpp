@@ -1,4 +1,5 @@
 #include "arrayVariableDeclaration.hpp"
+#include "primitiveVariableDeclaration.hpp"
 
 PrimitiveType ArrayVariableDeclaration::getPrimitiveType() const
 {
@@ -7,6 +8,6 @@ PrimitiveType ArrayVariableDeclaration::getPrimitiveType() const
 
 void ArrayVariableDeclaration::printC(std::ostream &os) const
 {
-    std::string type = PrimitiveVariableDeclaration(primitiveType, "tmpName").primitiveTypeToString();
+    std::string type = primitiveTypeToString();
     os << type << " " << name << "[" << size << "]";
 }
