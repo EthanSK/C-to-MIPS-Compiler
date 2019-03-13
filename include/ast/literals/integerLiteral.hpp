@@ -6,12 +6,12 @@
 
 class IntegerLiteral : public Literal
 {
-private:
-  int value;
-
 public:
-  IntegerLiteral(int _value);
+  IntegerLiteral(int value);
   void printC(std::ostream &os) const override;
+
+private:
+  int _value;
 };
 
 #endif

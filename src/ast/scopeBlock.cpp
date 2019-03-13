@@ -1,7 +1,7 @@
 #include "scopeBlock.hpp"
 
-ScopeBlock::ScopeBlock(std::vector<StatementPtr> _branches){
-    branches = _branches;
+ScopeBlock::ScopeBlock(std::vector<StatementPtr> branches){
+    _branches = branches;
 }
 void ScopeBlock::printC(std::ostream &os) const
 {
@@ -10,5 +10,5 @@ void ScopeBlock::printC(std::ostream &os) const
     {
         os << branches[i] << ";\n";
     }
-    os << "}" << std::endl; //to flush the buffer
+    os << "}\n" << std::endl; //to flush the buffer
 }

@@ -1,12 +1,12 @@
 #include "stringLiteral.hpp"
 
-StringLiteral::StringLiteral(std::string _value)
+StringLiteral::StringLiteral(std::string value)
 {
-	value = _value;
+	_value = value;
 }
 
 
 void StringLiteral::printC(std::ostream &os) const
 {
-	os << "\"" << value << "\"";
+	os << "\"" << _value << "\"";
 }

@@ -6,12 +6,12 @@
 
 class StringLiteral : public Literal
 {
-private:
-  std::string value;
-
 public:
-  StringLiteral(std::string _value);
+  StringLiteral(std::string value);
   void printC(std::ostream &os) const override;
+
+private:
+  std::string _value;
 };
 
 #endif

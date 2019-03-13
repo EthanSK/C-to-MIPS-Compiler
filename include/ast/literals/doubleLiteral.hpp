@@ -6,11 +6,12 @@
 
 class DoubleLiteral : public Literal
 {
-  private:
-    double value;
-  public:
-    DoubleLiteral(double _value);
+public:
+    DoubleLiteral(double value);
     void printC(std::ostream &os) const override;
+
+  private:
+    double _value;
 };
 
 #endif

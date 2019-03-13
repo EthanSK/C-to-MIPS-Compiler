@@ -11,7 +11,7 @@
 class ArrayElementReference : public VariableReference
 {
   public:
-    ArrayElementReference(std::string _name, int _index) : VariableReference(_name), index(_index){};
+    ArrayElementReference(std::string name, int index) : VariableReference(name), index(index){};
   protected:
     int index;
     void printC(std::ostream &os) const;

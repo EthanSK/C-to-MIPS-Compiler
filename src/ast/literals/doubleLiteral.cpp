@@ -1,12 +1,12 @@
 #include "doubleLiteral.hpp"
 
-DoubleLiteral::DoubleLiteral(double _value)
+DoubleLiteral::DoubleLiteral(double value)
 {
-	value = _value;
+	_value = value;
 }
 
 
 void DoubleLiteral::printC(std::ostream &os) const
 {
-	os << value;
+	os << _value;
 }

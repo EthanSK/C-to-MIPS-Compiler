@@ -1,9 +1,9 @@
 #include "charLiteral.hpp"
 
-CharLiteral::CharLiteral(int _value){
-	value = _value; 
+CharLiteral::CharLiteral(int value){
+	_value = value; 
 }
 void CharLiteral::printC(std::ostream &os) const
 {
-	os << "\'" << value << "\'";
+	os << "\'" << _value << "\'";
 }

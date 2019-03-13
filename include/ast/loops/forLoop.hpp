@@ -9,7 +9,6 @@
 
 class ForLoop : public Statement //will have branch[0] initializatino,, branch[1] condition, branch[2] increment/decr, branch[3] execution block
 {
-
 public:
   ForLoop(StatementPtr init, StatementPtr condition, StatementPtr increment, StatementPtr scopeBlock);
 

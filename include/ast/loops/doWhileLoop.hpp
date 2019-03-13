@@ -9,7 +9,6 @@
 
 class DoWhileLoop : public Statement //will have branch[0] execution block branch[1] condition block
 {
-
 public:
   DoWhileLoop(StatementPtr scopeBlock, StatementPtr condition);
 

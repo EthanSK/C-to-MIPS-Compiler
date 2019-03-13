@@ -1,9 +1,9 @@
 #include "integerLiteral.hpp"
 
-IntegerLiteral::IntegerLiteral(int _value){
-	value = _value;
+IntegerLiteral::IntegerLiteral(int value){
+	_value = value;
 }
 void IntegerLiteral::printC(std::ostream &os) const
 {
-	os << value;
+	os << _value;
 }

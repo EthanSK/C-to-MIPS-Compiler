@@ -6,11 +6,12 @@
 
 class CharLiteral : public Literal
 {
-  private:
-    int value; // I don't think char can take multiple letters? IDK but clang uses an int to store the char literal value and then casts it implicitly
   public:
-    CharLiteral(int _value);
+    CharLiteral(int value);
     void printC(std::ostream &os) const override;
+
+  private:
+    int _value; // I don't think char can take multiple letters? IDK but clang uses an int to store the char literal value and then casts it implicitly
 };
 
 #endif
