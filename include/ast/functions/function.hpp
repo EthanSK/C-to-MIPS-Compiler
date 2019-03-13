@@ -8,6 +8,7 @@
 class Function : public Statement
 {
 protected:
+  Function(std::string _name) : name(_name) {};
   std::string name;
 public:
   virtual StatementPtr getParameters() const = 0; //virtual because implementation mIGHT be different for calls and definition because different number of branches
