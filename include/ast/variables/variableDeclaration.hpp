@@ -6,7 +6,6 @@
 #include <iostream>
 #include <memory>
 #include "statement.hpp"
-#include "literal.hpp"
 
 class VariableDeclaration : public Statement
 {
