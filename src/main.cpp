@@ -38,9 +38,8 @@ StatementPtr generateTestAST()
             "main",
             new FunctionParameterList(std::vector<StatementPtr>()),
             new ScopeBlock(
-                {
-
-                })),
+                std::vector<StatementPtr>()
+                ))
     });
 
     return ast;

@@ -7,6 +7,12 @@ std::ostream &operator<<(std::ostream &os, const Statement &statement)
      return os;
 }  
 
+std::ostream &operator<<(std::ostream &os, const StatementPtr statementPtr)
+{
+     statementPtr->printC(os); 
+     return os; 
+}  
+
 Statement::~Statement()
 {
     for(size_t i = 0; i < branches.size(); i++)
