@@ -3,9 +3,9 @@
 
 #include <iostream>
 #include "statement.hpp"
-#include "primitiveType.hpp"
+#include "variableDeclaration.hpp"
 
-class FunctionDefinition : public Statement //definition is NOT just declaration with scope blokc, the decl params can just be type without name unlike in definiton.
+class FunctionDefinition : public VariableDeclaration //definition is NOT just declaration with scope block (so don't inherit that), the decl params can just be type without name unlike in definiton int a(int,int,char) for eg.
 {
 public:
   FunctionDefinition(PrimitiveType _primitiveType, std::string _name, StatementPtr parameters, StatementPtr scopeBlock);
@@ -13,9 +13,6 @@ public:
   StatementPtr getParameters() const;
   void printC(std::ostream &os) const override;
 
-protected:
-  std::string name;
-  PrimitiveType primitiveType;
 };
 
 #endif

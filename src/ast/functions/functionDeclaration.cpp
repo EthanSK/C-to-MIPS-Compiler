@@ -1,6 +1,6 @@
 #include "functionDeclaration.hpp"
 
-FunctionDeclaration::FunctionDeclaration(PrimitiveType _primitiveType, std::string _name, StatementPtr parameters) : name(_name), primitiveType(_primitiveType)
+FunctionDeclaration::FunctionDeclaration(PrimitiveType _primitiveType, std::string _name, StatementPtr parameters) : VariableDeclaration(_primitiveType, _name)
 {
     branches[0] = parameters;
 }

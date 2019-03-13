@@ -1,6 +1,6 @@
 
 
-int hi(int, int);
+int *hi(int, int);
 
 int main()
 {
