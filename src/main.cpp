@@ -25,6 +25,6 @@ int main(int argc, char *argv[])
 
 StatementPtr generateTestAST()
 {
-    StatementPtr ast = new ScopeBlock();
+    //StatementPtr ast = new ScopeBlock();
    
 }
