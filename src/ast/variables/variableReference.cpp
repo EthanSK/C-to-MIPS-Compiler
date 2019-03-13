@@ -1,6 +1,7 @@
 #include "variableReference.hpp"
 
-VariableReference::VariableReference(std::string name){
+VariableReference::VariableReference(std::string name)
+{
     name = name;
 }
 

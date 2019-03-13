@@ -34,15 +34,15 @@ int main()
        {2, 3},
        {4, 5, 6}};
 
-   int zzz = 3;
+   static const int statconst = 3;
    int i = 2;
-   int result = i + zzz;
+  // int result = i + zzz;
    char kkkkk = 'kkkkkkkkkkk';
    int aaao[6] = {1, 3, 5, 5, 5, 6};
    double weirdarray[3];
    for (i = 0; i < 50; i++)
    {
-      zzz++;
+     // zzz++;
       if (i > 5)
       {
          break;

@@ -5,6 +5,6 @@ testProgPath=$1
 
 # gcc $testProgPath -fdump-tree-all-graph
 # gcc -fdump-tree-vcg -g $testProgPath 
-clang -Xclang -ast-dump  $testProgPath #works
+clang -std=c90 -Xclang -ast-dump  $testProgPath #works
 
 # clang -cc1 -ast-print $testProgPath
