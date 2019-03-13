@@ -5,6 +5,10 @@ FunctionDeclaration::FunctionDeclaration(PrimitiveType _primitiveType, std::stri
 {
     branches[0] = parameters;
 }
+FunctionDeclaration::FunctionDeclaration(PrimitiveType _primitiveType, std::string _name, StatementPtr parameters) : name(_name), primitiveType(_primitiveType), isPointer(false), isExtern(false)
+{
+    branches[0] = parameters;
+}
 
 StatementPtr FunctionDeclaration::getParameters() const
 {
