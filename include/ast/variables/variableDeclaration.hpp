@@ -22,7 +22,7 @@ protected:
   PrimitiveType primitiveType;
   int arraySize; //if type even is array
 
-private: //decided its better to do it like this that have a class for each one that inherits, because there could be many more properties like isPointer isArray to add
+private: //decided its better to do it like this that have a class for each one that inherits, because there could be many more properties like isPointer isArray to add. also allows us to be consistent for functions8
          //the combinations of these three are too hard to keep track of, so its easier, while worse practice, to have them like this and rely on the guaranteed correct input.
   bool isPointer;
   bool isArray;
