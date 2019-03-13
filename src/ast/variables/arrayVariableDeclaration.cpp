@@ -1,9 +1,5 @@
 #include "arrayVariableDeclaration.hpp"
 
-int ArrayVariableDeclaration::getSize() const
-{
-    return size;
-}
 PrimitiveType ArrayVariableDeclaration::getPrimitiveType() const
 {
     return primitiveType;

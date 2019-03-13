@@ -14,7 +14,6 @@ class PointerVariableDeclaration : public VariableDeclaration
   public:
     PointerVariableDeclaration(std::string name, PrimitiveType _primitiveType) : VariableDeclaration(name), primitiveType(_primitiveType){};
     //we don't need a typeToString method. think about it, when decoding in codegen, we use elementType and size info thats it
-    PrimitiveType getPrimitiveType() const;
 
   protected:
     PrimitiveType primitiveType;

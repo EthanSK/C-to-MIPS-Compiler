@@ -23,7 +23,6 @@ class PrimitiveVariableDeclaration : public VariableDeclaration
 public:
   PrimitiveVariableDeclaration(PrimitiveType _type, std::string name) : VariableDeclaration(name), primitiveType(_type){}; //must be init'ed with a primitiveType value or makes no sense
   std::string primitiveTypeToString() const;
-  PrimitiveType getPrimitiveType() const;
 
 protected:
   PrimitiveType primitiveType;

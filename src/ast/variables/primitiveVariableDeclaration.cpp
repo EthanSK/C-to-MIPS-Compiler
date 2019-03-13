@@ -1,9 +1,5 @@
 #include "primitiveVariableDeclaration.hpp"
 
-PrimitiveType PrimitiveVariableDeclaration::getPrimitiveType() const
-{
-    return primitiveType;
-}
 
 std::string PrimitiveVariableDeclaration::primitiveTypeToString() const
 {

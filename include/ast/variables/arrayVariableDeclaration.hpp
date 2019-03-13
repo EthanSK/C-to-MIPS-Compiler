@@ -14,7 +14,6 @@ class ArrayVariableDeclaration : public VariableDeclaration
 public:
   ArrayVariableDeclaration(std::string name, PrimitiveType _primitiveType, int _size) : VariableDeclaration(name), primitiveType(_primitiveType), size(_size){};
   //we don't need a typeToString method. think about it, when decoding in codegen, we use elementType and size info thats it
-  int getSize() const;
   PrimitiveType getPrimitiveType() const;
 
 protected:
