@@ -11,7 +11,6 @@ private:
 
 public:
   FloatLiteral(float _value);
-  float getValue() const;
   void printC(std::ostream &os) const override;
 };
 

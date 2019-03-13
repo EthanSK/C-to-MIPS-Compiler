@@ -11,7 +11,6 @@ private:
 
 public:
   IntegerLiteral(int _value);
-  int getValue() const;
   void printC(std::ostream &os) const override;
 };
 

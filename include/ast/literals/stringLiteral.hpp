@@ -11,7 +11,6 @@ private:
 
 public:
   StringLiteral(std::string _value);
-  std::string getValue() const;
   void printC(std::ostream &os) const override;
 };
 
