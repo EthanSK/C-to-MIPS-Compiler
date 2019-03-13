@@ -11,10 +11,10 @@
 class PrimitiveVariableDeclaration : public VariableDeclaration
 {
 public:
-  PrimitiveVariableDeclaration(std::string _name, PrimitiveType _primitiveType) : VariableDeclaration(_name, _primitiveType){};
+  PrimitiveVariableDeclaration(PrimitiveType _primitiveType, std::string _name) : VariableDeclaration(_primitiveType, _name){};
 
 protected:
   void printC(std::ostream &os) const;
 };
- 
+
 #endif

@@ -11,7 +11,7 @@
 class VariableDeclaration : public Statement
 {
 public:
-  VariableDeclaration(std::string _name, PrimitiveType _primitiveType) : name(_name), primitiveType(_primitiveType){};
+  VariableDeclaration(PrimitiveType _primitiveType, std::string _name ) : name(_name), primitiveType(_primitiveType){};
   std::string primitiveTypeToString() const;
 
 protected:
