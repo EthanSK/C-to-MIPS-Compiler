@@ -5,6 +5,7 @@
 #include <string>
 #include <iostream>
 #include <memory>
+#include "context.hpp"
 
 class Statement;
 typedef const Statement* StatementPtr;
@@ -18,6 +19,7 @@ public:
 
 protected:
 	virtual void printC(std::ostream &os) const = 0; //prints c90 code so we can compare against input code //called in << overload
+	virtual void generatePython(std::ostream &os, PythonContext &context, int scopeDepth = 0) const = 0;
 
 protected:
 	std::vector<StatementPtr> branches;
