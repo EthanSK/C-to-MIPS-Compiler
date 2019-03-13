@@ -13,7 +13,16 @@ enum class PrimitiveType //enum class not enum so we guarantee strongly typed
 {
   _int,
   _float,
-  _double
+  _double,
+  _char,
+  _unsignedChar,
+  _signedChar,
+  _unsignedInt,
+  _short,
+  _unsignedShort,
+  _long,
+  _unsignedLong,
+  _longDouble
 };
 
 class PrimitiveVariableDeclaration : public VariableDeclaration
