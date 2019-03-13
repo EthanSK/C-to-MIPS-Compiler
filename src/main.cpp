@@ -4,11 +4,18 @@
 
 //for testing
 #include "scopeBlock.hpp"
+#include "ifElseStatement.hpp"
+#include "binaryGreaterThanOrEqualTo.hpp"
+#include "binaryAdd.hpp"
+#include "floatLiteral.hpp"
+#include "doubleLiteral.hpp"
+#include "integerLiteral.hpp"
 #include "functionDefinition.hpp"
 #include "functionParameterList.hpp"
 #include "returnKeyword.hpp"
 
 StatementPtr generateTestAST();
+StatementPtr generateTestFragment();
 
 
 int main(int argc, char *argv[])
@@ -26,7 +33,14 @@ int main(int argc, char *argv[])
     // std::cout << ast << std::endl;
     
     //testing
-    std::cout << generateTestAST();
+    PythonContext context;
+    StatementPtr ast = generateTestFragment();
+    std::cout << "\n\nC CODE\n======================\n";
+    std::cout << ast;
+    std::cout << "\n\nPYTHON CODE\n======================\n";
+    ast->generatePython(std::cout, context);
+    std::cout << std::endl;
+
     return 0;
 }
 
@@ -40,6 +54,22 @@ StatementPtr generateTestAST()
             new ScopeBlock(
                 std::vector<StatementPtr>()
                 ))
+    });
+
+    return ast;
+}
+
+StatementPtr generateTestFragment()
+{
+    StatementPtr ast = new ScopeBlock({
+        new IfElseStatement(
+            new BinaryGreaterThanOrEqualTo(new DoubleLiteral(10), new BinaryAdd(new IntegerLiteral(7), new FloatLiteral(7.7f))),
+            new ScopeBlock({
+                
+            }),
+            new ScopeBlock({
+
+            }))
     });
 
     return ast;

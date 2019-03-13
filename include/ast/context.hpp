@@ -1,5 +1,5 @@
-#ifndef scopeBlock_hpp
-#define scopeBlock_hpp
+#ifndef context_hpp
+#define context_hpp
 
 class Context
 {

@@ -1,8 +1,9 @@
 #include "scopeBlock.hpp"
 
 ScopeBlock::ScopeBlock(std::vector<StatementPtr> branches){
-    _branches = branches;
+    this->branches = branches;
 }
+
 void ScopeBlock::printC(std::ostream &os) const
 {
     os << "\n{\n";
@@ -11,4 +12,13 @@ void ScopeBlock::printC(std::ostream &os) const
         os << branches[i] << ";\n";
     }
     os << "}\n" << std::endl; //to flush the buffer
+}
+
+void ScopeBlock::generatePython(std::ostream &os, PythonContext &context, int scopeDepth) const
+{
+    for(size_t i = 0; i < branches.size(); i++)
+    {
+        branches[i]->generatePython(os, context, scopeDepth);
+        os << "\n";
+    }
 }

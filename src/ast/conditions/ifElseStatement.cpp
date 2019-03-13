@@ -1,9 +1,9 @@
-#include "ifStatement.hpp"
+#include "ifElseStatement.hpp"
 
 IfElseStatement::IfElseStatement(StatementPtr condition, StatementPtr ifScopeBlock, StatementPtr elseScopeBlock){
-    branches[0] = condition;
-    branches[1] = ifScopeBlock;
-    branches[2] = elseScopeBlock;
+    branches.push_back(condition);
+    branches.push_back(ifScopeBlock);
+    branches.push_back(elseScopeBlock);
 }
 
 StatementPtr IfElseStatement::getCondition() const{
@@ -19,3 +19,16 @@ void IfElseStatement::printC(std::ostream &os) const
 {
     os << "if (" << getCondition() << ")" << getIfScopeBlock() << "else" << getElseScopeBlock();//the scopeBlock printC is repsonsible for printing the { } with new lines
 }  
+
+void IfElseStatement::generatePython(std::ostream &os, PythonContext &context, int scopeDepth) const
+{
+    os << "if ";
+    getCondition()->generatePython(os, context, scopeDepth);
+
+    os << std::endl;
+    getIfScopeBlock()->generatePython(os, context, scopeDepth + 1);
+
+    os << "else" << std::endl;
+    getElseScopeBlock()->generatePython(os, context, scopeDepth + 1);
+    os << std::endl;
+}
