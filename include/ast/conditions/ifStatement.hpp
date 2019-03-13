@@ -8,10 +8,10 @@
 #include "statement.hpp"
 #include "scopeBlock.hpp"
 
-class IfStatement : public Statement //will have branch[0] condition, branch[1] if block, and branch[2] else block
+class IfElseStatement : public Statement //will have branch[0] condition, branch[1] if block, and branch[2] else block
 {
 public:
-  IfStatement(StatementPtr condition, StatementPtr ifScopeBlock, StatementPtr elseScopeBlock);
+  IfElseStatement(StatementPtr condition, StatementPtr ifScopeBlock, StatementPtr elseScopeBlock);
 
 protected:
   StatementPtr getCondition() const;
