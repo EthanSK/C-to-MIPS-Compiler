@@ -27,15 +27,15 @@ void FunctionDefinition::printC(std::ostream &os) const
     std::string primitiveTypeString = VariableDeclaration(primitiveType, name, isPointer, isExtern).primitiveTypeToString();
     if (isPointer)
     { 
-        os << primitiveTypeString << " *" << name << getParameters() << getScopeBlock();
+        os << primitiveTypeString << " * " << name << getParameters() << getScopeBlock();
     }
     else if (isExtern)
     {
-        os << "extern " << primitiveTypeString << " *" << name << getParameters() << getScopeBlock();
+        os << "extern " << primitiveTypeString << " * " << name << getParameters() << getScopeBlock();
     }
     else
     {
-        os << primitiveTypeString << name << getParameters() << getScopeBlock();
+        os << primitiveTypeString << " " << name << getParameters() << getScopeBlock();
     }
 
 }

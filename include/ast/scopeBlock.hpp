@@ -10,7 +10,7 @@
 class ScopeBlock : public Statement //aka compound statement, used to represent content between curly braces everywhere eg loops, conditions, pure scope, etc...
 {
 public:
-  ScopeBlock(std::vector<StatementPtr> branches);
+  ScopeBlock(std::vector<StatementPtr> _branches);
 
 protected:
   void printC(std::ostream &os) const override;
