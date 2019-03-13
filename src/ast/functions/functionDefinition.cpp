@@ -6,6 +6,12 @@ FunctionDefinition::FunctionDefinition(PrimitiveType _primitiveType, std::string
     branches[0] = parameters;
     branches[1] = scopeBlock;
 }
+
+FunctionDefinition::FunctionDefinition(PrimitiveType _primitiveType, std::string _name, StatementPtr parameters, StatementPtr scopeBlock) : name(_name), primitiveType(_primitiveType), isPointer(false), isExtern(false)
+{
+    branches[0] = parameters;
+    branches[1] = scopeBlock;
+}
 StatementPtr FunctionDefinition::getParameters() const
 {
     return branches[0];
@@ -18,7 +24,7 @@ void FunctionDefinition::printC(std::ostream &os) const
 {
     std::string primitiveTypeString = VariableDeclaration(primitiveType, name, isPointer, isExtern).primitiveTypeToString();
     if (isPointer)
-    {
+    { 
         os << primitiveTypeString << " *" << name << getParameters() << getScopeBlock();
     }
     else if (isExtern)

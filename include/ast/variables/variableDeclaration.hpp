@@ -15,6 +15,8 @@ public:
 
   VariableDeclaration(PrimitiveType _primitiveType, std::string _name, bool _isArray, bool _isExtern, int _arraySize) : arraySize(_arraySize), name(_name), primitiveType(_primitiveType), isPointer(false), isArray(_isArray), isExtern(_isExtern){}; //use this constructor for arrays
 
+  VariableDeclaration(PrimitiveType _primitiveType, std::string _name) : arraySize(0), name(_name), primitiveType(_primitiveType), isPointer(false), isArray(false), isExtern(false){}; //easy init without extra info
+
   std::string primitiveTypeToString() const;
 
 protected:

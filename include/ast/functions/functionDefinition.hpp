@@ -9,6 +9,8 @@ class FunctionDefinition : public Statement //definition is NOT just declaration
 {
 public:
   FunctionDefinition(PrimitiveType _primitiveType, std::string _name, StatementPtr parameters, StatementPtr scopeBlock, bool _isPointer, bool _isExtern);
+  FunctionDefinition(PrimitiveType _primitiveType, std::string _name, StatementPtr parameters, StatementPtr scopeBlock); //for easy init
+
   StatementPtr getScopeBlock() const;
   StatementPtr getParameters() const;
   void printC(std::ostream &os) const override;
