@@ -2,15 +2,17 @@
 #define functionCall_hpp
 
 #include <iostream>
-#include "function.hpp"
-#include "functionParameterList.hpp"
+#include "statement.hpp"
 
-class FunctionCall : public Function
+class FunctionCall : public Statement
 {
 public:
   FunctionCall(std::string _name, StatementPtr parameters); //parameters here won't be declarations even tho they use the func decl list (coz i'm lazy)
-  StatementPtr getParameters() const override;
+  StatementPtr getParameters() const;
   void printC(std::ostream &os) const override;
+
+protected:
+  std::string name;
 };
 
 #endif

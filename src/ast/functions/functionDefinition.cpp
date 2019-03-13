@@ -1,6 +1,6 @@
 #include "functionDefinition.hpp"
 
-FunctionDefinition::FunctionDefinition(PrimitiveType _primitiveType, StatementPtr parameters, StatementPtr scopeBlock) : Function(_name)
+FunctionDefinition::FunctionDefinition(PrimitiveType _primitiveType, std::string _name, StatementPtr parameters, StatementPtr scopeBlock) : name(_name), primitiveType(_primitiveType)
 {
     branches[0] = parameters;
     branches[1] = scopeBlock;

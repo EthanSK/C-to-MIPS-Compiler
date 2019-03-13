@@ -1,3 +1,7 @@
+
+
+int hi(int, int);
+
 int main()
 {
     int a[5];
@@ -5,3 +9,4 @@ int main()
     int b = 3;
     return 0;
 }
+
