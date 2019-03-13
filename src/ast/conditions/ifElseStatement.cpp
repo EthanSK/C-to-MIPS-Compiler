@@ -1,9 +1,9 @@
-#include "ifStatement.hpp"
+#include "ifElseStatement.hpp"
 
 IfElseStatement::IfElseStatement(StatementPtr condition, StatementPtr ifScopeBlock, StatementPtr elseScopeBlock){
-    branches[0] = condition;
-    branches[1] = ifScopeBlock;
-    branches[2] = elseScopeBlock;
+    branches.push_back(condition);
+    branches.push_back(ifScopeBlock);
+    branches.push_back(elseScopeBlock);
 }
 
 StatementPtr IfElseStatement::getCondition() const{

@@ -8,7 +8,6 @@
 class FunctionDeclaration : public Statement
 {
 public:
-  FunctionDeclaration(PrimitiveType _primitiveType, std::string _name, StatementPtr parameters, bool _isPointer, bool _isExtern);
   FunctionDeclaration(PrimitiveType _primitiveType, std::string _name, StatementPtr parameters);
   StatementPtr getParameters() const;
   void printC(std::ostream &os) const override;

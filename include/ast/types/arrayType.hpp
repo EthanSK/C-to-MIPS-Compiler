@@ -1,12 +1,17 @@
 #ifndef arrayType_hpp
 #define arrayType_hpp
 
-#include "primitiveType.hpp"
+#include "type.hpp"
 
-class ArrayType : public PrimitiveType
-{ //wrapper class for the enum type
+class ArrayType : public Type
+{ 
+
+  public:
+    ArrayType(StatementPtr child, int size);
+    StatementPtr getChild() const;
+
   protected:
-    int size;
+    int _size;
     void printC(std::ostream &os) const override;
 };
 

@@ -1,11 +1,8 @@
 #include "functionDeclaration.hpp"
 #include "variableDeclaration.hpp"
 
-FunctionDeclaration::FunctionDeclaration(PrimitiveType _primitiveType, std::string _name, StatementPtr parameters, bool _isPointer, bool _isExtern) : name(_name), primitiveType(_primitiveType), isPointer(_isPointer), isExtern(_isExtern)
-{
-    branches[0] = parameters;
-}
-FunctionDeclaration::FunctionDeclaration(PrimitiveType _primitiveType, std::string _name, StatementPtr parameters) : name(_name), primitiveType(_primitiveType), isPointer(false), isExtern(false)
+
+FunctionDeclaration::FunctionDeclaration(PrimitiveType _primitiveType, std::string _name, StatementPtr parameters) : name(_name), primitiveType(_primitiveType)
 {
     branches[0] = parameters;
 }

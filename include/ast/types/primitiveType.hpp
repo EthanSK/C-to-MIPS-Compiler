@@ -1,12 +1,12 @@
 #ifndef primitiveType_hpp
 #define primitiveType_hpp
 
-#include "statement.hpp"
+#include "type.hpp"
 
-class PrimitiveType : public Statement
+class PrimitiveType : public Type //only terminal type
 { //wrapper class for the enum type
-protected:
-  enum class PrimitiveTypeEnum //enum class not enum so we guarantee strongly typed
+public:
+  enum PrimitiveTypeEnum 
   {
     _void,
     _int,
@@ -16,7 +16,13 @@ protected:
     _unsigned
     //these are all we need appaz
   };
-  std::string primitiveTypeToString();
+
+public:
+  PrimitiveType(PrimitiveTypeEnum type) : _type(type){};
+
+protected:
+  PrimitiveTypeEnum _type;
+  std::string primitiveTypeToString() const;
   virtual void printC(std::ostream &os) const override;
 };
 
