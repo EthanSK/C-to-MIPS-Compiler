@@ -32,9 +32,12 @@ int main(int argc, char *argv[])
 
 StatementPtr generateTestAST()
 {
+
+    // StatementPtr ast = new PrimitiveType(PrimitiveType::_int);// works by itself
+
     StatementPtr ast = new ScopeBlock({
         new FunctionDefinition(
-            PrimitiveType::_int,
+            new PrimitiveType(PrimitiveType::_int),
             "main",
             new FunctionParameterList(std::vector<StatementPtr>()),
             new ScopeBlock(

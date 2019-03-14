@@ -9,6 +9,8 @@ std::string PrimitiveType::primitiveTypeToString() const
 {
     switch (_type)
     {
+    case PrimitiveType::_void:
+        return "void";
     case PrimitiveType::_int:
         return "int";
     case PrimitiveType::_float:

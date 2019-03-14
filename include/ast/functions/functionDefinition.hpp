@@ -3,26 +3,19 @@
 
 #include <iostream>
 #include "statement.hpp"
-#include "primitiveType.hpp"
 
 class FunctionDefinition : public Statement //definition is NOT just declaration with scope blokc, the decl params can just be type without name unlike in definiton.
 {
 public:
-  FunctionDefinition(PrimitiveType _primitiveType, std::string _name, StatementPtr parameters, StatementPtr scopeBlock, bool _isPointer, bool _isExtern);
-  FunctionDefinition(PrimitiveType _primitiveType, std::string _name, StatementPtr parameters, StatementPtr scopeBlock); //for easy init
+  FunctionDefinition(StatementPtr type, std::string name, StatementPtr parameters, StatementPtr scopeBlock);
 
-  StatementPtr getScopeBlock() const;
+  StatementPtr getType() const;
   StatementPtr getParameters() const;
+  StatementPtr getScopeBlock() const;
   void printC(std::ostream &os) const override;
 
 protected:
-  std::string name;
-  PrimitiveType primitiveType;
-
-private:
-  //function can't have array as return type
-  bool isPointer;
-  bool isExtern;
+  std::string _name;
 };
 
 #endif

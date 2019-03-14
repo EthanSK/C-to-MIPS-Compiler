@@ -3,23 +3,18 @@
 
 #include <iostream>
 #include "statement.hpp"
-#include "primitiveType.hpp"
+#include "type.hpp"
 
 class FunctionDeclaration : public Statement
 {
 public:
-  FunctionDeclaration(PrimitiveType _primitiveType, std::string _name, StatementPtr parameters);
+  FunctionDeclaration(StatementPtr type, std::string name, StatementPtr parameters);
   StatementPtr getParameters() const;
+  StatementPtr getType() const;
   void printC(std::ostream &os) const override;
 
 protected:
-  std::string name;
-  PrimitiveType primitiveType;
-
-private:
-  //function can't have array as return type
-  bool isPointer;
-  bool isExtern;
+  std::string _name;
 };
 
 #endif
