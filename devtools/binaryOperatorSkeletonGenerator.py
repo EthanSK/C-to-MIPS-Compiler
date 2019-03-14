@@ -1,18 +1,22 @@
 #to be run from project root
+import os
 
-
-
+binaryOperatorPath = "ast/operators/binaryOperators/"
+hppPath = "include/" + binaryOperatorPath
+cppPath = "src/" + binaryOperatorPath
 
 def createHPP(op_name, symbol ):
-    f = open("include/ast/operators/binaryOperators/binary" + op_name + ".hpp", "w")
+    f = open(hppPath + "binary" + op_name + ".hpp", "w")
     to_write = open('devtools/binaryHPPtemplate.txt', 'r').read() % (op_name, op_name, op_name)
     f.write(to_write)
 
 def createCPP(op_name, symbol):
-    f = open("src/ast/operators/binaryOperators/binary" + op_name + ".cpp", "w")
+    f = open(cppPath + "binary" + op_name + ".cpp", "w")
     to_write = open('devtools/binaryCPPtemplate.txt', 'r').read() % (op_name, op_name, symbol, op_name, symbol)
     f.write(to_write)
 
+os.rmdir(hppPath)
+os.rmdir(cppPath)
 txt_file = open("devtools/binaryNames.txt", "r")
 
 for line in txt_file.read().splitlines():

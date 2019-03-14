@@ -19,7 +19,7 @@ public:
 
 	virtual void generatePython(std::ostream &os, PythonContext &context, int scopeDepth = 0) const
 	{
-		os << "Not Supported: " << typeid(*this).name();
+		os << "[Not Supported: " << typeid(*this).name() << "]";
 	};
 
 protected:
