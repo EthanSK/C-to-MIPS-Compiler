@@ -1,5 +1,5 @@
 #to be run from project root
-import os
+import shutil, os
 
 binaryOperatorPath = "ast/operators/binaryOperators/"
 hppPath = "include/" + binaryOperatorPath
@@ -15,8 +15,13 @@ def createCPP(op_name, symbol):
     to_write = open('devtools/binaryCPPtemplate.txt', 'r').read() % (op_name, op_name, symbol, op_name, symbol)
     f.write(to_write)
 
-os.rmdir(hppPath)
-os.rmdir(cppPath)
+if (os.path.isdir(hppPath)):
+    shutil.rmtree(hppPath)
+if (os.path.isdir(cppPath)):
+    shutil.rmtree(cppPath)
+os.mkdir(hppPath)
+os.mkdir(cppPath)
+
 txt_file = open("devtools/binaryNames.txt", "r")
 
 for line in txt_file.read().splitlines():
