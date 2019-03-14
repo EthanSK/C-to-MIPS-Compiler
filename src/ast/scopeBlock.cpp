@@ -11,7 +11,7 @@ void ScopeBlock::printC(std::ostream &os) const
     {
         os << branches[i] << ";\n";
     }
-    os << "}"; //to flush the buffer
+    os << "}" << std::flush;
 }
 
 void ScopeBlock::generatePython(std::ostream &os, PythonContext &context, int scopeDepth) const
@@ -21,4 +21,5 @@ void ScopeBlock::generatePython(std::ostream &os, PythonContext &context, int sc
         branches[i]->generatePython(os, context, scopeDepth);
         os << "\n";
     }
+    os <<std::flush;
 }
