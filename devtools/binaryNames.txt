@@ -3,18 +3,18 @@ Modulo %
 Multiply *
 Add +
 Subtract -
-BitwiseLeftShift <<
-BitwiseRightShift >>
+LeftShift <<
+RightShift >>
 LessThan <
 GreaterThan >
 LessThanOrEqualTo <=
 GreaterThanOrEqualTo >=
 IsEqualTo ==
-InNotEqualTo !=
+IsNotEqualTo !=
 BitwiseAnd &
-ConditionalAnd &&
+LogicalAnd && and
 BitwiseOr |
-ConditionalOr ||
+LogicalOr || or
 BitwiseXor ^
 Assignment =
 AddAssignment +=
@@ -25,5 +25,5 @@ ModuloAssignment %=
 BitwiseAndAssignment &=
 BitwiseOrAssignment |=
 BitwiseXorAssignment ^=
-BitwiseLeftShiftAssignment <<=
-BitwiseRightShiftAssignment >>=
+LeftShiftAssignment <<=
+RightShiftAssignment >>=

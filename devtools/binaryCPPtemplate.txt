@@ -1,6 +1,15 @@
 #include "binary%s.hpp"
 
-void Binary%s::printCode(std::ostream &os) const
-{
-	os << "(" << getLeft() << " %s " << getRight() << ")";
+void Binary%s::printC(std::ostream &os) const
+{%s
+	os << getLeft();
+	os << " %s ";
+	os << getRight();%s
+}
+
+void Binary%s::generatePython(std::ostream &os, PythonContext &context, int scopeDepth) const
+{%s
+	getLeft()->generatePython(os, context, scopeDepth);
+	os << " %s ";
+	getRight()->generatePython(os, context, scopeDepth);%s
 }

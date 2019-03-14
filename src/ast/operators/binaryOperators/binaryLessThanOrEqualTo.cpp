@@ -1,6 +1,19 @@
 #include "binaryLessThanOrEqualTo.hpp"
 
-void BinaryLessThanOrEqualTo::printCode(std::ostream &os) const
+void BinaryLessThanOrEqualTo::printC(std::ostream &os) const
 {
-	os << "(" << getLeft() << " <= " << getRight() << ")";
+	os << "(";
+	os << getLeft();
+	os << " <= ";
+	os << getRight();
+	os << ")";
+}
+
+void BinaryLessThanOrEqualTo::generatePython(std::ostream &os, PythonContext &context, int scopeDepth) const
+{
+	os << "(";
+	getLeft()->generatePython(os, context, scopeDepth);
+	os << " <= ";
+	getRight()->generatePython(os, context, scopeDepth);
+	os << ")";
 }

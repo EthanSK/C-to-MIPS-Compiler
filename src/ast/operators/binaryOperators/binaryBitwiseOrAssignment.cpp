@@ -1,6 +1,15 @@
 #include "binaryBitwiseOrAssignment.hpp"
 
-void BinaryBitwiseOrAssignment::printCode(std::ostream &os) const
+void BinaryBitwiseOrAssignment::printC(std::ostream &os) const
 {
-	os << "(" << getLeft() << " |= " << getRight() << ")";
+	os << getLeft();
+	os << " |= ";
+	os << getRight();
+}
+
+void BinaryBitwiseOrAssignment::generatePython(std::ostream &os, PythonContext &context, int scopeDepth) const
+{
+	getLeft()->generatePython(os, context, scopeDepth);
+	os << " |= ";
+	getRight()->generatePython(os, context, scopeDepth);
 }

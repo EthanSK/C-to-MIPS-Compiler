@@ -5,14 +5,17 @@
 #include <string>
 #include <iostream>
 #include <memory>
-#include "astStatement.hpp"
+#include "statement.hpp"
 
-class BinaryOperator : Statement
+class BinaryOperator : public Statement
 {
-  protected:
-    StatementPtr getLeft() const;
-    StatementPtr getRight() const;
-    virtual void printCode(std::ostream &os) const = 0; //prints c90 code so we can compare against input code //called in << overload
+public:
+  BinaryOperator(StatementPtr left, StatementPtr right);
+ 
+protected:
+  StatementPtr getLeft() const;
+  StatementPtr getRight() const;
+  virtual void printC(std::ostream &os) const = 0; //prints c90 code so we can compare against input code //called in << overload
 };
 
 #endif

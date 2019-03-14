@@ -6,13 +6,16 @@
 #include <string>
 #include <iostream>
 #include <memory>
-#include "astStatement.hpp"
+#include "statement.hpp"
 
-class UnaryOperator : Statement
+class UnaryOperator : public Statement
 {
-  protected:
-    StatementPtr getOperand() const;
-    virtual void printCode(std::ostream &os) const = 0; //prints c90 code so we can compare against input code //called in << overload
+public:
+  UnaryOperator(StatementPtr operand);
+
+protected:
+  StatementPtr getOperand() const;
+  virtual void printC(std::ostream &os) const = 0; //prints c90 code so we can compare against input code //called in << overload
 };
 
 #endif

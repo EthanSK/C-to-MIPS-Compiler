@@ -3,9 +3,10 @@
 
 #include "unaryOperator.hpp"
 
-class UnaryPostDecrement : UnaryOperator
+class UnaryPostDecrement : public UnaryOperator
 { 
-    void printCode(std::ostream &os) const override;
+    using UnaryOperator::UnaryOperator;
+    void printC(std::ostream &os) const override;
 }; 
      
 #endif 

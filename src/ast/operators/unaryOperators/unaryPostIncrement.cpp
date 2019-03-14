@@ -1,6 +1,6 @@
 #include "unaryPostIncrement.hpp"
 
-void UnaryPostIncrement::printCode(std::ostream &os) const
+void UnaryPostIncrement::printC(std::ostream &os) const
 {
 	os << "(" << getOperand() << ")++";
 }

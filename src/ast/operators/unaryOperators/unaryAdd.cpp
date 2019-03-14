@@ -1,6 +1,6 @@
 #include "unaryAdd.hpp"
 
-void UnaryAdd::printCode(std::ostream &os) const
+void UnaryAdd::printC(std::ostream &os) const
 {
 	os << "+(" << getOperand() << ")";
 }

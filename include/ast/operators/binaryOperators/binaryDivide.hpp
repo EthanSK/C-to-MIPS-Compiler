@@ -4,10 +4,16 @@
 
 #include <iostream>
 #include "binaryOperator.hpp"
+#include "context.hpp"
 
-class BinaryDivide : BinaryOperator
+class BinaryDivide : public BinaryOperator
 { 
-    void printCode(std::ostream &os) const override;
+public:
+    using BinaryOperator::BinaryOperator;
+    void generatePython(std::ostream &os, PythonContext &context, int scopeDepth = 0) const override;
+
+protected:
+    void printC(std::ostream &os) const override;
 }; 
      
 #endif 

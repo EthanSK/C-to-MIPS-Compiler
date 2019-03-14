@@ -3,9 +3,10 @@
 
 #include "unaryOperator.hpp"
 
-class UnaryAddress : UnaryOperator
+class UnaryAddress : public UnaryOperator
 { 
-    void printCode(std::ostream &os) const override;
+    using UnaryOperator::UnaryOperator;
+    void printC(std::ostream &os) const override;
 }; 
      
 #endif 

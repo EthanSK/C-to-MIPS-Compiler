@@ -1,6 +1,6 @@
 #include "unaryNot.hpp"
 
-void UnaryNot::printCode(std::ostream &os) const
+void UnaryNot::printC(std::ostream &os) const
 {
 	os << "!(" << getOperand() << ")";
 }
