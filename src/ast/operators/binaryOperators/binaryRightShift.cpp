@@ -2,7 +2,11 @@
 
 void BinaryRightShift::printC(std::ostream &os) const
 {
-	os << "(" << getLeft() << " >> " << getRight() << ")";
+	os << "(";
+	os << getLeft();
+	os << " >> ";
+	os << getRight();
+	os << ")";
 }
 
 void BinaryRightShift::generatePython(std::ostream &os, PythonContext &context, int scopeDepth) const

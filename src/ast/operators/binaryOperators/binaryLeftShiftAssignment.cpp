@@ -2,7 +2,9 @@
 
 void BinaryLeftShiftAssignment::printC(std::ostream &os) const
 {
-	os << "(" << getLeft() << " <<= " << getRight() << ")";
+	os << getLeft();
+	os << " <<= ";
+	os << getRight();
 }
 
 void BinaryLeftShiftAssignment::generatePython(std::ostream &os, PythonContext &context, int scopeDepth) const

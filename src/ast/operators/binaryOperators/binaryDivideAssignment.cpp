@@ -2,7 +2,9 @@
 
 void BinaryDivideAssignment::printC(std::ostream &os) const
 {
-	os << "(" << getLeft() << " /= " << getRight() << ")";
+	os << getLeft();
+	os << " /= ";
+	os << getRight();
 }
 
 void BinaryDivideAssignment::generatePython(std::ostream &os, PythonContext &context, int scopeDepth) const

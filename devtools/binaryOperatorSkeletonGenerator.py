@@ -11,8 +11,12 @@ def createHPP(op_name, symbol, py_symbol):
     f.write(to_write)
 
 def createCPP(op_name, symbol, py_symbol):
-    symbols = [op_name, op_name, symbol, op_name, "\n	os << \"(\";", py_symbol, "\n	os << \")\";"]
+    lbracket = "\n	os << \"(\";"
+    rbracket = "\n	os << \")\";"
+    symbols = [op_name, op_name, lbracket, symbol, rbracket, op_name, lbracket, py_symbol, rbracket]
     if "Assignment" in op_name:
+        symbols[2] = ""
+        symbols[4] = ""
         symbols[-1] = ""
         symbols[-3] = ""
 

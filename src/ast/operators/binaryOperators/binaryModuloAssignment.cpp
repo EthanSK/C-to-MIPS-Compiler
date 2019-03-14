@@ -2,7 +2,9 @@
 
 void BinaryModuloAssignment::printC(std::ostream &os) const
 {
-	os << "(" << getLeft() << " %= " << getRight() << ")";
+	os << getLeft();
+	os << " %= ";
+	os << getRight();
 }
 
 void BinaryModuloAssignment::generatePython(std::ostream &os, PythonContext &context, int scopeDepth) const
