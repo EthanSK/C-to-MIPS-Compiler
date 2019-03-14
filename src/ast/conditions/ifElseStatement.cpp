@@ -17,7 +17,7 @@ StatementPtr IfElseStatement::getElseScopeBlock() const{
 }
 void IfElseStatement::printC(std::ostream &os) const
 {
-    os << "if (" << getCondition() << ")" << getIfScopeBlock() << "else" << getElseScopeBlock();//the scopeBlock printC is repsonsible for printing the { } with new lines
+    os << "if (" << getCondition() << ")" << getIfScopeBlock() << std::endl << "else" << getElseScopeBlock();//the scopeBlock printC is repsonsible for printing the { } with new lines
 }  
 
 void IfElseStatement::generatePython(std::ostream &os, PythonContext &context, int scopeDepth) const
@@ -33,4 +33,21 @@ void IfElseStatement::generatePython(std::ostream &os, PythonContext &context, i
     context.indentStream(os, scopeDepth);
     os << "else:" << std::endl;
     getElseScopeBlock()->generatePython(os, context, scopeDepth + 1);
+}
+
+{
+if ((10 >= (7 + 7.7f)))
+{
+("pink" == "purple");
+}
+else
+{
+if ((3 <= (1.374 + 7.7f)))
+{
+("lost" != "dizzy");
+}
+else
+{
+};
+};
 }
