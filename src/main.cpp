@@ -1,18 +1,8 @@
 #include <iomanip>
 #include <map>
-#include "ast.hpp"
 
 //for testing
-#include "scopeBlock.hpp"
-#include "ifElseStatement.hpp"
-#include "binaryGreaterThanOrEqualTo.hpp"
-#include "binaryAdd.hpp"
-#include "floatLiteral.hpp"
-#include "doubleLiteral.hpp"
-#include "integerLiteral.hpp"
-#include "functionDefinition.hpp"
-#include "functionParameterList.hpp"
-#include "returnKeyword.hpp"
+#include "test.hpp"
 
 StatementPtr generateTestAST();
 StatementPtr generateTestFragment();
@@ -65,10 +55,17 @@ StatementPtr generateTestFragment()
         new IfElseStatement(
             new BinaryGreaterThanOrEqualTo(new DoubleLiteral(10), new BinaryAdd(new IntegerLiteral(7), new FloatLiteral(7.7f))),
             new ScopeBlock({
-                
+                new BinaryIsEqualTo(new StringLiteral("pink"), new StringLiteral("purple"))
             }),
             new ScopeBlock({
+                new IfElseStatement(
+                    new BinaryLessThanOrEqualTo(new DoubleLiteral(3), new BinaryAdd(new DoubleLiteral(1.374), new FloatLiteral(7.7f))),
+                    new ScopeBlock({
+                        new BinaryIsNotEqualTo(new StringLiteral("lost"), new StringLiteral("dizzy"))
+                    }),
+                    new ScopeBlock({
 
+                    }))
             }))
     });
 
