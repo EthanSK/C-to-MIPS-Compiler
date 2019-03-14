@@ -18,8 +18,8 @@ void ScopeBlock::generatePython(std::ostream &os, PythonContext &context, int sc
 {
     for(size_t i = 0; i < branches.size(); i++)
     {
+        context.indentStream(os, scopeDepth);
         branches[i]->generatePython(os, context, scopeDepth);
-        os << "\n";
     }
     os <<std::flush;
 }

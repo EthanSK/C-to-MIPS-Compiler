@@ -11,8 +11,17 @@ def createHPP(op_name, symbol, py_symbol):
     f.write(to_write)
 
 def createCPP(op_name, symbol, py_symbol):
+    lbracket = "\n	os << \"(\";"
+    rbracket = "\n	os << \")\";"
+    symbols = [op_name, op_name, lbracket, symbol, rbracket, op_name, lbracket, py_symbol, rbracket]
+    if "Assignment" in op_name:
+        symbols[2] = ""
+        symbols[4] = ""
+        symbols[-1] = ""
+        symbols[-3] = ""
+
     f = open(cppPath + "binary" + op_name + ".cpp", "w")
-    to_write = open('devtools/binaryCPPtemplate.txt', 'r').read() % (op_name, op_name, symbol, op_name, py_symbol)
+    to_write = open('devtools/binaryCPPtemplate.txt', 'r').read() % tuple(symbols)
     f.write(to_write)
 
 if (os.path.isdir(hppPath)):
