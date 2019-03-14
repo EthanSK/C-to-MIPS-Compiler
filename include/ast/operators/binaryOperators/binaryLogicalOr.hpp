@@ -1,12 +1,12 @@
-#ifndef binaryIsNotEqualTo_hpp
-#define binaryIsNotEqualTo_hpp
+#ifndef binaryLogicalOr_hpp
+#define binaryLogicalOr_hpp
 
 
 #include <iostream>
 #include "binaryOperator.hpp"
 #include "context.hpp"
 
-class BinaryIsNotEqualTo : public BinaryOperator
+class BinaryLogicalOr : public BinaryOperator
 { 
 public:
     using BinaryOperator::BinaryOperator;

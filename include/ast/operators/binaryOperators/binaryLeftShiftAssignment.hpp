@@ -1,12 +1,12 @@
-#ifndef binaryIsNotEqualTo_hpp
-#define binaryIsNotEqualTo_hpp
+#ifndef binaryLeftShiftAssignment_hpp
+#define binaryLeftShiftAssignment_hpp
 
 
 #include <iostream>
 #include "binaryOperator.hpp"
 #include "context.hpp"
 
-class BinaryIsNotEqualTo : public BinaryOperator
+class BinaryLeftShiftAssignment : public BinaryOperator
 { 
 public:
     using BinaryOperator::BinaryOperator;

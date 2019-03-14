@@ -10,11 +10,11 @@ GreaterThan >
 LessThanOrEqualTo <=
 GreaterThanOrEqualTo >=
 IsEqualTo ==
-InNotEqualTo !=
+IsNotEqualTo !=
 BitwiseAnd &
-ConditionalAnd &&
+LogicalAnd &&
 BitwiseOr |
-ConditionalOr ||
+LogicalOr ||
 BitwiseXor ^
 Assignment =
 AddAssignment +=
@@ -25,5 +25,5 @@ ModuloAssignment %=
 BitwiseAndAssignment &=
 BitwiseOrAssignment |=
 BitwiseXorAssignment ^=
-BitwiseLeftShiftAssignment <<=
-BitwiseRightShiftAssignment >>=
+LeftShiftAssignment <<=
+RightShiftAssignment >>=

@@ -10,7 +10,7 @@ def createHPP(op_name, symbol ):
 
 def createCPP(op_name, symbol):
     f = open("src/ast/operators/binaryOperators/binary" + op_name + ".cpp", "w")
-    to_write = open('devtools/binaryCPPtemplate.txt', 'r').read() % (op_name, op_name, symbol)
+    to_write = open('devtools/binaryCPPtemplate.txt', 'r').read() % (op_name, op_name, symbol, op_name, symbol)
     f.write(to_write)
 
 txt_file = open("devtools/binaryNames.txt", "r")
