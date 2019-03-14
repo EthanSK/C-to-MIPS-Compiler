@@ -56,6 +56,7 @@ StatementPtr generateTestAST()
 StatementPtr generateTestFragment()
 {
     StatementPtr ast = new ScopeBlock({
+        new BinaryAssignment(new VariableDeclaration(new PrimitiveType(PrimitiveType::PrimitiveTypeEnum::_int), "x"), new IntegerLiteral(2)),
         new IfElseStatement(
             new BinaryGreaterThanOrEqualTo(new DoubleLiteral(10), new BinaryAdd(new IntegerLiteral(7), new FloatLiteral(7.7f))),
             new ScopeBlock({

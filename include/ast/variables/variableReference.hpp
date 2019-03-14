@@ -11,9 +11,10 @@ class VariableReference : public Statement
 {
 public:
   VariableReference(std::string name);
+  void generatePython(std::ostream &os, PythonContext &context, int scopeDepth = 0) const override;
 
 protected:
-  std::string name;
+  std::string _name;
   void printC(std::ostream &os) const override;
 };
 
