@@ -6,12 +6,15 @@
 
 class IntegerLiteral : public Literal
 {
-public:
-  IntegerLiteral(int value);
-  void printC(std::ostream &os) const override;
+  public:
+    IntegerLiteral(int value);
+    void generatePython(std::ostream &os, PythonContext &context, int scopeDepth = 0) const override;
 
-private:
-  int _value;
+  protected:
+    void printC(std::ostream &os) const override;
+
+  private:
+    int _value;
 };
 
 #endif

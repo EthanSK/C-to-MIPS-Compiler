@@ -6,8 +6,11 @@
 
 class DoubleLiteral : public Literal
 {
-public:
+  public:
     DoubleLiteral(double value);
+    void generatePython(std::ostream &os, PythonContext &context, int scopeDepth = 0) const override;
+
+  protected:
     void printC(std::ostream &os) const override;
 
   private:

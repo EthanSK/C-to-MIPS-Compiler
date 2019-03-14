@@ -6,12 +6,15 @@
 
 class FloatLiteral : public Literal
 {
-public:
-  FloatLiteral(float value);
-  void printC(std::ostream &os) const override;
+  public:
+    FloatLiteral(float value);
+    void generatePython(std::ostream &os, PythonContext &context, int scopeDepth = 0) const override;
 
-private:
-  float _value;
+  protected:
+    void printC(std::ostream &os) const override;
+
+  private:
+    float _value;
 };
 
 #endif
