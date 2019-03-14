@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <fstream>
 #include <memory>
 #include "context.hpp"
 
@@ -21,6 +22,7 @@ public:
 	{
 		os << "[Not Supported: " << typeid(*this).name() << "]";
 	};
+	void writePrintCToFile(std::string filePath = "bin/printC.c") const;
 
 protected:
 	virtual void printC(std::ostream &os) const = 0; //prints c90 code so we can compare against input code //called in << overload
