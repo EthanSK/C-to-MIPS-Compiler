@@ -2,10 +2,10 @@
 
 ForLoop::ForLoop(StatementPtr init, StatementPtr condition, StatementPtr increment, StatementPtr scopeBlock)
 {
-    branches[0] = init;
-    branches[1] = condition;
-    branches[2] = increment;
-    branches[3] = scopeBlock;
+    branches.push_back(init);
+    branches.push_back(condition);
+    branches.push_back(increment);
+    branches.push_back(scopeBlock);
 } 
 StatementPtr ForLoop::getInit() const
 {

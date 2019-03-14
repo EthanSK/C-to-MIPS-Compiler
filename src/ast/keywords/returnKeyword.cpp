@@ -1,7 +1,7 @@
 #include "returnKeyword.hpp"
 
 ReturnKeyword::ReturnKeyword(StatementPtr returnValue){
-    branches[0] = returnValue; 
+    branches.push_back(returnValue); 
 }
 StatementPtr ReturnKeyword::getReturnValue() const
 {

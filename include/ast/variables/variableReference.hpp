@@ -1,5 +1,5 @@
-#ifndef variable_hpp
-#define variable_hpp
+#ifndef variableReference_hpp
+#define variableReference_hpp
 
 #include <vector>
 #include <string>

@@ -1,8 +1,8 @@
 #include "whileLoop.hpp"
 
 WhileLoop::WhileLoop(StatementPtr condition, StatementPtr scopeBlock){
-    branches[0] = condition;
-    branches[1] = scopeBlock; 
+    branches.push_back(condition);
+    branches.push_back(scopeBlock); 
 }
 
 StatementPtr WhileLoop::getCondition() const{

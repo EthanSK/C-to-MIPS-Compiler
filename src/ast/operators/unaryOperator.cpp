@@ -2,7 +2,7 @@
 
 UnaryOperator::UnaryOperator(StatementPtr operand)
 {
-        branches[0] = operand;
+        branches.push_back(operand);
 } 
 
 StatementPtr UnaryOperator::getOperand() const

@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
     PythonContext context;
     StatementPtr ast = generateTestFragment();
     std::cout << "\n\nC CODE\n======================\n";
-    std::cout << ast;
+    std::cout << ast << std::endl;
     std::cout << "\n\nPYTHON CODE\n======================\n";
     ast->generatePython(std::cout, context);
     std::cout << std::endl;
