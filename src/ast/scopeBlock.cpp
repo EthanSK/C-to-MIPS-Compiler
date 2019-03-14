@@ -10,5 +10,5 @@ void ScopeBlock::printC(std::ostream &os) const
     {
         os << branches[i] << ";\n";
     }
-    os << "}" << std::endl; //to flush the buffer
+    os << "}";
 }
