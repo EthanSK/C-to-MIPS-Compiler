@@ -7,12 +7,12 @@
 class FunctionCall : public Statement
 {
 public:
-  FunctionCall(std::string _name, StatementPtr parameters); //parameters here won't be declarations even tho they use the func decl list (coz i'm lazy)
+  FunctionCall(std::string name, StatementPtr parameters); //parameters here won't be declarations even tho they use the func decl list (coz i'm lazy)
   StatementPtr getParameters() const;
   void printC(std::ostream &os) const override;
 
 protected:
-  std::string name;
+  std::string _name;
 };
 
 #endif

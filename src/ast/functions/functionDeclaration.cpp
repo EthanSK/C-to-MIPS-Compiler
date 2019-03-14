@@ -1,33 +1,23 @@
 #include "functionDeclaration.hpp"
 #include "variableDeclaration.hpp"
 
-FunctionDeclaration::FunctionDeclaration(PrimitiveType _primitiveType, std::string _name, StatementPtr parameters, bool _isPointer, bool _isExtern) : name(_name), primitiveType(_primitiveType), isPointer(_isPointer), isExtern(_isExtern)
+FunctionDeclaration::FunctionDeclaration(StatementPtr type, std::string name, StatementPtr parameters) : _name(name)
 {
-    branches[0] = parameters;
-}
-FunctionDeclaration::FunctionDeclaration(PrimitiveType _primitiveType, std::string _name, StatementPtr parameters) : name(_name), primitiveType(_primitiveType), isPointer(false), isExtern(false)
-{
-    branches[0] = parameters;
+    branches.push_back(type);
+    branches.push_back(parameters);
 }
 
-StatementPtr FunctionDeclaration::getParameters() const
+StatementPtr FunctionDeclaration::getType() const
 {
     return branches[0];
 }
 
+StatementPtr FunctionDeclaration::getParameters() const
+{
+    return branches[1];
+}
+
 void FunctionDeclaration::printC(std::ostream &os) const
 {
-    std::string primitiveTypeString = VariableDeclaration(primitiveType, name, isPointer, isExtern).primitiveTypeToString();
-    if (isPointer)
-    {
-        os << primitiveTypeString << " *" << name << getParameters();
-    }
-    else if (isExtern)
-    {
-        os << "extern " << primitiveTypeString << " *" << name << getParameters();
-    }
-    else
-    {
-        os << primitiveTypeString << name << getParameters();
-    }
+    os << getType() << " " << _name << getParameters();
 }
