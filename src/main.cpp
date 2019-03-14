@@ -67,7 +67,7 @@ StatementPtr generateTestFragment()
                         new BinaryIsNotEqualTo(new StringLiteral("lost"), new StringLiteral("dizzy"))
                     }),
                     new ScopeBlock({
-
+                            new BinaryAssignment(new VariableReference("x"), new IntegerLiteral(42))
                     }))
             }))
     });

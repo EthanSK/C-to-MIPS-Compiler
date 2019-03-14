@@ -7,9 +7,7 @@ void BinaryBitwiseXorAssignment::printC(std::ostream &os) const
 
 void BinaryBitwiseXorAssignment::generatePython(std::ostream &os, PythonContext &context, int scopeDepth) const
 {
-    os << "(";
 	getLeft()->generatePython(os, context, scopeDepth);
 	os << " ^= ";
 	getRight()->generatePython(os, context, scopeDepth);
-	os << ")";
 }

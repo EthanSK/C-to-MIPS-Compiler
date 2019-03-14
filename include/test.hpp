@@ -1,6 +1,5 @@
 #ifndef test_hpp
 #define test_hpp
-#include "test.hpp"
 #include "ast.hpp"
 #include "scopeBlock.hpp"
 #include "context.hpp"

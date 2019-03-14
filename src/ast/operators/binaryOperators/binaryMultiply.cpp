@@ -7,7 +7,7 @@ void BinaryMultiply::printC(std::ostream &os) const
 
 void BinaryMultiply::generatePython(std::ostream &os, PythonContext &context, int scopeDepth) const
 {
-    os << "(";
+	os << "(";
 	getLeft()->generatePython(os, context, scopeDepth);
 	os << " * ";
 	getRight()->generatePython(os, context, scopeDepth);

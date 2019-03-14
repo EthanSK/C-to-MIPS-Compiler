@@ -6,10 +6,8 @@ void Binary%s::printC(std::ostream &os) const
 }
 
 void Binary%s::generatePython(std::ostream &os, PythonContext &context, int scopeDepth) const
-{
-    os << "(";
+{%s
 	getLeft()->generatePython(os, context, scopeDepth);
 	os << " %s ";
-	getRight()->generatePython(os, context, scopeDepth);
-	os << ")";
+	getRight()->generatePython(os, context, scopeDepth);%s
 }

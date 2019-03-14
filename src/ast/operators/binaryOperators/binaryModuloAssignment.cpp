@@ -7,9 +7,7 @@ void BinaryModuloAssignment::printC(std::ostream &os) const
 
 void BinaryModuloAssignment::generatePython(std::ostream &os, PythonContext &context, int scopeDepth) const
 {
-    os << "(";
 	getLeft()->generatePython(os, context, scopeDepth);
 	os << " %= ";
 	getRight()->generatePython(os, context, scopeDepth);
-	os << ")";
 }

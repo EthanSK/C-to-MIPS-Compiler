@@ -7,7 +7,7 @@ void BinaryGreaterThan::printC(std::ostream &os) const
 
 void BinaryGreaterThan::generatePython(std::ostream &os, PythonContext &context, int scopeDepth) const
 {
-    os << "(";
+	os << "(";
 	getLeft()->generatePython(os, context, scopeDepth);
 	os << " > ";
 	getRight()->generatePython(os, context, scopeDepth);

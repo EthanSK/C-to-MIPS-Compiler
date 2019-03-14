@@ -7,7 +7,7 @@ void BinaryLogicalOr::printC(std::ostream &os) const
 
 void BinaryLogicalOr::generatePython(std::ostream &os, PythonContext &context, int scopeDepth) const
 {
-    os << "(";
+	os << "(";
 	getLeft()->generatePython(os, context, scopeDepth);
 	os << " or ";
 	getRight()->generatePython(os, context, scopeDepth);
