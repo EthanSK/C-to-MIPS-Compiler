@@ -12,9 +12,9 @@ GreaterThanOrEqualTo >=
 IsEqualTo ==
 IsNotEqualTo !=
 BitwiseAnd &
-LogicalAnd &&
+LogicalAnd && and
 BitwiseOr |
-LogicalOr ||
+LogicalOr || or
 BitwiseXor ^
 Assignment =
 AddAssignment +=

@@ -19,3 +19,18 @@ void IfElseStatement::printC(std::ostream &os) const
 {
     os << "if (" << getCondition() << ")" << getIfScopeBlock() << "else" << getElseScopeBlock();//the scopeBlock printC is repsonsible for printing the { } with new lines
 }  
+
+void IfElseStatement::generatePython(std::ostream &os, PythonContext &context, int scopeDepth) const
+{
+    context.indentStream(os, scopeDepth);
+    os << "if ";
+    getCondition()->generatePython(os, context, scopeDepth);
+    os << ":";
+
+    os << std::endl;
+    getIfScopeBlock()->generatePython(os, context, scopeDepth + 1);
+
+    context.indentStream(os, scopeDepth);
+    os << "else:" << std::endl;
+    getElseScopeBlock()->generatePython(os, context, scopeDepth + 1);
+}

@@ -9,6 +9,7 @@
 class StructDefinitionList : public VariableDeclarationList//can be used for functions param list and struct fields
 {
   using VariableDeclarationList::VariableDeclarationList;
+  
   public:
     void printC(std::ostream &os) const override;
 };

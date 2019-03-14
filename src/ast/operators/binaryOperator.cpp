@@ -2,8 +2,8 @@
 
 BinaryOperator::BinaryOperator(StatementPtr left, StatementPtr right)
 {
-        branches[0] = left;
-        branches[1] = right;
+        branches.push_back(left);
+        branches.push_back(right);
 }
 
 StatementPtr BinaryOperator::getLeft() const
