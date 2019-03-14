@@ -9,7 +9,7 @@ void BinaryLogicalOr::generatePython(std::ostream &os, PythonContext &context, i
 {
     os << "(";
 	getLeft()->generatePython(os, context, scopeDepth);
-	os << " || ";
+	os << " or ";
 	getRight()->generatePython(os, context, scopeDepth);
 	os << ")";
 }

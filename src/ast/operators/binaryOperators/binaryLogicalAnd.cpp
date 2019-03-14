@@ -9,7 +9,7 @@ void BinaryLogicalAnd::generatePython(std::ostream &os, PythonContext &context, 
 {
     os << "(";
 	getLeft()->generatePython(os, context, scopeDepth);
-	os << " && ";
+	os << " and ";
 	getRight()->generatePython(os, context, scopeDepth);
 	os << ")";
 }
