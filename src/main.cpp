@@ -19,12 +19,13 @@ int main(int argc, char *argv[])
     }
 
     // Parse the AST
-    // StatementPtr ast = parseAST();
-    // std::cout << ast << std::endl;
+    StatementPtr ast = parseAST();
+    //std::cout << ast << std::endl;
+
 
     //testing
     PythonContext context;
-    StatementPtr ast = generateTestFragment();
+    //StatementPtr ast = generateTestFragment();
     std::cout << "\n\nC CODE\n======================\n";
     std::cout << ast << std::endl;
     ast->writePrintCToFile();
