@@ -2,5 +2,5 @@
 
 void ArrayElementReference::printC(std::ostream &os) const
 {
-    os << name << "[" << index << "]";
+    os << _name << "[" << index << "]";
 }

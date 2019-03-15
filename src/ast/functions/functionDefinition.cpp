@@ -27,3 +27,11 @@ void FunctionDefinition::printC(std::ostream &os) const
 {
     os << getType() << " " << _name << getParameters() << getScopeBlock();
 }
+
+void FunctionDefinition::generatePython(std::ostream &os, PythonContext &context, int scopeDepth) const
+{
+    os << "def " << _name;
+    getParameters()->generatePython(os, context, scopeDepth);
+    os << ":";
+    getScopeBlock()->generatePython(os, context, scopeDepth + 1);
+}
