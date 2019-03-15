@@ -33,12 +33,13 @@ int main(int argc, char *argv[])
     std::cout << "\n\nPYTHON CODE\n======================\n";
     ast->generatePython(std::cout, context);
 
-    if (std::string(argv[1]) == "--translate")
+    if (argc > 4 && std::string(argv[1]) == "--translate")
     {
         ast->writePythonToFile(context, std::string(argv[4]));
         std::cout << std::endl;
     }
 
+    std::cout << std::endl;
     return 0;
 }
 

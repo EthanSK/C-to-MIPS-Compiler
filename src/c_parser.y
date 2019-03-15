@@ -43,7 +43,8 @@
 %type <expr> PARAMETER_DECLARATION 
 
 
-%type <expr> TYPE_NAME ABSTRACT_DECLARATOR DIRECT_ABSTRACT_DECLARATOR INITIALIZER_LIST STATEMENT LABELED_STATEMENT COMPOUND_STATEMENT DECLARATION_LIST STATEMENT_LIST EXPRESSION_STATEMENT SELECTION_STATEMENT ITERATION_STATEMENT JUMP_STATEMENT TRANSLATION_UNIT EXTERNAL_DECLARATION FUNCTION_DEFINITION
+%type <expr> TYPE_NAME ABSTRACT_DECLARATOR DIRECT_ABSTRACT_DECLARATOR INITIALIZER_LIST STATEMENT LABELED_STATEMENT COMPOUND_STATEMENT DECLARATION_LIST
+%type <expr> STATEMENT_LIST EXPRESSION_STATEMENT SELECTION_STATEMENT ITERATION_STATEMENT JUMP_STATEMENT TRANSLATION_UNIT EXTERNAL_DECLARATION FUNCTION_DEFINITION
 
 %type <token> ASSIGNEMENT_OPERATOR UNARY_OPERATOR
 
@@ -54,7 +55,7 @@
 
 %%
 
-ROOT : TRANSLATION_UNIT
+ROOT : TRANSLATION_UNIT { g_root = $1; }
 
 PRIMARY_EXPRESSION
 	: T_IDENTIFIER
@@ -258,15 +259,15 @@ STORAGE_CLASS_SPECIFIER
 	;
 
 TYPE_SPECIFIER
-	: T_VOID
-	| T_CHAR
-	| T_SHORT
-	| T_INT
-	| T_LONG
-	| T_FLOAT
-	| T_DOUBLE
-	| T_SIGNED
-	| T_UNSIGNED
+	: T_VOID { $$ = new PrimitiveType(PrimitiveType::PrimitiveTypeEnum::_void); }
+	| T_CHAR { $$ = new PrimitiveType(PrimitiveType::PrimitiveTypeEnum::_char); }
+	| T_SHORT { $$ = new PrimitiveType(PrimitiveType::PrimitiveTypeEnum::_float); }
+	| T_INT { $$ = new PrimitiveType(PrimitiveType::PrimitiveTypeEnum::_int); }
+	| T_LONG { $$ = new PrimitiveType(PrimitiveType::PrimitiveTypeEnum::_long); }
+	| T_FLOAT { $$ = new PrimitiveType(PrimitiveType::PrimitiveTypeEnum::_float); }
+	| T_DOUBLE { $$ = new PrimitiveType(PrimitiveType::PrimitiveTypeEnum::_double); }
+	| T_SIGNED { $$ = new PrimitiveType(PrimitiveType::PrimitiveTypeEnum::_signed); }
+	| T_UNSIGNED { $$ = new PrimitiveType(PrimitiveType::PrimitiveTypeEnum::_unsigned); }
 	| STRUCT_OR_UNION_SPECIFIER
 	| ENUM_SPECIFIER
 	| T_TYPE_NAME
