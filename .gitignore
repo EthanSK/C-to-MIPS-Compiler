@@ -5,3 +5,5 @@ build
 *.d
 *.output
 *.tab
+HOSTTYPE=x86_64
+.vscode/settings.json

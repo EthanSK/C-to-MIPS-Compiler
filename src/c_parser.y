@@ -58,7 +58,7 @@
 ROOT : TRANSLATION_UNIT { g_root = $1; }
 
 PRIMARY_EXPRESSION
-	: T_IDENTIFIER
+	: T_IDENTIFIER { $$ = new VariableReference(*$1); delete $1; }
 	| T_NUMBER_LIT
   	| T_CHAR_LIT { $$ = new CharLiteral($1); }
 	| T_STRING_LIT { $$ = new StringLiteral(*$1); delete $1; }
