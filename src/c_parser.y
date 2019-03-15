@@ -60,8 +60,8 @@ ROOT : TRANSLATION_UNIT { g_root = $1; }
 PRIMARY_EXPRESSION
 	: T_IDENTIFIER
 	| T_NUMBER_LIT
-  	| T_CHAR_LIT
-	| T_STRING_LIT
+  	| T_CHAR_LIT { $$ = new CharLiteral($1); }
+	| T_STRING_LIT { $$ = new StringLiteral(*$1); delete $1; }
 	| T_LBRACKET EXPRESSION T_RBRACKET { $$ = $2; }
 	;
 
