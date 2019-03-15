@@ -62,7 +62,7 @@ PRIMARY_EXPRESSION
 	| T_NUMBER_LIT
   	| T_CHAR_LIT
 	| T_STRING_LIT
-	| T_LBRACKET EXPRESSION T_RBRACKET { $$ = $2 }
+	| T_LBRACKET EXPRESSION T_RBRACKET { $$ = $2; }
 	;
 
 POSTFIX_EXPRESSION
@@ -90,7 +90,7 @@ UNARY_EXPRESSION
 		{
 			case T_AND: $$ = new UnaryAddress($2); break;
 			case T_MULTIPLY: $$ = new UnaryDereference($2); break;
-			case T_PLUS: $$ = new UnaryPlus($2); break;
+			case T_PLUS: $$ = new UnaryAdd($2); break;
 			case T_MINUS: $$ = new UnaryMinus($2); break;
 			case T_INVERT: $$ = new UnaryBitwiseInvert($2); break;
 			case T_NOT: $$ = new UnaryNot($2); break;
@@ -129,8 +129,8 @@ ADDITIVE_EXPRESSION
 
 SHIFT_EXPRESSION
 	: ADDITIVE_EXPRESSION
-	| SHIFT_EXPRESSION T_LSHIFT ADDITIVE_EXPRESSION { $$ = new BinaryBitwiseLeftShift($1, $3); }
-	| SHIFT_EXPRESSION T_RSHIFT ADDITIVE_EXPRESSION { $$ = new BinaryBitwiseRightShift($1, $3); }
+	| SHIFT_EXPRESSION T_LSHIFT ADDITIVE_EXPRESSION { $$ = new BinaryLeftShift($1, $3); }
+	| SHIFT_EXPRESSION T_RSHIFT ADDITIVE_EXPRESSION { $$ = new BinaryRightShift($1, $3); }
 	;
 
 RELATIONAL_EXPRESSION
@@ -164,12 +164,12 @@ INCLUSIVE_OR_EXPRESSION
 
 LOGICAL_AND_EXPRESSION
 	: INCLUSIVE_OR_EXPRESSION
-	| LOGICAL_AND_EXPRESSION T_AND_AND INCLUSIVE_OR_EXPRESSION { $$ = new BinaryConditionalAnd($1, $3); }
+	| LOGICAL_AND_EXPRESSION T_AND_AND INCLUSIVE_OR_EXPRESSION { $$ = new BinaryLogicalAnd($1, $3); }
 	;
 
 LOGICAL_OR_EXPRESSION
 	: LOGICAL_AND_EXPRESSION
-	| LOGICAL_OR_EXPRESSION T_OR_OR LOGICAL_AND_EXPRESSION { $$ = new BinaryConditionalOr($1, $3); }
+	| LOGICAL_OR_EXPRESSION T_OR_OR LOGICAL_AND_EXPRESSION { $$ = new BinaryLogicalOr($1, $3); }
 	;
 
 CONDITIONAL_EXPRESSION
@@ -183,14 +183,14 @@ ASSIGNMENT_EXPRESSION
 	{
 		switch ($2)
 		{
-		case T_EQ: $$ = new BinaryAssignement($1, $3); break;
-		case T_MULTIPLY_EQ: $$ = new BinaryMultiplyAssignement($1, $3); break;
-		case T_DIVIDE_EQ: $$ = new BinaryDivideAssignement($1, $3); break;
-		case T_MODULO_EQ: $$ = new BinaryModuloAssignement($1, $3); break;
-		case T_PLUS_EQ: $$ = new BinaryAddAssignement($1, $3); break;
-		case T_MINUS_EQ: $$ = new BinarySubtractAssignement($1, $3); break;
-		case T_LSHIFT_EQ: $$ = new BinaryBitwiseLeftShiftAssignement($1, $3); break;
-		case T_RSHIFT_EQ: $$ = new BinaryBitwiseRightShiftAssignement($1, $3); break;
+		case T_EQ: $$ = new BinaryAssignment($1, $3); break;
+		case T_MULTIPLY_EQ: $$ = new BinaryMultiplyAssignment($1, $3); break;
+		case T_DIVIDE_EQ: $$ = new BinaryDivideAssignment($1, $3); break;
+		case T_MODULO_EQ: $$ = new BinaryModuloAssignment($1, $3); break;
+		case T_PLUS_EQ: $$ = new BinaryAddAssignment($1, $3); break;
+		case T_MINUS_EQ: $$ = new BinarySubtractAssignment($1, $3); break;
+		case T_LSHIFT_EQ: $$ = new BinaryLeftShiftAssignment($1, $3); break;
+		case T_RSHIFT_EQ: $$ = new BinaryRightShiftAssignment($1, $3); break;
 		case T_AND_AND: $$ = new BinaryBitwiseAndAssignment($1, $3); break;
 		case T_XOR_EQ: $$ = new BinaryBitwiseXorAssignment($1, $3); break;
 		case T_OR_EQ: $$ = new BinaryBitwiseOrAssignment($1, $3); break;
