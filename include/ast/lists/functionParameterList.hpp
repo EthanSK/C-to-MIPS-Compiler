@@ -11,6 +11,7 @@ class FunctionParameterList : public VariableDeclarationList//can be used for fu
   using VariableDeclarationList::VariableDeclarationList;
   public:
     void printC(std::ostream &os) const override;
+    void generatePython(std::ostream &os, PythonContext &context, int scopeDepth = 0) const override;
 };
 
 #endif
