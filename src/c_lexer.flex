@@ -112,6 +112,8 @@ L?\"(\\.|[^\\"])*\" { yylval.string = new std::string(yytext, 1, strlen(yytext) 
 
 %%
 
+
+
 void yyerror (char const *s)
 {
   fprintf (stderr, "Lexing error : %s\n", s);

@@ -3,9 +3,11 @@
   #include <cassert>
 
   extern StatementPtr g_root;
+  extern FILE *yyin;
 
   int yylex(void);
   void yyerror(const char *);
+  
 }
 
 %union
@@ -52,6 +54,8 @@
 %type <number> T_NUMBER_LIT T_CHAR_LIT
 
 %start ROOT
+
+
 
 %%
 

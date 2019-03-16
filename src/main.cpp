@@ -6,22 +6,20 @@
 
 StatementPtr generateTestAST();
 StatementPtr generateTestFragment();
-
+extern FILE *yyin;
 int main(int argc, char *argv[])
 {
+    // Parse the AST
+    yyin = fopen("test/testProgram.c", "r"); //default value for dev
 
-    std::map<std::string, double> bindings;
-
-    // Grab the pairs of bindings from argv
-    for (int i = 1; i < argc - 1; i += 2)
+    if (argc >= 5 && std::string(argv[1]) == "-S")
     {
-        bindings.insert(std::make_pair(argv[i], strtod(argv[i + 1], 0)));
+         yyin = fopen(argv[2], "r");
     }
 
-    // Parse the AST
     StatementPtr ast = parseAST();
+    //std::cin << "int a = 5;";
     //std::cout << ast << std::endl;
-
 
     //testing
     PythonContext context;
@@ -33,7 +31,7 @@ int main(int argc, char *argv[])
     std::cout << "\n\nPYTHON CODE\n======================\n";
     ast->generatePython(std::cout, context);
 
-    if (argc > 4 && std::string(argv[1]) == "--translate")
+    if (argc >= 5 && std::string(argv[1]) == "--translate")
     {
         ast->writePythonToFile(context, std::string(argv[4]));
         std::cout << std::endl;
