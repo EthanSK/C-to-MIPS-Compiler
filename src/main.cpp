@@ -60,7 +60,7 @@ StatementPtr generateTestAST()
 StatementPtr generateTestFragment()
 {
     StatementPtr ast = new RootNode(
-        new ScopeBlock({
+        new SequenceBlock({
 
             new VariableDeclaration(new PrimitiveType(PrimitiveType::PrimitiveTypeEnum::_int), "y"),
             new BinaryAssignment(new VariableDeclaration(new PrimitiveType(PrimitiveType::PrimitiveTypeEnum::_int), "z"), new IntegerLiteral(2)),

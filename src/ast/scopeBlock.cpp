@@ -1,9 +1,5 @@
 #include "scopeBlock.hpp"
 
-ScopeBlock::ScopeBlock(std::vector<StatementPtr> branches){
-    this->branches = branches;
-}
-
 void ScopeBlock::printC(std::ostream &os) const
 {
     os << "\n{\n";
