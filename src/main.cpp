@@ -24,6 +24,8 @@ int main(int argc, char *argv[])
     //testing
     PythonContext context;
     StatementPtr ast = generateTestFragment();
+    ast->initializePythonContext(context);
+
     std::cout << "\n\nC CODE\n======================\n";
     std::cout << ast << std::endl;
     ast->writePrintCToFile();

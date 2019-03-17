@@ -22,6 +22,15 @@ class Statement
 	{
 		os << "[Not Supported: " << typeid(*this).name() << "]";
 	};
+
+	virtual void initializePythonContext(PythonContext &context, int scopeDepth = 0) const
+	{
+		for (int i = 0; i < branches.size(); ++i)
+		{
+			branches[i]->initializePythonContext(context, scopeDepth);
+		}
+	};
+
 	void writePrintCToFile(std::string filePath = "bin/printC.c") const; //can't use for write python because whats output is different
 	void writePythonToFile(PythonContext &context, std::string filePath = "bin/translated.py", int scopeDepth = 0) const;
 
