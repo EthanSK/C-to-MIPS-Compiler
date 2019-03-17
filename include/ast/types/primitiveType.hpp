@@ -13,7 +13,9 @@ public:
     _float,
     _double,
     _char,
-    _unsigned
+    _signed,
+    _unsigned,
+    _long
     //these are all we need appaz
   };
 

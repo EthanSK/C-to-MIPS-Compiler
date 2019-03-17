@@ -17,7 +17,7 @@ public:
   
 protected:
   std::string _name;
-  virtual void printC(std::ostream &os) const;
+  virtual void printC(std::ostream &os) const override;
 };
 
 #endif

@@ -23,7 +23,6 @@ void Statement::writePythonToFile(PythonContext &context, std::string filePath, 
 {
     std::ofstream file(filePath, std::ios::out | std::ios::trunc);
     this->generatePython(file, context, scopeDepth);
-    file << this;
     file.close();
 }
 
