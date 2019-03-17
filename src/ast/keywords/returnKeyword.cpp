@@ -12,3 +12,9 @@ void ReturnKeyword::printC(std::ostream &os) const
 {
     os << "return " << getReturnValue();
 }
+
+void ReturnKeyword::generatePython(std::ostream &os, PythonContext &context, int scopeDepth) const
+{
+    os << "return ";
+    getReturnValue()->generatePython(os, context, scopeDepth);
+}

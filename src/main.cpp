@@ -63,14 +63,16 @@ StatementPtr generateTestFragment()
         new FunctionDefinition(
         new PrimitiveType(PrimitiveType::_int),
         "blankFunc",
-        new FunctionParameterList({new VariableDeclaration(new PrimitiveType(PrimitiveType::PrimitiveTypeEnum::_int), "in")}),
+        new FunctionParameterList({new VariableDeclaration(new PrimitiveType(PrimitiveType::PrimitiveTypeEnum::_int), "input")}),
         new ScopeBlock({})),
 
         new FunctionDefinition(
         new PrimitiveType(PrimitiveType::_int),
         "someFunc",
-        new FunctionParameterList({new VariableDeclaration(new PrimitiveType(PrimitiveType::PrimitiveTypeEnum::_int), "in")}),
-        new ScopeBlock({})),
+        new FunctionParameterList({new VariableDeclaration(new PrimitiveType(PrimitiveType::PrimitiveTypeEnum::_int), "input")}),
+        new ScopeBlock({
+            new ReturnKeyword(new VariableReference("input"))
+        })),
 
         new FunctionDefinition(
         new PrimitiveType(PrimitiveType::_int),
