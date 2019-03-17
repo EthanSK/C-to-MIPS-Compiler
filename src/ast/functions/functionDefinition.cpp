@@ -34,4 +34,5 @@ void FunctionDefinition::generatePython(std::ostream &os, PythonContext &context
     getParameters()->generatePython(os, context, scopeDepth);
     os << ":";
     getScopeBlock()->generatePython(os, context, scopeDepth + 1);
+    context.indentStream(os, scopeDepth);
 }

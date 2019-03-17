@@ -21,5 +21,8 @@ void ScopeBlock::generatePython(std::ostream &os, PythonContext &context, int sc
         context.indentStream(os, scopeDepth);
         branches[i]->generatePython(os, context, scopeDepth);
     }
+
+    context.indentStream(os, scopeDepth);
+    os << "pass";
     os <<std::flush;
 }
