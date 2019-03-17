@@ -17,13 +17,13 @@ int main(int argc, char *argv[])
          yyin = fopen(argv[2], "r");
     }
 
-    StatementPtr ast = parseAST();
+    //StatementPtr ast = parseAST();
     //std::cin << "int a = 5;";
     //std::cout << ast << std::endl;
 
     //testing
     PythonContext context;
-    //StatementPtr ast = generateTestFragment();
+    StatementPtr ast = generateTestFragment();
     std::cout << "\n\nC CODE\n======================\n";
     std::cout << ast << std::endl;
     ast->writePrintCToFile();
@@ -62,6 +62,12 @@ StatementPtr generateTestFragment()
 
         new FunctionDefinition(
         new PrimitiveType(PrimitiveType::_int),
+        "blankFunc",
+        new FunctionParameterList({new VariableDeclaration(new PrimitiveType(PrimitiveType::PrimitiveTypeEnum::_int), "in")}),
+        new ScopeBlock({})),
+
+        new FunctionDefinition(
+        new PrimitiveType(PrimitiveType::_int),
         "someFunc",
         new FunctionParameterList({new VariableDeclaration(new PrimitiveType(PrimitiveType::PrimitiveTypeEnum::_int), "in")}),
         new ScopeBlock({})),
@@ -84,7 +90,8 @@ StatementPtr generateTestFragment()
                             new BinaryIsNotEqualTo(new StringLiteral("lost"), new StringLiteral("dizzy"))
                         }),
                         new ScopeBlock({
-                                new BinaryAssignment(new VariableReference("x"), new IntegerLiteral(42))
+                                new BinaryAssignment(new VariableReference("x"), new IntegerLiteral(42)),
+                                new BinaryAssignment(new VariableReference("x"), new FunctionCall("someFunc", new FunctionParameterList({new VariableReference("x")})))
                         }))
                 }))
             })

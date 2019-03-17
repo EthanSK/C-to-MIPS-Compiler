@@ -10,6 +10,7 @@ public:
   FunctionCall(std::string name, StatementPtr parameters); //parameters here won't be declarations even tho they use the func decl list (coz i'm lazy)
   StatementPtr getParameters() const;
   void printC(std::ostream &os) const override;
+  void generatePython(std::ostream &os, PythonContext &context, int scopeDepth = 0) const override;
 
 protected:
   std::string _name;
