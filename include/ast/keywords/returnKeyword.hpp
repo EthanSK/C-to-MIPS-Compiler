@@ -14,7 +14,7 @@ public:
 
 protected:
   StatementPtr getReturnValue() const;
-  virtual void printC(std::ostream &os) const = 0;
+  void printC(std::ostream &os) const override;
 };
 
 #endif
