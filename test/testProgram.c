@@ -1,5 +1,5 @@
-double a = 5.5f;
 int x = 5;
+double a = 5.5f;
 
 int main()
 {
