@@ -105,8 +105,10 @@ StatementPtr generateTestFragment()
                                     new BinaryAssignment(new VariableReference("x"), new IntegerLiteral(42)),
                                     new BinaryAssignment(new VariableReference("y"), new FunctionCall("someFunc", new FunctionParameterList({new VariableReference("z")})))
                             }))
-                    }))
+                    })),
+                    new ReturnKeyword(new IntegerLiteral(10))
                 })
+                
             )
         })
     );
