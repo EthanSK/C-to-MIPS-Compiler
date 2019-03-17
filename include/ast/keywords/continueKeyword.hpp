@@ -11,7 +11,7 @@ class ContinueKeyword : public Statement
 {
     //has no braches and carries no data
   protected:
-    virtual void printC(std::ostream &os) const = 0;
+    virtual void printC(std::ostream &os) const override;
 };
 
 #endif

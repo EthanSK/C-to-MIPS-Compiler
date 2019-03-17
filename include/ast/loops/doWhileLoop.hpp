@@ -15,7 +15,7 @@ public:
 protected:
   StatementPtr getScopeBlock() const;
   StatementPtr getCondition() const;
-  virtual void printC(std::ostream &os) const = 0;
+  virtual void printC(std::ostream &os) const override;
 };
 
 #endif

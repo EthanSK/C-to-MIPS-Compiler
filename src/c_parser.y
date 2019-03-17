@@ -13,6 +13,7 @@
 %union
 {
   StatementPtr expr;
+  std::vector<StatementPtr> *exprList;
   double number;
   yytokentype token;
   std::string *string;
@@ -46,7 +47,9 @@
 
 
 %type <expr> TYPE_NAME ABSTRACT_DECLARATOR DIRECT_ABSTRACT_DECLARATOR INITIALIZER_LIST STATEMENT LABELED_STATEMENT COMPOUND_STATEMENT DECLARATION_LIST
-%type <expr> STATEMENT_LIST EXPRESSION_STATEMENT SELECTION_STATEMENT ITERATION_STATEMENT JUMP_STATEMENT TRANSLATION_UNIT EXTERNAL_DECLARATION FUNCTION_DEFINITION
+%type <expr> EXPRESSION_STATEMENT SELECTION_STATEMENT ITERATION_STATEMENT JUMP_STATEMENT TRANSLATION_UNIT EXTERNAL_DECLARATION FUNCTION_DEFINITION
+
+%type <exprList> STATEMENT_LIST
 
 %type <token> ASSIGNEMENT_OPERATOR UNARY_OPERATOR
 
@@ -61,6 +64,7 @@
 
 ROOT : TRANSLATION_UNIT { g_root = new RootNode($1); }
 
+//Terminals
 PRIMARY_EXPRESSION
 	: T_IDENTIFIER { $$ = new VariableReference(*$1); delete $1; }
 	| T_INT_LIT { $$ = new IntegerLiteral($1); }
@@ -356,7 +360,7 @@ DIRECT_DECLARATOR
 POINTER
 	: T_MULTIPLY
 	| T_MULTIPLY TYPE_QUALIFIER_LIST
-	| T_MULTIPLY POINTER { return new PointerType($2); }
+	| T_MULTIPLY POINTER { $$ = new PointerType($2); }
 	| T_MULTIPLY TYPE_QUALIFIER_LIST POINTER
 	;
 
@@ -439,9 +443,9 @@ LABELED_STATEMENT
 //Scope stuff
 COMPOUND_STATEMENT
 	: T_LCURLY_BRACE T_RCURLY_BRACE { $$ = new ScopeBlock(); }
-	| T_LCURLY_BRACE STATEMENT_LIST T_RCURLY_BRACE { $$ = new ScopeBlock($2); }
+	| T_LCURLY_BRACE STATEMENT_LIST T_RCURLY_BRACE { $$ = new ScopeBlock(*$2); delete $2; }
 	| T_LCURLY_BRACE DECLARATION_LIST T_RCURLY_BRACE { $$ = new ScopeBlock($2); }
-	| T_LCURLY_BRACE DECLARATION_LIST STATEMENT_LIST T_RCURLY_BRACE { $$ = new ScopeBlock({$2, $3}); }
+	| T_LCURLY_BRACE DECLARATION_LIST STATEMENT_LIST T_RCURLY_BRACE { $$ = new ScopeBlock({$2, new SequenceBlock(*$3)}); delete $3; }
 	;
 
 DECLARATION_LIST
@@ -450,8 +454,8 @@ DECLARATION_LIST
 	;
 
 STATEMENT_LIST
-	: STATEMENT
-	| STATEMENT_LIST STATEMENT { $$ = new SequenceBlock({$1, $2}); }
+	: STATEMENT { $$ = new std::vector<StatementPtr>{$1}; }
+	| STATEMENT_LIST STATEMENT { $1->push_back($2); $$ = $1; }
 	;
 
 //The comma operator nonsense I believe i.e a = (1, 2, func(), 4);
@@ -460,6 +464,7 @@ EXPRESSION_STATEMENT
 	| EXPRESSION T_SEMICOLON
 	;
 
+//If else and switch statements
 SELECTION_STATEMENT
 	: T_IF T_LBRACKET EXPRESSION T_RBRACKET STATEMENT { $$ = new IfElseStatement($3, $5, new ScopeBlock()); }
 	| T_IF T_LBRACKET EXPRESSION T_RBRACKET STATEMENT T_ELSE STATEMENT { $$ = new IfElseStatement($3, $5, $7); }
