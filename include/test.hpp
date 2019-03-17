@@ -1,6 +1,7 @@
 #ifndef test_hpp
 #define test_hpp
 #include "ast.hpp"
+#include "rootNode.hpp"
 #include "scopeBlock.hpp"
 #include "context.hpp"
 #include "statement.hpp"
