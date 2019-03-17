@@ -11,12 +11,13 @@ class WhileLoop : public Statement //will have branch[0] condition branch[1] exe
 {
 public:
   WhileLoop(StatementPtr condition, StatementPtr scopeBlock);
+  void generatePython(std::ostream &os, PythonContext &context, int scopeDepth = 0) const override;
 
 protected:
   StatementPtr getCondition() const;
   StatementPtr getScopeBlock() const;
 
-  virtual void printC(std::ostream &os) const = 0;
+  virtual void printC(std::ostream &os) const;
 };
 
 #endif

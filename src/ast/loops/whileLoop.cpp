@@ -17,3 +17,11 @@ void WhileLoop::printC(std::ostream &os) const
     os << "while (" << getCondition() << ")" << getScopeBlock(); 
 }
 
+void WhileLoop::generatePython(std::ostream &os, PythonContext &context, int scopeDepth) const
+{
+	os << "while ";
+    getCondition()->generatePython(os, context, scopeDepth);
+    os << ":";
+    getScopeBlock()->generatePython(os, context, scopeDepth + 1);
+}
+

@@ -76,6 +76,11 @@ StatementPtr generateTestFragment()
             "someFunc",
             new FunctionParameterList({new VariableDeclaration(new PrimitiveType(PrimitiveType::PrimitiveTypeEnum::_int), "input")}),
             new ScopeBlock({
+                new WhileLoop(
+                    new BinaryLessThan(new VariableReference("input"), new IntegerLiteral(10)),
+                    new ScopeBlock({
+                        new BinaryAddAssignment(new VariableReference("input"), new IntegerLiteral(1))
+                    })),
                 new ReturnKeyword(new VariableReference("input"))
             })),
 
