@@ -1,5 +1,6 @@
 %code requires{
   #include "ast.hpp"
+  #include "parserHelpers.hpp"
   #include <cassert>
 
   extern StatementPtr g_root;
@@ -13,7 +14,7 @@
 %union
 {
   StatementPtr expr;
-  std::vector<StatementPtr> *exprList;
+  StatementListPtr exprList;
   DeclPackage *decl;
   double number;
   yytokentype token;
@@ -381,8 +382,8 @@ PARAMETER_TYPE_LIST
 
 //Aggregate list of params
 PARAMETER_LIST
-	: PARAMETER_DECLARATION { $$ = new std::vector<StatementPtr>{$1}; }
-	| PARAMETER_LIST T_COMMA PARAMETER_DECLARATION { $1->push_back($3); $$ = $1; }
+	: PARAMETER_DECLARATION { $$ = initExprList($1); }
+	| PARAMETER_LIST T_COMMA PARAMETER_DECLARATION { $$ = concatExprList($1, $3); }
 	;
 
 PARAMETER_DECLARATION
@@ -461,14 +462,14 @@ COMPOUND_STATEMENT
 
 //dunno what this is yet, but I know it's a sequence. Perhaps of declarations but not concrete on it
 DECLARATION_LIST
-	: DECLARATION { $$ = new std::vector<StatementPtr>{$1}; }
-	| DECLARATION_LIST DECLARATION { $1->push_back($2); $$ = $1; } 
+	: DECLARATION { $$ = initExprList($1); }
+	| DECLARATION_LIST DECLARATION { $$ = concatExprList($1, $2); } 
 	;
 
 //This should just represent multiple lines in a row, dunno though
 STATEMENT_LIST
-	: STATEMENT { $$ = new std::vector<StatementPtr>{$1}; }
-	| STATEMENT_LIST STATEMENT { $1->push_back($2); $$ = $1; }
+	: STATEMENT { $$ = initExprList($1); }
+	| STATEMENT_LIST STATEMENT { $$ = concatExprList($1, $2); }
 	;
 
 //The comma operator nonsense I believe i.e a = (1, 2, func(), 4);
@@ -503,11 +504,11 @@ JUMP_STATEMENT
 
 //Aggregation of top level global statements
 TRANSLATION_UNIT
-	: EXTERNAL_DECLARATION { $$ = new std::vector<StatementPtr>{$1}; }
-	| TRANSLATION_UNIT EXTERNAL_DECLARATION { $1->push_back($2); $$ = $1; }
+	: EXTERNAL_DECLARATION { $$ = initExprList($1); }
+	| TRANSLATION_UNIT EXTERNAL_DECLARATION { $$ = concatExprList($1, $2); }
 	;
 
-//External declaration means something in global scope i think
+//External declaration means something in global scope
 EXTERNAL_DECLARATION
 	: FUNCTION_DEFINITION
 	| DECLARATION
