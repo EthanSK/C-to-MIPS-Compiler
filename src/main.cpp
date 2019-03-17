@@ -24,7 +24,6 @@ int main(int argc, char *argv[])
     //testing
     PythonContext context;
     StatementPtr ast = generateTestFragment();
-    ast->initializePythonContext(context);
 
     std::cout << "\n\nC CODE\n======================\n";
     std::cout << ast << std::endl;
@@ -62,6 +61,9 @@ StatementPtr generateTestFragment()
 {
     StatementPtr ast = new ScopeBlock({
 
+        new VariableDeclaration(new PrimitiveType(PrimitiveType::PrimitiveTypeEnum::_int), "y"),
+        new BinaryAssignment(new VariableDeclaration(new PrimitiveType(PrimitiveType::PrimitiveTypeEnum::_int), "z"), new IntegerLiteral(2)),
+        
         new FunctionDefinition(
         new PrimitiveType(PrimitiveType::_int),
         "blankFunc",
@@ -95,7 +97,7 @@ StatementPtr generateTestFragment()
                         }),
                         new ScopeBlock({
                                 new BinaryAssignment(new VariableReference("x"), new IntegerLiteral(42)),
-                                new BinaryAssignment(new VariableReference("x"), new FunctionCall("someFunc", new FunctionParameterList({new VariableReference("x")})))
+                                new BinaryAssignment(new VariableReference("y"), new FunctionCall("someFunc", new FunctionParameterList({new VariableReference("z")})))
                         }))
                 }))
             })

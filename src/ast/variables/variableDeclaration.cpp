@@ -17,5 +17,6 @@ void VariableDeclaration::printC(std::ostream &os) const
 
 void VariableDeclaration::generatePython(std::ostream &os, PythonContext &context, int scopeDepth) const
 {
+    if (scopeDepth == 0) { context.registerGlobal(_name); }
     os << _name;
 }

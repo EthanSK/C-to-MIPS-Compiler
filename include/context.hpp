@@ -12,10 +12,11 @@ class PythonContext : public Context
 {
 public:
     void indentStream(std::ostream& os, int scopeDepth) const;
-    void registerGlobal(std::string identifier) { globalIdentifiers.push_back(identifier); }
+    void registerGlobal(std::string identifier);
+    void dumpGlobals(std::ostream& os, int scopeDepth) const;
 
 private:
-    std::vector<std::string> globalIdentifiers;
+    std::vector<std::string> _globalIdentifiers;
     const int PY_INDENT_SIZE = 4;
 };
 

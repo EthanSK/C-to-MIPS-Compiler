@@ -8,3 +8,17 @@ void PythonContext::indentStream(std::ostream& os, int scopeDepth) const
         os << " ";
     }
 }
+
+void PythonContext::dumpGlobals(std::ostream& os, int scopeDepth) const
+{
+    for (int i = 0; i < _globalIdentifiers.size(); ++i)
+    {
+        indentStream(os, scopeDepth);
+        os << "global " << _globalIdentifiers[i];
+    }
+}
+
+void PythonContext::registerGlobal(std::string identifier)
+{
+    _globalIdentifiers.push_back(identifier);
+}

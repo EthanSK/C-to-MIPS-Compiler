@@ -31,8 +31,9 @@ void FunctionDefinition::printC(std::ostream &os) const
 void FunctionDefinition::generatePython(std::ostream &os, PythonContext &context, int scopeDepth) const
 {
     os << "def " << _name;
-    getParameters()->generatePython(os, context, scopeDepth);
+    getParameters()->generatePython(os, context, scopeDepth + 1);
     os << ":";
+    context.dumpGlobals(os, scopeDepth + 1);
     getScopeBlock()->generatePython(os, context, scopeDepth + 1);
     context.indentStream(os, scopeDepth);
 }
