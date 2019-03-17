@@ -1,4 +1,5 @@
 int x = 5;
+int* yy;
 double a = 5.5f;
 
 int main()

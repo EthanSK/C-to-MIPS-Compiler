@@ -65,6 +65,7 @@
 
 %%
 
+//Root that turns the aggregate into a sequence and adds the root node
 ROOT : TRANSLATION_UNIT { g_root = new RootNode(new SequenceBlock(*$1)); delete $1; }
 
 //Terminals
@@ -494,7 +495,7 @@ JUMP_STATEMENT
 	| T_RETURN EXPRESSION T_SEMICOLON { $$ = new ReturnKeyword($2); }
 	;
 
-//Anything top level ¯\_(ツ)_/¯
+//Aggregation of top level global statements
 TRANSLATION_UNIT
 	: EXTERNAL_DECLARATION { $$ = new std::vector<StatementPtr>{$1}; }
 	| TRANSLATION_UNIT EXTERNAL_DECLARATION { $1->push_back($2); $$ = $1; }
