@@ -11,6 +11,7 @@ class SequenceBlock : public Statement
 {
 public:
   SequenceBlock();
+  SequenceBlock(StatementPtr branch);
   SequenceBlock(std::vector<StatementPtr> branches);
   void generatePython(std::ostream &os, PythonContext &context, int scopeDepth = 0) const override;
 

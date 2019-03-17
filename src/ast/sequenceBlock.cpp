@@ -1,6 +1,7 @@
 #include "sequenceBlock.hpp"
 
-SequenceBlock::SequenceBlock(){}
+SequenceBlock::SequenceBlock() { }
+SequenceBlock::SequenceBlock(StatementPtr branch) { branches.push_back(branch); }
 SequenceBlock::SequenceBlock(std::vector<StatementPtr> branches){
     this->branches = branches;
 }
