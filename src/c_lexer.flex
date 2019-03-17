@@ -99,12 +99,14 @@ while { return T_WHILE; }
 "++" { return T_PLUS_PLUS; }
 "--" { return T_MINUS_MINUS; }
 
-0{OCTDIGIT}+{INTSUFFIX}? { yylval.number = std::stoi(yytext, nullptr, 8); return T_NUMBER_LIT; }
-0[xX]{HEXDIGIT}+{INTSUFFIX}? { yylval.number = std::stoi(yytext, nullptr, 16); return T_NUMBER_LIT; }
-{DIGIT}+{INTSUFFIX}? { yylval.number = std::stoi(yytext, nullptr, 10); return T_NUMBER_LIT; }
+0{OCTDIGIT}+{INTSUFFIX}? { yylval.number = std::stoi(yytext, nullptr, 8); return T_INT_LIT; }
+0[xX]{HEXDIGIT}+{INTSUFFIX}? { yylval.number = std::stoi(yytext, nullptr, 16); return T_INT_LIT; }
+{DIGIT}+{INTSUFFIX}? { yylval.number = std::stoi(yytext, nullptr, 10); return T_INT_LIT; }
 
-{DIGIT}+\.{DIGIT}*[fF]? { yylval.number = std::stod(yytext); return T_NUMBER_LIT; }
-{DIGIT}*\.{DIGIT}+[fF]? { yylval.number = std::stod(yytext); return T_NUMBER_LIT; }
+{DIGIT}+\.{DIGIT}*[fF] { yylval.number = std::stod(yytext); return T_DOUBLE_LIT; }
+{DIGIT}*\.{DIGIT}+[fF] { yylval.number = std::stod(yytext); return T_DOUBLE_LIT; }
+{DIGIT}+\.{DIGIT}* { yylval.number = std::stod(yytext); return T_FLOAT_LIT; }
+{DIGIT}*\.{DIGIT}+ { yylval.number = std::stod(yytext); return T_FLOAT_LIT; }
 
 L?\"(\\.|[^\\"])*\" { yylval.string = new std::string(yytext, 1, strlen(yytext) - 2); return T_STRING_LIT; }
 

@@ -1,8 +1,7 @@
-#ifndef test_hpp
-#define test_hpp
+#ifndef headers_hpp
+#define headers_hpp
 #include "ast.hpp"
 #include "rootNode.hpp"
-#include "sequenceBlock.hpp"
 #include "scopeBlock.hpp"
 #include "context.hpp"
 #include "statement.hpp"

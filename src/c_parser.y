@@ -18,7 +18,7 @@
   std::string *string;
 }
 
-%token T_NUMBER_LIT T_CHAR_LIT T_STRING_LIT T_IDENTIFIER T_TYPE_NAME
+%token T_INT_LIT T_FLOAT_LIT T_DOUBLE_LIT T_CHAR_LIT T_STRING_LIT T_IDENTIFIER T_TYPE_NAME
 
 %token T_AUTO T_BREAK T_CASE T_CHAR T_CONST T_CONTINUE T_DEFAULT T_DO T_DOUBLE T_ELSE T_ENUM T_EXTERN T_FLOAT T_FOR T_GOTO T_IF T_INT T_LONG T_REGISTER T_RETURN T_SHORT T_SIGNED T_SIZEOF T_STATIC T_STRUCT T_SWITCH T_TYPEDEF T_UNION T_UNSIGNED T_VOID T_VOLATILE T_WHILE
 
@@ -51,7 +51,7 @@
 %type <token> ASSIGNEMENT_OPERATOR UNARY_OPERATOR
 
 %type <string> T_STRING_LIT T_IDENTIFIER
-%type <number> T_NUMBER_LIT T_CHAR_LIT
+%type <number> T_INT_LIT T_CHAR_LIT T_DOUBLE_LIT T_FLOAT_LIT
 
 %start ROOT
 
@@ -59,11 +59,13 @@
 
 %%
 
-ROOT : TRANSLATION_UNIT { g_root = $1; }
+ROOT : TRANSLATION_UNIT { g_root = new RootNode($1); }
 
 PRIMARY_EXPRESSION
 	: T_IDENTIFIER { $$ = new VariableReference(*$1); delete $1; }
-	| T_NUMBER_LIT
+	| T_INT_LIT { $$ = new IntegerLiteral($1); }
+	| T_DOUBLE_LIT { $$ = new DoubleLiteral($1); }
+	| T_FLOAT_LIT { $$ = new FloatLiteral($1); }
   	| T_CHAR_LIT { $$ = new CharLiteral($1); }
 	| T_STRING_LIT { $$ = new StringLiteral(*$1); delete $1; }
 	| T_LBRACKET EXPRESSION T_RBRACKET { $$ = $2; }

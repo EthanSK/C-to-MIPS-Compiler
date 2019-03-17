@@ -2,7 +2,7 @@
 #include <map>
 
 //for testing
-#include "test.hpp"
+#include "headers.hpp"
 
 StatementPtr generateTestAST();
 StatementPtr generateTestFragment();
@@ -21,9 +21,8 @@ int main(int argc, char *argv[])
     //std::cin << "int a = 5;";
     //std::cout << ast << std::endl;
 
-    //testing
     PythonContext context;
-    StatementPtr ast = generateTestFragment();
+    StatementPtr ast = parseAST();
 
     std::cout << "\n\nC CODE\n======================\n";
     std::cout << ast << std::endl;
