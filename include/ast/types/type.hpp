@@ -3,6 +3,9 @@
 
 #include "statement.hpp"
 
+class Type;
+typedef const Type* TypePtr;
+
 class Type : public Statement
 {
   protected:

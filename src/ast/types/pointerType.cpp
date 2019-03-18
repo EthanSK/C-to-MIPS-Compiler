@@ -5,9 +5,9 @@ PointerType::PointerType(StatementPtr child)
     branches.push_back(child);
 }
 
-StatementPtr PointerType::getChild() const
+TypePtr PointerType::getChild() const
 {
-    return branches[0];
+    return reinterpret_cast<TypePtr>(branches[0]);
 }
 
 void PointerType::printC(std::ostream &os) const

@@ -6,9 +6,9 @@ QualifiedType::QualifiedType(StatementPtr child, StatementPtr qualifier)
     branches.push_back(qualifier);
 }
 
-StatementPtr QualifiedType::getChild() const
+TypePtr QualifiedType::getChild() const
 {
-    return branches[0];
+    return reinterpret_cast<TypePtr>(branches[0]);
 }
 
 StatementPtr QualifiedType::getQualifier() const

@@ -5,9 +5,9 @@ ArrayType::ArrayType(StatementPtr child, int size) : _size(size)
     branches.push_back(child);
 }
 
-StatementPtr ArrayType::getChild() const
+TypePtr ArrayType::getChild() const
 {
-    return branches[0];
+    return reinterpret_cast<TypePtr>(branches[0]);
 }
 
 void ArrayType::printC(std::ostream &os) const
