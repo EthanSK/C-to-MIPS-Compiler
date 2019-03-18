@@ -1,13 +1,15 @@
 #ifndef variableInitializationList_hpp 
 #define variableInitializationList_hpp
 
-#include "statement.hpp"
+#include "nodeList.hpp"
 
-class VariableInitializationList : public Statement
+class VariableInitializationList;
+typedef const VariableInitializationList* VariableInitializationListPtr;
+
+class VariableInitializationList : public NodeList
 {
 public:
-    VariableInitializationList(std::vector<StatementPtr> initializations);
-    std::vector<StatementPtr> getInitializations() const;
+    using NodeList::NodeList;
     void generatePython(std::ostream &os, PythonContext &context, int scopeDepth = 0) const override;
 
 protected:

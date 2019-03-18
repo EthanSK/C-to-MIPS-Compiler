@@ -236,7 +236,7 @@ CONSTANT_EXPRESSION
 
 DECLARATION
 	: DECLARATION_SPECIFIERS T_SEMICOLON
-	| DECLARATION_SPECIFIERS INIT_DECLARATOR_LIST T_SEMICOLON { $$ = new VariableDeclaration($1, new VariableInitializationList(*$2)); delete $2; }
+	| DECLARATION_SPECIFIERS INIT_DECLARATOR_LIST T_SEMICOLON { $$ = new VariableDeclaration($1, *$2); delete $2; }
 	;
 
 //I believe declaration specifier is the fully qualified and storage classed type, such as extern int*

@@ -1,6 +1,6 @@
 #include "variableDeclaration.hpp"
 
-VariableDeclaration::VariableDeclaration(StatementPtr type, StatementPtr initList)
+VariableDeclaration::VariableDeclaration(StatementPtr type, NodeListPtr initList)
 {
     branches.push_back(type);
     branches.push_back(initList);

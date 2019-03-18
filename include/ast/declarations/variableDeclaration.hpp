@@ -2,11 +2,13 @@
 #define variableDeclaration_hpp
 
 #include "declaration.hpp"
+#include "variableInitializationList.hpp"
 
 class VariableDeclaration : public Declaration
 {
 public:
-    VariableDeclaration(StatementPtr type, StatementPtr initList);
+    VariableDeclaration(StatementPtr type, NodeListPtr initList);
+    VariableDeclaration(StatementPtr type, std::vector<StatementPtr> initList) : VariableDeclaration(type, new VariableInitializationList(initList)) { }
     void generatePython(std::ostream &os, PythonContext &context, int scopeDepth = 0) const override;
   
 protected:
