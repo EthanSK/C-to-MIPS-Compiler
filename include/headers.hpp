@@ -1,7 +1,8 @@
 #ifndef headers_hpp
 #define headers_hpp
 #include "identifier.hpp"
-#include "qualifiedType"
+#include "qualifiedType.hpp"
+#include "storageClassedType.hpp"
 #include "storageClass.hpp"
 #include "typeQualifier.hpp"
 #include "ternaryOperator.hpp"
