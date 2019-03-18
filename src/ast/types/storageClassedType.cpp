@@ -20,3 +20,5 @@ void StorageClassedType::printC(std::ostream &os) const
 {
     os << getStorageClass() << " " << getChild();
 }
+
+int StorageClassedType::getTypeSize() const { return getChild()->getTypeSize(); }

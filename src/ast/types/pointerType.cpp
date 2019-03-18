@@ -14,3 +14,5 @@ void PointerType::printC(std::ostream &os) const
 {
     os << getChild() << " *";
 }
+
+int PointerType::getTypeSize() const { return 4; }

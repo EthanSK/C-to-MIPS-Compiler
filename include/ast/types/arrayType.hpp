@@ -9,6 +9,7 @@ class ArrayType : public Type
   public:
     ArrayType(StatementPtr child, int size);
     TypePtr getChild() const;
+    virtual int getTypeSize() const override;
 
   protected:
     int _size;

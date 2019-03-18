@@ -7,6 +7,7 @@ class StorageClassedType : public Type
 { 
   public:
     StorageClassedType(StatementPtr child, StatementPtr storageClass);
+    virtual int getTypeSize() const override;
 
   protected:
     TypePtr getChild() const;

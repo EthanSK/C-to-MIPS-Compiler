@@ -29,3 +29,28 @@ std::string PrimitiveType::primitiveTypeToString() const
         return "UNKNOWN TYPE";
     }
 }
+
+int PrimitiveType::getTypeSize() const
+{
+   switch (_type)
+    {
+    case PrimitiveType::_void:
+        return 0;
+    case PrimitiveType::_int:
+        return 4;
+    case PrimitiveType::_float:
+        return 4;
+    case PrimitiveType::_double:
+        return 8;
+    case PrimitiveType::_char:
+        return 1;
+    case PrimitiveType::_signed:
+        return 4;
+    case PrimitiveType::_unsigned:
+        return 4;
+    case PrimitiveType::_long:
+        return 8;
+    default:
+        return 0;
+    } 
+}

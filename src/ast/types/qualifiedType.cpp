@@ -20,3 +20,5 @@ void QualifiedType::printC(std::ostream &os) const
 {
     os << getQualifier() << " " << getChild();
 }
+
+int QualifiedType::getTypeSize() const { return getChild()->getTypeSize(); }
