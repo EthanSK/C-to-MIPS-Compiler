@@ -247,7 +247,7 @@ DECLARATION_SPECIFIERS
 	: STORAGE_CLASS_SPECIFIER { $$ = new StorageClassedType(new PrimitiveType(PrimitiveType::PrimitiveTypeEnum::_int), $1); }
 	| STORAGE_CLASS_SPECIFIER DECLARATION_SPECIFIERS { $$ = new StorageClassedType($2, $1); }
 	| TYPE_SPECIFIER
-	| TYPE_SPECIFIER DECLARATION_SPECIFIERS
+	| TYPE_SPECIFIER DECLARATION_SPECIFIERS //I think this part is only relevant when doing funcptrs, it allows you to write 'int int'
 	| TYPE_QUALIFIER { $$ = new QualifiedType(new PrimitiveType(PrimitiveType::PrimitiveTypeEnum::_int), $1); }
 	| TYPE_QUALIFIER DECLARATION_SPECIFIERS { $$ = new QualifiedType($2, $1); }
 	;
