@@ -86,8 +86,8 @@ POSTFIX_EXPRESSION
 	| POSTFIX_EXPRESSION T_LSQUARE_BRACKET EXPRESSION T_RSQUARE_BRACKET { $$ = new ArrayElementReference($1, $3); }
 	| POSTFIX_EXPRESSION T_LBRACKET T_RBRACKET { $$ = new FunctionCall($1); }
 	| POSTFIX_EXPRESSION T_LBRACKET ARGUMENT_EXPRESSION_LIST T_RBRACKET { $$ = new FunctionCall($1, new FunctionParameterList(*$3)); delete $3; }
-	| POSTFIX_EXPRESSION T_DOT T_IDENTIFIER
-	| POSTFIX_EXPRESSION T_ARROW T_IDENTIFIER
+	| POSTFIX_EXPRESSION T_DOT T_IDENTIFIER //Struct stuff
+	| POSTFIX_EXPRESSION T_ARROW T_IDENTIFIER //Struct stuff
 	| POSTFIX_EXPRESSION T_PLUS_PLUS { $$ = new UnaryPostIncrement($1); }
 	| POSTFIX_EXPRESSION T_MINUS_MINUS { $$ = new UnaryPostDecrement($1); }
 	;
@@ -252,7 +252,7 @@ DECLARATION_SPECIFIERS
 	;
 
 EXPRESSION_STATEMENT
-	: T_SEMICOLON
+	: T_SEMICOLON { $$ = new SequenceBlock(); }
 	| EXPRESSION T_SEMICOLON
 	;
 
@@ -427,6 +427,8 @@ INITIALIZER
 	| T_LCURLY_BRACE INITIALIZER_LIST T_COMMA T_RCURLY_BRACE
 	;
 
+//Array initializers and related initializer lists
+//Since initializer lists can be recursive we need to take care and perhaps use a different system
 INITIALIZER_LIST
 	: INITIALIZER
 	| INITIALIZER_LIST T_COMMA INITIALIZER
