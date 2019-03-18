@@ -108,6 +108,7 @@ UNARY_EXPRESSION
 			case T_MINUS: $$ = new UnaryMinus($2); break;
 			case T_INVERT: $$ = new UnaryBitwiseInvert($2); break;
 			case T_NOT: $$ = new UnaryNot($2); break;
+			default: break;
 		}
 	}
 	| T_SIZEOF UNARY_EXPRESSION
@@ -208,6 +209,7 @@ ASSIGNMENT_EXPRESSION
 		case T_AND_AND: $$ = new BinaryBitwiseAndAssignment($1, $3); break;
 		case T_XOR_EQ: $$ = new BinaryBitwiseXorAssignment($1, $3); break;
 		case T_OR_EQ: $$ = new BinaryBitwiseOrAssignment($1, $3); break;
+		default: break;
 		}
 	}
 	;
@@ -247,11 +249,6 @@ DECLARATION_SPECIFIERS
 	| TYPE_SPECIFIER DECLARATION_SPECIFIERS
 	| TYPE_QUALIFIER
 	| TYPE_QUALIFIER DECLARATION_SPECIFIERS
-	;
-
-EXPRESSION_STATEMENT
-	: T_SEMICOLON { $$ = new SequenceBlock(); }
-	| EXPRESSION T_SEMICOLON
 	;
 
 INIT_DECLARATOR_LIST
@@ -476,7 +473,7 @@ STATEMENT_LIST
 
 //The comma operator nonsense I believe i.e a = (1, 2, func(), 4);
 EXPRESSION_STATEMENT
-	: T_SEMICOLON
+	: T_SEMICOLON { $$ = new SequenceBlock(); }
 	| EXPRESSION T_SEMICOLON
 	;
 
