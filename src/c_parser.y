@@ -244,12 +244,12 @@ DECLARATION
 
 //I believe declaration specifier is the fully qualified and storage classed type, such as extern int*
 DECLARATION_SPECIFIERS
-	: STORAGE_CLASS_SPECIFIER
-	| STORAGE_CLASS_SPECIFIER DECLARATION_SPECIFIERS
+	: STORAGE_CLASS_SPECIFIER { $$ = new StorageClassedType(new PrimitiveType(PrimitiveType::PrimitiveTypeEnum::_int), $1); }
+	| STORAGE_CLASS_SPECIFIER DECLARATION_SPECIFIERS { $$ = new StorageClassedType($2, $1); }
 	| TYPE_SPECIFIER
 	| TYPE_SPECIFIER DECLARATION_SPECIFIERS
-	| TYPE_QUALIFIER
-	| TYPE_QUALIFIER DECLARATION_SPECIFIERS
+	| TYPE_QUALIFIER { $$ = new QualifiedType(new PrimitiveType(PrimitiveType::PrimitiveTypeEnum::_int), $1); }
+	| TYPE_QUALIFIER DECLARATION_SPECIFIERS { $$ = new QualifiedType($2, $1); }
 	;
 
 INIT_DECLARATOR_LIST
@@ -265,11 +265,11 @@ INIT_DECLARATOR
 
 //This is all stuff about how the variable is stored
 STORAGE_CLASS_SPECIFIER
-	: T_TYPEDEF
-	| T_EXTERN
-	| T_STATIC
-	| T_AUTO
-	| T_REGISTER
+	: T_TYPEDEF { $$ = new StorageClass(StorageClass::StorageClassSpecifierEnum::_typedef); }
+	| T_EXTERN { $$ = new StorageClass(StorageClass::StorageClassSpecifierEnum::_extern); }
+	| T_STATIC { $$ = new StorageClass(StorageClass::StorageClassSpecifierEnum::_static); }
+	| T_AUTO { $$ = new StorageClass(StorageClass::StorageClassSpecifierEnum::_auto); }
+	| T_REGISTER { $$ = new StorageClass(StorageClass::StorageClassSpecifierEnum::_register); }
 	;
 
 //The core type - primitive or struct, union
@@ -371,6 +371,7 @@ POINTER
 	| T_MULTIPLY TYPE_QUALIFIER_LIST POINTER
 	;
 
+//List of several type qualifiers, such as const volatile
 TYPE_QUALIFIER_LIST
 	: TYPE_QUALIFIER
 	| TYPE_QUALIFIER_LIST TYPE_QUALIFIER
