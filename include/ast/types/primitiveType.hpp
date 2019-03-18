@@ -21,6 +21,7 @@ public:
 
 public:
   PrimitiveType(PrimitiveTypeEnum type) : _type(type){};
+  virtual int getTypeSize() const override;
 
 protected:
   PrimitiveTypeEnum _type;

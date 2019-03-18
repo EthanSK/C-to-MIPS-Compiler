@@ -7,9 +7,10 @@ class QualifiedType : public Type
 { 
   public:
     QualifiedType(StatementPtr child, StatementPtr qualifier);
+    virtual int getTypeSize() const override;
 
   protected:
-    StatementPtr getChild() const;
+    TypePtr getChild() const;
     StatementPtr getQualifier() const;
 
     void printC(std::ostream &os) const override;
