@@ -1,6 +1,10 @@
 #ifndef headers_hpp
 #define headers_hpp
 #include "identifier.hpp"
+#include "qualifiedType.hpp"
+#include "storageClassedType.hpp"
+#include "storageClass.hpp"
+#include "typeQualifier.hpp"
 #include "ternaryOperator.hpp"
 #include "ast.hpp"
 #include "rootNode.hpp"
@@ -10,7 +14,6 @@
 #include "type.hpp"
 #include "pointerType.hpp"
 #include "primitiveType.hpp"
-#include "externType.hpp"
 #include "arrayType.hpp"
 #include "binaryOperator.hpp"
 #include "unaryOperator.hpp"
