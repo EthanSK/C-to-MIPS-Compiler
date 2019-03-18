@@ -5,8 +5,6 @@
 
 class Declarator : public Statement
 {
-  protected:
-    virtual void printC(std::ostream &os) const = 0;
 };
 
 #endif
