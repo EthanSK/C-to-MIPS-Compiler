@@ -11,7 +11,7 @@ std::string CharLiteral::getEscapedChar() const
     else if (_value == '\r') { return "\\r"; }
     else if (_value == '\t') { return "\\t"; }
     else if (_value == '\0') { return "\\0"; }
-    else if (_value == '\"') { return "\""; }
+    else if (_value == '\"') { return "\\\""; }
     else { return std::string(1, (char)_value); }
 }
 

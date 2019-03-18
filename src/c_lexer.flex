@@ -121,7 +121,7 @@ while { return T_WHILE; }
     else if (str == "'\\r'") { yylval.number = '\r'; }
     else if (str == "'\\t'") { yylval.number = '\t'; }
     else if (str == "'\\0'") { yylval.number = '\0'; }
-    else if (str == "'\"'") { yylval.number = '\"'; }
+    else if (str == "'\\\"'") { yylval.number = '\"'; }
     else { yylval.number = str[1]; }
     return T_CHAR_LIT;
   }
