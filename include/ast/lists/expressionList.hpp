@@ -1,12 +1,12 @@
-#ifndef variableInitializationList_hpp 
-#define variableInitializationList_hpp
+#ifndef expressionList_hpp 
+#define expressionList_hpp
 
 #include "nodeList.hpp"
 
-class VariableInitializationList;
-typedef const VariableInitializationList* VariableInitializationListPtr;
+class ExpressionList;
+typedef const ExpressionList* ExpressionListPtr;
 
-class VariableInitializationList : public NodeList
+class ExpressionList : public NodeList
 {
 public:
     using NodeList::NodeList;

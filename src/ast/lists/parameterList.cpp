@@ -1,6 +1,6 @@
-#include "variableInitializationList.hpp"
+#include "parameterList.hpp"
 
-void VariableInitializationList::printC(std::ostream &os) const
+void ParameterList::printC(std::ostream &os) const
 {
     std::vector<StatementPtr> initializations = getNodes();
     for (int i = 0; i < initializations.size(); ++i)
@@ -10,12 +10,12 @@ void VariableInitializationList::printC(std::ostream &os) const
     }
 }
 
-void VariableInitializationList::generatePython(std::ostream &os, PythonContext &context, int scopeDepth) const
+void ParameterList::generatePython(std::ostream &os, PythonContext &context, int scopeDepth) const
 {
     std::vector<StatementPtr> initializations = getNodes();
     for (int i = 0; i < initializations.size(); ++i)
     {
-        if (i > 0) { os << "\n"; }
+        if (i > 0) { os << ", "; }
         initializations[i]->generatePython(os, context, scopeDepth);
     }
 }

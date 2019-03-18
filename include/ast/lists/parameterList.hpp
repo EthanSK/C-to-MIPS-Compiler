@@ -1,12 +1,12 @@
-#ifndef variableInitializationList_hpp 
-#define variableInitializationList_hpp
+#ifndef parameterList_hpp 
+#define parameterList_hpp
 
 #include "nodeList.hpp"
 
-class VariableInitializationList;
-typedef const VariableInitializationList* VariableInitializationListPtr;
+class ParameterList;
+typedef const ParameterList* ParameterListPtr;
 
-class VariableInitializationList : public NodeList
+class ParameterList : public NodeList
 {
 public:
     using NodeList::NodeList;

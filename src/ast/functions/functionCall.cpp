@@ -15,11 +15,13 @@ StatementPtr FunctionCall::getParameters() const{
 
 void FunctionCall::printC(std::ostream &os) const
 {
-    os << getName() << getParameters();
+    os << getName() << "(" << getParameters() << ")";
 } 
 
 void FunctionCall::generatePython(std::ostream &os, PythonContext &context, int scopeDepth) const
 {
     getName()->generatePython(os, context, scopeDepth);
+    os << "(";
     getParameters()->generatePython(os, context, scopeDepth);
+    os << ")";
 }

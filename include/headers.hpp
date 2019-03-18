@@ -1,6 +1,10 @@
 #ifndef headers_hpp
 #define headers_hpp
 #include "identifier.hpp"
+#include "expressionList.hpp"
+#include "parameterList.hpp"
+#include "parameterDeclaration.hpp"
+#include "functionDeclarator.hpp"
 #include "variableInitializationList.hpp"
 #include "arrayDeclaratorSized.hpp"
 #include "arrayDeclarator.hpp"
@@ -63,8 +67,7 @@
 #include "unaryDereference.hpp"
 #include "unaryPreDecrement.hpp"
 #include "unaryBitwiseInvert.hpp"
-#include "unarySizeOfConst.hpp"
-#include "functionParameterList.hpp"
+#include "unarySizeofConst.hpp"
 #include "structDefinitionList.hpp"
 #include "variableDeclarationList.hpp"
 #include "initializerList.hpp"
