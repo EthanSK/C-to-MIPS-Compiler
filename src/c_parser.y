@@ -432,19 +432,11 @@ INITIALIZER_LIST
 	;
 
 STATEMENT
-	: LABELED_STATEMENT //goto garbage
-	| COMPOUND_STATEMENT //scope stuff
+	: COMPOUND_STATEMENT //scope stuff
 	| EXPRESSION_STATEMENT //sequence of lines
 	| SELECTION_STATEMENT //if else and switch
 	| ITERATION_STATEMENT //loops
 	| JUMP_STATEMENT //flow control
-	;
-
-//This is goto garbage so ignore it
-LABELED_STATEMENT
-	: T_IDENTIFIER T_COLON STATEMENT
-	| T_CASE CONSTANT_EXPRESSION T_COLON STATEMENT
-	| T_DEFAULT T_COLON STATEMENT
 	;
 
 //Scope stuff
