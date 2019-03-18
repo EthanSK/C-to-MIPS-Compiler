@@ -11,6 +11,7 @@ HEXDIGIT [0-9A-Fa-f]
 OCTDIGIT [0-7]
 NONDIGIT [_A-Za-z]
 INTSUFFIX [uUlL]
+EXPONENT [Ee][+-]?{DIGIT}+
 
 %%
 
@@ -107,6 +108,10 @@ while { return T_WHILE; }
 {DIGIT}*\.{DIGIT}+[fF] { yylval.number = std::stod(yytext); return T_DOUBLE_LIT; }
 {DIGIT}+\.{DIGIT}* { yylval.number = std::stod(yytext); return T_FLOAT_LIT; }
 {DIGIT}*\.{DIGIT}+ { yylval.number = std::stod(yytext); return T_FLOAT_LIT; }
+{DIGIT}*"."{DIGIT}+({EXPONENT})?[fF]	{ yylval.number = std::stod(yytext); return T_FLOAT_LIT; }
+{DIGIT}+"."{DIGIT}*({EXPONENT})?[fF]	{ yylval.number = std::stod(yytext); return T_FLOAT_LIT; }
+{DIGIT}*"."{DIGIT}+({EXPONENT})?	{ yylval.number = std::stod(yytext); return T_DOUBLE_LIT; }
+{DIGIT}+"."{DIGIT}*({EXPONENT})?	{ yylval.number = std::stod(yytext); return T_DOUBLE_LIT; }
 
 {NONDIGIT}?\"(\\.|[^\\"])*\" { yylval.string = new std::string(yytext, 1, strlen(yytext) - 2); return T_STRING_LIT; }
 {NONDIGIT}?'(\\.|[^\\'])+'	{ yylval.number = yytext[0]; return T_CHAR_LIT; }
