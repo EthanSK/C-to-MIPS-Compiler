@@ -114,7 +114,17 @@ while { return T_WHILE; }
 {DIGIT}+"."{DIGIT}*({EXPONENT})?	{ yylval.number = std::stod(yytext); return T_DOUBLE_LIT; }
 
 {NONDIGIT}?\"(\\.|[^\\"])*\" { yylval.string = new std::string(yytext, 1, strlen(yytext) - 2); return T_STRING_LIT; }
-{NONDIGIT}?'(\\.|[^\\'])+'	{ yylval.number = strlen(yytext) ? yytext[1] : '\0'; return T_CHAR_LIT; }
+{NONDIGIT}?'(\\.|[^\\'])+'	{
+    std::string str = yytext;
+    if (str == "'\\\\'") { yylval.number = '\\'; }
+    else if (str == "'\\n'") { yylval.number = '\n'; }
+    else if (str == "'\\r'") { yylval.number = '\r'; }
+    else if (str == "'\\t'") { yylval.number = '\t'; }
+    else if (str == "'\\0'") { yylval.number = '\0'; }
+    else if (str == "'\"'") { yylval.number = '\"'; }
+    else { yylval.number = str[1]; }
+    return T_CHAR_LIT;
+  }
 
 {NONDIGIT}({NONDIGIT}|{DIGIT})* { yylval.string = new std::string(yytext); return T_IDENTIFIER; }
 

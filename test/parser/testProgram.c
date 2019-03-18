@@ -18,6 +18,12 @@ int main()
         for (; x < 10; x++)
         {
             getBigNum('a');
+            getBigNum('2');
+            getBigNum('\0');
+            getBigNum('\n');
+            getBigNum('\t');
+            getBigNum('\r');
+            getBigNum('\"');
         }
     }
     else if (sizeof(int) > 1) {  }
