@@ -478,7 +478,7 @@ STATEMENT_LIST
 
 //The comma operator nonsense I believe i.e a = (1, 2, func(), 4);
 EXPRESSION_STATEMENT
-	: T_SEMICOLON { $$ = new SequenceBlock(); }
+	: T_SEMICOLON { $$ = new EmptyNode(); }
 	| EXPRESSION T_SEMICOLON
 	;
 

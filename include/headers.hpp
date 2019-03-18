@@ -1,6 +1,7 @@
 #ifndef headers_hpp
 #define headers_hpp
 #include "identifier.hpp"
+#include "emptyNode.hpp"
 #include "qualifiedType.hpp"
 #include "storageClassedType.hpp"
 #include "storageClass.hpp"
