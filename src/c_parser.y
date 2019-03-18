@@ -349,6 +349,8 @@ DECLARATOR
 	| DIRECT_DECLARATOR
 	;
 
+//It seems like direct declarator is responsible for so much random different stuff, like the variable name in an initializer
+//the variable name in a function definition, but also the param list in a function definitin
 DIRECT_DECLARATOR
 	: T_IDENTIFIER { $$ = new VariableReference(*$1); delete $1; }
 	| T_LBRACKET DECLARATOR T_RBRACKET { $$ = $2; }
