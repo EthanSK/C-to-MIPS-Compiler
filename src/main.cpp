@@ -46,12 +46,12 @@ StatementPtr generateTestAST()
 
     // StatementPtr ast = new PrimitiveType(PrimitiveType::_int);// works by itself
 
-    StatementPtr ast = new ScopeBlock({new FunctionDefinition(
+    StatementPtr ast = new ScopeBlock(new FunctionDefinition(
         new PrimitiveType(PrimitiveType::_int),
         "main",
         new FunctionParameterList(std::vector<StatementPtr>()),
         new ScopeBlock(
-            std::vector<StatementPtr>()))});
+            std::vector<StatementPtr>())));
 
     return ast;
 }
@@ -68,7 +68,7 @@ StatementPtr generateTestFragment()
             new PrimitiveType(PrimitiveType::_int),
             "blankFunc",
             new FunctionParameterList({new VariableDeclaration(new PrimitiveType(PrimitiveType::PrimitiveTypeEnum::_int), "input")}),
-            new ScopeBlock({})),
+            new ScopeBlock()),
 
             new FunctionDefinition(
             new PrimitiveType(PrimitiveType::_int),
@@ -77,9 +77,9 @@ StatementPtr generateTestFragment()
             new ScopeBlock({
                 new WhileLoop(
                     new BinaryLessThan(new VariableReference("input"), new IntegerLiteral(10)),
-                    new ScopeBlock({
+                    new ScopeBlock(
                         new BinaryAddAssignment(new VariableReference("input"), new IntegerLiteral(1))
-                    })),
+                    )),
                 new ReturnKeyword(new VariableReference("input"))
             })),
 
@@ -91,20 +91,20 @@ StatementPtr generateTestFragment()
                 new BinaryAssignment(new VariableDeclaration(new PrimitiveType(PrimitiveType::PrimitiveTypeEnum::_int), "x"), new IntegerLiteral(2)),
                 new IfElseStatement(
                     new BinaryGreaterThanOrEqualTo(new DoubleLiteral(10), new BinaryAdd(new IntegerLiteral(7), new FloatLiteral(7.7f))),
-                    new ScopeBlock({
+                    new ScopeBlock(
                         new BinaryIsEqualTo(new StringLiteral("pink"), new StringLiteral("purple"))
-                    }),
-                    new ScopeBlock({
+                    ),
+                    new ScopeBlock(
                         new IfElseStatement(
                             new BinaryLessThanOrEqualTo(new DoubleLiteral(3), new BinaryAdd(new DoubleLiteral(1.374), new FloatLiteral(7.7f))),
-                            new ScopeBlock({
+                            new ScopeBlock(
                                 new BinaryIsNotEqualTo(new StringLiteral("lost"), new StringLiteral("dizzy"))
-                            }),
+                            ),
                             new ScopeBlock({
                                     new BinaryAssignment(new VariableReference("x"), new IntegerLiteral(42)),
                                     new BinaryAssignment(new VariableReference("y"), new FunctionCall("someFunc", new FunctionParameterList({new VariableReference("z")})))
                             }))
-                    })),
+                    )),
                     new ReturnKeyword(new IntegerLiteral(10))
                 })
                 

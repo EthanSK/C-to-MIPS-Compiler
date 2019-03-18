@@ -1,6 +1,7 @@
 %code requires{
   #include "ast.hpp"
   #include "parserHelpers.hpp"
+  #include "transportPackages.hpp"
   #include <cassert>
 
   extern StatementPtr g_root;
@@ -466,7 +467,7 @@ DECLARATION_LIST
 	| DECLARATION_LIST DECLARATION { $$ = concatExprList($1, $2); } 
 	;
 
-//This should just represent multiple lines in a row, dunno though
+//This should just represent multiple lines in a row that aren't global scope
 STATEMENT_LIST
 	: STATEMENT { $$ = initExprList($1); }
 	| STATEMENT_LIST STATEMENT { $$ = concatExprList($1, $2); }

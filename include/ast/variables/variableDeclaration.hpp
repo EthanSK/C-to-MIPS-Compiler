@@ -6,17 +6,18 @@
 #include <iostream>
 #include <memory>
 #include "statement.hpp"
-#include "primitiveType.hpp"
+#include "identifier.hpp"
 
 class VariableDeclaration : public Statement
 {
 public:
-  VariableDeclaration(StatementPtr type, std::string name);
+  VariableDeclaration(StatementPtr type, StatementPtr name);
+  VariableDeclaration(StatementPtr type, std::string name) : VariableDeclaration(type, new Identifier(name)) { }
   void generatePython(std::ostream &os, PythonContext &context, int scopeDepth = 0) const override;
   StatementPtr getType() const;
+  StatementPtr getName() const;
   
 protected:
-  std::string _name;
   virtual void printC(std::ostream &os) const override;
 };
 
