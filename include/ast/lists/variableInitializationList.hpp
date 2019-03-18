@@ -5,10 +5,13 @@
 
 class VariableInitializationList : public Statement
 {
-  public:
+public:
     VariableInitializationList(std::vector<StatementPtr> initializations);
     std::vector<StatementPtr> getInitializations() const;
-    virtual void printC(std::ostream &os) const override = 0;
+    void generatePython(std::ostream &os, PythonContext &context, int scopeDepth = 0) const override;
+
+protected:
+    virtual void printC(std::ostream &os) const override;
 };
 
 #endif

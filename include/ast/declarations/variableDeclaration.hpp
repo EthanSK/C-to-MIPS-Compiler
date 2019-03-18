@@ -2,7 +2,6 @@
 #define variableDeclaration_hpp
 
 #include "declaration.hpp"
-#include "identifier.hpp"
 
 class VariableDeclaration : public Declaration
 {
@@ -13,7 +12,6 @@ public:
 protected:
     StatementPtr getType() const;
     StatementPtr getInitList() const;
-    std::vector<StatementPtr> getInitializations() const;
 
     virtual void printC(std::ostream &os) const override;
 };
