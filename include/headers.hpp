@@ -1,6 +1,7 @@
 #ifndef headers_hpp
 #define headers_hpp
 #include "identifier.hpp"
+#include "arrayDeclaratorSized.hpp"
 #include "arrayDeclarator.hpp"
 #include "variableDeclarator.hpp"
 #include "variableInitialization.hpp"
