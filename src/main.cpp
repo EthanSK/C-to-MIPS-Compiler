@@ -9,6 +9,7 @@ StatementPtr generateTestFragment();
 extern FILE *yyin;
 int main(int argc, char *argv[])
 {
+    bool isTranslatingToPython = false;
     // Parse the AST
     yyin = fopen("test/parser/testProgram.c", "r"); //default value for dev
 
@@ -17,22 +18,24 @@ int main(int argc, char *argv[])
          yyin = fopen(argv[2], "r");
     }
 
-    //StatementPtr ast = parseAST();
-    //std::cin << "int a = 5;";
-    //std::cout << ast << std::endl;
+     if (argc >= 5 && std::string(argv[1]) == "--translate")
+    {
+        isTranslatingToPython = true;
+        yyin = fopen(argv[2], "r");
+    }
 
-    PythonContext context;
     StatementPtr ast = parseAST();
 
     std::cout << "\n\nC CODE\n======================\n";
     std::cout << ast << std::endl;
     ast->writePrintCToFile();
 
-    std::cout << "\n\nPYTHON CODE\n======================\n";
-    ast->generatePython(std::cout, context);
 
-    if (argc >= 5 && std::string(argv[1]) == "--translate")
+    if (isTranslatingToPython)
     {
+        PythonContext context;
+        std::cout << "\n\nPYTHON CODE\n======================\n";
+        ast->generatePython(std::cout, context);
         ast->writePythonToFile(context, std::string(argv[4]));
         std::cout << std::endl;
     }
