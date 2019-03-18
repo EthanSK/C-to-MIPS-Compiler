@@ -13,21 +13,21 @@ if [[ ! -f bin/c_compiler ]] ; then
     have_compiler=1
 fi
 
-python_translator_dir="test/pythonTranslator"
+cwd="test/pythonTranslator"
 
-input_dir="$python_translator_dir/tests"
+input_dir="$cwd/tests"
 
-working="$python_translator_dir/output"
-mkdir -p ${working}
+output_dir="$cwd/output"
+mkdir -p ${output_dir}
 
 for c_file in ${input_dir}/*.c ; do
     base=$(echo $c_file | sed -E -e "s|${input_dir}/([^.]+)[.]c|\1|g");
     echo "base $base"
     # Compile the reference C version
-    gcc $c_file -o $working/$base
+    gcc $c_file -o $output_dir/$base
     
     # Run the reference C version
-    $working/$base
+    $output_dir/$base
     REF_C_OUT=$?
     
     # Run the reference python version
@@ -37,10 +37,10 @@ for c_file in ${input_dir}/*.c ; do
     if [[ ${have_compiler} -eq 0 ]] ; then
         
         # Create the DUT python version by invoking the compiler with translation flags
-        $compiler --translate $c_file -o ${working}/$base-got.py
+        $compiler --translate $c_file -o ${output_dir}/$base-got.py
         
         # Run the DUT python version
-        python ${working}/$base-got.py
+        python ${output_dir}/$base-got.py
         GOT_P_OUT=$?
     fi
     
