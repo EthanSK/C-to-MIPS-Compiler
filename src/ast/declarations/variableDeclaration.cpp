@@ -1,6 +1,4 @@
 #include "variableDeclaration.hpp"
-#include "variableInitializationList.hpp"
-#include "declarator.hpp"
 
 VariableDeclaration::VariableDeclaration(StatementPtr type, StatementPtr initList)
 {
