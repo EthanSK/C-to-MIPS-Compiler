@@ -1,16 +1,21 @@
 #include "variableReference.hpp"
 
-VariableReference::VariableReference(std::string name)
+VariableReference::VariableReference(StatementPtr name)
 {
-    _name = name;
+    branches.push_back(name);
+}
+
+StatementPtr VariableReference::getName() const
+{
+    return branches[0];
 }
 
 void VariableReference::printC(std::ostream &os) const
 {
-    os << _name;
+    os << getName();
 }
 
 void VariableReference::generatePython(std::ostream &os, PythonContext &context, int scopeDepth) const
 {
-    os << _name;
+    getName()->generatePython(os, context, scopeDepth);
 }

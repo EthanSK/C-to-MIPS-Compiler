@@ -3,17 +3,23 @@
 
 #include <iostream>
 #include "statement.hpp"
+#include "identifier.hpp"
+#include "functionParameterList.hpp"
 
 class FunctionCall : public Statement
 {
 public:
-  FunctionCall(std::string name, StatementPtr parameters); //parameters here won't be declarations even tho they use the func decl list (coz i'm lazy)
+  FunctionCall(StatementPtr name, StatementPtr parameters); //parameters here won't be declarations even tho they use the func decl list (coz i'm lazy)
+  FunctionCall(std::string name, StatementPtr parameters) : FunctionCall(new Identifier(name), parameters) { }
+  FunctionCall(StatementPtr name) : FunctionCall(name, new FunctionParameterList()) { }
+  FunctionCall(std::string name) : FunctionCall(new Identifier(name)) { }
+  
   StatementPtr getParameters() const;
-  void printC(std::ostream &os) const override;
+  StatementPtr getName() const;
   void generatePython(std::ostream &os, PythonContext &context, int scopeDepth = 0) const override;
 
 protected:
-  std::string _name;
+  void printC(std::ostream &os) const override;
 };
 
 #endif

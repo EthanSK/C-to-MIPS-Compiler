@@ -6,15 +6,17 @@
 #include <iostream>
 #include <memory>
 #include "statement.hpp"
-#include "variableReference.hpp"
 
-class ArrayElementReference : public VariableReference
+class ArrayElementReference : public Statement
 {
   public:
-    ArrayElementReference(std::string name, int index) : VariableReference(name), index(index){};
+    ArrayElementReference(StatementPtr arr, StatementPtr index);
+
   protected:
-    int index;
+    StatementPtr getArr() const;
+    StatementPtr getIndex() const;
     void printC(std::ostream &os) const;
 };
 
 #endif
+

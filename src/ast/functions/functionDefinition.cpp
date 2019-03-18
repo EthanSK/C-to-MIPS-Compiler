@@ -1,9 +1,10 @@
 #include "functionDefinition.hpp"
 #include "variableDeclaration.hpp"
 
-FunctionDefinition::FunctionDefinition(StatementPtr type, std::string name, StatementPtr parameters, StatementPtr scopeBlock) : _name(name)
+FunctionDefinition::FunctionDefinition(StatementPtr type, StatementPtr name, StatementPtr parameters, StatementPtr scopeBlock)
 {
     branches.push_back(type);
+    branches.push_back(name);
     branches.push_back(parameters);
     branches.push_back(scopeBlock);
 }
@@ -13,24 +14,30 @@ StatementPtr FunctionDefinition::getType() const
     return branches[0];
 }
 
-StatementPtr FunctionDefinition::getParameters() const
+StatementPtr FunctionDefinition::getName() const
 {
     return branches[1];
 }
 
-StatementPtr FunctionDefinition::getScopeBlock() const
+StatementPtr FunctionDefinition::getParameters() const
 {
     return branches[2];
 }
 
+StatementPtr FunctionDefinition::getScopeBlock() const
+{
+    return branches[3];
+}
+
 void FunctionDefinition::printC(std::ostream &os) const
 {
-    os << getType() << " " << _name << getParameters() << getScopeBlock();
+    os << getType() << " " << getName() << getParameters() << getScopeBlock();
 }
 
 void FunctionDefinition::generatePython(std::ostream &os, PythonContext &context, int scopeDepth) const
 {
-    os << "def " << _name;
+    os << "def ";
+    getName()->generatePython(os, context, scopeDepth + 1);
     getParameters()->generatePython(os, context, scopeDepth + 1);
     os << ":";
     context.dumpGlobals(os, scopeDepth + 1);
