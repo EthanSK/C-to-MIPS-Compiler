@@ -5,6 +5,8 @@
 
 class Declarator : public Statement
 {
+public:
+    StatementPtr getIdentifier() const = 0;
 };
 
 #endif
