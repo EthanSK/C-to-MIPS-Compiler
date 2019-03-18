@@ -438,7 +438,7 @@ INITIALIZER_LIST
 STATEMENT
 	: LABELED_STATEMENT //goto garbage
 	| COMPOUND_STATEMENT //scope stuff
-	| EXPRESSION_STATEMENT //dumb comma thing
+	| EXPRESSION_STATEMENT //sequence of lines
 	| SELECTION_STATEMENT //if else and switch
 	| ITERATION_STATEMENT //loops
 	| JUMP_STATEMENT //flow control
@@ -476,7 +476,7 @@ STATEMENT_LIST
 	| STATEMENT_LIST STATEMENT { $$ = concatExprList($1, $2); }
 	;
 
-//The comma operator nonsense I believe i.e a = (1, 2, func(), 4);
+//Represents a single line. Allows empty lines
 EXPRESSION_STATEMENT
 	: T_SEMICOLON { $$ = new EmptyNode(); }
 	| EXPRESSION T_SEMICOLON
