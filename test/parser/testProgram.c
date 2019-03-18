@@ -5,6 +5,7 @@ auto int a12;
 extern auto int a15;
 extern a20;
 register a50;
+const char* text = "yo";
 
 double a = 5.5f;
 
