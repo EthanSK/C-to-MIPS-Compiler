@@ -248,6 +248,7 @@ DECLARATION_SPECIFIERS
 	| TYPE_QUALIFIER DECLARATION_SPECIFIERS { $$ = new QualifiedType($2, $1); }
 	;
 
+//Aggregates together multiple initializations
 INIT_DECLARATOR_LIST
 	: INIT_DECLARATOR
 	| INIT_DECLARATOR_LIST T_COMMA INIT_DECLARATOR
@@ -255,8 +256,8 @@ INIT_DECLARATOR_LIST
 
 //Handles declarations both with and without initializers - we will just init with 0
 INIT_DECLARATOR
-	: DECLARATOR
-	| DECLARATOR T_EQ INITIALIZER
+	: DECLARATOR { $$ = new VariableInitialization($1, new IntegerLiteral(0)); }
+	| DECLARATOR T_EQ INITIALIZER { $$ = new VariableInitialization($1, $3); }
 	;
 
 //This is all stuff about how the variable is stored
