@@ -6,9 +6,9 @@ StorageClassedType::StorageClassedType(StatementPtr child, StatementPtr storageC
     branches.push_back(storageClass);
 }
 
-StatementPtr StorageClassedType::getChild() const
+TypePtr StorageClassedType::getChild() const
 {
-    return branches[0];
+   return reinterpret_cast<TypePtr>(branches[0]);
 }
 
 StatementPtr StorageClassedType::getStorageClass() const
@@ -20,3 +20,5 @@ void StorageClassedType::printC(std::ostream &os) const
 {
     os << getStorageClass() << " " << getChild();
 }
+
+int StorageClassedType::getTypeSize() const { return getChild()->getTypeSize(); }

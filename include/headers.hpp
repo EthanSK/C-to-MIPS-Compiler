@@ -59,6 +59,7 @@
 #include "unaryDereference.hpp"
 #include "unaryPreDecrement.hpp"
 #include "unaryBitwiseInvert.hpp"
+#include "unarySizeofConst.hpp"
 #include "functionParameterList.hpp"
 #include "structDefinitionList.hpp"
 #include "variableDeclarationList.hpp"

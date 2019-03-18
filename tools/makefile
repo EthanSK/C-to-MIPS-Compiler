@@ -22,7 +22,8 @@ YACC_TARGET_HPP = $(SRC_DIR)/$(YACC_NAME_NO_EXT).tab.hpp
 YACC_TARGET_OBJ = $(OBJ_DIR)/$(YACC_NAME_NO_EXT).tab.o
 
 CXX = g++
-CXXFLAGS = -std=c++11 -Wall -MMD -O0 -g -mavx -Wno-deprecated-register
+STD = c++11
+CXXFLAGS = -std=${STD} -Wall -MMD -O0 -g -mavx -Wno-deprecated-register
 
 compiler: $(COMPILER_OUT)
 

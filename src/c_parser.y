@@ -1,7 +1,6 @@
 %code requires{
   #include "ast.hpp"
   #include "parserHelpers.hpp"
-  #include "transportPackages.hpp"
   #include <cassert>
 
   extern StatementPtr g_root;
@@ -16,7 +15,6 @@
 {
   StatementPtr expr;
   StatementListPtr exprList;
-  DeclPackage *decl;
   double number;
   yytokentype token;
   std::string *string;
@@ -44,15 +42,13 @@
 %type <expr> STORAGE_CLASS_SPECIFIER TYPE_SPECIFIER STRUCT_OR_UNION_SPECIFIER ENUM_SPECIFIER STRUCT_OR_UNION STRUCT_DECLARATION_LIST
 %type <expr> DECLARATION_SPECIFIERS STRUCT_DECLARATION SPECIFIER_QUALIFIER_LIST TYPE_QUALIFIER STRUCT_DECLARATOR
 %type <expr> ENUMERATOR_LIST ENUMERATOR DIRECT_DECLARATOR POINTER PARAMETER_TYPE_LIST TYPE_QUALIFIER_LIST
-%type <expr> PARAMETER_DECLARATION 
+%type <expr> PARAMETER_DECLARATION INIT_DECLARATOR
 
 
-%type <expr> TYPE_NAME ABSTRACT_DECLARATOR DIRECT_ABSTRACT_DECLARATOR INITIALIZER_LIST STATEMENT LABELED_STATEMENT COMPOUND_STATEMENT
+%type <expr> TYPE_NAME ABSTRACT_DECLARATOR DIRECT_ABSTRACT_DECLARATOR INITIALIZER_LIST STATEMENT COMPOUND_STATEMENT
 %type <expr> EXPRESSION_STATEMENT SELECTION_STATEMENT ITERATION_STATEMENT JUMP_STATEMENT EXTERNAL_DECLARATION FUNCTION_DEFINITION
 
 %type <exprList> STATEMENT_LIST PARAMETER_LIST TRANSLATION_UNIT DECLARATION_LIST ARGUMENT_EXPRESSION_LIST IDENTIFIER_LIST
-
-%type <decl> INIT_DECLARATOR
 
 %type <token> ASSIGNEMENT_OPERATOR UNARY_OPERATOR
 
@@ -111,8 +107,8 @@ UNARY_EXPRESSION
 			default: break;
 		}
 	}
-	| T_SIZEOF UNARY_EXPRESSION
-	| T_SIZEOF T_LBRACKET TYPE_NAME T_RBRACKET
+	| T_SIZEOF UNARY_EXPRESSION { $$ = new UnarySizeof($2); }
+	| T_SIZEOF T_LBRACKET TYPE_NAME T_RBRACKET { $$ = new UnarySizeofConst($3); }
 	;
 
 UNARY_OPERATOR
@@ -247,7 +243,7 @@ DECLARATION_SPECIFIERS
 	: STORAGE_CLASS_SPECIFIER { $$ = new StorageClassedType(new PrimitiveType(PrimitiveType::PrimitiveTypeEnum::_int), $1); }
 	| STORAGE_CLASS_SPECIFIER DECLARATION_SPECIFIERS { $$ = new StorageClassedType($2, $1); }
 	| TYPE_SPECIFIER
-	| TYPE_SPECIFIER DECLARATION_SPECIFIERS
+	| TYPE_SPECIFIER DECLARATION_SPECIFIERS //I think this part is only relevant when doing funcptrs, it allows you to write 'int int'
 	| TYPE_QUALIFIER { $$ = new QualifiedType(new PrimitiveType(PrimitiveType::PrimitiveTypeEnum::_int), $1); }
 	| TYPE_QUALIFIER DECLARATION_SPECIFIERS { $$ = new QualifiedType($2, $1); }
 	;
@@ -353,6 +349,8 @@ DECLARATOR
 	| DIRECT_DECLARATOR
 	;
 
+//It seems like direct declarator is responsible for so much random different stuff, like the variable name in an initializer
+//the variable name in a function definition, but also the param list in a function definitin
 DIRECT_DECLARATOR
 	: T_IDENTIFIER { $$ = new VariableReference(*$1); delete $1; }
 	| T_LBRACKET DECLARATOR T_RBRACKET { $$ = $2; }
@@ -436,19 +434,11 @@ INITIALIZER_LIST
 	;
 
 STATEMENT
-	: LABELED_STATEMENT //goto garbage
-	| COMPOUND_STATEMENT //scope stuff
+	: COMPOUND_STATEMENT //scope stuff
 	| EXPRESSION_STATEMENT //sequence of lines
 	| SELECTION_STATEMENT //if else and switch
 	| ITERATION_STATEMENT //loops
 	| JUMP_STATEMENT //flow control
-	;
-
-//This is goto garbage so ignore it
-LABELED_STATEMENT
-	: T_IDENTIFIER T_COLON STATEMENT
-	| T_CASE CONSTANT_EXPRESSION T_COLON STATEMENT
-	| T_DEFAULT T_COLON STATEMENT
 	;
 
 //Scope stuff
@@ -464,7 +454,7 @@ COMPOUND_STATEMENT
 	}
 	;
 
-//dunno what this is yet, but I know it's a sequence. Perhaps of declarations but not concrete on it
+//Sequence of declarations. Particuarly used by the KR function definition which we aren't doing
 DECLARATION_LIST
 	: DECLARATION { $$ = initExprList($1); }
 	| DECLARATION_LIST DECLARATION { $$ = concatExprList($1, $2); } 
@@ -493,14 +483,13 @@ SELECTION_STATEMENT
 ITERATION_STATEMENT
 	: T_WHILE T_LBRACKET EXPRESSION T_RBRACKET STATEMENT { new WhileLoop($3, $5); }
 	| T_DO STATEMENT T_WHILE T_LBRACKET EXPRESSION T_RBRACKET T_SEMICOLON { new DoWhileLoop($2, $5); }
-	| T_FOR T_LBRACKET EXPRESSION_STATEMENT EXPRESSION_STATEMENT T_RBRACKET STATEMENT
+	| T_FOR T_LBRACKET EXPRESSION_STATEMENT EXPRESSION_STATEMENT T_RBRACKET STATEMENT { $$ = new ForLoop($3, $4, new EmptyNode(), $6); }
 	| T_FOR T_LBRACKET EXPRESSION_STATEMENT EXPRESSION_STATEMENT EXPRESSION T_RBRACKET STATEMENT { $$ = new ForLoop($3, $4, $5, $7); }
 	;
 
-//Flow control - break,continue,goto,return
+//Flow control - break,continue,return
 JUMP_STATEMENT
-	: T_GOTO T_IDENTIFIER T_SEMICOLON //Goto garbage
-	| T_CONTINUE T_SEMICOLON { $$ = new ContinueKeyword(); }
+	: T_CONTINUE T_SEMICOLON { $$ = new ContinueKeyword(); }
 	| T_BREAK T_SEMICOLON { $$ = new BreakKeyword(); }
 	| T_RETURN T_SEMICOLON
 	| T_RETURN EXPRESSION T_SEMICOLON { $$ = new ReturnKeyword($2); }
@@ -519,14 +508,10 @@ EXTERNAL_DECLARATION
 	;
 
 //Function definitions
-//1. Parametered
-//2. Parameterless
-//3. Non-specified return Parametered
-//4. Non-specified return Parameterless
+//They have included the parameter list inside of the declarator which we have not, honestly this doesn't seem too logical
+//As it stands now, we only support parameterless functions. This whole thing seems like a huge mess
 FUNCTION_DEFINITION
-	: DECLARATION_SPECIFIERS DECLARATOR DECLARATION_LIST COMPOUND_STATEMENT
-	| DECLARATION_SPECIFIERS DECLARATOR COMPOUND_STATEMENT { $$ = new FunctionDefinition($1, $2, new FunctionParameterList(), $3); }
-	| DECLARATOR DECLARATION_LIST COMPOUND_STATEMENT
+	: DECLARATION_SPECIFIERS DECLARATOR COMPOUND_STATEMENT { $$ = new FunctionDefinition($1, $2, new FunctionParameterList(), $3); }
 	| DECLARATOR COMPOUND_STATEMENT { $$ = new FunctionDefinition(new PrimitiveType(PrimitiveType::PrimitiveTypeEnum::_int), $1, new FunctionParameterList(), $2); }
 	;
 

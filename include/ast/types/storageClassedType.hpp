@@ -7,9 +7,10 @@ class StorageClassedType : public Type
 { 
   public:
     StorageClassedType(StatementPtr child, StatementPtr storageClass);
+    virtual int getTypeSize() const override;
 
   protected:
-    StatementPtr getChild() const;
+    TypePtr getChild() const;
     StatementPtr getStorageClass() const;
 
     void printC(std::ostream &os) const override;

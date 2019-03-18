@@ -5,6 +5,7 @@ auto int a12;
 extern auto int a15;
 extern a20;
 register a50;
+const char* text = "yo";
 
 double a = 5.5f;
 
@@ -17,9 +18,17 @@ int main()
         int x = 0;
         for (; x < 10; x++)
         {
-            getBigNum();
+            getBigNum('a');
+            getBigNum('2');
+            getBigNum('\0');
+            getBigNum('\n');
+            getBigNum('\t');
+            getBigNum('\r');
+            getBigNum('\\');
+            getBigNum('\"');
         }
     }
+    else if (sizeof(int) > 1) {  }
 
     if (3 > 2)
     {

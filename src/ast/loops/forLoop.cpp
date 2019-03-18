@@ -26,5 +26,5 @@ StatementPtr ForLoop::getScopeBlock() const
 
 void ForLoop::printC(std::ostream &os) const
 {
-    os << "for (" << getInit() << "; " << getCondition() << "; " << getIncrement() << " )" << getScopeBlock();
+    os << "for (" << getInit() << "; " << getCondition() << "; " << getIncrement() << ")" << getScopeBlock();
 }

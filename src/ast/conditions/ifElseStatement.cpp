@@ -17,7 +17,7 @@ StatementPtr IfElseStatement::getElseScopeBlock() const{
 }
 void IfElseStatement::printC(std::ostream &os) const
 {
-    os << "if (" << getCondition() << ")" << getIfScopeBlock() << std::endl << "else" << getElseScopeBlock();//the scopeBlock printC is repsonsible for printing the { } with new lines
+    os << "if (" << getCondition() << ")" << getIfScopeBlock() << std::endl << "else " << getElseScopeBlock();//the scopeBlock printC is repsonsible for printing the { } with new lines
 }  
 
 void IfElseStatement::generatePython(std::ostream &os, PythonContext &context, int scopeDepth) const
