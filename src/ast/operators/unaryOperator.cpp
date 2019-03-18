@@ -8,4 +8,4 @@ UnaryOperator::UnaryOperator(StatementPtr operand)
 StatementPtr UnaryOperator::getOperand() const
 {
         return branches[0];
-}
+} 
