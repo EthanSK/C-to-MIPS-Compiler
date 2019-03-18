@@ -8,6 +8,7 @@ class FunctionDeclarator : public Declarator
 {
 public:
     FunctionDeclarator(StatementPtr identifier, StatementPtr paramList);
+    FunctionDeclarator(StatementPtr identifier, std::vector<StatementPtr> paramList) : FunctionDeclarator(identifier, new ParameterList(paramList)) { }
     FunctionDeclarator(StatementPtr identifier) : FunctionDeclarator(identifier, new ParameterList()) { }
     std::string getIdentifierName() const override;
     void generatePython(std::ostream &os, PythonContext &context, int scopeDepth = 0) const override;
