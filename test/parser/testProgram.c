@@ -14,7 +14,11 @@ int main()
 {
     if (2 > 1)
     {
-
+        int x = 0;
+        for (; x < 10; x++)
+        {
+            getBigNum();
+        }
     }
 
     if (3 > 2)
