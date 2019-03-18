@@ -80,7 +80,7 @@ POSTFIX_EXPRESSION
 	: PRIMARY_EXPRESSION
 	| POSTFIX_EXPRESSION T_LSQUARE_BRACKET EXPRESSION T_RSQUARE_BRACKET { $$ = new ArrayElementReference($1, $3); }
 	| POSTFIX_EXPRESSION T_LBRACKET T_RBRACKET { $$ = new FunctionCall($1); }
-	| POSTFIX_EXPRESSION T_LBRACKET ARGUMENT_EXPRESSION_LIST T_RBRACKET { $$ = new FunctionCall($1, new FunctionParameterList(*$3)); delete $3; }
+	| POSTFIX_EXPRESSION T_LBRACKET ARGUMENT_EXPRESSION_LIST T_RBRACKET { $$ = new FunctionCall($1, new ExpressionList(*$3)); delete $3; }
 	| POSTFIX_EXPRESSION T_DOT T_IDENTIFIER //Struct stuff
 	| POSTFIX_EXPRESSION T_ARROW T_IDENTIFIER //Struct stuff
 	| POSTFIX_EXPRESSION T_PLUS_PLUS { $$ = new UnaryPostIncrement($1); }
@@ -388,8 +388,9 @@ PARAMETER_LIST
 	| PARAMETER_LIST T_COMMA PARAMETER_DECLARATION { $$ = concatExprList($1, $3); }
 	;
 
+//Function parameters
 PARAMETER_DECLARATION
-	: DECLARATION_SPECIFIERS DECLARATOR
+	: DECLARATION_SPECIFIERS DECLARATOR { $$ = new ParameterDeclaration($1, $2); }
 	| DECLARATION_SPECIFIERS ABSTRACT_DECLARATOR
 	| DECLARATION_SPECIFIERS
 	;
@@ -510,11 +511,9 @@ EXTERNAL_DECLARATION
 	;
 
 //Function definitions
-//They have included the parameter list inside of the declarator which we have not, honestly this doesn't seem too logical
-//As it stands now, we only support parameterless functions. This whole thing seems like a huge mess
 FUNCTION_DEFINITION
-	: DECLARATION_SPECIFIERS DECLARATOR COMPOUND_STATEMENT { $$ = new FunctionDefinition($1, $2, new FunctionParameterList(), $3); }
-	| DECLARATOR COMPOUND_STATEMENT { $$ = new FunctionDefinition(new PrimitiveType(PrimitiveType::PrimitiveTypeEnum::_int), $1, new FunctionParameterList(), $2); }
+	: DECLARATION_SPECIFIERS DECLARATOR COMPOUND_STATEMENT { $$ = new FunctionDefinition(new FunctionDeclaration($1, $2), $3); }
+	| DECLARATOR COMPOUND_STATEMENT { $$ = new FunctionDefinition(new FunctionDeclaration(new PrimitiveType(PrimitiveType::PrimitiveTypeEnum::_int), $1), $2); }
 	;
 
 %%
