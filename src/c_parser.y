@@ -344,8 +344,8 @@ ENUMERATOR
 
 //Qualifier for the type, valid in args as well as decls
 TYPE_QUALIFIER
-	: T_CONST
-	| T_VOLATILE
+	: T_CONST { $$ = new TypeQualifier(TypeQualifier::TypeQualifierEnum::_const); }
+	| T_VOLATILE { $$ = new TypeQualifier(TypeQualifier::TypeQualifierEnum::_volatile); }
 	;
 
 DECLARATOR
