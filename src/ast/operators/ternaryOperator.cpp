@@ -1,4 +1,4 @@
-#include "ternary.hpp"
+#include "ternaryOperator.hpp"
 
 TernaryOperator::TernaryOperator(StatementPtr condition, StatementPtr trueSelect, StatementPtr falseSelect)
 {
