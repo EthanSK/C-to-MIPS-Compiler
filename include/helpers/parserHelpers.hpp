@@ -21,4 +21,20 @@ inline StatementListPtr concatExprList(StatementListPtr exprList, StatementPtr e
     return exprList;
 }
 
-#endif 
+class TestNode : public Statement
+{
+
+  public:
+    std::string _id;
+     TestNode(std::string id) : _id(id){
+        std::cout << "Test node spawed: " << _id << std::endl;
+    };
+
+
+    void printC(std::ostream &os) const
+    {
+        os << "Test node printC: " <<  _id << std::endl;
+    }
+};
+
+#endif
