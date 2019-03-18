@@ -26,20 +26,20 @@ int main(int argc, char *argv[])
 
     StatementPtr ast = parseAST();
 
-    std::cout << "\n\nC CODE\n======================\n";
-    std::cout << ast << std::endl;
+    std::cerr << "\n\nC CODE\n======================\n";
+    std::cerr << ast << std::endl;
     ast->writePrintCToFile();
 
 
     if (isTranslatingToPython)
     {
         PythonContext context;
-        std::cout << "\n\nPYTHON CODE\n======================\n";
-        ast->generatePython(std::cout, context);
+        std::cerr << "\n\nPYTHON CODE\n======================\n";
+        ast->generatePython(std::cerr, context);
         ast->writePythonToFile(context, std::string(argv[4]));
-        std::cout << std::endl;
+        std::cerr << std::endl;
     }
 
-    std::cout << std::endl;
+    std::cerr << std::endl;
     return 0;
 }

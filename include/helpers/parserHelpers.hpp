@@ -27,7 +27,7 @@ class TestNode : public Statement
   public:
     std::string _id;
      TestNode(std::string id) : _id(id){
-        std::cout << "Test node spawed: " << _id << std::endl;
+        std::cerr << "Test node spawed: " << _id << std::endl;
     };
 
 
