@@ -6,10 +6,10 @@ CharLiteral::CharLiteral(int value){
 
 void CharLiteral::printC(std::ostream &os) const
 {
-	os << "\'" << _value << "\'";
+	os << "\'" << ((char)_value) << "\'";
 }
 
 void CharLiteral::generatePython(std::ostream &os, PythonContext &context, int scopeDepth) const
 {
-	os << "'" << _value << "'";
+	os << "'" << ((char)_value) << "'";
 }

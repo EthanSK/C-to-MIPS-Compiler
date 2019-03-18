@@ -452,7 +452,7 @@ COMPOUND_STATEMENT
 	}
 	;
 
-//dunno what this is yet, but I know it's a sequence. Perhaps of declarations but not concrete on it
+//Sequence of declarations. Particuarly used by the KR function definition which we aren't doing
 DECLARATION_LIST
 	: DECLARATION { $$ = initExprList($1); }
 	| DECLARATION_LIST DECLARATION { $$ = concatExprList($1, $2); } 
@@ -485,10 +485,9 @@ ITERATION_STATEMENT
 	| T_FOR T_LBRACKET EXPRESSION_STATEMENT EXPRESSION_STATEMENT EXPRESSION T_RBRACKET STATEMENT { $$ = new ForLoop($3, $4, $5, $7); }
 	;
 
-//Flow control - break,continue,goto,return
+//Flow control - break,continue,return
 JUMP_STATEMENT
-	: T_GOTO T_IDENTIFIER T_SEMICOLON //Goto garbage
-	| T_CONTINUE T_SEMICOLON { $$ = new ContinueKeyword(); }
+	: T_CONTINUE T_SEMICOLON { $$ = new ContinueKeyword(); }
 	| T_BREAK T_SEMICOLON { $$ = new BreakKeyword(); }
 	| T_RETURN T_SEMICOLON
 	| T_RETURN EXPRESSION T_SEMICOLON { $$ = new ReturnKeyword($2); }
@@ -507,14 +506,11 @@ EXTERNAL_DECLARATION
 	;
 
 //Function definitions
-//1. Parametered
-//2. Parameterless
-//3. Non-specified return Parametered
-//4. Non-specified return Parameterless
+//They have included the parameter list inside of the declarator which we have not, honestly this doesn't seem too logical
 FUNCTION_DEFINITION
-	: DECLARATION_SPECIFIERS DECLARATOR DECLARATION_LIST COMPOUND_STATEMENT
+	: DECLARATION_SPECIFIERS DECLARATOR DECLARATION_LIST COMPOUND_STATEMENT //This is the KR style
 	| DECLARATION_SPECIFIERS DECLARATOR COMPOUND_STATEMENT { $$ = new FunctionDefinition($1, $2, new FunctionParameterList(), $3); }
-	| DECLARATOR DECLARATION_LIST COMPOUND_STATEMENT
+	| DECLARATOR DECLARATION_LIST COMPOUND_STATEMENT //This is the KR style
 	| DECLARATOR COMPOUND_STATEMENT { $$ = new FunctionDefinition(new PrimitiveType(PrimitiveType::PrimitiveTypeEnum::_int), $1, new FunctionParameterList(), $2); }
 	;
 

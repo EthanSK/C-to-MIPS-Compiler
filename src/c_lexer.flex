@@ -114,7 +114,7 @@ while { return T_WHILE; }
 {DIGIT}+"."{DIGIT}*({EXPONENT})?	{ yylval.number = std::stod(yytext); return T_DOUBLE_LIT; }
 
 {NONDIGIT}?\"(\\.|[^\\"])*\" { yylval.string = new std::string(yytext, 1, strlen(yytext) - 2); return T_STRING_LIT; }
-{NONDIGIT}?'(\\.|[^\\'])+'	{ yylval.number = yytext[0]; return T_CHAR_LIT; }
+{NONDIGIT}?'(\\.|[^\\'])+'	{ yylval.number = strlen(yytext) ? yytext[1] : '\0'; return T_CHAR_LIT; }
 
 {NONDIGIT}({NONDIGIT}|{DIGIT})* { yylval.string = new std::string(yytext); return T_IDENTIFIER; }
 

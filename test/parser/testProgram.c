@@ -17,7 +17,7 @@ int main()
         int x = 0;
         for (; x < 10; x++)
         {
-            getBigNum();
+            getBigNum('a');
         }
     }
     else if (sizeof(int) > 1) {  }
