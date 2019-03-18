@@ -1,17 +1,17 @@
-#ifndef paramaterDeclaration_hpp
-#define paramaterDeclaration_hpp
+#ifndef parameterDeclaration_hpp
+#define parameterDeclaration_hpp
 
 #include "declaration.hpp"
 
-class ParamaterDeclaration : public Declaration
+class ParameterDeclaration : public Declaration
 {
 public:
-    ParamaterDeclaration(StatementPtr type, StatementPtr identifier);
+    ParameterDeclaration(StatementPtr type, StatementPtr decl);
     void generatePython(std::ostream &os, PythonContext &context, int scopeDepth = 0) const override;
   
 protected:
     StatementPtr getType() const;
-    StatementPtr getIdentifier() const;
+    StatementPtr getDecl() const;
 
     virtual void printC(std::ostream &os) const override;
 };
