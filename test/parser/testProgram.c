@@ -23,6 +23,7 @@ int main()
             getBigNum('\n');
             getBigNum('\t');
             getBigNum('\r');
+            getBigNum('\\');
             getBigNum('\"');
         }
     }

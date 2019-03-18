@@ -14,6 +14,7 @@ class CharLiteral : public Literal
     void printC(std::ostream &os) const override;
 
   private:
+    std::string getEscapedChar() const;
     int _value; // I don't think char can take multiple letters? IDK but clang uses an int to store the char literal value and then casts it implicitly
 };
 
