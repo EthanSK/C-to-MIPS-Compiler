@@ -1,6 +1,7 @@
 #ifndef headers_hpp
 #define headers_hpp
 #include "identifier.hpp"
+#include "typeQualifier.hpp"
 #include "ternaryOperator.hpp"
 #include "ast.hpp"
 #include "rootNode.hpp"

@@ -19,8 +19,12 @@ std::string PrimitiveType::primitiveTypeToString() const
         return "double";
     case PrimitiveType::_char:
         return "char";
+    case PrimitiveType::_signed:
+        return "signed";
     case PrimitiveType::_unsigned:
         return "unsigned";
+    case PrimitiveType::_long:
+        return "long";
     default:
         return "UNKNOWN TYPE";
     }
