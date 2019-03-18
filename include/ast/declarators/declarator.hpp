@@ -6,7 +6,7 @@
 class Declarator : public Statement
 {
 public:
-    StatementPtr getIdentifier() const = 0;
+    virtual std::string getIdentifierName() const = 0;
 };
 
 #endif
