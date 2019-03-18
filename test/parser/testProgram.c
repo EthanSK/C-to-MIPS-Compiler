@@ -20,6 +20,7 @@ int main()
             getBigNum();
         }
     }
+    else if (sizeof(int) > 1) { }
 
     if (3 > 2)
     {
