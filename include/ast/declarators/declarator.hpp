@@ -3,6 +3,9 @@
 
 #include "statement.hpp"
 
+class Declarator;
+typedef const Declarator* DeclaratorPtr;
+
 class Declarator : public Statement
 {
 public:
