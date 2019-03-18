@@ -242,6 +242,7 @@ DECLARATION
 	| DECLARATION_SPECIFIERS INIT_DECLARATOR_LIST T_SEMICOLON
 	;
 
+//I believe declaration specifier is the fully qualified and storage classed type, such as extern int*
 DECLARATION_SPECIFIERS
 	: STORAGE_CLASS_SPECIFIER
 	| STORAGE_CLASS_SPECIFIER DECLARATION_SPECIFIERS
@@ -262,6 +263,7 @@ INIT_DECLARATOR
 	| DECLARATOR T_EQ INITIALIZER
 	;
 
+//This is all stuff about how the variable is stored
 STORAGE_CLASS_SPECIFIER
 	: T_TYPEDEF
 	| T_EXTERN
@@ -270,6 +272,7 @@ STORAGE_CLASS_SPECIFIER
 	| T_REGISTER
 	;
 
+//The core type - primitive or struct, union
 TYPE_SPECIFIER
 	: T_VOID { $$ = new PrimitiveType(PrimitiveType::PrimitiveTypeEnum::_void); }
 	| T_CHAR { $$ = new PrimitiveType(PrimitiveType::PrimitiveTypeEnum::_char); }
@@ -339,6 +342,7 @@ ENUMERATOR
 	| T_IDENTIFIER T_EQ CONSTANT_EXPRESSION
 	;
 
+//Qualifier for the type, valid in args as well as decls
 TYPE_QUALIFIER
 	: T_CONST
 	| T_VOLATILE
