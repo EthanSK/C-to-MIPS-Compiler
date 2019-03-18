@@ -8,6 +8,8 @@ register a50;
 
 double a = 5.5f;
 
+getBigNum() { return 100; }
+
 int main()
 {
     if (2 > 1)

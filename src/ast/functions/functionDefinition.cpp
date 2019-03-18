@@ -31,7 +31,7 @@ StatementPtr FunctionDefinition::getScopeBlock() const
 
 void FunctionDefinition::printC(std::ostream &os) const
 {
-    os << getType() << " " << getName() << getParameters() << getScopeBlock();
+    os << std::endl << getType() << " " << getName() << getParameters() << getScopeBlock();
 }
 
 void FunctionDefinition::generatePython(std::ostream &os, PythonContext &context, int scopeDepth) const
