@@ -1,6 +1,7 @@
 #ifndef headers_hpp
 #define headers_hpp
 #include "identifier.hpp"
+#include "globalScopeBlock.hpp"
 #include "expressionList.hpp"
 #include "parameterList.hpp"
 #include "parameterDeclaration.hpp"
@@ -67,7 +68,7 @@
 #include "unaryDereference.hpp"
 #include "unaryPreDecrement.hpp"
 #include "unaryBitwiseInvert.hpp"
-#include "unarySizeOfConst.hpp"
+#include "unarySizeofConst.hpp"
 #include "structDefinitionList.hpp"
 #include "variableDeclarationList.hpp"
 #include "initializerList.hpp"

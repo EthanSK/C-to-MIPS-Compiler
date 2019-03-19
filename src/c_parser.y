@@ -65,7 +65,7 @@
 %%
 
 //Root that turns the aggregate into a sequence and adds the root node
-ROOT : TRANSLATION_UNIT { g_root = new RootNode(new SequenceBlock(*$1)); delete $1; }
+ROOT : TRANSLATION_UNIT { g_root = new RootNode(new GlobalScopeBlock(*$1)); delete $1; }
 
 //Terminals
 PRIMARY_EXPRESSION
