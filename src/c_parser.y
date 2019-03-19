@@ -236,13 +236,13 @@ CONSTANT_EXPRESSION
 	: CONDITIONAL_EXPRESSION
 	;
 
-//We need to change how this works, because function declarators could be popping through here too
+//Pairs DECLARATION_SPECIFIERS with a list of declarators, which can be variables or function
 DECLARATION
 	: DECLARATION_SPECIFIERS T_SEMICOLON { $$ = new Declaration($1); }
 	| DECLARATION_SPECIFIERS INIT_DECLARATOR_LIST T_SEMICOLON { $$ = new Declaration($1, *$2); delete $2; }
 	;
 
-//I believe declaration specifier is the fully qualified and storage classed type, such as extern int*
+//Full specified type with primitive type, qualifiers, storage classes etc
 DECLARATION_SPECIFIERS
 	: STORAGE_CLASS_SPECIFIER { $$ = new StorageClassedType(new PrimitiveType(PrimitiveType::PrimitiveTypeEnum::_int), $1); }
 	| STORAGE_CLASS_SPECIFIER DECLARATION_SPECIFIERS { $$ = new StorageClassedType($2, $1); }
@@ -252,14 +252,13 @@ DECLARATION_SPECIFIERS
 	| TYPE_QUALIFIER DECLARATION_SPECIFIERS { $$ = new QualifiedType($2, $1); }
 	;
 
-//Aggregates together multiple initializations
+//Aggregates together multiple declarators
 INIT_DECLARATOR_LIST
 	: INIT_DECLARATOR { $$ = initExprList($1); }
 	| INIT_DECLARATOR_LIST T_COMMA INIT_DECLARATOR { $$ = concatExprList($1, $3); }
 	;
 
-//Handles declarations both with and without initializers - we will just init with 0
-//We need to change how this works, because function declarators could be popping through here too
+//Pairs declarators with their initializer
 INIT_DECLARATOR
 	: DECLARATOR
 	| DECLARATOR T_EQ INITIALIZER { $$ = new InitDeclarator($1, $3); }

@@ -3,7 +3,8 @@ int;
 int yy;
 int xx, xxx = 10, xxxx = 20;
 
-func1(int boi), func2();
+x20 = 10;
+int func1(int boi), func2();
 
 int factorial(int n)
 {
