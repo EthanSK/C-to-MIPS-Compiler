@@ -12,7 +12,7 @@ std::ostream &operator<<(std::ostream &os, const StatementPtr statementPtr)
     return os;
 }
 
-void Statement::generatePython(std::ostream &os, PythonContext &context, int scopeDepth = 0) const
+void Statement::generatePython(std::ostream &os, PythonContext &context, int scopeDepth) const
 {
     os << "[Not Supported: " << typeid(*this).name() << "]";
 }
@@ -23,7 +23,7 @@ void Statement::generatePython(std::ostream &os) const
     generatePython(os, pyContext);
 }
 
-void Statement::printTree(std::ostream &os, int scopeDepth = 0) const
+void Statement::printTree(std::ostream &os, int scopeDepth) const
 {
     const int INDENT_SIZE = 2;
     for (int i = 0; i < scopeDepth * INDENT_SIZE; ++i) { os << " "; }
@@ -31,7 +31,11 @@ void Statement::printTree(std::ostream &os, int scopeDepth = 0) const
     if (branches.size() > 0)
     {
         os << ":";
-        for (int i = 0; i < branches.size(); ++i) { branches[i]->printTree(os, scopeDepth + 1); }
+        for (int i = 0; i < branches.size(); ++i)
+        {
+            os << std::endl;
+            branches[i]->printTree(os, scopeDepth + 1);
+        }
     }
 }
 
