@@ -21,7 +21,9 @@ for destFile in $destFiles
 do
     fileName=$(basename "$destFile")
     if [[ ! " ${srcFileNames[@]} " =~ " ${fileName} " ]]; then
-       echo "deleting $fileName"
-       rm -f "$destFile"
+        if [[ ! $fileName == *".yy."* && ! $fileName == *".tab."* ]]; then
+            echo "deleting $fileName"
+            rm -f "$destFile"
+        fi
     fi
 done
