@@ -22,9 +22,14 @@ class Statement
 	{
 		os << "[Not Supported: " << typeid(*this).name() << "]";
 	}
+	void generatePython(std::ostream &os) const
+	{
+		PythonContext pyContext;
+		generatePython(os, pyContext);
+	}
 
 	void writePrintCToFile(std::string filePath = "bin/printC.c") const; //can't use for write python because whats output is different
-	void writePythonToFile(PythonContext &context, std::string filePath = "bin/translated.py", int scopeDepth = 0) const;
+	void writePythonToFile(std::string filePath = "bin/translated.py") const;
 
   protected:
 	virtual void printC(std::ostream &os) const = 0; //prints c90 code so we can compare against input code //called in << overload

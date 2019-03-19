@@ -19,10 +19,10 @@ void Statement::writePrintCToFile(std::string filePath) const
     file.close();
 }
 
-void Statement::writePythonToFile(PythonContext &context, std::string filePath, int scopeDepth) const
+void Statement::writePythonToFile(std::string filePath) const
 {
     std::ofstream file(filePath, std::ios::out | std::ios::trunc);
-    this->generatePython(file, context, scopeDepth);
+    this->generatePython(file);
     file.close();
 }
 

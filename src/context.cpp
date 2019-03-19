@@ -11,10 +11,15 @@ void PythonContext::indentStream(std::ostream& os, int scopeDepth) const
 
 void PythonContext::dumpGlobals(std::ostream& os, int scopeDepth) const
 {
-    for (int i = 0; i < _globalIdentifiers.size(); ++i)
+    if (_globalIdentifiers.size() > 0)
     {
         indentStream(os, scopeDepth);
-        os << "global " << _globalIdentifiers[i];
+        os << "global ";
+        for (int i = 0; i < _globalIdentifiers.size(); ++i)
+        {
+            if (i > 0) { os << ", "; }
+            os << _globalIdentifiers[i];
+        }
     }
 }
 

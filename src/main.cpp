@@ -33,10 +33,9 @@ int main(int argc, char *argv[])
 
     if (isTranslatingToPython)
     {
-        PythonContext context;
         std::cerr << "\n\nPYTHON CODE\n======================\n";
-        ast->generatePython(std::cerr, context);
-        ast->writePythonToFile(context, std::string(argv[4]));
+        ast->generatePython(std::cerr);
+        ast->writePythonToFile(std::string(argv[4]));
         std::cerr << std::endl;
     }
 
