@@ -2,7 +2,7 @@ int;
 int yy;
 int xx, xxx = 10, xxxx = 20;
 
-int func1(int boi), func2();
+int func1(int boi)wadawd, func2();
 x = 22;
 
 int factorial(int n)

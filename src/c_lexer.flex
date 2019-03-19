@@ -135,7 +135,7 @@ while { count(); return T_WHILE; }
 %%
 
 int column = 0;
-int row = 1;
+int row = 0;
 void count()
 {
 	for (int i = 0; i < strlen(yytext); ++i)
@@ -146,9 +146,9 @@ void count()
   }
 }
 
-
 void yyerror (char const *s)
 {
-  std::cout << "Parser/lexer error, line " << row << ", column " << column << ": " << s << std::endl;
+  std::cout << "parse error: " << yytext << std::endl;
+  std::cout << "line " << (row + 1) << ", column " << (column + 1) << std::endl;
   exit(1);
 }
