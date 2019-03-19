@@ -45,7 +45,7 @@ void Statement::printTree(std::ostream &os, int scopeDepth) const
 
 std::string Statement::getGraphNodeID() const
 {
-    const void* ptr = reinterpret_cast<const void*>(this);
+    const void *ptr = reinterpret_cast<const void *>(this);
     std::stringstream ss;
     ss << "ID" << ptr;
     return ss.str();
@@ -54,15 +54,28 @@ std::string Statement::getGraphNodeID() const
 std::string Statement::getGraphNodeLabel() const
 {
     std::stringstream ss;
+    ss << "<";
     ss << typeid(*this).name();
-    if (branches.size() == 0) { ss << "\\n" << *this; }
+    if (branches.size() == 0)
+    {
+        ss << "<font color='red'><b>";
+    }
+    if (branches.size() == 0)
+    {
+        ss << "<br/>"
+           << *this;
+    }
+    if (branches.size() == 0)
+    {
+        ss << "</b></font>";
+    }
+    ss << ">";
     return ss.str();
-    
 }
 
 void Statement::generateTreeGraph(std::ostream &os) const
 {
-    os << getGraphNodeID() << " [label=\"" << getGraphNodeLabel() << "\"]" << std::endl;
+    os << getGraphNodeID() << " [label=" << getGraphNodeLabel() << "]" << std::endl;
     for (int i = 0; i < branches.size(); ++i)
     {
         os << getGraphNodeID() << " -> " << branches[i]->getGraphNodeID() << ";" << std::endl;
