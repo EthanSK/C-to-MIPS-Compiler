@@ -69,7 +69,7 @@ ROOT : TRANSLATION_UNIT { g_root = new RootNode(new GlobalScopeBlock(*$1)); dele
 
 //Terminals
 PRIMARY_EXPRESSION
-	: T_IDENTIFIER { $$ = new DirectDeclarator(*$1); delete $1; }
+	: T_IDENTIFIER { $$ = new Identifier(*$1); delete $1; }
 	| T_INT_LIT { $$ = new IntegerLiteral($1); }
 	| T_DOUBLE_LIT { $$ = new DoubleLiteral($1); }
 	| T_FLOAT_LIT { $$ = new FloatLiteral($1); }
@@ -358,7 +358,7 @@ DECLARATOR
 //It seems like direct declarator is responsible for so much random different stuff, like the variable name in an initializer
 //the variable name in a function definition, but also the param list in a function definitin
 DIRECT_DECLARATOR
-	: T_IDENTIFIER { $$ = new Identifier(*$1); delete $1; }
+	: T_IDENTIFIER { $$ = new DirectDeclarator(*$1); delete $1; }
 	| T_LBRACKET DECLARATOR T_RBRACKET { $$ = $2; }
 	| DIRECT_DECLARATOR T_LSQUARE_BRACKET CONSTANT_EXPRESSION T_RSQUARE_BRACKET { $$ = new ArrayDeclaratorSized($1, $3); }
 	| DIRECT_DECLARATOR T_LSQUARE_BRACKET T_RSQUARE_BRACKET { $$ = new ArrayDeclarator($1); }
