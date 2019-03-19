@@ -2,6 +2,7 @@
 
 %{
 extern "C" int fileno(FILE *stream);
+void count();
 
 #include "c_parser.tab.hpp"
 %}
@@ -15,38 +16,38 @@ EXPONENT [Ee][+-]?{DIGIT}+
 
 %%
 
-auto { return T_AUTO; }
-break { return T_BREAK; }
-case { return T_CASE; }
-char { return T_CHAR; }
-const { return T_CONST; }
-continue { return T_CONTINUE; }
-default { return T_DEFAULT; }
-do { return T_DO; }
-double { return T_DOUBLE; }
-else { return T_ELSE; }
-enum { return T_ENUM; }
-extern { return T_EXTERN; }
-float { return T_FLOAT; }
-for { return T_FOR; }
-goto { return T_GOTO; }
-if { return T_IF; }
-int { return T_INT; }
-long { return T_LONG; }
-register { return T_REGISTER; }
-return { return T_RETURN; }
-short { return T_SHORT; }
-signed { return T_SIGNED; }
-sizeof { return T_SIZEOF; }
-static { return T_STATIC; }
-struct { return T_STRUCT; }
-switch { return T_SWITCH; }
-typedef { return T_TYPEDEF; }
-union { return T_UNION; }
-unsigned { return T_UNSIGNED; }
-void { return T_VOID; }
-volatile { return T_VOLATILE; }
-while { return T_WHILE; }
+auto { count(); return T_AUTO; }
+break { count(); return T_BREAK; }
+case { count(); return T_CASE; }
+char { count(); return T_CHAR; }
+const { count(); return T_CONST; }
+continue { count(); return T_CONTINUE; }
+default { count(); return T_DEFAULT; }
+do { count(); return T_DO; }
+double { count(); return T_DOUBLE; }
+else { count(); return T_ELSE; }
+enum { count(); return T_ENUM; }
+extern { count(); return T_EXTERN; }
+float { count(); return T_FLOAT; }
+for { count(); return T_FOR; }
+goto { count(); return T_GOTO; }
+if { count(); return T_IF; }
+int { count(); return T_INT; }
+long { count(); return T_LONG; }
+register { count(); return T_REGISTER; }
+return { count(); return T_RETURN; }
+short { count(); return T_SHORT; }
+signed { count(); return T_SIGNED; }
+sizeof { count(); return T_SIZEOF; }
+static { count(); return T_STATIC; }
+struct { count(); return T_STRUCT; }
+switch { count(); return T_SWITCH; }
+typedef { count(); return T_TYPEDEF; }
+union { count(); return T_UNION; }
+unsigned { count(); return T_UNSIGNED; }
+void { count(); return T_VOID; }
+volatile { count(); return T_VOLATILE; }
+while { count(); return T_WHILE; }
 
 "+" { return T_PLUS; }
 "-" { return T_MINUS; }
@@ -128,12 +129,26 @@ while { return T_WHILE; }
 
 {NONDIGIT}({NONDIGIT}|{DIGIT})* { yylval.string = new std::string(yytext); return T_IDENTIFIER; }
 
+[ \t\v\n\f]		{ count(); }
+.			{ /* ignore bad characters */ }
+
 %%
 
+int column = 0;
+int row = 1;
+void count()
+{
+	for (int i = 0; i < strlen(yytext); ++i)
+  {
+		if (yytext[i] == '\n') { column = 0; row++; }
+		else if (yytext[i] == '\t') { column += 8 - (column % 8); }
+		else { column++; }
+  }
+}
 
 
 void yyerror (char const *s)
 {
-  fprintf (stderr, "Lexing error : %s\n", s);
+  std::cout << "Parser/lexer error, line " << row << ", column " << column << ": " << s << std::endl;
   exit(1);
 }
