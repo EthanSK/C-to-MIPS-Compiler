@@ -23,16 +23,16 @@ for c_file in ${test_cases_dir}/*.c ; do
     obj_file=$build_dir/$base_name.o
     binary_out=$bin_dir/$base_name
 
-    echo $c_file
-    echo $base_name
-    echo $driver_file
-    echo $asm_file
-    echo $obj_file
-    echo $binary_out
-    # $c_compiler -S $c_file -o $asm_file
-    # mips-linux-gnu-gcc -mfp32 -o $obj_file -c $asm_file
-    # mips-linux-gnu-gcc -mfp32 -static -o $binary_out $obj_file $driver_file
-    # qemu-mips $binary_out
+    # echo $c_file
+    # echo $base_name
+    # echo $driver_file
+    # echo $asm_file
+    # echo $obj_file
+    # echo $binary_out
+    $c_compiler -S $c_file -o $asm_file
+    mips-linux-gnu-gcc -mfp32 -o $obj_file -c $asm_file
+    mips-linux-gnu-gcc -mfp32 -static -o $binary_out $obj_file $driver_file
+    qemu-mips $binary_out
     
     exit_code=$?
     echo "exit code: $exit_code"
