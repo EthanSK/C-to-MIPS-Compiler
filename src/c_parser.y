@@ -69,7 +69,7 @@ ROOT : TRANSLATION_UNIT { g_root = new RootNode(new GlobalScopeBlock(*$1)); dele
 
 //Terminals
 PRIMARY_EXPRESSION
-	: T_IDENTIFIER { $$ = new VariableReference(*$1); delete $1; }
+	: T_IDENTIFIER { $$ = new DirectDeclarator(*$1); delete $1; }
 	| T_INT_LIT { $$ = new IntegerLiteral($1); }
 	| T_DOUBLE_LIT { $$ = new DoubleLiteral($1); }
 	| T_FLOAT_LIT { $$ = new FloatLiteral($1); }
