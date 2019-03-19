@@ -24,6 +24,10 @@ summary_file="$log_dir/_summary.csv"
 
 #tools
 c_compiler="mips-linux-gnu-gcc" #replace this with our compiler
+if [[ "$1" != "" ]] ; then
+    c_compiler="$1" #so we can pass in our compiler
+fi
+echo $c_compiler
 gcc_flags="-mfp32 -std=c90 -ansi -pedantic"
 
 #flags
