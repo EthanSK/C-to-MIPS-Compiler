@@ -26,6 +26,10 @@ int main(int argc, char *argv[])
 
     StatementPtr ast = parseAST();
 
+    std::cerr << "\n\nTree\n======================\n";
+    ast->printTree(std::cerr);
+    std::cerr << std::endl;
+
     std::cerr << "\n\nC CODE\n======================\n";
     std::cerr << ast << std::endl;
     ast->writePrintCToFile();

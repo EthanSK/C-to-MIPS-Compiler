@@ -18,15 +18,10 @@ class Statement
 	friend std::ostream &operator<<(std::ostream &os, const Statement &statement);
 	friend std::ostream &operator<<(std::ostream &os, const StatementPtr statementPtr);
 
-	virtual void generatePython(std::ostream &os, PythonContext &context, int scopeDepth = 0) const
-	{
-		os << "[Not Supported: " << typeid(*this).name() << "]";
-	}
-	void generatePython(std::ostream &os) const
-	{
-		PythonContext pyContext;
-		generatePython(os, pyContext);
-	}
+	void printTree(std::ostream &os, int scopeDepth = 0) const;
+
+	virtual void generatePython(std::ostream &os, PythonContext &context, int scopeDepth = 0) const;
+	void generatePython(std::ostream &os) const;
 
 	void writePrintCToFile(std::string filePath = "bin/printC.c") const; //can't use for write python because whats output is different
 	void writePythonToFile(std::string filePath = "bin/translated.py") const;

@@ -12,6 +12,29 @@ std::ostream &operator<<(std::ostream &os, const StatementPtr statementPtr)
     return os;
 }
 
+void Statement::generatePython(std::ostream &os, PythonContext &context, int scopeDepth = 0) const
+{
+    os << "[Not Supported: " << typeid(*this).name() << "]";
+}
+
+void Statement::generatePython(std::ostream &os) const
+{
+    PythonContext pyContext;
+    generatePython(os, pyContext);
+}
+
+void Statement::printTree(std::ostream &os, int scopeDepth = 0) const
+{
+    const int INDENT_SIZE = 2;
+    for (int i = 0; i < scopeDepth * INDENT_SIZE; ++i) { os << " "; }
+    os << "[" << typeid(*this).name() << "]";
+    if (branches.size() > 0)
+    {
+        os << ":";
+        for (int i = 0; i < branches.size(); ++i) { branches[i]->printTree(os, scopeDepth + 1); }
+    }
+}
+
 void Statement::writePrintCToFile(std::string filePath) const
 {
     std::ofstream file(filePath, std::ios::out | std::ios::trunc);
