@@ -455,7 +455,8 @@ COMPOUND_STATEMENT
 	| T_LCURLY_BRACE DECLARATION_LIST T_RCURLY_BRACE { $$ = new ScopeBlock(*$2); delete $2; }
 	| T_LCURLY_BRACE DECLARATION_LIST STATEMENT_LIST T_RCURLY_BRACE
 	{
-		$$ = new ScopeBlock({new SequenceBlock(*$2), new SequenceBlock(*$3)});
+		$2->insert($2->end(), $3->begin(), $3->end() );
+		$$ = new ScopeBlock(*$2);
 		delete $2;
 		delete $3;
 	}

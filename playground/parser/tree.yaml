@@ -1,5 +1,38 @@
 [8RootNode]:
-  [13SequenceBlock]:
+  [16GlobalScopeBlock]:
+    [18FunctionDefinition]:
+      [19FunctionDeclaration]:
+        [13PrimitiveType]
+        [18FunctionDeclarator]:
+          [17VariableReference]:
+            [10Identifier]
+          [13ParameterList]:
+            [20ParameterDeclaration]:
+              [13PrimitiveType]
+              [17VariableReference]:
+                [10Identifier]
+      [10ScopeBlock]:
+        [15IfElseStatement]:
+          [15BinaryIsEqualTo]:
+            [17VariableReference]:
+              [10Identifier]
+            [14IntegerLiteral]
+          [10ScopeBlock]:
+            [13ReturnKeyword]:
+              [14IntegerLiteral]
+          [10ScopeBlock]:
+            [13ReturnKeyword]:
+              [14BinaryMultiply]:
+                [17VariableReference]:
+                  [10Identifier]
+                [12FunctionCall]:
+                  [17VariableReference]:
+                    [10Identifier]
+                  [14ExpressionList]:
+                    [14BinarySubtract]:
+                      [17VariableReference]:
+                        [10Identifier]
+                      [14IntegerLiteral]
     [18FunctionDefinition]:
       [19FunctionDeclaration]:
         [13PrimitiveType]
@@ -8,5 +41,18 @@
             [10Identifier]
           [13ParameterList]
       [10ScopeBlock]:
-        [13ReturnKeyword]:
-          [14IntegerLiteral]
+        [13SequenceBlock]:
+          [19VariableDeclaration]:
+            [13PrimitiveType]
+            [26VariableInitializationList]:
+              [22VariableInitialization]:
+                [17VariableReference]:
+                  [10Identifier]
+                [14IntegerLiteral]
+        [13SequenceBlock]:
+          [13ReturnKeyword]:
+            [12FunctionCall]:
+              [17VariableReference]:
+                [10Identifier]
+              [14ExpressionList]:
+                [14IntegerLiteral]

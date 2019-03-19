@@ -8,7 +8,6 @@ SequenceBlock::SequenceBlock(std::vector<StatementPtr> branches){
 
 void SequenceBlock::printC(std::ostream &os) const
 {
-    os << "\n";
     for(size_t i = 0; i < branches.size(); i++)
     {
         os << branches[i] << ";\n";
