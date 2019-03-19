@@ -236,6 +236,7 @@ CONSTANT_EXPRESSION
 	: CONDITIONAL_EXPRESSION
 	;
 
+//We need to change how this works, because function declarators could be popping through here too
 DECLARATION
 	: DECLARATION_SPECIFIERS T_SEMICOLON
 	| DECLARATION_SPECIFIERS INIT_DECLARATOR_LIST T_SEMICOLON { $$ = new VariableDeclaration($1, *$2); delete $2; }
@@ -258,6 +259,7 @@ INIT_DECLARATOR_LIST
 	;
 
 //Handles declarations both with and without initializers - we will just init with 0
+//We need to change how this works, because function declarators could be popping through here too
 INIT_DECLARATOR
 	: DECLARATOR { $$ = new VariableInitialization($1, new IntegerLiteral(0)); }
 	| DECLARATOR T_EQ INITIALIZER { $$ = new VariableInitialization($1, $3); }
