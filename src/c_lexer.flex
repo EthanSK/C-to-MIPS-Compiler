@@ -49,73 +49,74 @@ void { count(); return T_VOID; }
 volatile { count(); return T_VOLATILE; }
 while { count(); return T_WHILE; }
 
-"+" { return T_PLUS; }
-"-" { return T_MINUS; }
-"*" { return T_MULTIPLY; }
-"/" { return T_DIVIDE; }
-"%" { return T_MODULO; }
-"<<" { return T_LSHIFT; }
-">>" { return T_RSHIFT; }
+"+" { count(); return T_PLUS; }
+"-" { count(); return T_MINUS; }
+"*" { count(); return T_MULTIPLY; }
+"/" { count(); return T_DIVIDE; }
+"%" { count(); return T_MODULO; }
+"<<" { count(); return T_LSHIFT; }
+">>" { count(); return T_RSHIFT; }
 
-"<" { return T_LESS_THAN; }
-">" { return T_GREATER_THAN; }
-"<=" { return T_LESS_THAN_EQ; }
-">=" { return T_GREATER_THAN_EQ; }
-"==" { return T_EQ_EQ; }
-"!=" { return T_NOT_EQ; }
+"<" { count(); return T_LESS_THAN; }
+">" { count(); return T_GREATER_THAN; }
+"<=" { count(); return T_LESS_THAN_EQ; }
+">=" { count(); return T_GREATER_THAN_EQ; }
+"==" { count(); return T_EQ_EQ; }
+"!=" { count(); return T_NOT_EQ; }
 
-"&" { return T_AND; }
-"&&" { return T_AND_AND; }
-"|" { return T_OR; }
-"||" { return T_OR_OR; }
-"^" { return T_XOR; }
+"&" { count(); return T_AND; }
+"&&" { count(); return T_AND_AND; }
+"|" { count(); return T_OR; }
+"||" { count(); return T_OR_OR; }
+"^" { count(); return T_XOR; }
 
-"=" { return T_EQ; }
-"+=" { return T_PLUS_EQ; }
-"-=" { return T_MINUS_EQ; }
-"*=" { return T_MULTIPLY_EQ; }
-"/=" { return T_DIVIDE_EQ; }
-"%=" { return T_MODULO_EQ; }
-"&=" { return T_AND_EQ; }
-"|=" { return T_OR_EQ; }
-"^=" { return T_XOR_EQ; }
-"<<=" { return T_LSHIFT_EQ; }
-">>=" { return T_RSHIFT_EQ; }
+"=" { count(); return T_EQ; }
+"+=" { count(); return T_PLUS_EQ; }
+"-=" { count(); return T_MINUS_EQ; }
+"*=" { count(); return T_MULTIPLY_EQ; }
+"/=" { count(); return T_DIVIDE_EQ; }
+"%=" { count(); return T_MODULO_EQ; }
+"&=" { count(); return T_AND_EQ; }
+"|=" { count(); return T_OR_EQ; }
+"^=" { count(); return T_XOR_EQ; }
+"<<=" { count(); return T_LSHIFT_EQ; }
+">>=" { count(); return T_RSHIFT_EQ; }
 
-"." { return T_DOT; }
-"->" { return T_ARROW; }
-"," { return T_COMMA; }
-":" { return T_COLON; }
-";" { return T_SEMICOLON; }
-"?" { return T_QUESTION; }
+"." { count(); return T_DOT; }
+"->" { count(); return T_ARROW; }
+"," { count(); return T_COMMA; }
+":" { count(); return T_COLON; }
+";" { count(); return T_SEMICOLON; }
+"?" { count(); return T_QUESTION; }
 
-"(" { return T_LBRACKET; }
-")" { return T_RBRACKET; }
-"[" { return T_LSQUARE_BRACKET; }
-"]" { return T_RSQUARE_BRACKET; }
-"{" { return T_LCURLY_BRACE; }
-"}" { return T_RCURLY_BRACE; }
+"(" { count(); return T_LBRACKET; }
+")" { count(); return T_RBRACKET; }
+"[" { count(); return T_LSQUARE_BRACKET; }
+"]" { count(); return T_RSQUARE_BRACKET; }
+"{" { count(); return T_LCURLY_BRACE; }
+"}" { count(); return T_RCURLY_BRACE; }
 
-"!" { return T_NOT; }
-"~" { return T_INVERT; }
-"++" { return T_PLUS_PLUS; }
-"--" { return T_MINUS_MINUS; }
+"!" { count(); return T_NOT; }
+"~" { count(); return T_INVERT; }
+"++" { count(); return T_PLUS_PLUS; }
+"--" { count(); return T_MINUS_MINUS; }
 
-0{OCTDIGIT}+{INTSUFFIX}? { yylval.number = std::stoi(yytext, nullptr, 8); return T_INT_LIT; }
-0[xX]{HEXDIGIT}+{INTSUFFIX}? { yylval.number = std::stoi(yytext, nullptr, 16); return T_INT_LIT; }
-{DIGIT}+{INTSUFFIX}? { yylval.number = std::stoi(yytext, nullptr, 10); return T_INT_LIT; }
+0{OCTDIGIT}+{INTSUFFIX}? { count(); yylval.number = std::stoi(yytext, nullptr, 8); return T_INT_LIT; }
+0[xX]{HEXDIGIT}+{INTSUFFIX}? { count(); yylval.number = std::stoi(yytext, nullptr, 16); return T_INT_LIT; }
+{DIGIT}+{INTSUFFIX}? { count(); yylval.number = std::stoi(yytext, nullptr, 10); return T_INT_LIT; }
 
-{DIGIT}+\.{DIGIT}*[fF] { yylval.number = std::stod(yytext); return T_DOUBLE_LIT; }
-{DIGIT}*\.{DIGIT}+[fF] { yylval.number = std::stod(yytext); return T_DOUBLE_LIT; }
-{DIGIT}+\.{DIGIT}* { yylval.number = std::stod(yytext); return T_FLOAT_LIT; }
-{DIGIT}*\.{DIGIT}+ { yylval.number = std::stod(yytext); return T_FLOAT_LIT; }
-{DIGIT}*"."{DIGIT}+({EXPONENT})?[fF]	{ yylval.number = std::stod(yytext); return T_FLOAT_LIT; }
-{DIGIT}+"."{DIGIT}*({EXPONENT})?[fF]	{ yylval.number = std::stod(yytext); return T_FLOAT_LIT; }
-{DIGIT}*"."{DIGIT}+({EXPONENT})?	{ yylval.number = std::stod(yytext); return T_DOUBLE_LIT; }
-{DIGIT}+"."{DIGIT}*({EXPONENT})?	{ yylval.number = std::stod(yytext); return T_DOUBLE_LIT; }
+{DIGIT}+\.{DIGIT}*[fF] { count(); yylval.number = std::stod(yytext); return T_DOUBLE_LIT; }
+{DIGIT}*\.{DIGIT}+[fF] { count(); yylval.number = std::stod(yytext); return T_DOUBLE_LIT; }
+{DIGIT}+\.{DIGIT}* { count(); yylval.number = std::stod(yytext); return T_FLOAT_LIT; }
+{DIGIT}*\.{DIGIT}+ { count(); yylval.number = std::stod(yytext); return T_FLOAT_LIT; }
+{DIGIT}*"."{DIGIT}+({EXPONENT})?[fF]	{ count(); yylval.number = std::stod(yytext); return T_FLOAT_LIT; }
+{DIGIT}+"."{DIGIT}*({EXPONENT})?[fF]	{ count(); yylval.number = std::stod(yytext); return T_FLOAT_LIT; }
+{DIGIT}*"."{DIGIT}+({EXPONENT})?	{ count(); yylval.number = std::stod(yytext); return T_DOUBLE_LIT; }
+{DIGIT}+"."{DIGIT}*({EXPONENT})?	{ count(); yylval.number = std::stod(yytext); return T_DOUBLE_LIT; }
 
-{NONDIGIT}?\"(\\.|[^\\"])*\" { yylval.string = new std::string(yytext, 1, strlen(yytext) - 2); return T_STRING_LIT; }
+{NONDIGIT}?\"(\\.|[^\\"])*\" { count(); yylval.string = new std::string(yytext, 1, strlen(yytext) - 2); return T_STRING_LIT; }
 {NONDIGIT}?'(\\.|[^\\'])+'	{
+    count();
     std::string str = yytext;
     if (str == "'\\\\'") { yylval.number = '\\'; }
     else if (str == "'\\n'") { yylval.number = '\n'; }
@@ -127,10 +128,10 @@ while { count(); return T_WHILE; }
     return T_CHAR_LIT;
   }
 
-{NONDIGIT}({NONDIGIT}|{DIGIT})* { yylval.string = new std::string(yytext); return T_IDENTIFIER; }
+{NONDIGIT}({NONDIGIT}|{DIGIT})* { count(); yylval.string = new std::string(yytext); return T_IDENTIFIER; }
 
 [ \t\v\n\f]		{ count(); }
-.			{ /* ignore bad characters */ }
+.			{ }
 
 %%
 
@@ -149,6 +150,6 @@ void count()
 void yyerror (char const *s)
 {
   std::cout << "parse error: " << yytext << std::endl;
-  std::cout << "line " << (row + 1) << ", column " << (column + 1) << std::endl;
+  std::cout << "line " << (row + 1) << ", column " << (column + 1 - strlen(yytext)) << std::endl;
   exit(1);
 }
