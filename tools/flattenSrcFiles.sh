@@ -4,24 +4,24 @@ destFolder=$2
 fileExt=$3
 
 srcFiles=$(find $srcFolder -name "*.$fileExt")
+srcFileNames=()
 mkdir -p "$destFolder"
 
+echo "Flattening ${fileExt} files"
 for srcFile in $srcFiles
 do
     fileName=$(basename "$srcFile")
-    rsync --update $srcFile "$destFolder/$fileName"
-    
-    
+    srcFileNames+=("$fileName")
+    rsync --update $srcFile "$destFolder/$fileName" 
 done
 
-
-#half finished code
-# for destFile in $destFolder/*
-# do 
-#     #now delete files in tmp that aren't in the source any more
-#     if [[ ! -f "$srcFile" && -f "$destFolder/$fileName" ]]; then
-#         #file exists in tmp but not in source
-#         echo "file shouldn't be here: $destFolder/$fileName , $srcFile"
-#         #    rm -f $destFolder/$fileName
-#     fi
-# done
+echo "Cleansing old ${fileExt} files"
+destFiles=$(find $destFolder -name "*.$fileExt")
+for destFile in $destFiles
+do
+    fileName=$(basename "$destFile")
+    if [[ ! " ${srcFileNames[@]} " =~ " ${fileName} " ]]; then
+       echo "deleting $fileName"
+       rm -f "$destFile"
+    fi
+done
