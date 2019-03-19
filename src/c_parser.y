@@ -459,7 +459,7 @@ COMPOUND_STATEMENT
 	}
 	;
 
-//Sequence of declarations. Particuarly used by the KR function definition which we aren't doing
+//Sequence of declarations
 DECLARATION_LIST
 	: DECLARATION { $$ = initExprList($1); }
 	| DECLARATION_LIST DECLARATION { $$ = concatExprList($1, $2); } 
