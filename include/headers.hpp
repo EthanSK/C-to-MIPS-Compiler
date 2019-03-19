@@ -2,6 +2,7 @@
 #define headers_hpp
 #include "identifier.hpp"
 #include "declaratorList.hpp"
+#include "initDeclarator.hpp"
 #include "globalScopeBlock.hpp"
 #include "expressionList.hpp"
 #include "parameterList.hpp"

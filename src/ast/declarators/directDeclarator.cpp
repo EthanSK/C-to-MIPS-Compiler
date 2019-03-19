@@ -23,5 +23,6 @@ void DirectDeclarator::printC(std::ostream &os) const
 
 void DirectDeclarator::generatePython(std::ostream &os, PythonContext &context, int scopeDepth) const
 {
+    if (scopeDepth == 0) { context.registerGlobal(getIdentifierName()); }
     getIdentifier()->generatePython(os, context, scopeDepth);
 }
