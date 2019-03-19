@@ -53,7 +53,11 @@ std::string Statement::getGraphNodeID() const
 
 std::string Statement::getGraphNodeLabel() const
 {
-    return typeid(*this).name();
+    std::stringstream ss;
+    ss << typeid(*this).name();
+    if (branches.size() == 0) { ss << "\\n" << *this; }
+    return ss.str();
+    
 }
 
 void Statement::generateTreeGraph(std::ostream &os) const
