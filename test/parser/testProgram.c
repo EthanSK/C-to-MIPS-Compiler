@@ -6,5 +6,9 @@ int factorial(int n)
 
 int main()
 {
+    while (1 > 0)
+    {
+        int x = 10;
+    }
     return factorial(5);
 }
