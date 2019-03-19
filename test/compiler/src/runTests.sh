@@ -24,7 +24,7 @@ summary_file="$log_dir/_summary.csv"
 
 #tools
 c_compiler="mips-linux-gnu-gcc" #replace this with our compiler
-
+gcc_flags="-mfp32 -std=c90 -ansi -pedantic"
 
 #flags
 is_verbose=1
@@ -73,8 +73,8 @@ for c_file in ${test_cases_dir}/*.c ; do #use test_cases_dir here to enforce cor
     fi
     
     $c_compiler -S $c_file -o $asm_file
-    mips-linux-gnu-gcc -mfp32 -o $obj_file -c $asm_file
-    mips-linux-gnu-gcc -mfp32 -static -o $binary_out $obj_file $driver_file
+    mips-linux-gnu-gcc $gcc_flags -o $obj_file -c $asm_file
+    mips-linux-gnu-gcc $gcc_flags -static -o $binary_out $obj_file $driver_file
     qemu-mips $binary_out
     exit_code=$?
     

@@ -1,2 +1,5 @@
+FOR_N, exit code: 127, Fail
+IF_ELSE_F, exit code: 127, Fail
+IF_ELSE_T, exit code: 127, Fail
 IF_F, exit code: 127, Fail
 IF_T, exit code: 127, Fail
