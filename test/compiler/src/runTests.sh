@@ -7,6 +7,11 @@ build_dir="$compiler_test_dir/build"
 bin_dir="$compiler_test_dir/bin"
 c_compiler="mips-linux-gnu-gcc " #replace this with our compiler
 
+rm -rf $build_dir
+rm -rf $bin_dir
+mkdir -p $build_dir
+mkdir -p $bin_dir
+
 $cwd/moveTests.sh #so we can run tests from final dir for security
 
 
