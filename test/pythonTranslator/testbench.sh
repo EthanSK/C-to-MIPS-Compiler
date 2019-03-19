@@ -48,7 +48,7 @@ for c_file in ${input_dir}/*.c ; do
     
     
     if [[ $ref_c_exit_code -ne $ref_py_exit_code ]] ; then
-        result="$base, REF_FAIL, Expected ${ref_c_exit_code}, got ${ref_py_exit_code}" #something is wrong with the test
+        result="$base, Fail, Expected ${ref_c_exit_code}, got ${ref_py_exit_code}" #something is wrong with the test
         elif [[ ${have_compiler} -ne 0 ]] ; then
         result="$base, Fail, No C compiler/translator"
         elif [[ $ref_c_exit_code -ne $got_py_exit_code ]] ; then
@@ -60,3 +60,5 @@ for c_file in ${input_dir}/*.c ; do
     csv_line="$result"
     echo $csv_line >> $output_file
 done
+
+cat $output_file | column -t -s, | grep -E --color=auto 'Fail|$$'
