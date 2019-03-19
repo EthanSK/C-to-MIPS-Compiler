@@ -4,4 +4,5 @@ int FOR_N(){
     {
         
     }
+    return i; //should equal 1
 }
