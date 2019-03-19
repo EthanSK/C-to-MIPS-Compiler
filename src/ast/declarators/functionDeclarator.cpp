@@ -28,7 +28,7 @@ void FunctionDeclarator::printC(std::ostream &os) const
 
 void FunctionDeclarator::generatePython(std::ostream &os, PythonContext &context, int scopeDepth) const
 {
-    getIdentifier()->generatePython(os, context, scopeDepth);
+    getIdentifier()->generatePython(os, context, scopeDepth + 1);
     os << "(";
     getParamList()->generatePython(os, context, scopeDepth + 1);
     os << ")";

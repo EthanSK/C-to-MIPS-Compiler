@@ -1,0 +1,19 @@
+#ifndef initDeclarator_hpp
+#define initDeclarator_hpp
+
+#include "declarator.hpp"
+
+class InitDeclarator : public Declarator
+{
+public:
+  InitDeclarator(StatementPtr declarator, StatementPtr initializer);
+  void generatePython(std::ostream &os, PythonContext &context, int scopeDepth = 0) const override;
+  DeclaratorPtr getDeclarator() const;
+  StatementPtr getInitializer() const;
+  
+protected:
+  virtual void printC(std::ostream &os) const override;
+  virtual std::string getIdentifierName() const override;
+};
+
+#endif

@@ -69,7 +69,7 @@ ROOT : TRANSLATION_UNIT { g_root = new RootNode(new GlobalScopeBlock(*$1)); dele
 
 //Terminals
 PRIMARY_EXPRESSION
-	: T_IDENTIFIER { $$ = new VariableReference(*$1); delete $1; }
+	: T_IDENTIFIER { $$ = new Identifier(*$1); delete $1; }
 	| T_INT_LIT { $$ = new IntegerLiteral($1); }
 	| T_DOUBLE_LIT { $$ = new DoubleLiteral($1); }
 	| T_FLOAT_LIT { $$ = new FloatLiteral($1); }
@@ -236,13 +236,13 @@ CONSTANT_EXPRESSION
 	: CONDITIONAL_EXPRESSION
 	;
 
-//We need to change how this works, because function declarators could be popping through here too
+//Pairs DECLARATION_SPECIFIERS with a list of declarators, which can be variables or function
 DECLARATION
-	: DECLARATION_SPECIFIERS T_SEMICOLON //This allows you to do int; because someone high thought we needed that
-	| DECLARATION_SPECIFIERS INIT_DECLARATOR_LIST T_SEMICOLON { $$ = new VariableDeclaration($1, *$2); delete $2; }
+	: DECLARATION_SPECIFIERS T_SEMICOLON { $$ = new Declaration($1); }
+	| DECLARATION_SPECIFIERS INIT_DECLARATOR_LIST T_SEMICOLON { $$ = new Declaration($1, *$2); delete $2; }
 	;
 
-//I believe declaration specifier is the fully qualified and storage classed type, such as extern int*
+//Full specified type with primitive type, qualifiers, storage classes etc
 DECLARATION_SPECIFIERS
 	: STORAGE_CLASS_SPECIFIER { $$ = new StorageClassedType(new PrimitiveType(PrimitiveType::PrimitiveTypeEnum::_int), $1); }
 	| STORAGE_CLASS_SPECIFIER DECLARATION_SPECIFIERS { $$ = new StorageClassedType($2, $1); }
@@ -252,17 +252,16 @@ DECLARATION_SPECIFIERS
 	| TYPE_QUALIFIER DECLARATION_SPECIFIERS { $$ = new QualifiedType($2, $1); }
 	;
 
-//Aggregates together multiple initializations
+//Aggregates together multiple declarators
 INIT_DECLARATOR_LIST
 	: INIT_DECLARATOR { $$ = initExprList($1); }
 	| INIT_DECLARATOR_LIST T_COMMA INIT_DECLARATOR { $$ = concatExprList($1, $3); }
 	;
 
-//Handles declarations both with and without initializers - we will just init with 0
-//We need to change how this works, because function declarators could be popping through here too
+//Pairs declarators with their initializer
 INIT_DECLARATOR
-	: DECLARATOR { $$ = new VariableInitialization($1, new IntegerLiteral(0)); }
-	| DECLARATOR T_EQ INITIALIZER { $$ = new VariableInitialization($1, $3); }
+	: DECLARATOR
+	| DECLARATOR T_EQ INITIALIZER { $$ = new InitDeclarator($1, $3); }
 	;
 
 //This is all stuff about how the variable is stored
@@ -358,7 +357,7 @@ DECLARATOR
 //It seems like direct declarator is responsible for so much random different stuff, like the variable name in an initializer
 //the variable name in a function definition, but also the param list in a function definitin
 DIRECT_DECLARATOR
-	: T_IDENTIFIER { $$ = new Identifier(*$1); delete $1; }
+	: T_IDENTIFIER { $$ = new DirectDeclarator(*$1); delete $1; }
 	| T_LBRACKET DECLARATOR T_RBRACKET { $$ = $2; }
 	| DIRECT_DECLARATOR T_LSQUARE_BRACKET CONSTANT_EXPRESSION T_RSQUARE_BRACKET { $$ = new ArrayDeclaratorSized($1, $3); }
 	| DIRECT_DECLARATOR T_LSQUARE_BRACKET T_RSQUARE_BRACKET { $$ = new ArrayDeclarator($1); }
@@ -394,9 +393,9 @@ PARAMETER_LIST
 
 //Function parameters
 PARAMETER_DECLARATION
-	: DECLARATION_SPECIFIERS DECLARATOR { $$ = new ParameterDeclaration($1, $2); }
+	: DECLARATION_SPECIFIERS DECLARATOR { $$ = new Declaration($1, $2); }
 	| DECLARATION_SPECIFIERS ABSTRACT_DECLARATOR
-	| DECLARATION_SPECIFIERS
+	| DECLARATION_SPECIFIERS { $$ = new Declaration($1); }
 	;
 
 IDENTIFIER_LIST
@@ -517,8 +516,8 @@ EXTERNAL_DECLARATION
 
 //Function definitions
 FUNCTION_DEFINITION
-	: DECLARATION_SPECIFIERS DECLARATOR COMPOUND_STATEMENT { $$ = new FunctionDefinition(new FunctionDeclaration($1, $2), $3); }
-	| DECLARATOR COMPOUND_STATEMENT { $$ = new FunctionDefinition(new FunctionDeclaration(new PrimitiveType(PrimitiveType::PrimitiveTypeEnum::_int), $1), $2); }
+	: DECLARATION_SPECIFIERS DECLARATOR COMPOUND_STATEMENT { $$ = new FunctionDefinition(new Declaration($1, $2), $3); }
+	| DECLARATOR COMPOUND_STATEMENT { $$ = new FunctionDefinition(new Declaration(new PrimitiveType(PrimitiveType::PrimitiveTypeEnum::_int), $1), $2); }
 	;
 
 %%

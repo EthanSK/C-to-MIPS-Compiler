@@ -1,5 +1,4 @@
 #include "functionDefinition.hpp"
-#include "variableDeclaration.hpp"
 
 FunctionDefinition::FunctionDefinition(StatementPtr decl, StatementPtr scopeBlock)
 {
@@ -24,6 +23,7 @@ void FunctionDefinition::printC(std::ostream &os) const
 
 void FunctionDefinition::generatePython(std::ostream &os, PythonContext &context, int scopeDepth) const
 {
+    os << "def ";
     getDecl()->generatePython(os, context, scopeDepth);
     os << ":";
     context.dumpGlobals(os, scopeDepth + 1);
