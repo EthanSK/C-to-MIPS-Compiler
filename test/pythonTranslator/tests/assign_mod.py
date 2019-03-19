@@ -1,6 +1,6 @@
 def main():
     x = 10
-    x //= 5
+    x %= 5
     return x
 
 if __name__ == "__main__":

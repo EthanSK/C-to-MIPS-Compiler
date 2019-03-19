@@ -45,7 +45,7 @@ for c_file in ${input_dir}/*.c ; do
         $compiler --translate $c_file -o ${output_dir}/$translated_python_file > /dev/null 2>&1
         
         # Run the DUT python version
-        python ${output_dir}/$translated_python_file
+        python3 ${output_dir}/$translated_python_file
         got_py_exit_code=$?
     fi
     
@@ -66,4 +66,6 @@ for c_file in ${input_dir}/*.c ; do
     echo $csv_line >> $output_file
 done
 
+echo
+echo "Results:"
 cat $output_file | column -t -s, | grep -E --color=auto 'Fail|$$'
