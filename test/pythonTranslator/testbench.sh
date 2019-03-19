@@ -18,6 +18,9 @@ input_dir="$cwd/tests"
 output_dir="$cwd/output"
 output_file="$output_dir/_summary.csv"
 
+RED='\033[0;31m'
+NC='\033[0m'
+
 rm -f $output_file
 rm -rf $output_dir
 mkdir -p ${output_dir}
@@ -39,7 +42,7 @@ for c_file in ${input_dir}/*.c ; do
     if [[ ${have_compiler} -eq 0 ]] ; then
         translated_python_file="${base}Got.py"
         # Create the DUT python version by invoking the compiler with translation flags
-        $compiler --translate $c_file -o ${output_dir}/$translated_python_file
+        $compiler --translate $c_file -o ${output_dir}/$translated_python_file > /dev/null 2>&1
         
         # Run the DUT python version
         python ${output_dir}/$translated_python_file
@@ -48,11 +51,13 @@ for c_file in ${input_dir}/*.c ; do
     
     
     if [[ $ref_c_exit_code -ne $ref_py_exit_code ]] ; then
-        result="$base, Fail, Expected ${ref_c_exit_code}, got ${ref_py_exit_code}" #something is wrong with the test
+        result="$base, REF_FAIL, Expected ${ref_c_exit_code}, got ${ref_py_exit_code}" #something is wrong with the test
+        echo -e "${RED}REF_FAIL${NC}"
         elif [[ ${have_compiler} -ne 0 ]] ; then
         result="$base, Fail, No C compiler/translator"
         elif [[ $ref_c_exit_code -ne $got_py_exit_code ]] ; then
         result="$base, Fail, Expected ${ref_c_exit_code}, got ${got_py_exit_code}" #something is wrong with our compiler
+        echo -e "${RED}Fail${NC}"
     else
         result="$base, Pass"
     fi
