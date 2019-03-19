@@ -13,7 +13,7 @@ $cwd/moveTests.sh #so we can run tests from final dir for security
 for c_file in ${test_cases_dir}/*.c ; do
     base_name=$(echo $c_file | sed -E -e "s|${test_cases_dir}/([^.]+)[.]c|\1|g");
     driver_file="$test_cases_dir/${base_name}_driver.c"
-    asm_file=$build_dir/$base.s
+    asm_file=$build_dir/$base_name.s
     obj_file=$build_dir/$base_name.o
     binary_out=$bin_dir/$base_name
     
