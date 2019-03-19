@@ -2,5 +2,5 @@ double ATOF();
 
 int main()
 {
-    return !(ATOF() == 2.7182818);
+    return !(ATOF() == 2.71828189);
 }
