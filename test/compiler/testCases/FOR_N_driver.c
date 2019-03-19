@@ -1,5 +1,6 @@
 int FOR_N();
 
-int main(){
+int main()
+{
     return !(FOR_N() == 1);
 }

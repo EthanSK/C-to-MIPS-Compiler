@@ -3,3 +3,5 @@ IF_ELSE_F, exit code: 127, Fail
 IF_ELSE_T, exit code: 127, Fail
 IF_F, exit code: 127, Fail
 IF_T, exit code: 127, Fail
+LOCAL_ARRAY, exit code: 127, Fail
+SELF_RECURSION, exit code: 127, Fail

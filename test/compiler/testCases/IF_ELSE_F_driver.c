@@ -1,5 +1,6 @@
 int IF_ELSE_F();
 
-int main(){
+int main()
+{
     return !(IF_ELSE_F() == 8888);
 }

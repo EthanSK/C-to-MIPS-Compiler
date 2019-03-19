@@ -1,5 +1,6 @@
 int IF_F();
 
-int main(){
+int main()
+{
     return !(IF_F() == 2019);
 }
