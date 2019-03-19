@@ -29,6 +29,7 @@ for c_file in ${test_cases_dir}/*.c ; do
     # echo $asm_file
     # echo $obj_file
     # echo $binary_out
+    
     $c_compiler -S $c_file -o $asm_file
     mips-linux-gnu-gcc -mfp32 -o $obj_file -c $asm_file
     mips-linux-gnu-gcc -mfp32 -static -o $binary_out $obj_file $driver_file
