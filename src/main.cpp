@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
     // Parse the AST
     yyin = fopen("test/parser/testProgram.c", "r"); //default value for dev
 
-    if (argc >= 5 && std::string(argv[1]) == "-S")
+    if (argc >= 3 && std::string(argv[1]) == "-S")
     {
          yyin = fopen(argv[2], "r");
     }
@@ -29,6 +29,8 @@ int main(int argc, char *argv[])
     std::cerr << "\n\nTree\n======================\n";
     ast->printTree(std::cerr);
     std::cerr << std::endl;
+
+    ast->writeDotFile();
 
     std::cerr << "\n\nC CODE\n======================\n";
     std::cerr << ast << std::endl;

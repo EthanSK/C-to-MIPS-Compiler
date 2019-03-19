@@ -1,1 +1,5 @@
-5.5f
+int main()
+{
+    int x;
+    return factorial(5);
+}
