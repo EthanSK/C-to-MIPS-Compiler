@@ -3,7 +3,7 @@
 compiler_test_dir="test/compiler"
 cwd="$compiler_test_dir/src"
 test_cases_dir="$compiler_test_dir/testCases"
-c_compiler="bin/c_compiler"
+c_compiler="mips-linux-gnu-gcc " #replace this with our compiler
 
 $cwd/moveTests.sh #so we can run tests from final dir for security
 
