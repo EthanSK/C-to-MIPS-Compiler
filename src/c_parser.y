@@ -238,7 +238,7 @@ CONSTANT_EXPRESSION
 
 //We need to change how this works, because function declarators could be popping through here too
 DECLARATION
-	: DECLARATION_SPECIFIERS T_SEMICOLON
+	: DECLARATION_SPECIFIERS T_SEMICOLON //This allows you to do int; because someone high thought we needed that
 	| DECLARATION_SPECIFIERS INIT_DECLARATOR_LIST T_SEMICOLON { $$ = new VariableDeclaration($1, *$2); delete $2; }
 	;
 
