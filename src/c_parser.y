@@ -238,8 +238,8 @@ CONSTANT_EXPRESSION
 
 //We need to change how this works, because function declarators could be popping through here too
 DECLARATION
-	: DECLARATION_SPECIFIERS T_SEMICOLON //This allows you to do int; because someone high thought we needed that
-	| DECLARATION_SPECIFIERS INIT_DECLARATOR_LIST T_SEMICOLON { $$ = new VariableDeclaration($1, *$2); delete $2; }
+	: DECLARATION_SPECIFIERS T_SEMICOLON { $$ = new Declaration($1); }
+	| DECLARATION_SPECIFIERS INIT_DECLARATOR_LIST T_SEMICOLON { $$ = new Declaration($1, *$2); delete $2; }
 	;
 
 //I believe declaration specifier is the fully qualified and storage classed type, such as extern int*
@@ -261,8 +261,8 @@ INIT_DECLARATOR_LIST
 //Handles declarations both with and without initializers - we will just init with 0
 //We need to change how this works, because function declarators could be popping through here too
 INIT_DECLARATOR
-	: DECLARATOR { $$ = new VariableInitialization($1, new IntegerLiteral(0)); }
-	| DECLARATOR T_EQ INITIALIZER { $$ = new VariableInitialization($1, $3); }
+	: DECLARATOR
+	| DECLARATOR T_EQ INITIALIZER { $$ = new InitDeclarator($1, $3); }
 	;
 
 //This is all stuff about how the variable is stored
@@ -394,7 +394,7 @@ PARAMETER_LIST
 
 //Function parameters
 PARAMETER_DECLARATION
-	: DECLARATION_SPECIFIERS DECLARATOR { $$ = new ParameterDeclaration($1, $2); }
+	: DECLARATION_SPECIFIERS DECLARATOR { $$ = new Declaration($1, $2); }
 	| DECLARATION_SPECIFIERS ABSTRACT_DECLARATOR
 	| DECLARATION_SPECIFIERS
 	;
@@ -517,8 +517,8 @@ EXTERNAL_DECLARATION
 
 //Function definitions
 FUNCTION_DEFINITION
-	: DECLARATION_SPECIFIERS DECLARATOR COMPOUND_STATEMENT { $$ = new FunctionDefinition(new FunctionDeclaration($1, $2), $3); }
-	| DECLARATOR COMPOUND_STATEMENT { $$ = new FunctionDefinition(new FunctionDeclaration(new PrimitiveType(PrimitiveType::PrimitiveTypeEnum::_int), $1), $2); }
+	: DECLARATION_SPECIFIERS DECLARATOR COMPOUND_STATEMENT { $$ = new FunctionDefinition(new Declaration($1, $2), $3); }
+	| DECLARATOR COMPOUND_STATEMENT { $$ = new FunctionDefinition(new Declaration(new PrimitiveType(PrimitiveType::PrimitiveTypeEnum::_int), $1), $2); }
 	;
 
 %%

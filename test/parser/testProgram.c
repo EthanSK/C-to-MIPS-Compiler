@@ -1,3 +1,10 @@
+
+int;
+int yy;
+int xx, xxx = 10, xxxx = 20;
+
+func1(int boi), func2();
+
 int factorial(int n)
 {
     if (n == 0) { return 1; }
@@ -12,3 +19,6 @@ int main()
     x = y;
     return x;
 }
+
+func1(boi) { return boi; }
+func2() { return xxx; }

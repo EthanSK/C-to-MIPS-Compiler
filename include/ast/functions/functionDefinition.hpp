@@ -1,9 +1,7 @@
 #ifndef functionDefinition_hpp
 #define functionDefinition_hpp
 
-#include <iostream>
 #include "statement.hpp"
-#include "identifier.hpp"
 
 class FunctionDefinition : public Statement
 {
