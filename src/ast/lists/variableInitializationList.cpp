@@ -15,7 +15,7 @@ void VariableInitializationList::generatePython(std::ostream &os, PythonContext 
     std::vector<StatementPtr> initializations = getNodes();
     for (int i = 0; i < initializations.size(); ++i)
     {
-        if (i > 0) { os << "\n"; }
+        if (i > 0) { context.indentStream(os, scopeDepth); }
         initializations[i]->generatePython(os, context, scopeDepth);
     }
 }
