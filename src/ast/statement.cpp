@@ -1,4 +1,5 @@
 #include "statement.hpp"
+#include <sstream>
 
 std::ostream &operator<<(std::ostream &os, const Statement &statement)
 {
@@ -42,40 +43,34 @@ void Statement::printTree(std::ostream &os, int scopeDepth) const
     }
 }
 
-void Statement::generateTreeGraph(std::ostream &os, int scopeDepth) const
+std::string Statement::getGraphNodeID() const
 {
-    for (int i = 0; i < branches.size(); i++)
+    const void* ptr = reinterpret_cast<const void*>(this);
+    std::stringstream ss;
+    ss << "ID" << ptr;
+    return ss.str();
+}
+
+std::string Statement::getGraphNodeLabel() const
+{
+    return typeid(*this).name();
+}
+
+void Statement::generateTreeGraph(std::ostream &os) const
+{
+    os << getGraphNodeID() << " [label=\"" << getGraphNodeLabel() << "\"]" << std::endl;
+    for (int i = 0; i < branches.size(); ++i)
     {
-        os << "\"" << typeid(*this).name() << "\" -> ";
-        branches[i]->generateTreeGraph(os, scopeDepth + 1);
-        os << std::endl; 
+        os << getGraphNodeID() << " -> " << branches[i]->getGraphNodeID() << ";" << std::endl;
+        branches[i]->generateTreeGraph(os);
     }
-
-
-
-
-    // const int INDENT_SIZE = 2;
-    // for (int i = 0; i < scopeDepth * INDENT_SIZE; ++i)
-    // {
-    //     os << " ";
-    // }
-    // os << "[" << typeid(*this).name() << "]";
-    // if (branches.size() > 0)
-    // {
-    //     os << ":";
-    //     for (int i = 0; i < branches.size(); ++i)
-    //     {
-    //         os << std::endl;
-    //         branches[i]->generateTreeGraph(os, scopeDepth + 1);
-    //     }
-    // }
 }
 
 void Statement::writeDotFile(std::string filePath) const
 {
     std::ofstream file(filePath, std::ios::out | std::ios::trunc);
-    file << "digraph G { \n";
-    this->generateTreeGraph(file);
+    file << "digraph AST { \n";
+    generateTreeGraph(file);
     file << "\n}";
     file.close();
 }
