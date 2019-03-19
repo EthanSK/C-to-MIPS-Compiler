@@ -10,6 +10,6 @@ void BinaryDivideAssignment::printC(std::ostream &os) const
 void BinaryDivideAssignment::generatePython(std::ostream &os, PythonContext &context, int scopeDepth) const
 {
 	getLeft()->generatePython(os, context, scopeDepth);
-	os << " /= ";
+	os << " //= ";
 	getRight()->generatePython(os, context, scopeDepth);
 }

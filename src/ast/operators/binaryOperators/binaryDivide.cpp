@@ -13,7 +13,7 @@ void BinaryDivide::generatePython(std::ostream &os, PythonContext &context, int 
 {
 	os << "(";
 	getLeft()->generatePython(os, context, scopeDepth);
-	os << " / ";
+	os << " // ";
 	getRight()->generatePython(os, context, scopeDepth);
 	os << ")";
 }

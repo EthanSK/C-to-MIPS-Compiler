@@ -1,4 +1,4 @@
-Divide /
+Divide / //
 Modulo %
 Multiply *
 Add +
@@ -20,7 +20,7 @@ Assignment =
 AddAssignment +=
 SubtractAssignment -=
 MultiplyAssignment *=
-DivideAssignment /=
+DivideAssignment /= //=
 ModuloAssignment %=
 BitwiseAndAssignment &=
 BitwiseOrAssignment |=
