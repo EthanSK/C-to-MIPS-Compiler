@@ -16,7 +16,7 @@ $cwd/moveTests.sh #so we can run tests from final dir for security
 
 
 for c_file in ${test_cases_dir}/*.c ; do
-    [[ $c_file == *_driver.c ]] && continue #ignore the already existing driver files
+    [[ $c_file == *_driver.c ]] && continue #ignore the driver files
     base_name=$(echo $c_file | sed -E -e "s|${test_cases_dir}/([^.]+)[.]c|\1|g");
     driver_file="$test_cases_dir/${base_name}_driver.c"
     asm_file=$build_dir/$base_name.s
