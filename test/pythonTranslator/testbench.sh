@@ -29,7 +29,7 @@ for c_file in ${input_dir}/*.c ; do
     base=$(echo $c_file | sed -E -e "s|${input_dir}/([^.]+)[.]c|\1|g");
     echo "base $base"
     # Compile the reference C version
-    gcc $c_file -o $output_dir/$base
+    gcc -Wno-implicit-int $c_file -o $output_dir/$base
     
     # Run the reference C version
     $output_dir/$base
