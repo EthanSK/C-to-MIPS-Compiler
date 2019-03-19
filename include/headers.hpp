@@ -1,6 +1,7 @@
 #ifndef headers_hpp
 #define headers_hpp
 #include "identifier.hpp"
+#include "declaratorList.hpp"
 #include "globalScopeBlock.hpp"
 #include "expressionList.hpp"
 #include "parameterList.hpp"
