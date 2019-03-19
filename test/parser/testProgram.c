@@ -7,5 +7,8 @@ int factorial(int n)
 int main()
 {
     int x;
-    return factorial(5);
+    int y = factorial(5);
+
+    x = y;
+    return x;
 }
