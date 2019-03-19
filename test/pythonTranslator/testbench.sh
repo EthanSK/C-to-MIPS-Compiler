@@ -25,9 +25,15 @@ rm -f $output_file
 rm -rf $output_dir
 mkdir -p ${output_dir}
 
-for c_file in ${input_dir}/*.c ; do
-    base=$(echo $c_file | sed -E -e "s|${input_dir}/([^.]+)[.]c|\1|g");
-    echo "base $base"
+c_files=$(find $input_dir -name "*.c")
+
+
+for c_file in $c_files ; do
+    base_relative=$(echo $c_file | sed -E -e "s|${input_dir}/([^.]+)[.]c|\1|g");
+    base_ext=$(basename "$c_file");
+    base=${base_ext%.*}
+
+    echo "base $base, baserel: $base_relative"
     # Compile the reference C version
     gcc -Wno-implicit-int $c_file -o $output_dir/$base
     
@@ -36,7 +42,7 @@ for c_file in ${input_dir}/*.c ; do
     ref_c_exit_code=$?
     
     # Run the reference python version
-    python3 ${input_dir}/$base.py
+    python3 ${input_dir}/$base_relative.py
     ref_py_exit_code=$?
     
     if [[ ${have_compiler} -eq 0 ]] ; then
