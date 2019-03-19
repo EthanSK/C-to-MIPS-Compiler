@@ -1,0 +1,12 @@
+[8RootNode]:
+  [13SequenceBlock]:
+    [18FunctionDefinition]:
+      [19FunctionDeclaration]:
+        [13PrimitiveType]
+        [18FunctionDeclarator]:
+          [17VariableReference]:
+            [10Identifier]
+          [13ParameterList]
+      [10ScopeBlock]:
+        [13ReturnKeyword]:
+          [14IntegerLiteral]
