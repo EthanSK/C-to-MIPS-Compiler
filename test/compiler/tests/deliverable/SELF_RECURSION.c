@@ -1,4 +1,4 @@
-int SELF_RECURSION(int r) /*r is number of times to recurse */
+int SELF_RECURSION(int r)
 {
     if (r == 0)
     {
