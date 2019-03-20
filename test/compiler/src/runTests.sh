@@ -2,9 +2,9 @@
 
 #Info:
 #run from project root
-#⚠️DO NOT rm test_deliverable/test_cases in case user mistakenly adds tests there (so can be recovered and moved later)⚠️
+#⚠️DO NOT add rm test_deliverable/test_cases in case user mistakenly adds tests there (so can be recovered and moved later)⚠️
 #should recursively test all folders in test_cases_dir
-
+#this script calls another script that copies over the deliverable tests to the correct required directory (for ease)
 
 #===========================================BOILERPLATE=================================================
 
@@ -41,7 +41,7 @@ rm -rf $log_dir
 mkdir -p $build_dir
 mkdir -p $bin_dir
 mkdir -p $log_dir
-$cwd/moveTests.sh #so we can run tests from final dir for security
+$cwd/copyDeliverableTests.sh #so we can run tests from final dir for security
 
 
 #Colours!!
@@ -63,17 +63,20 @@ white='\033[0;37m'        # White
 #run test
 for c_file in $c_files ; do #use test_cases_dir here to enforce correctly added tests only
     [[ $c_file == *_driver.c ]] && continue #ignore the driver files
-    base_name_rel=$(echo $c_file | sed -E -e "s|${test_cases_dir}/([^.]+)[.]c|\1|g");
-    parent_dir_rel=$(dirname "${base_name_rel}") #eg deliverable
-    driver_file="$deliverable_test_cases_dir/${base_name_rel}_driver.c" #but here use deliverable_test_cases to enforce file loc
-    asm_file=$build_dir/$base_name_rel.s
-    obj_file=$build_dir/$base_name_rel.o
-    binary_out=$bin_dir/$base_name_rel
+    rel_name_no_ext=$(echo $c_file | sed -E -e "s|${test_cases_dir}/([^.]+)[.]c|\1|g"); #relative (to test_cases_dir) name w/out extension
+    parent_dir_rel=$(dirname "${rel_name_no_ext}") #eg deliverable
+    driver_file="$test_cases_dir/${rel_name_no_ext}_driver.c" #but here use deliverable_test_cases to enforce file loc
+    asm_file=$build_dir/$rel_name_no_ext.s
+    obj_file=$build_dir/$rel_name_no_ext.o
+    binary_out=$bin_dir/$rel_name_no_ext
+
+    mkdir -p $bin_dir/$parent_dir_rel
+    mkdir -p $build_dir/$parent_dir_rel
     
     if [[ $is_verbose == 1 ]] ; then
-        printf "${yellow}\n\n========================== $base_name_rel ==========================\n\n${no_colour}"
+        printf "${yellow}\n\n========================== $rel_name_no_ext ==========================\n\n${no_colour}"
         printf "${purple}============= file info =============\n"
-        echo "c_file: $c_file"; echo "base_name_rel: $base_name_rel";echo "parent_dir_rel: $parent_dir_rel"; echo "driver_file: $driver_file"; echo "asm_file: $asm_file"; echo "obj_file: $obj_file"; echo "binary_out: $binary_out"
+        echo "c_file: $c_file"; echo "rel_name_no_ext: $rel_name_no_ext";echo "parent_dir_rel: $parent_dir_rel"; echo "driver_file: $driver_file"; echo "asm_file: $asm_file"; echo "obj_file: $obj_file"; echo "binary_out: $binary_out"
         printf "======================================\n${no_colour}"
     fi
     
@@ -91,7 +94,7 @@ for c_file in $c_files ; do #use test_cases_dir here to enforce correctly added 
         colour=$red
     fi
     
-    csv_line="$base_name_rel, exit code: $exit_code, $outcome"
+    csv_line="$rel_name_no_ext, exit code: $exit_code, $outcome"
     echo $csv_line >> $summary_file
     
     if [[ $is_verbose == 1 ]] ; then

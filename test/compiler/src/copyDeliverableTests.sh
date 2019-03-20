@@ -1,5 +1,5 @@
 #!/bin/bash
-test_cases_in_dir="test/compiler/testCases"
+test_cases_in_dir="test/compiler/testCases/deliverable"
 test_cases_out_dir="test_deliverable/test_cases"
 rm -rf $test_cases_out_dir
 mkdir -p $test_cases_out_dir
