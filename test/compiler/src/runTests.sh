@@ -35,6 +35,7 @@ is_verbose=1
 
 #setup
 rm -rf $output_dir
+rm -f $summary_file #must remove otherwise causes problems 
 mkdir -p $output_dir
 mkdir -p $log_dir
 $cwd/copyDeliverableTests.sh #so we can run tests from final dir for security

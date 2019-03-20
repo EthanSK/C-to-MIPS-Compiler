@@ -39,7 +39,7 @@ purple='\033[0;35m'       # Purple
 cyan='\033[0;36m'         # Cyan
 white='\033[0;37m'        # White
 
-rm -f $summary_file
+rm -f $summary_file #must remove summary file
 rm -rf $output_dir
 mkdir -p ${output_dir}
 mkdir -p $log_dir
