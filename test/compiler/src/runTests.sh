@@ -27,7 +27,7 @@ if [[ "$1" != "" ]] ; then
     c_compiler="$1" #so we can pass in our compiler
 fi
 echo $c_compiler
-gcc_flags="-mfp32 -std=c90 -ansi -pedantic"
+gcc_flags_enforce_c90=" -std=c90 -ansi -pedantic "
 
 #flags
 is_verbose=1
@@ -77,8 +77,8 @@ for c_file in $c_files ; do #use tests_dir here to enforce correctly added tests
     fi
     
     $c_compiler -S $c_file -o $asm_file
-    mips-linux-gnu-gcc $gcc_flags -o $obj_file -c $asm_file
-    mips-linux-gnu-gcc $gcc_flags -static -o $binary_out $obj_file $driver_file
+    mips-linux-gnu-gcc -mfp32 $gcc_flags_enforce_c90 -o $obj_file -c $asm_file
+    mips-linux-gnu-gcc -mfp32 $gcc_flags_enforce_c90 -static -o $binary_out $obj_file $driver_file
     qemu-mips $binary_out
     exit_code=$?
     
