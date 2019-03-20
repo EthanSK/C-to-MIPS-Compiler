@@ -15,6 +15,7 @@ public:
 protected:
   void printC(std::ostream &os) const override;
   virtual std::string getIdentifierName() const override;
+  virtual DeclTypeEnum declType() const override { return DeclTypeEnum::direct; }
 };
 
 #endif

@@ -16,6 +16,7 @@ public:
 protected:
     StatementPtr getIdentifier() const;
     StatementPtr getParamList() const;
+    virtual DeclTypeEnum declType() const override { return DeclTypeEnum::func; }
     void printC(std::ostream &os) const override;
 };
 

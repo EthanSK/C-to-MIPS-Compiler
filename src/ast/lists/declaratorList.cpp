@@ -10,12 +10,21 @@ void DeclaratorList::printC(std::ostream &os) const
     }
 }
 
+DeclaratorPtr DeclaratorList::getDeclarator(int index) const
+{
+    return reinterpret_cast<DeclaratorPtr>(branches[index]);
+}
+
 void DeclaratorList::generatePython(std::ostream &os, PythonContext &context, int scopeDepth) const
 {
-    std::vector<StatementPtr> initializations = getNodes();
-    for (int i = 0; i < initializations.size(); ++i)
+    for (int i = 0; i < branches.size(); ++i)
     {
+        DeclaratorPtr decl = getDeclarator(i);
         if (i > 0) { context.indentStream(os, scopeDepth); }
-        initializations[i]->generatePython(os, context, scopeDepth);
+        decl->generatePython(os, context, scopeDepth);
+        if (decl->declType() == Declarator::DeclTypeEnum::direct)
+        {
+            os << " = 0";
+        }
     }
 }
