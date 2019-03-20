@@ -79,7 +79,7 @@ for c_file in $c_files ; do
         echo -e "${red}Fail${no_colour}"
         res_colour=$red
     else
-        result="$rel_name_noext, Pass"
+        result="$rel_name_noext, Pass" #must keep rel name noext here coz goes in csv
         res_colour=$green
     fi
     

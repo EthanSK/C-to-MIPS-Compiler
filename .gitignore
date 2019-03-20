@@ -8,3 +8,5 @@ build
 HOSTTYPE=x86_64
 .vscode/settings.json
 test/pythonTranslator/output
+test/compiler/build
+test/compiler/bin
