@@ -3,7 +3,7 @@
 #Info:
 #run from project root
 #⚠️DO NOT add rm test_deliverable/test_cases in case user mistakenly adds tests there (so can be recovered and moved later)⚠️
-#should recursively test all folders in test_cases_dir
+#should recursively test all folders in tests_dir
 #this script calls another script that copies over the deliverable tests to the correct required directory (for ease)
 
 #===========================================BOILERPLATE=================================================
@@ -11,7 +11,7 @@
 #directories
 compiler_test_dir="test/compiler"
 cwd="$compiler_test_dir/src"
-test_cases_dir="$compiler_test_dir/testCases"
+tests_dir="$compiler_test_dir/tests"
 deliverable_test_cases_dir="test_deliverable/test_cases"
 output_dir="$compiler_test_dir/output"
 log_dir="$compiler_test_dir/log"
@@ -19,7 +19,7 @@ log_dir="$compiler_test_dir/log"
 
 #files
 summary_file="$log_dir/_summary.csv"
-c_files=$(find $test_cases_dir -name "*.c")
+c_files=$(find $tests_dir -name "*.c")
 
 #tools
 c_compiler="mips-linux-gnu-gcc" #replace this with our compiler
@@ -58,11 +58,11 @@ white='\033[0;37m'        # White
 
 
 #run test
-for c_file in $c_files ; do #use test_cases_dir here to enforce correctly added tests only
+for c_file in $c_files ; do #use tests_dir here to enforce correctly added tests only
     [[ $c_file == *_driver.c ]] && continue #ignore the driver files
-    rel_name_noext=$(echo $c_file | sed -E -e "s|${test_cases_dir}/([^.]+)[.]c|\1|g"); #relative (to test_cases_dir) name w/out extension
+    rel_name_noext=$(echo $c_file | sed -E -e "s|${tests_dir}/([^.]+)[.]c|\1|g"); #relative (to tests_dir) name w/out extension
     parent_dir_rel=$(dirname "${rel_name_noext}") #eg deliverable
-    driver_file="$test_cases_dir/${rel_name_noext}_driver.c" #but here use deliverable_test_cases to enforce file loc
+    driver_file="$tests_dir/${rel_name_noext}_driver.c" #but here use deliverable_test_cases to enforce file loc
     asm_file=$output_dir/$rel_name_noext.s
     obj_file=$output_dir/$rel_name_noext.o
     binary_out=$output_dir/$rel_name_noext

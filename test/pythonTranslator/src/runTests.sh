@@ -19,13 +19,13 @@ fi
 
 python_tests_dir="test/pythonTranslator"
 cwd="$python_tests_dir/src"
-input_dir="$python_tests_dir/tests"
+tests_dir="$python_tests_dir/tests"
 output_dir="$python_tests_dir/output"
 log_dir="$python_tests_dir/log"
 summary_file="$log_dir/_summary.csv"
 
 
-c_files=$(find $input_dir -name "*.c")
+c_files=$(find $tests_dir -name "*.c")
 
 
 #Colours!!
@@ -50,7 +50,7 @@ mkdir -p $log_dir
 
 
 for c_file in $c_files ; do
-    rel_name_noext=$(echo $c_file | sed -E -e "s|${input_dir}/([^.]+)[.]c|\1|g"); #eg functions/funcA
+    rel_name_noext=$(echo $c_file | sed -E -e "s|${tests_dir}/([^.]+)[.]c|\1|g"); #eg functions/funcA
     parent_dir_rel=$(dirname "${rel_name_noext}") #eg or functions/
     base_name_ext=$(basename "$c_file"); #eg funcA.c
     # base_name_noext=${base_name_ext%.*} #not using this any more, being more legit
@@ -66,7 +66,7 @@ for c_file in $c_files ; do
     ref_c_exit_code=$?
     
     # Run the reference python version
-    python3 ${input_dir}/$rel_name_noext.py
+    python3 ${tests_dir}/$rel_name_noext.py
     ref_py_exit_code=$?
     
     if [[ ${have_compiler} -eq 0 ]] ; then
