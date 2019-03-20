@@ -3,7 +3,7 @@
 #Info:
 #run from project root
 #⚠️DO NOT rm test_deliverable/test_cases in case user mistakenly adds tests there (so can be recovered and moved later)⚠️
-
+#should recursively test all folders in test_cases_dir
 
 
 #===========================================BOILERPLATE=================================================
@@ -20,7 +20,7 @@ log_dir="$compiler_test_dir/log"
 
 #files
 summary_file="$log_dir/_summary.csv"
-
+c_files=$(find $test_cases_dir -name "*.c")
 
 #tools
 c_compiler="mips-linux-gnu-gcc" #replace this with our compiler
@@ -59,20 +59,21 @@ white='\033[0;37m'        # White
 
 #============================================FUNCTIONALITY================================================
 
+
 #run test
-for c_file in ${test_cases_dir}/*.c ; do #use test_cases_dir here to enforce correctly added tests only
-    
+for c_file in $c_files ; do #use test_cases_dir here to enforce correctly added tests only
     [[ $c_file == *_driver.c ]] && continue #ignore the driver files
-    base_name=$(echo $c_file | sed -E -e "s|${test_cases_dir}/([^.]+)[.]c|\1|g");
-    driver_file="$deliverable_test_cases_dir/${base_name}_driver.c" #but here use deliverable_test_cases to enforce file loc
-    asm_file=$build_dir/$base_name.s
-    obj_file=$build_dir/$base_name.o
-    binary_out=$bin_dir/$base_name
+    base_name_rel=$(echo $c_file | sed -E -e "s|${test_cases_dir}/([^.]+)[.]c|\1|g");
+    parent_dir_rel=$(dirname "${base_name_rel}") #eg deliverable
+    driver_file="$deliverable_test_cases_dir/${base_name_rel}_driver.c" #but here use deliverable_test_cases to enforce file loc
+    asm_file=$build_dir/$base_name_rel.s
+    obj_file=$build_dir/$base_name_rel.o
+    binary_out=$bin_dir/$base_name_rel
     
     if [[ $is_verbose == 1 ]] ; then
-        printf "${yellow}\n\n========================== $base_name ==========================\n\n${no_colour}"
+        printf "${yellow}\n\n========================== $base_name_rel ==========================\n\n${no_colour}"
         printf "${purple}============= file info =============\n"
-        echo "c_file: $c_file"; echo "base_name: $base_name"; echo "driver_file: $driver_file"; echo "asm_file: $asm_file"; echo "obj_file: $obj_file"; echo "binary_out: $binary_out"
+        echo "c_file: $c_file"; echo "base_name_rel: $base_name_rel";echo "parent_dir_rel: $parent_dir_rel"; echo "driver_file: $driver_file"; echo "asm_file: $asm_file"; echo "obj_file: $obj_file"; echo "binary_out: $binary_out"
         printf "======================================\n${no_colour}"
     fi
     
@@ -90,7 +91,7 @@ for c_file in ${test_cases_dir}/*.c ; do #use test_cases_dir here to enforce cor
         colour=$red
     fi
     
-    csv_line="$base_name, exit code: $exit_code, $outcome"
+    csv_line="$base_name_rel, exit code: $exit_code, $outcome"
     echo $csv_line >> $summary_file
     
     if [[ $is_verbose == 1 ]] ; then
