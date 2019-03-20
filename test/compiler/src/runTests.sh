@@ -63,20 +63,20 @@ white='\033[0;37m'        # White
 #run test
 for c_file in $c_files ; do #use test_cases_dir here to enforce correctly added tests only
     [[ $c_file == *_driver.c ]] && continue #ignore the driver files
-    rel_name_no_ext=$(echo $c_file | sed -E -e "s|${test_cases_dir}/([^.]+)[.]c|\1|g"); #relative (to test_cases_dir) name w/out extension
-    parent_dir_rel=$(dirname "${rel_name_no_ext}") #eg deliverable
-    driver_file="$test_cases_dir/${rel_name_no_ext}_driver.c" #but here use deliverable_test_cases to enforce file loc
-    asm_file=$build_dir/$rel_name_no_ext.s
-    obj_file=$build_dir/$rel_name_no_ext.o
-    binary_out=$bin_dir/$rel_name_no_ext
+    rel_name_noext=$(echo $c_file | sed -E -e "s|${test_cases_dir}/([^.]+)[.]c|\1|g"); #relative (to test_cases_dir) name w/out extension
+    parent_dir_rel=$(dirname "${rel_name_noext}") #eg deliverable
+    driver_file="$test_cases_dir/${rel_name_noext}_driver.c" #but here use deliverable_test_cases to enforce file loc
+    asm_file=$build_dir/$rel_name_noext.s
+    obj_file=$build_dir/$rel_name_noext.o
+    binary_out=$bin_dir/$rel_name_noext
 
     mkdir -p $bin_dir/$parent_dir_rel
     mkdir -p $build_dir/$parent_dir_rel
     
     if [[ $is_verbose == 1 ]] ; then
-        printf "${yellow}\n\n========================== $rel_name_no_ext ==========================\n\n${no_colour}"
+        printf "${yellow}\n\n========================== $rel_name_noext ==========================\n\n${no_colour}"
         printf "${purple}============= file info =============\n"
-        echo "c_file: $c_file"; echo "rel_name_no_ext: $rel_name_no_ext";echo "parent_dir_rel: $parent_dir_rel"; echo "driver_file: $driver_file"; echo "asm_file: $asm_file"; echo "obj_file: $obj_file"; echo "binary_out: $binary_out"
+        echo "c_file: $c_file"; echo "rel_name_noext: $rel_name_noext";echo "parent_dir_rel: $parent_dir_rel"; echo "driver_file: $driver_file"; echo "asm_file: $asm_file"; echo "obj_file: $obj_file"; echo "binary_out: $binary_out"
         printf "======================================\n${no_colour}"
     fi
     
@@ -94,7 +94,7 @@ for c_file in $c_files ; do #use test_cases_dir here to enforce correctly added 
         colour=$red
     fi
     
-    csv_line="$rel_name_no_ext, exit code: $exit_code, $outcome"
+    csv_line="$rel_name_noext, exit code: $exit_code, $outcome"
     echo $csv_line >> $summary_file
     
     if [[ $is_verbose == 1 ]] ; then

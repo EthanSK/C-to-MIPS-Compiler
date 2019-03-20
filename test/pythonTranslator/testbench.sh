@@ -16,62 +16,79 @@ fi
 cwd="test/pythonTranslator"
 input_dir="$cwd/tests"
 output_dir="$cwd/output"
-output_file="$output_dir/_summary.csv"
+log_dir="$cwd/log"
+summary_file="$log_dir/_summary.csv"
 
-RED='\033[0;31m'
-NC='\033[0m'
+#Colours!!
+no_colour='\033[0m'       # Colour Reset
+black='\033[0;30m'        # Black
+red='\033[0;31m'          # Red
+green='\033[0;32m'        # Green
+yellow='\033[0;33m'       # Yellow
+blue='\033[0;34m'         # Blue
+purple='\033[0;35m'       # Purple
+cyan='\033[0;36m'         # Cyan
+white='\033[0;37m'        # White
 
-rm -f $output_file
+rm -f $summary_file
 rm -rf $output_dir
 mkdir -p ${output_dir}
+mkdir -p $log_dir
 
 c_files=$(find $input_dir -name "*.c")
 
 
 for c_file in $c_files ; do
-    base_relative=$(echo $c_file | sed -E -e "s|${input_dir}/([^.]+)[.]c|\1|g");
-    base_ext=$(basename "$c_file");
-    base=${base_ext%.*}
-
-    echo "base $base, baserel: $base_relative"
+    rel_name_noext=$(echo $c_file | sed -E -e "s|${input_dir}/([^.]+)[.]c|\1|g"); #eg functions/funcA
+    parent_dir_rel=$(dirname "${rel_name_noext}") #eg or functions/
+    base_name_ext=$(basename "$c_file"); #eg funcA.c
+    # base_name_noext=${base_name_ext%.*} #not using this any more, being more legit
+    
+    mkdir -p $output_dir/$parent_dir_rel
+    
+    echo "test: $rel_name_noext"
     # Compile the reference C version
-    gcc -Wno-implicit-int $c_file -o $output_dir/$base
+    gcc -Wno-implicit-int $c_file -o $output_dir/$rel_name_noext
     
     # Run the reference C version
-    $output_dir/$base
+    $output_dir/$rel_name_noext
     ref_c_exit_code=$?
     
     # Run the reference python version
-    python3 ${input_dir}/$base_relative.py
+    python3 ${input_dir}/$rel_name_noext.py
     ref_py_exit_code=$?
     
     if [[ ${have_compiler} -eq 0 ]] ; then
-        translated_python_file="${base}Got.py"
+        translated_python_file="${output_dir}/${rel_name_noext}_result.py"
         # Create the DUT python version by invoking the compiler with translation flags
-        $compiler --translate $c_file -o ${output_dir}/$translated_python_file > /dev/null 2>&1
+        $compiler --translate $c_file -o $translated_python_file > /dev/null 2>&1
         
         # Run the DUT python version
-        python3 ${output_dir}/$translated_python_file
+        python3 $translated_python_file
         got_py_exit_code=$?
     fi
     
     
     if [[ $ref_c_exit_code -ne $ref_py_exit_code ]] ; then
-        result="$base, REF_FAIL, Expected ${ref_c_exit_code}, got ${ref_py_exit_code}" #something is wrong with the test
-        echo -e "${RED}REF_FAIL${NC}"
+        result="$rel_name_noext, REF_FAIL, Expected ${ref_c_exit_code}, got ${ref_py_exit_code}" #something is wrong with the test
+        echo -e "${red}REF_FAIL${no_colour}"
         elif [[ ${have_compiler} -ne 0 ]] ; then
-        result="$base, Fail, No C compiler/translator"
+        result="${red}$rel_name_noext, Fail, No C compiler/translator${no_colour}"
         elif [[ $ref_c_exit_code -ne $got_py_exit_code ]] ; then
-        result="$base, Fail, Expected ${ref_c_exit_code}, got ${got_py_exit_code}" #something is wrong with our compiler
-        echo -e "${RED}Fail${NC}"
+        result="$rel_name_noext, Fail, Expected ${ref_c_exit_code}, got ${got_py_exit_code}" #something is wrong with our compiler
+        echo -e "${red}Fail${no_colour}"
+        res_colour=$red
     else
-        result="$base, Pass"
+        result="$rel_name_noext, Pass"
+        res_colour=$green
     fi
     
     csv_line="$result"
-    echo $csv_line >> $output_file
+    echo -e "${res_colour}result: $csv_line${no_colour}"
+    echo -e "${yellow}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~${no_colour}"
+    echo $csv_line >> $summary_file
 done
 
 echo
-echo "Results:"
-cat $output_file | column -t -s, | grep -E --color=auto 'Fail|$$'
+printf "${cyan}\n\n========================== SUMMARY ==========================\n\n${no_colour}"
+cat $summary_file | column -t -s, | grep -E --color=auto 'Fail|$$'
