@@ -106,6 +106,45 @@ void Statement::writePythonToFile(std::string filePath) const
     file.close();
 }
 
+void Statement::writeILToFile(std::string filePath) const
+{
+    std::ofstream file(filePath, std::ios::out | std::ios::trunc);
+    this->generateIL(file);
+    file.close();
+}
+
+void Statement::generateIL(std::vector<ILinstr> &instrs, ILContext &context) const
+{
+    ILinstr instr;
+    instr.opcode = "invalid";
+    instr.dest = typeid(*this).name();
+    instrs.push_back(instr);
+}
+
+void Statement::generateIL(std::vector<ILinstr> &instrs) const
+{
+    ILContext context;
+    generateIL(instrs, context);
+}
+
+void Statement::generateIL(std::ostream &os) const
+{
+    std::vector<ILinstr> instrs;
+    generateIL(instrs);
+    
+    for(size_t i = 0; i < instrs.size(); i++)
+    {
+       os << instrs[i].label << " " << instrs[i].opcode << " " << instrs[i].dest << " " << instrs[i].in1 << " " << instrs[i].in2;
+       
+       for(size_t j = 0; j < instrs[i].extraData.size(); j++)
+       {
+           os << " " << instrs[i].extraData[j];
+       }
+
+       os << std::endl;
+    }
+}
+
 Statement::~Statement()
 {
     for (size_t i = 0; i < branches.size(); i++)

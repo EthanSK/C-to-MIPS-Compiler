@@ -31,6 +31,11 @@ int main(int argc, char *argv[])
     ast->writePrintCToFile();
     ast->writeDotFile();
 
+    std::cerr << "\n\nIL CODE\n======================\n";
+    std::vector<ILinstr> instrs;
+    ast->generateIL(std::cerr);
+    ast->writeILToFile();
+
     if (isTranslatingToPython)
     {
         std::cerr << "\n\nPYTHON CODE\n======================\n";
