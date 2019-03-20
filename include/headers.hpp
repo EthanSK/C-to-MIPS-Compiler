@@ -68,7 +68,7 @@
 #include "unaryDereference.hpp"
 #include "unaryPreDecrement.hpp"
 #include "unaryBitwiseInvert.hpp"
-#include "unarySizeOfConst.hpp"
+#include "unarySizeofConst.hpp"
 #include "initializerList.hpp"
 #include "arrayElementReference.hpp"
 #include "ifElseStatement.hpp"
