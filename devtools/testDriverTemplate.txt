@@ -1,0 +1,5 @@
+int FUNC_NAME();
+
+int main(){
+    return !(FUNC_NAME() == FUNC_EXIT_CODE); /*exit code 0 means success */
+}
