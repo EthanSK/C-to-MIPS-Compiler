@@ -13,8 +13,7 @@ compiler_test_dir="test/compiler"
 cwd="$compiler_test_dir/src"
 test_cases_dir="$compiler_test_dir/testCases"
 deliverable_test_cases_dir="test_deliverable/test_cases"
-build_dir="$compiler_test_dir/build"
-bin_dir="$compiler_test_dir/bin"
+output_dir="$compiler_test_dir/output"
 log_dir="$compiler_test_dir/log"
 
 
@@ -35,11 +34,8 @@ is_verbose=1
 
 
 #setup
-rm -rf $build_dir
-rm -rf $bin_dir
-rm -rf $log_dir
-mkdir -p $build_dir
-mkdir -p $bin_dir
+rm -rf $output_dir
+mkdir -p $output_dir
 mkdir -p $log_dir
 $cwd/copyDeliverableTests.sh #so we can run tests from final dir for security
 
@@ -66,12 +62,11 @@ for c_file in $c_files ; do #use test_cases_dir here to enforce correctly added 
     rel_name_noext=$(echo $c_file | sed -E -e "s|${test_cases_dir}/([^.]+)[.]c|\1|g"); #relative (to test_cases_dir) name w/out extension
     parent_dir_rel=$(dirname "${rel_name_noext}") #eg deliverable
     driver_file="$test_cases_dir/${rel_name_noext}_driver.c" #but here use deliverable_test_cases to enforce file loc
-    asm_file=$build_dir/$rel_name_noext.s
-    obj_file=$build_dir/$rel_name_noext.o
-    binary_out=$bin_dir/$rel_name_noext
+    asm_file=$output_dir/$rel_name_noext.s
+    obj_file=$output_dir/$rel_name_noext.o
+    binary_out=$output_dir/$rel_name_noext
 
-    mkdir -p $bin_dir/$parent_dir_rel
-    mkdir -p $build_dir/$parent_dir_rel
+    mkdir -p $output_dir/$parent_dir_rel
     
     if [[ $is_verbose == 1 ]] ; then
         printf "${yellow}\n\n========================== $rel_name_noext ==========================\n\n${no_colour}"

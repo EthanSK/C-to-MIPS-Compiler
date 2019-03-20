@@ -1,6 +1,10 @@
 #!/bin/bash
 # to be run from project root
 
+
+
+#===========================================BOILERPLATE=================================================
+
 if [[ "$1" != "" ]] ; then
     compiler="$1"
 else
@@ -13,11 +17,16 @@ if [[ ! -f bin/c_compiler ]] ; then
     have_compiler=1
 fi
 
-cwd="test/pythonTranslator"
-input_dir="$cwd/tests"
-output_dir="$cwd/output"
-log_dir="$cwd/log"
+python_tests_dir="test/pythonTranslator"
+cwd="$python_tests_dir/src"
+input_dir="$python_tests_dir/tests"
+output_dir="$python_tests_dir/output"
+log_dir="$python_tests_dir/log"
 summary_file="$log_dir/_summary.csv"
+
+
+c_files=$(find $input_dir -name "*.c")
+
 
 #Colours!!
 no_colour='\033[0m'       # Colour Reset
@@ -35,7 +44,9 @@ rm -rf $output_dir
 mkdir -p ${output_dir}
 mkdir -p $log_dir
 
-c_files=$(find $input_dir -name "*.c")
+
+
+#============================================FUNCTIONALITY================================================
 
 
 for c_file in $c_files ; do
