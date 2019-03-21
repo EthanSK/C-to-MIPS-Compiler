@@ -40,16 +40,15 @@ void IfElseStatement::generatePython(std::ostream &os, PythonContext &context, i
 
 void IfElseStatement::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
 {
-    std::string conditionReg = "conditionReg";
-    std::string ifLabel = "ifLabel"; //makename - needs to be unique
-    std::string endLabel = "endLabel";
-    
-    getCondition()->generateIL(instrs, context, conditionReg); //sets up condition, result is 1 or 0
-    //need to generate labels for branch
-    instrs.push_back(ILinstr("branchIfEqual", ifLabel, conditionReg, "true_immediate_goes_here"));
-    getElseScopeBlock()->generateIL(instrs, context, "doesnt_matter");
-    instrs.push_back(ILinstr(endLabel));
-    instrs.push_back(ILinstr(ifLabel));
-    getIfScopeBlock()->generateIL(instrs, context, "doesnt_matter");
-    instrs.push_back(ILinstr(endLabel)); //no need, just for consistency & safety
+    std::string conditionReg = context.makeName("cond");
+    std::string else_lb = context.makeName("else");
+    std::string endif_lb = context.makeName("endif");
+
+    getCondition()->generateIL(instrs, context, conditionReg);
+    instrs.push_back(ILinstr("beq", else_lb, conditionReg, "0")); //Fix this to new immediate system later
+    getIfScopeBlock()->generateIL(instrs, context, destReg);
+    instrs.push_back(ILinstr("b", endif_lb));
+    instrs.push_back(ILinstr(else_lb));
+    getElseScopeBlock()->generateIL(instrs, context, destReg);
+    instrs.push_back(ILinstr(endif_lb));
 }
