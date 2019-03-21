@@ -11,6 +11,7 @@ class DoWhileLoop : public Statement //will have branch[0] execution block branc
 {
 public:
   DoWhileLoop(StatementPtr scopeBlock, StatementPtr condition);
+  void generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const override;
 
 protected:
   StatementPtr getScopeBlock() const;

@@ -20,6 +20,8 @@
 | or        | or x y z       | x = y \| z                           |
 | orl       | orl x y z      | x = y \|\| z                         |
 | xor       | xor x y z      | x = y ^ z                            |
+| inc       | inc x          | x++                                  |
+| dec       | dec x          | x--                                  |
 | b         | b label        | branch to label                      |
 | beq       | bgez label x y | branch to label if x == y            |
 | bne       | bne label x y  | branch to label if x != y            |
