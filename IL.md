@@ -2,8 +2,10 @@
 | --------- | -------------- | ------------------------------------ |
 | mov       | mov x y        | x = y                                |
 | movi      | movi x im      | x = im                               |
-| add       | add x y z      | x = y - z                            |
+| add       | add x y z      | x = y + z                            |
+| addi      | add x y im     | x = y + im                           |
 | sub       | sub x y z      | x = y - z                            |
+| subi      | subi x y im    | x = y - im                           |
 | mul       | mul x y z      | x = y * z                            |
 | div       | div x y z      | x = y / z                            |
 | mod       | mod x y z      | x = y % z                            |

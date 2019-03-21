@@ -14,11 +14,6 @@ void UnaryMinus::generatePython(std::ostream &os, PythonContext &context, int sc
 
 void UnaryMinus::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
 {
-	std::string innerReg = "temp_reg";
-	getOperand()->generateIL(instrs, context, innerReg);
-	ILinstr instr("sub", destReg, "0", innerReg); 
-	instrs.push_back(instr);
-	//-(5 + 2)
-	//5 + 2 --> name  - inner
-	//- <-- name   - outer
+	getOperand()->generateIL(instrs, context, "$t0");
+	instrs.push_back(ILinstr("subi", destReg, "$0", "$t0"));
 } 
