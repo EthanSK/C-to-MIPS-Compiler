@@ -1,6 +1,6 @@
 int main()
 {
-    return 1;
-    return +1;
-    return -1;
+    a = 1 > 2;
+    b = !a;
+    return b;
 }
