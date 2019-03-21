@@ -23,8 +23,9 @@
 | orl       | orl x y z          | x = y \|\| z                                          |
 | xor       | xor x y z          | x = y ^ z                                             |
 | `xxx`.eq  | `xxx`.eq x y z     | compound assignement version of `xxx`                 |
-| inc       | inc x              | x++                                                   |
-| dec       | dec x              | x--                                                   |
+| inc       | inc x              | ++x                                                   |
+| dec       | dec x              | --x                                                   |
+| neg       | neg x y            | x = ~y                                                |
 | b         | b label            | branch to label                                       |
 | beq       | bgez label x y     | branch to label if x == y                             |
 | bne       | bne label x y      | branch to label if x != y                             |

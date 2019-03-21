@@ -11,3 +11,9 @@ void UnaryBitwiseInvert::generatePython(std::ostream &os, PythonContext &context
 	getOperand()->generatePython(os, context, scopeDepth);
 	os << ")";
 }
+
+void UnaryBitwiseInvert::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
+{
+    getOperand()->generateIL(instrs, context, "$t0");
+	instrs.push_back(ILinstr("neg", destReg, "$t0"));
+}
