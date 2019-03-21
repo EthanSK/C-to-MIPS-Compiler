@@ -27,6 +27,8 @@ struct ILinstr
 
     //label
     ILinstr(std::string label) : label(label) {};
+
+    bool hasLabel() const { return label != ""; }
 };
 
 #endif

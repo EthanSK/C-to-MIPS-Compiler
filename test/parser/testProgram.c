@@ -1,8 +1,14 @@
 int main()
 {
-    int x;
-    int y = factorial(5);
-
-    x = y;
+    int x = 5;
+    if (2 > 1)
+    {
+        x = 3;
+    }
+    else
+    {
+        x = 5;
+    }
+    
     return x;
 }

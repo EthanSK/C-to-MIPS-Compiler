@@ -33,7 +33,7 @@ void PythonContext::registerGlobal(std::string identifier)
 std::string ILContext::makeName(std::string name)
 {
     std::stringstream ss;
-    int nameCount = ++_registeredNames[name];
+    int nameCount = _registeredNames[name]++;
     ss << "0x" << std::hex << nameCount << std::dec << "_" << name;
     return ss.str();
 }
