@@ -24,6 +24,5 @@ void BinaryIsNotEqualTo::generateIL(std::vector<ILinstr> &instrs, ILContext &con
 	std::string innerRightReg = "temp_reg_right";
 	getLeft()->generateIL(instrs, context, innerLeftReg);
 	getRight()->generateIL(instrs, context, innerRightReg);
-	ILinstr instr("isNotEqualTo", destReg, innerLeftReg, innerRightReg); 
-	instrs.push_back(instr);
+	instrs.push_back(ILinstr("isNotEqualTo", destReg, innerLeftReg, innerRightReg));
 }

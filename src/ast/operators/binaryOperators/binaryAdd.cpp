@@ -24,6 +24,5 @@ void BinaryAdd::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std
 	std::string innerRightReg = "temp_reg_right";
 	getLeft()->generateIL(instrs, context, innerLeftReg);
 	getRight()->generateIL(instrs, context, innerRightReg);
-	ILinstr instr("add", destReg, innerLeftReg, innerRightReg); 
-	instrs.push_back(instr);
+	instrs.push_back(ILinstr("add", destReg, innerLeftReg, innerRightReg));
 }

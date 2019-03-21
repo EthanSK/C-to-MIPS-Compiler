@@ -20,6 +20,5 @@ void BinaryDivideAssignment::generateIL(std::vector<ILinstr> &instrs, ILContext 
 	std::string innerRightReg = "temp_reg_right";
 	getLeft()->generateIL(instrs, context, innerLeftReg);
 	getRight()->generateIL(instrs, context, innerRightReg);
-	ILinstr instr("divideAssignment", destReg, innerLeftReg, innerRightReg); 
-	instrs.push_back(instr);
+	instrs.push_back(ILinstr("divideAssignment", destReg, innerLeftReg, innerRightReg));
 }

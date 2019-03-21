@@ -24,6 +24,5 @@ void BinaryLogicalAnd::generateIL(std::vector<ILinstr> &instrs, ILContext &conte
 	std::string innerRightReg = "temp_reg_right";
 	getLeft()->generateIL(instrs, context, innerLeftReg);
 	getRight()->generateIL(instrs, context, innerRightReg);
-	ILinstr instr("logicalAnd", destReg, innerLeftReg, innerRightReg); 
-	instrs.push_back(instr);
+	instrs.push_back(ILinstr("logicalAnd", destReg, innerLeftReg, innerRightReg));
 }

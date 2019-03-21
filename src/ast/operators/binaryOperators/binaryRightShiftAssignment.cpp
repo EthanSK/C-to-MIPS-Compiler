@@ -20,6 +20,5 @@ void BinaryRightShiftAssignment::generateIL(std::vector<ILinstr> &instrs, ILCont
 	std::string innerRightReg = "temp_reg_right";
 	getLeft()->generateIL(instrs, context, innerLeftReg);
 	getRight()->generateIL(instrs, context, innerRightReg);
-	ILinstr instr("rightShiftAssignment", destReg, innerLeftReg, innerRightReg); 
-	instrs.push_back(instr);
+	instrs.push_back(ILinstr("rightShiftAssignment", destReg, innerLeftReg, innerRightReg));
 }

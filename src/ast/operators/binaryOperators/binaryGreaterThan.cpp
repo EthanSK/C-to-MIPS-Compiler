@@ -24,6 +24,5 @@ void BinaryGreaterThan::generateIL(std::vector<ILinstr> &instrs, ILContext &cont
 	std::string innerRightReg = "temp_reg_right";
 	getLeft()->generateIL(instrs, context, innerLeftReg);
 	getRight()->generateIL(instrs, context, innerRightReg);
-	ILinstr instr("greaterThan", destReg, innerLeftReg, innerRightReg); 
-	instrs.push_back(instr);
+	instrs.push_back(ILinstr("greaterThan", destReg, innerLeftReg, innerRightReg));
 }

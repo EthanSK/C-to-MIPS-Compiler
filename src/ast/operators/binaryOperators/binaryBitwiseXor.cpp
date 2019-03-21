@@ -24,6 +24,5 @@ void BinaryBitwiseXor::generateIL(std::vector<ILinstr> &instrs, ILContext &conte
 	std::string innerRightReg = "temp_reg_right";
 	getLeft()->generateIL(instrs, context, innerLeftReg);
 	getRight()->generateIL(instrs, context, innerRightReg);
-	ILinstr instr("bitwiseXor", destReg, innerLeftReg, innerRightReg); 
-	instrs.push_back(instr);
+	instrs.push_back(ILinstr("bitwiseXor", destReg, innerLeftReg, innerRightReg));
 }

@@ -20,6 +20,5 @@ void BinaryBitwiseAndAssignment::generateIL(std::vector<ILinstr> &instrs, ILCont
 	std::string innerRightReg = "temp_reg_right";
 	getLeft()->generateIL(instrs, context, innerLeftReg);
 	getRight()->generateIL(instrs, context, innerRightReg);
-	ILinstr instr("bitwiseAndAssignment", destReg, innerLeftReg, innerRightReg); 
-	instrs.push_back(instr);
+	instrs.push_back(ILinstr("bitwiseAndAssignment", destReg, innerLeftReg, innerRightReg));
 }

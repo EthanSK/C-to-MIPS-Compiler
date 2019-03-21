@@ -24,6 +24,5 @@ void BinaryLessThanOrEqualTo::generateIL(std::vector<ILinstr> &instrs, ILContext
 	std::string innerRightReg = "temp_reg_right";
 	getLeft()->generateIL(instrs, context, innerLeftReg);
 	getRight()->generateIL(instrs, context, innerRightReg);
-	ILinstr instr("lessThanOrEqualTo", destReg, innerLeftReg, innerRightReg); 
-	instrs.push_back(instr);
+	instrs.push_back(ILinstr("lessThanOrEqualTo", destReg, innerLeftReg, innerRightReg));
 }

@@ -20,6 +20,5 @@ void BinaryMultiplyAssignment::generateIL(std::vector<ILinstr> &instrs, ILContex
 	std::string innerRightReg = "temp_reg_right";
 	getLeft()->generateIL(instrs, context, innerLeftReg);
 	getRight()->generateIL(instrs, context, innerRightReg);
-	ILinstr instr("multiplyAssignment", destReg, innerLeftReg, innerRightReg); 
-	instrs.push_back(instr);
+	instrs.push_back(ILinstr("multiplyAssignment", destReg, innerLeftReg, innerRightReg));
 }
