@@ -12,6 +12,7 @@ public:
     Declaration(StatementPtr type, StatementPtr decl) : Declaration(type, std::vector<StatementPtr>{decl}) { }
     Declaration(StatementPtr type) : Declaration(type, std::vector<StatementPtr>{}) { }
     void generatePython(std::ostream &os, PythonContext &context, int scopeDepth = 0) const override;
+    void generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const override;
   
 protected:
     StatementPtr getType() const;
