@@ -1,4 +1,5 @@
 #include "functionCall.hpp"
+#include <sstream>
 
 FunctionCall::FunctionCall(StatementPtr name, StatementPtr parameters) {
     branches.push_back(name);
@@ -24,4 +25,13 @@ void FunctionCall::generatePython(std::ostream &os, PythonContext &context, int 
     os << "(";
     getParameters()->generatePython(os, context, scopeDepth);
     os << ")";
+}
+
+void FunctionCall::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
+{
+    std::stringstream ss;
+    ss << getName();
+
+    ILinstr instr("fcall", destReg, ss.str());
+    instrs.push_back(instr);
 }
