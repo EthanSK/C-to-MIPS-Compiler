@@ -45,7 +45,7 @@ void IfElseStatement::generateIL(std::vector<ILinstr> &instrs, ILContext &contex
     std::string endif_lb = context.makeName("endif");
 
     getCondition()->generateIL(instrs, context, conditionReg);
-    instrs.push_back(ILinstr("beq", else_lb, conditionReg, "0")); //Fix this to new immediate system later
+    instrs.push_back(ILinstr("bnez", else_lb, conditionReg));
     getIfScopeBlock()->generateIL(instrs, context, destReg);
     instrs.push_back(ILinstr("b", endif_lb));
     instrs.push_back(ILinstr(else_lb));
