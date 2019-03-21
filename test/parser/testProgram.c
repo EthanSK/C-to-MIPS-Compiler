@@ -1,12 +1,11 @@
 int main()
 {
     int x = 10;
-    int y = 0;
-    do 
+    int y;
+    for (x = 0; x < 10; x++)
     {
-        x--;
-        y++;
-    } while (x > 0);
+        y *= 2;
+    }
 
     return y;
 }

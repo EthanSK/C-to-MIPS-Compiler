@@ -33,6 +33,9 @@ void FunctionDefinition::generatePython(std::ostream &os, PythonContext &context
 
 void FunctionDefinition::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
 {
-    instrs.push_back(ILinstr("funcDef", "removed for testing"));
+    ILinstr instr;
+    instr.opcode = "funcDef";
+    instr.extraData.push_back("removed for testing");
+    instrs.push_back(instr);
     getScopeBlock()->generateIL(instrs, context, destReg);
 }

@@ -28,3 +28,21 @@ void ForLoop::printC(std::ostream &os) const
 {
     os << "for (" << getInit() << "; " << getCondition() << "; " << getIncrement() << ")" << getScopeBlock();
 }
+
+void ForLoop::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
+{
+    std::string forCond = context.makeName("cond");
+    std::string for_lb = context.makeName("for");
+    std::string for_end_lb = context.makeName("for_end");
+
+    getInit()->generateIL(instrs, context, destReg);
+
+    instrs.push_back(ILinstr(for_lb));
+    getCondition()->generateIL(instrs, context, forCond);
+    instrs.push_back(ILinstr("bez", for_end_lb, forCond));
+
+    getScopeBlock()->generateIL(instrs, context, destReg);
+    getIncrement()->generateIL(instrs, context, destReg);
+    instrs.push_back(ILinstr("b", for_lb));
+    instrs.push_back(ILinstr(for_end_lb));
+}

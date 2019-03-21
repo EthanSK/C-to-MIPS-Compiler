@@ -11,6 +11,7 @@ class ForLoop : public Statement //will have branch[0] initializatino,, branch[1
 {
 public:
   ForLoop(StatementPtr init, StatementPtr condition, StatementPtr increment, StatementPtr scopeBlock);
+  void generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const override;
 
 protected:
   StatementPtr getInit() const;

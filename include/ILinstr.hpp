@@ -28,6 +28,8 @@ struct ILinstr
     //label
     ILinstr(std::string label) : label(label) {};
 
+    ILinstr() { }
+
     bool hasLabel() const { return label != ""; }
 };
 
