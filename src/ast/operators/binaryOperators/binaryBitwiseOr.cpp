@@ -20,8 +20,8 @@ void BinaryBitwiseOr::generatePython(std::ostream &os, PythonContext &context, i
 
 void BinaryBitwiseOr::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
 {
-	std::string leftReg = "_or_l";
-	std::string rightReg = "_or_r";
+	std::string leftReg = context.makeName("or_l");
+	std::string rightReg = context.makeName("or_r");
 	getLeft()->generateIL(instrs, context, leftReg);
 	getRight()->generateIL(instrs, context, rightReg);
 	instrs.push_back(ILinstr("or", destReg, leftReg, rightReg));

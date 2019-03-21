@@ -20,8 +20,8 @@ void BinaryAdd::generatePython(std::ostream &os, PythonContext &context, int sco
 
 void BinaryAdd::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
 {
-	std::string leftReg = "_add_l";
-	std::string rightReg = "_add_r";
+	std::string leftReg = context.makeName("add_l");
+	std::string rightReg = context.makeName("add_r");
 	getLeft()->generateIL(instrs, context, leftReg);
 	getRight()->generateIL(instrs, context, rightReg);
 	instrs.push_back(ILinstr("add", destReg, leftReg, rightReg));

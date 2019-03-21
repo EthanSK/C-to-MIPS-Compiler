@@ -16,8 +16,8 @@ void BinaryDivideAssignment::generatePython(std::ostream &os, PythonContext &con
 
 void BinaryDivideAssignment::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
 {
-	std::string leftReg = "_divideAssignment_l";
-	std::string rightReg = "_divideAssignment_r";
+	std::string leftReg = context.makeName("divideAssignment_l");
+	std::string rightReg = context.makeName("divideAssignment_r");
 	getLeft()->generateIL(instrs, context, leftReg);
 	getRight()->generateIL(instrs, context, rightReg);
 	instrs.push_back(ILinstr("divideAssignment", destReg, leftReg, rightReg));

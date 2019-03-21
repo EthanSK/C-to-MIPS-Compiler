@@ -20,8 +20,8 @@ void BinaryDivide::generatePython(std::ostream &os, PythonContext &context, int 
 
 void BinaryDivide::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
 {
-	std::string leftReg = "_div_l";
-	std::string rightReg = "_div_r";
+	std::string leftReg = context.makeName("div_l");
+	std::string rightReg = context.makeName("div_r");
 	getLeft()->generateIL(instrs, context, leftReg);
 	getRight()->generateIL(instrs, context, rightReg);
 	instrs.push_back(ILinstr("div", destReg, leftReg, rightReg));

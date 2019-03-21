@@ -20,8 +20,8 @@ void BinaryIsNotEqualTo::generatePython(std::ostream &os, PythonContext &context
 
 void BinaryIsNotEqualTo::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
 {
-	std::string leftReg = "_ne_l";
-	std::string rightReg = "_ne_r";
+	std::string leftReg = context.makeName("ne_l");
+	std::string rightReg = context.makeName("ne_r");
 	getLeft()->generateIL(instrs, context, leftReg);
 	getRight()->generateIL(instrs, context, rightReg);
 	instrs.push_back(ILinstr("ne", destReg, leftReg, rightReg));

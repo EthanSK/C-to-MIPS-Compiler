@@ -20,8 +20,8 @@ void BinaryGreaterThanOrEqualTo::generatePython(std::ostream &os, PythonContext 
 
 void BinaryGreaterThanOrEqualTo::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
 {
-	std::string leftReg = "_gte_l";
-	std::string rightReg = "_gte_r";
+	std::string leftReg = context.makeName("gte_l");
+	std::string rightReg = context.makeName("gte_r");
 	getLeft()->generateIL(instrs, context, leftReg);
 	getRight()->generateIL(instrs, context, rightReg);
 	instrs.push_back(ILinstr("gte", destReg, leftReg, rightReg));

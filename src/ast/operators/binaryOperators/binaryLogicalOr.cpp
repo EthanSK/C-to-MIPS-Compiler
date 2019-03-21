@@ -20,8 +20,8 @@ void BinaryLogicalOr::generatePython(std::ostream &os, PythonContext &context, i
 
 void BinaryLogicalOr::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
 {
-	std::string leftReg = "_orl_l";
-	std::string rightReg = "_orl_r";
+	std::string leftReg = context.makeName("orl_l");
+	std::string rightReg = context.makeName("orl_r");
 	getLeft()->generateIL(instrs, context, leftReg);
 	getRight()->generateIL(instrs, context, rightReg);
 	instrs.push_back(ILinstr("orl", destReg, leftReg, rightReg));

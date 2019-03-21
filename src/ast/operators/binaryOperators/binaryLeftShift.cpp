@@ -20,8 +20,8 @@ void BinaryLeftShift::generatePython(std::ostream &os, PythonContext &context, i
 
 void BinaryLeftShift::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
 {
-	std::string leftReg = "_lsl_l";
-	std::string rightReg = "_lsl_r";
+	std::string leftReg = context.makeName("lsl_l");
+	std::string rightReg = context.makeName("lsl_r");
 	getLeft()->generateIL(instrs, context, leftReg);
 	getRight()->generateIL(instrs, context, rightReg);
 	instrs.push_back(ILinstr("lsl", destReg, leftReg, rightReg));

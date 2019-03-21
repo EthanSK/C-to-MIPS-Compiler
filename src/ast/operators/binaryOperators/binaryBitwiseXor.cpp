@@ -20,8 +20,8 @@ void BinaryBitwiseXor::generatePython(std::ostream &os, PythonContext &context, 
 
 void BinaryBitwiseXor::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
 {
-	std::string leftReg = "_xor_l";
-	std::string rightReg = "_xor_r";
+	std::string leftReg = context.makeName("xor_l");
+	std::string rightReg = context.makeName("xor_r");
 	getLeft()->generateIL(instrs, context, leftReg);
 	getRight()->generateIL(instrs, context, rightReg);
 	instrs.push_back(ILinstr("xor", destReg, leftReg, rightReg));
