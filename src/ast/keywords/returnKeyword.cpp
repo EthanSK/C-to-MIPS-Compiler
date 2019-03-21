@@ -18,3 +18,10 @@ void ReturnKeyword::generatePython(std::ostream &os, PythonContext &context, int
     os << "return ";
     getReturnValue()->generatePython(os, context, scopeDepth);
 }
+
+void ReturnKeyword::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
+{
+    std::string retReg = context.makeName("ret");
+    getReturnValue()->generateIL(instrs, context, retReg);
+    instrs.push_back(ILinstr("retv", retReg));
+} 
