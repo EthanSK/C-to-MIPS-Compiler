@@ -26,7 +26,7 @@ class Statement
 	void writeDotFile(std::string filePath = "bin/ast.dot") const;
 	void writePrintCToFile(std::string filePath = "bin/printC.c") const;
 	void writePythonToFile(std::string filePath = "bin/translated.py") const;
-	void writeILToFile(std::string filePath = "bin/il.txt") const;
+	void writeILToFile(std::string filePath = "bin/intermediateLanguage.txt") const;
 
 	virtual void generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const;
 	void generateIL(std::vector<ILinstr> &instrs) const;
