@@ -16,6 +16,7 @@ void BinaryLeftShiftAssignment::generatePython(std::ostream &os, PythonContext &
 
 void BinaryLeftShiftAssignment::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
 {
+	//ASSIGNMENT VERSION
 	std::string leftReg = context.makeName("lsl.eq_l");
 	std::string rightReg = context.makeName("lsl.eq_r");
 	getLeft()->generateIL(instrs, context, leftReg);

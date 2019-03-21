@@ -16,7 +16,8 @@ def createHPP(op_name, symbol, py_symbol):
 def createCPP(op_name, symbol, py_symbol, opcode):
     lbracket = "\n	os << \"(\";"
     rbracket = "\n	os << \")\";"
-    symbols = [op_name, op_name, lbracket, symbol, rbracket, op_name, lbracket, py_symbol, rbracket, op_name, opcode, opcode, opcode]
+    symbols = [op_name, op_name, lbracket, symbol, rbracket, op_name, lbracket, py_symbol, rbracket]
+    symbols_il = [op_name, opcode, opcode, opcode]
     if "Assignment" in op_name: #makes no sense to have (int x = 5) [coz in brackets]
         symbols[2] = ""
         symbols[4] = ""
@@ -25,7 +26,12 @@ def createCPP(op_name, symbol, py_symbol, opcode):
 
     f = open(cppPath + "binary" + op_name + ".cpp", "w")
     to_write = open('devtools/binaryCPPtemplate.txt', 'r').read() % tuple(symbols)
-    f.write(to_write)
+    to_write_il = open('devtools/binOpSkelGenIL.txt', 'r').read() % tuple(symbols_il)
+    if "Assignment" in op_name:
+        to_write_il = open('devtools/binOpSkelGenILAssignment.txt', 'r').read() % tuple(symbols_il)
+
+
+    f.write(to_write + to_write_il)
 
 if (os.path.isdir(hppPath)):
     shutil.rmtree(hppPath)

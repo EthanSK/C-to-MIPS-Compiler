@@ -16,6 +16,7 @@ void BinaryMultiplyAssignment::generatePython(std::ostream &os, PythonContext &c
 
 void BinaryMultiplyAssignment::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
 {
+	//ASSIGNMENT VERSION
 	std::string leftReg = context.makeName("mul.eq_l");
 	std::string rightReg = context.makeName("mul.eq_r");
 	getLeft()->generateIL(instrs, context, leftReg);
