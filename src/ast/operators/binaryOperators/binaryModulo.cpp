@@ -20,9 +20,9 @@ void BinaryModulo::generatePython(std::ostream &os, PythonContext &context, int 
 
 void BinaryModulo::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
 {
-	std::string innerLeftReg = "temp_reg_left";
-	std::string innerRightReg = "temp_reg_right";
-	getLeft()->generateIL(instrs, context, innerLeftReg);
-	getRight()->generateIL(instrs, context, innerRightReg);
-	instrs.push_back(ILinstr("modulo", destReg, innerLeftReg, innerRightReg));
+	std::string leftReg = "_mod_l";
+	std::string rightReg = "_mod_r";
+	getLeft()->generateIL(instrs, context, leftReg);
+	getRight()->generateIL(instrs, context, rightReg);
+	instrs.push_back(ILinstr("mod", destReg, leftReg, rightReg));
 }

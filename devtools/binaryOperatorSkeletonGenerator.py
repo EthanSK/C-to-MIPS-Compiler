@@ -13,10 +13,10 @@ def createHPP(op_name, symbol, py_symbol):
     to_write = open('devtools/binaryHPPtemplate.txt', 'r').read() % (op_name, op_name, op_name)
     f.write(to_write)
 
-def createCPP(op_name, symbol, py_symbol):
+def createCPP(op_name, symbol, py_symbol, opcode):
     lbracket = "\n	os << \"(\";"
     rbracket = "\n	os << \")\";"
-    symbols = [op_name, op_name, lbracket, symbol, rbracket, op_name, lbracket, py_symbol, rbracket, op_name, lowerCaseFirstLetter(op_name)]
+    symbols = [op_name, op_name, lbracket, symbol, rbracket, op_name, lbracket, py_symbol, rbracket, op_name, opcode, opcode, opcode]
     if "Assignment" in op_name: #makes no sense to have (int x = 5) [coz in brackets]
         symbols[2] = ""
         symbols[4] = ""
@@ -40,13 +40,14 @@ for line in txt_file.read().splitlines():
     split_line = line.split()
 
     op_name = split_line[0]
-    symbol = split_line[1]
+    opcode = split_line[1]
+    symbol = split_line[2]
     py_symbol = symbol
-    if len(split_line) > 2:
-        py_symbol = split_line[2] #if the no. of elements on the line >2, we have a special python symbol, eg 'and' and 'or'
+    if len(split_line) > 3:
+        py_symbol = split_line[3] #if the no. of elements on the line >2, we have a special python symbol, eg 'and' and 'or'
 
     print('operator name: ' + op_name + ', symbol: ' + symbol)
     createHPP(op_name, symbol, py_symbol)
-    createCPP(op_name, symbol, py_symbol)
+    createCPP(op_name, symbol, py_symbol, opcode)
 txt_file.close()
 

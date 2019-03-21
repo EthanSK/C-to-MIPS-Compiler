@@ -1,6 +1,7 @@
 | IL Opcode | Example        | Meaning                       |
 | --------- | -------------- | ----------------------------- |
 | mov       | mov x y        | x = y                         |
+| add       | add x y z      | x = y - z                     |
 | sub       | sub x y z      | x = y - z                     |
 | mul       | mul x y z      | x = y * z                     |
 | div       | div x y z      | x = y / z                     |

@@ -20,9 +20,9 @@ void BinaryMultiply::generatePython(std::ostream &os, PythonContext &context, in
 
 void BinaryMultiply::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
 {
-	std::string innerLeftReg = "temp_reg_left";
-	std::string innerRightReg = "temp_reg_right";
-	getLeft()->generateIL(instrs, context, innerLeftReg);
-	getRight()->generateIL(instrs, context, innerRightReg);
-	instrs.push_back(ILinstr("multiply", destReg, innerLeftReg, innerRightReg));
+	std::string leftReg = "_mul_l";
+	std::string rightReg = "_mul_r";
+	getLeft()->generateIL(instrs, context, leftReg);
+	getRight()->generateIL(instrs, context, rightReg);
+	instrs.push_back(ILinstr("mul", destReg, leftReg, rightReg));
 }

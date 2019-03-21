@@ -20,9 +20,9 @@ void BinaryLogicalAnd::generatePython(std::ostream &os, PythonContext &context, 
 
 void BinaryLogicalAnd::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
 {
-	std::string innerLeftReg = "temp_reg_left";
-	std::string innerRightReg = "temp_reg_right";
-	getLeft()->generateIL(instrs, context, innerLeftReg);
-	getRight()->generateIL(instrs, context, innerRightReg);
-	instrs.push_back(ILinstr("logicalAnd", destReg, innerLeftReg, innerRightReg));
+	std::string leftReg = "_andl_l";
+	std::string rightReg = "_andl_r";
+	getLeft()->generateIL(instrs, context, leftReg);
+	getRight()->generateIL(instrs, context, rightReg);
+	instrs.push_back(ILinstr("andl", destReg, leftReg, rightReg));
 }
