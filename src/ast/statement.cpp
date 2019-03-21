@@ -115,7 +115,7 @@ void Statement::writeILToFile(std::string filePath) const
 
 void Statement::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
 {
-    ILinstr instr("no_impl", typeid(*this).name());
+    ILinstr instr("noImpl", typeid(*this).name());
     instrs.push_back(instr);
 }
 
