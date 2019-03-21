@@ -18,9 +18,13 @@ void BinaryDivideAssignment::generatePython(std::ostream &os, PythonContext &con
 
 void BinaryDivideAssignment::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
 {
-	std::string leftReg = context.makeName("div.eq_l");
-	std::string rightReg = context.makeName("div.eq_r");
+	std::string opcode = "div";
+	std::string leftReg = context.makeName(opcode + "_l");
+	std::string rightReg = context.makeName(opcode + "_r");
+	std::string resultReg = context.makeName(opcode + "_res");
+	getLeft()->generateIL(instrs, context, leftReg);
 	getRight()->generateIL(instrs, context, rightReg);
-	instrs.push_back(ILinstr("div.eq", destReg, leftReg, rightReg));
-	dynamic_cast<LValuePtr>(getLeft())->generateLValueStoreIL(instrs, context, leftReg);
+	instrs.push_back(ILinstr(opcode, resultReg, leftReg, rightReg));
+	instrs.push_back(ILinstr("mov", destReg, resultReg));
+	dynamic_cast<LValuePtr>(getLeft())->generateLValueStoreIL(instrs, context, resultReg);
 }

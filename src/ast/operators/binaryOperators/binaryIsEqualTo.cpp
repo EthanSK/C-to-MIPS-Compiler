@@ -22,9 +22,10 @@ void BinaryIsEqualTo::generatePython(std::ostream &os, PythonContext &context, i
 
 void BinaryIsEqualTo::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
 {
-	std::string leftReg = context.makeName("eq_l");
-	std::string rightReg = context.makeName("eq_r");
+	std::string opcode = "eq";
+	std::string leftReg = context.makeName(opcode + "_l");
+	std::string rightReg = context.makeName(opcode + "_r");
 	getLeft()->generateIL(instrs, context, leftReg);
 	getRight()->generateIL(instrs, context, rightReg);
-	instrs.push_back(ILinstr("eq", destReg, leftReg, rightReg));
+	instrs.push_back(ILinstr(opcode, destReg, leftReg, rightReg));
 }

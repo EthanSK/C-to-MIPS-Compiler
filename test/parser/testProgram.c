@@ -1,4 +1,10 @@
 int main()
 {
-    x = 1;
+    int x = 0;
+    if (!x)
+    {
+        x += 1;
+    }
+
+    return x;
 }

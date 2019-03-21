@@ -22,9 +22,10 @@ void BinaryGreaterThanOrEqualTo::generatePython(std::ostream &os, PythonContext 
 
 void BinaryGreaterThanOrEqualTo::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
 {
-	std::string leftReg = context.makeName("gte_l");
-	std::string rightReg = context.makeName("gte_r");
+	std::string opcode = "gte";
+	std::string leftReg = context.makeName(opcode + "_l");
+	std::string rightReg = context.makeName(opcode + "_r");
 	getLeft()->generateIL(instrs, context, leftReg);
 	getRight()->generateIL(instrs, context, rightReg);
-	instrs.push_back(ILinstr("gte", destReg, leftReg, rightReg));
+	instrs.push_back(ILinstr(opcode, destReg, leftReg, rightReg));
 }

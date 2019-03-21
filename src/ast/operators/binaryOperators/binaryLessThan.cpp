@@ -22,9 +22,10 @@ void BinaryLessThan::generatePython(std::ostream &os, PythonContext &context, in
 
 void BinaryLessThan::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
 {
-	std::string leftReg = context.makeName("lt_l");
-	std::string rightReg = context.makeName("lt_r");
+	std::string opcode = "lt";
+	std::string leftReg = context.makeName(opcode + "_l");
+	std::string rightReg = context.makeName(opcode + "_r");
 	getLeft()->generateIL(instrs, context, leftReg);
 	getRight()->generateIL(instrs, context, rightReg);
-	instrs.push_back(ILinstr("lt", destReg, leftReg, rightReg));
+	instrs.push_back(ILinstr(opcode, destReg, leftReg, rightReg));
 }

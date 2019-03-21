@@ -17,7 +17,7 @@ def createCPP(op_name, symbol, py_symbol, opcode):
     lbracket = "\n	os << \"(\";"
     rbracket = "\n	os << \")\";"
     symbols = [op_name, op_name, lbracket, symbol, rbracket, op_name, lbracket, py_symbol, rbracket]
-    symbols_il = [op_name, opcode, opcode, opcode]
+    symbols_il = [op_name, opcode]
     if "Assignment" in op_name: #makes no sense to have (int x = 5) [coz in brackets]
         symbols[2] = ""
         symbols[4] = ""

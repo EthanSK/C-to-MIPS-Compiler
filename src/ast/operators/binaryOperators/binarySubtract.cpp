@@ -22,9 +22,10 @@ void BinarySubtract::generatePython(std::ostream &os, PythonContext &context, in
 
 void BinarySubtract::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
 {
-	std::string leftReg = context.makeName("sub_l");
-	std::string rightReg = context.makeName("sub_r");
+	std::string opcode = "sub";
+	std::string leftReg = context.makeName(opcode + "_l");
+	std::string rightReg = context.makeName(opcode + "_r");
 	getLeft()->generateIL(instrs, context, leftReg);
 	getRight()->generateIL(instrs, context, rightReg);
-	instrs.push_back(ILinstr("sub", destReg, leftReg, rightReg));
+	instrs.push_back(ILinstr(opcode, destReg, leftReg, rightReg));
 }
