@@ -173,6 +173,7 @@ void Statement::generateIL(std::ostream &os) const
        }
 
        os << std::endl;
+       if (instrs[i].opcode == "fend") { os << std::endl; }
     }
 }
 
