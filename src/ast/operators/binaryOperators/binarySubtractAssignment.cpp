@@ -16,9 +16,9 @@ void BinarySubtractAssignment::generatePython(std::ostream &os, PythonContext &c
 
 void BinarySubtractAssignment::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
 {
-	std::string leftReg = context.makeName("subtractAssignment_l");
-	std::string rightReg = context.makeName("subtractAssignment_r");
+	std::string leftReg = context.makeName("sub.eq_l");
+	std::string rightReg = context.makeName("sub.eq_r");
 	getLeft()->generateIL(instrs, context, leftReg);
 	getRight()->generateIL(instrs, context, rightReg);
-	instrs.push_back(ILinstr("subtractAssignment", destReg, leftReg, rightReg));
+	instrs.push_back(ILinstr("sub.eq", destReg, leftReg, rightReg));
 }

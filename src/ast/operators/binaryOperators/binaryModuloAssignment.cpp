@@ -16,9 +16,9 @@ void BinaryModuloAssignment::generatePython(std::ostream &os, PythonContext &con
 
 void BinaryModuloAssignment::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
 {
-	std::string leftReg = context.makeName("moduloAssignment_l");
-	std::string rightReg = context.makeName("moduloAssignment_r");
+	std::string leftReg = context.makeName("mod.eq_l");
+	std::string rightReg = context.makeName("mod.eq_r");
 	getLeft()->generateIL(instrs, context, leftReg);
 	getRight()->generateIL(instrs, context, rightReg);
-	instrs.push_back(ILinstr("moduloAssignment", destReg, leftReg, rightReg));
+	instrs.push_back(ILinstr("mod.eq", destReg, leftReg, rightReg));
 }

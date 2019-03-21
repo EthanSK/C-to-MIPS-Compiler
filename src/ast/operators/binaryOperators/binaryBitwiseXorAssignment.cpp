@@ -16,9 +16,9 @@ void BinaryBitwiseXorAssignment::generatePython(std::ostream &os, PythonContext 
 
 void BinaryBitwiseXorAssignment::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
 {
-	std::string leftReg = context.makeName("bitwiseXorAssignment_l");
-	std::string rightReg = context.makeName("bitwiseXorAssignment_r");
+	std::string leftReg = context.makeName("xor.eq_l");
+	std::string rightReg = context.makeName("xor.eq_r");
 	getLeft()->generateIL(instrs, context, leftReg);
 	getRight()->generateIL(instrs, context, rightReg);
-	instrs.push_back(ILinstr("bitwiseXorAssignment", destReg, leftReg, rightReg));
+	instrs.push_back(ILinstr("xor.eq", destReg, leftReg, rightReg));
 }

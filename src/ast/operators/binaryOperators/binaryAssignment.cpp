@@ -16,9 +16,9 @@ void BinaryAssignment::generatePython(std::ostream &os, PythonContext &context, 
 
 void BinaryAssignment::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
 {
-	std::string leftReg = context.makeName("assignment_l");
-	std::string rightReg = context.makeName("assignment_r");
+	std::string leftReg = context.makeName("mov.eq_l");
+	std::string rightReg = context.makeName("mov.eq_r");
 	getLeft()->generateIL(instrs, context, leftReg);
 	getRight()->generateIL(instrs, context, rightReg);
-	instrs.push_back(ILinstr("assignment", destReg, leftReg, rightReg));
+	instrs.push_back(ILinstr("mov.eq", destReg, leftReg, rightReg));
 }

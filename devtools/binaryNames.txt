@@ -16,14 +16,14 @@ LogicalAnd andl && and
 BitwiseOr or |
 LogicalOr orl || or
 BitwiseXor xor ^
-Assignment assignment =
-AddAssignment addAssignment +=
-SubtractAssignment subtractAssignment -=
-MultiplyAssignment multiplyAssignment *=
-DivideAssignment divideAssignment /= //=
-ModuloAssignment moduloAssignment %=
-BitwiseAndAssignment bitwiseAndAssignment &=
-BitwiseOrAssignment bitwiseOrAssignment |=
-BitwiseXorAssignment bitwiseXorAssignment ^=
-LeftShiftAssignment leftShiftAssignment <<=
-RightShiftAssignment rightShiftAssignment >>=
+Assignment mov.eq =
+AddAssignment add.eq +=
+SubtractAssignment sub.eq -=
+MultiplyAssignment mul.eq *=
+DivideAssignment div.eq /= //=
+ModuloAssignment mod.eq %=
+BitwiseAndAssignment and.eq &=
+BitwiseOrAssignment or.eq |=
+BitwiseXorAssignment xor.eq ^=
+LeftShiftAssignment lsl.eq <<=
+RightShiftAssignment lsr.eq >>=

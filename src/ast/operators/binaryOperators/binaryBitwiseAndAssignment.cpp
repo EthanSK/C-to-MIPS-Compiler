@@ -16,9 +16,9 @@ void BinaryBitwiseAndAssignment::generatePython(std::ostream &os, PythonContext 
 
 void BinaryBitwiseAndAssignment::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
 {
-	std::string leftReg = context.makeName("bitwiseAndAssignment_l");
-	std::string rightReg = context.makeName("bitwiseAndAssignment_r");
+	std::string leftReg = context.makeName("and.eq_l");
+	std::string rightReg = context.makeName("and.eq_r");
 	getLeft()->generateIL(instrs, context, leftReg);
 	getRight()->generateIL(instrs, context, rightReg);
-	instrs.push_back(ILinstr("bitwiseAndAssignment", destReg, leftReg, rightReg));
+	instrs.push_back(ILinstr("and.eq", destReg, leftReg, rightReg));
 }

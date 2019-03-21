@@ -16,3 +16,8 @@ void Identifier::generatePython(std::ostream &os, PythonContext &context, int sc
 {
 	os << _name;
 }
+
+void Identifier::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
+{
+	instrs.push_back(ILinstr("mov", destReg, _name));
+}
