@@ -1,4 +1,5 @@
 #include "binaryBitwiseXor.hpp"
+#include "lvalue.hpp"
 #include <sstream>
 
 void BinaryBitwiseXor::printC(std::ostream &os) const

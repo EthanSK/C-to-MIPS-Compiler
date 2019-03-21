@@ -1,4 +1,5 @@
 #include "binarySubtractAssignment.hpp"
+#include "lvalue.hpp"
 #include <sstream>
 
 void BinarySubtractAssignment::printC(std::ostream &os) const
@@ -17,8 +18,9 @@ void BinarySubtractAssignment::generatePython(std::ostream &os, PythonContext &c
 
 void BinarySubtractAssignment::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
 {
-	std::string leftVar = getLeft()->toString(); //sub.eq_l
+	std::string leftReg = context.makeName("sub.eq_l");
 	std::string rightReg = context.makeName("sub.eq_r");
 	getRight()->generateIL(instrs, context, rightReg);
-	instrs.push_back(ILinstr("sub.eq", destReg, leftVar, rightReg));
+	instrs.push_back(ILinstr("sub.eq", destReg, leftReg, rightReg));
+	dynamic_cast<LValuePtr>(getLeft())->generateLValueStoreIL(instrs, context, leftReg);
 }

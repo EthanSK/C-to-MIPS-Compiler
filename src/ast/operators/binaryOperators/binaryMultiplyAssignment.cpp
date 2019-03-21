@@ -1,4 +1,5 @@
 #include "binaryMultiplyAssignment.hpp"
+#include "lvalue.hpp"
 #include <sstream>
 
 void BinaryMultiplyAssignment::printC(std::ostream &os) const
@@ -17,8 +18,9 @@ void BinaryMultiplyAssignment::generatePython(std::ostream &os, PythonContext &c
 
 void BinaryMultiplyAssignment::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
 {
-	std::string leftVar = getLeft()->toString(); //mul.eq_l
+	std::string leftReg = context.makeName("mul.eq_l");
 	std::string rightReg = context.makeName("mul.eq_r");
 	getRight()->generateIL(instrs, context, rightReg);
-	instrs.push_back(ILinstr("mul.eq", destReg, leftVar, rightReg));
+	instrs.push_back(ILinstr("mul.eq", destReg, leftReg, rightReg));
+	dynamic_cast<LValuePtr>(getLeft())->generateLValueStoreIL(instrs, context, leftReg);
 }

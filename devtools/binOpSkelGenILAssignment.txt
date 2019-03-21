@@ -1,8 +1,9 @@
 
 void Binary%s::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
 {
-	std::string leftVar = getLeft()->toString(); //%s_l
+	std::string leftReg = context.makeName("%s_l");
 	std::string rightReg = context.makeName("%s_r");
 	getRight()->generateIL(instrs, context, rightReg);
-	instrs.push_back(ILinstr("%s", destReg, leftVar, rightReg));
+	instrs.push_back(ILinstr("%s", destReg, leftReg, rightReg));
+	dynamic_cast<LValuePtr>(getLeft())->generateLValueStoreIL(instrs, context, leftReg);
 }

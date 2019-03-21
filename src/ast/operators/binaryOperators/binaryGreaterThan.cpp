@@ -1,4 +1,5 @@
 #include "binaryGreaterThan.hpp"
+#include "lvalue.hpp"
 #include <sstream>
 
 void BinaryGreaterThan::printC(std::ostream &os) const

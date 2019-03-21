@@ -1,4 +1,5 @@
 #include "binaryDivideAssignment.hpp"
+#include "lvalue.hpp"
 #include <sstream>
 
 void BinaryDivideAssignment::printC(std::ostream &os) const
@@ -17,8 +18,9 @@ void BinaryDivideAssignment::generatePython(std::ostream &os, PythonContext &con
 
 void BinaryDivideAssignment::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
 {
-	std::string leftVar = getLeft()->toString(); //div.eq_l
+	std::string leftReg = context.makeName("div.eq_l");
 	std::string rightReg = context.makeName("div.eq_r");
 	getRight()->generateIL(instrs, context, rightReg);
-	instrs.push_back(ILinstr("div.eq", destReg, leftVar, rightReg));
+	instrs.push_back(ILinstr("div.eq", destReg, leftReg, rightReg));
+	dynamic_cast<LValuePtr>(getLeft())->generateLValueStoreIL(instrs, context, leftReg);
 }

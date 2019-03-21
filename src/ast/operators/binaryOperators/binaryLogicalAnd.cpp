@@ -1,4 +1,5 @@
 #include "binaryLogicalAnd.hpp"
+#include "lvalue.hpp"
 #include <sstream>
 
 void BinaryLogicalAnd::printC(std::ostream &os) const

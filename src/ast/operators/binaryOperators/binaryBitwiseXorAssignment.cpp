@@ -1,4 +1,5 @@
 #include "binaryBitwiseXorAssignment.hpp"
+#include "lvalue.hpp"
 #include <sstream>
 
 void BinaryBitwiseXorAssignment::printC(std::ostream &os) const
@@ -17,8 +18,9 @@ void BinaryBitwiseXorAssignment::generatePython(std::ostream &os, PythonContext 
 
 void BinaryBitwiseXorAssignment::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
 {
-	std::string leftVar = getLeft()->toString(); //xor.eq_l
+	std::string leftReg = context.makeName("xor.eq_l");
 	std::string rightReg = context.makeName("xor.eq_r");
 	getRight()->generateIL(instrs, context, rightReg);
-	instrs.push_back(ILinstr("xor.eq", destReg, leftVar, rightReg));
+	instrs.push_back(ILinstr("xor.eq", destReg, leftReg, rightReg));
+	dynamic_cast<LValuePtr>(getLeft())->generateLValueStoreIL(instrs, context, leftReg);
 }

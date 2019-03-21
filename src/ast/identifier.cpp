@@ -21,3 +21,8 @@ void Identifier::generateIL(std::vector<ILinstr> &instrs, ILContext &context, st
 {
 	instrs.push_back(ILinstr("mov", destReg, _name));
 }
+
+void Identifier::generateLValueStoreIL(std::vector<ILinstr> &instrs, ILContext &context, std::string inputReg) const
+{
+	instrs.push_back(ILinstr("mov", _name, inputReg));
+}
