@@ -16,11 +16,7 @@ void UnaryMinus::generateIL(std::vector<ILinstr> &instrs, ILContext &context, st
 {
 	std::string innerName = "temp_name";
 	getOperand()->generateIL(instrs, context, innerName);
-	ILinstr instr;
-	instr.opcode = "sub";
-	instr.dest = destReg;
-	instr.in1 = "0";
-	instr.in2 = innerName;
+	ILinstr instr("sub", destReg, "0", innerName, {});
 	instrs.push_back(instr);
 	//-(5 + 2)
 	//5 + 2 --> name  - inner
