@@ -42,7 +42,6 @@ void IfElseStatement::generateIL(std::vector<ILinstr> &instrs, ILContext &contex
 {
     std::string conditionReg = "conditionReg";
     std::string ifLabel = "ifLabel"; //makename - needs to be unique
-    std::string elseLabel = "elseLabel";
     std::string endLabel = "endLabel";
     
     getCondition()->generateIL(instrs, context, conditionReg); //sets up condition, result is 1 or 0

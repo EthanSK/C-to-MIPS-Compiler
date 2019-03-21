@@ -14,5 +14,6 @@ void UnaryAdd::generatePython(std::ostream &os, PythonContext &context, int scop
 
 void UnaryAdd::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
 {
-	
+	getOperand()->generateIL(instrs, context, "doesnt_matter");
+	//no need to add it to 0, makes no difference
 }
