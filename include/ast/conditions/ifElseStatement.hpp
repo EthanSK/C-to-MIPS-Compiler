@@ -10,9 +10,12 @@
 
 class IfElseStatement : public Statement //will have branch[0] condition, branch[1] if block, and branch[2] else block
 {
+
+  void generatePython(std::ostream &os, PythonContext &context, int scopeDepth = 0) const override;
+  void generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const override;
+
 public:
   IfElseStatement(StatementPtr condition, StatementPtr ifScopeBlock, StatementPtr elseScopeBlock);
-  void generatePython(std::ostream &os, PythonContext &context, int scopeDepth = 0) const override;
 
 protected:
   StatementPtr getCondition() const;

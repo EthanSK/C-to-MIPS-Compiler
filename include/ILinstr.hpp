@@ -11,10 +11,10 @@ struct ILinstr
     std::string dest;                   //output register
     std::string input1;                 //input register
     std::string input2;                 //input register 2
-    std::vector<std::string> extraData; //could be used for func params
+    std::vector<std::string> extraData; //could be used for func params,
 
-    //all properties
-    ILinstr(std::string label, std::string opcode, std::string dest, std::string input1, std::string input2, std::vector<std::string> extraData) : label(label), opcode(opcode), dest(dest), input1(input1), input2(input2), extraData(extraData){};
+    //all properties w/out label
+    ILinstr(std::string opcode, std::string dest, std::string input1, std::string input2, std::vector<std::string> extraData) : opcode(opcode), dest(dest), input1(input1), input2(input2), extraData(extraData){};
 
     //commonly used properties
     ILinstr(std::string opcode, std::string dest, std::string input1, std::string input2) : opcode(opcode), dest(dest), input1(input1), input2(input2){};
@@ -24,6 +24,9 @@ struct ILinstr
 
     //no implementation
     ILinstr(std::string opcode, std::string dest) : opcode(opcode), dest(dest){};
+
+    //label
+    ILinstr(std::string label) : label(label) {};
 };
 
 #endif
