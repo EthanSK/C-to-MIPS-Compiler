@@ -151,7 +151,14 @@ void Statement::generateIL(std::ostream &os) const
     }
 
     const int FIXED_PADDING = 4;
-    for (int i = 0; i < columnWidths.size(); i++) { columnWidths[i] += FIXED_PADDING; }
+    for (int i = 0; i < columnWidths.size(); i++)
+    {
+        if (columnWidths[i] > 0)
+        {
+            columnWidths[i] += FIXED_PADDING;
+        }
+    }
+
     for (size_t i = 0; i < instrs.size(); i++)
     {
        os << Utils::padString(instrs[i].label, columnWidths[0]);
