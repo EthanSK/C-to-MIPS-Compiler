@@ -15,7 +15,7 @@ public:
     }
 
     template <class DestType, class SrcType>
-    static const DestType* tryCast(const SrcType* src, const char* errorOnFail)
+    static const DestType* tryCast(const SrcType* src, std::string errorOnFail)
     {
         const DestType* dest= dynamic_cast<const DestType*>(src);
         if (dest) { return dest; }

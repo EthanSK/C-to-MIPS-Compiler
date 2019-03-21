@@ -27,6 +27,6 @@ void BinaryDivideAssignment::generateIL(std::vector<ILinstr> &instrs, ILContext 
 	getRight()->generateIL(instrs, context, rightReg);
 	instrs.push_back(ILinstr(opcode, resultReg, leftReg, rightReg));
 	instrs.push_back(ILinstr("mov", destReg, resultReg));
-	LValuePtr lvalue = Utils::tryCast<LValue>(getLeft(), "LHS of an assignment must be an lvalue");
+	LValuePtr lvalue = Utils::tryCast<LValue>(getLeft(), "Illegal " + opcode + ": " + toString() + ". LHS of an assignment must be an lvalue");
 	lvalue->generateLValueStoreIL(instrs, context, resultReg);
 }
