@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include <unordered_map>
 
 class Context
 {
@@ -10,10 +11,13 @@ class Context
 
 class ILContext : public Context 
 {
+public:
+    std::string makeName(std::string name);
 
+private:
+    std::unordered_map<std::string, int> _registeredNames;
 };
 
-   
 class PythonContext : public Context
 {
 public:

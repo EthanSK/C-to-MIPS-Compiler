@@ -1,4 +1,6 @@
 #include "context.hpp"
+#include <sstream>
+#include <ios>
 
 void PythonContext::indentStream(std::ostream& os, int scopeDepth) const
 {
@@ -26,4 +28,12 @@ void PythonContext::dumpGlobals(std::ostream& os, int scopeDepth) const
 void PythonContext::registerGlobal(std::string identifier)
 {
     _globalIdentifiers.push_back(identifier);
+}
+
+std::string ILContext::makeName(std::string name)
+{
+    std::stringstream ss;
+    int nameCount = ++_registeredNames[name];
+    ss << "0x" << std::hex << nameCount << std::dec << "_" << name;
+    return ss.str();
 }
