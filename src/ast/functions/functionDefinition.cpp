@@ -30,3 +30,9 @@ void FunctionDefinition::generatePython(std::ostream &os, PythonContext &context
     getScopeBlock()->generatePython(os, context, scopeDepth + 1);
     context.indentStream(os, scopeDepth);
 }
+
+void FunctionDefinition::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
+{
+    instrs.push_back(ILinstr("funcDef", "removed for testing"));
+    getScopeBlock()->generateIL(instrs, context, destReg);
+}

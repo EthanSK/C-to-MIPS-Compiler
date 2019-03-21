@@ -1,15 +1,3 @@
-int;
-int yy;
-int xx, xxx = 10, xxxx = 20;
-
-int func1(int boi), func2();
-
-int factorial(int n)
-{
-    if (n == 0) { return 1; }
-    else { return n * factorial(n - 1); }
-}
-
 int main()
 {
     int x;
@@ -18,6 +6,3 @@ int main()
     x = y;
     return x;
 }
-
-func1(boi) { return boi; }
-func2() { return xxx; }
