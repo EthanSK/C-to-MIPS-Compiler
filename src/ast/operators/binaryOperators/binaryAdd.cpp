@@ -1,4 +1,5 @@
 #include "binaryAdd.hpp"
+#include <sstream>
 
 void BinaryAdd::printC(std::ostream &os) const
 {

@@ -19,6 +19,8 @@ class Statement
 	friend std::ostream &operator<<(std::ostream &os, const Statement &statement);
 	friend std::ostream &operator<<(std::ostream &os, const StatementPtr statementPtr);
 
+	std::string toString() const;
+
 	void printTree(std::ostream &os, int scopeDepth = 0) const;
 	virtual void generatePython(std::ostream &os, PythonContext &context, int scopeDepth = 0) const;
 	void generatePython(std::ostream &os) const;

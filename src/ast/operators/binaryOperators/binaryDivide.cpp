@@ -1,4 +1,5 @@
 #include "binaryDivide.hpp"
+#include <sstream>
 
 void BinaryDivide::printC(std::ostream &os) const
 {

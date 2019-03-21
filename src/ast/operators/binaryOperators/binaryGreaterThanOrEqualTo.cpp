@@ -1,4 +1,5 @@
 #include "binaryGreaterThanOrEqualTo.hpp"
+#include <sstream>
 
 void BinaryGreaterThanOrEqualTo::printC(std::ostream &os) const
 {

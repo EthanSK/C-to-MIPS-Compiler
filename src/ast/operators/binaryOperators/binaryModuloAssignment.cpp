@@ -1,4 +1,5 @@
 #include "binaryModuloAssignment.hpp"
+#include <sstream>
 
 void BinaryModuloAssignment::printC(std::ostream &os) const
 {
@@ -16,10 +17,8 @@ void BinaryModuloAssignment::generatePython(std::ostream &os, PythonContext &con
 
 void BinaryModuloAssignment::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
 {
-	//ASSIGNMENT VERSION
-	std::string leftReg = context.makeName("mod.eq_l");
+	std::string leftVar = getLeft()->toString(); //mod.eq_l
 	std::string rightReg = context.makeName("mod.eq_r");
-	getLeft()->generateIL(instrs, context, leftReg);
 	getRight()->generateIL(instrs, context, rightReg);
-	instrs.push_back(ILinstr("mod.eq", destReg, leftReg, rightReg));
+	instrs.push_back(ILinstr("mod.eq", destReg, leftVar, rightReg));
 }

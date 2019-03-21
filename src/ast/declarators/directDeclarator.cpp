@@ -11,9 +11,7 @@ StatementPtr DirectDeclarator::getIdentifier() const{
 }
 
 std::string DirectDeclarator::getIdentifierName() const{
-    std::stringstream ss;
-    ss << getIdentifier();
-    return ss.str();
+    return getIdentifier()->toString();
 }
 
 void DirectDeclarator::printC(std::ostream &os) const

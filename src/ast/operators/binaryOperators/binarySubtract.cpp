@@ -1,4 +1,5 @@
 #include "binarySubtract.hpp"
+#include <sstream>
 
 void BinarySubtract::printC(std::ostream &os) const
 {

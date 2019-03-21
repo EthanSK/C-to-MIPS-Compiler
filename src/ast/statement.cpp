@@ -15,6 +15,13 @@ std::ostream &operator<<(std::ostream &os, const StatementPtr statementPtr)
     return os;
 }
 
+std::string Statement::toString() const
+{
+    std::stringstream ss;
+	ss << *this;
+	return ss.str();
+}
+
 void Statement::generatePython(std::ostream &os, PythonContext &context, int scopeDepth) const
 {
     os << "[Not Supported: " << typeid(*this).name() << "]";
@@ -140,7 +147,7 @@ void Statement::generateIL(std::ostream &os) const
         columnWidths[1] = std::max(columnWidths[1], instrs[i].opcode.length());
         columnWidths[2] = std::max(columnWidths[2], instrs[i].dest.length());
         columnWidths[3] = std::max(columnWidths[3], instrs[i].input1.length());
-        columnWidths[4] = std::max(columnWidths[3], instrs[i].input2.length());
+        columnWidths[4] = std::max(columnWidths[4], instrs[i].input2.length());
     }
 
     const int FIXED_PADDING = 4;

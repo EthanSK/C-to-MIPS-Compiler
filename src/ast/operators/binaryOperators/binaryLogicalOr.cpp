@@ -1,4 +1,5 @@
 #include "binaryLogicalOr.hpp"
+#include <sstream>
 
 void BinaryLogicalOr::printC(std::ostream &os) const
 {

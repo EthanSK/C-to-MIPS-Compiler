@@ -1,4 +1,5 @@
 #include "binaryMultiply.hpp"
+#include <sstream>
 
 void BinaryMultiply::printC(std::ostream &os) const
 {

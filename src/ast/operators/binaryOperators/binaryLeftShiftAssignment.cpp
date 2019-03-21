@@ -1,4 +1,5 @@
 #include "binaryLeftShiftAssignment.hpp"
+#include <sstream>
 
 void BinaryLeftShiftAssignment::printC(std::ostream &os) const
 {
@@ -16,10 +17,8 @@ void BinaryLeftShiftAssignment::generatePython(std::ostream &os, PythonContext &
 
 void BinaryLeftShiftAssignment::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
 {
-	//ASSIGNMENT VERSION
-	std::string leftReg = context.makeName("lsl.eq_l");
+	std::string leftVar = getLeft()->toString(); //lsl.eq_l
 	std::string rightReg = context.makeName("lsl.eq_r");
-	getLeft()->generateIL(instrs, context, leftReg);
 	getRight()->generateIL(instrs, context, rightReg);
-	instrs.push_back(ILinstr("lsl.eq", destReg, leftReg, rightReg));
+	instrs.push_back(ILinstr("lsl.eq", destReg, leftVar, rightReg));
 }

@@ -1,4 +1,5 @@
 #include "binaryDivideAssignment.hpp"
+#include <sstream>
 
 void BinaryDivideAssignment::printC(std::ostream &os) const
 {
@@ -16,10 +17,8 @@ void BinaryDivideAssignment::generatePython(std::ostream &os, PythonContext &con
 
 void BinaryDivideAssignment::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
 {
-	//ASSIGNMENT VERSION
-	std::string leftReg = context.makeName("div.eq_l");
+	std::string leftVar = getLeft()->toString(); //div.eq_l
 	std::string rightReg = context.makeName("div.eq_r");
-	getLeft()->generateIL(instrs, context, leftReg);
 	getRight()->generateIL(instrs, context, rightReg);
-	instrs.push_back(ILinstr("div.eq", destReg, leftReg, rightReg));
+	instrs.push_back(ILinstr("div.eq", destReg, leftVar, rightReg));
 }

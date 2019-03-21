@@ -16,9 +16,7 @@ StatementPtr FunctionDeclarator::getParamList() const{
 }
 
 std::string FunctionDeclarator::getIdentifierName() const{
-    std::stringstream ss;
-    ss << getIdentifier();
-    return ss.str();
+    return getIdentifier()->toString();
 }
 
 void FunctionDeclarator::printC(std::ostream &os) const

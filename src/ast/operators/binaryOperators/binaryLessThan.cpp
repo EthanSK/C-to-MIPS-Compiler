@@ -1,4 +1,5 @@
 #include "binaryLessThan.hpp"
+#include <sstream>
 
 void BinaryLessThan::printC(std::ostream &os) const
 {

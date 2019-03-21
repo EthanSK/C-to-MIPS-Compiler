@@ -1,4 +1,5 @@
 #include "binaryModulo.hpp"
+#include <sstream>
 
 void BinaryModulo::printC(std::ostream &os) const
 {

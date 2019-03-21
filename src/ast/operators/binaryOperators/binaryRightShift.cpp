@@ -1,4 +1,5 @@
 #include "binaryRightShift.hpp"
+#include <sstream>
 
 void BinaryRightShift::printC(std::ostream &os) const
 {
