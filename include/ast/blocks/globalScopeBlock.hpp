@@ -1,9 +1,9 @@
 #ifndef globalScopeBlock_hpp
 #define globalScopeBlock_hpp
 
-#include "scopeBlock.hpp"
+#include "sequenceBlock.hpp"
 
-class GlobalScopeBlock : public ScopeBlock
+class GlobalScopeBlock : public SequenceBlock
 {
 public:
   using ScopeBlock::ScopeBlock;

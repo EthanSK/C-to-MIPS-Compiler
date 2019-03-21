@@ -27,3 +27,13 @@ void ScopeBlock::generatePython(std::ostream &os, PythonContext &context, int sc
         os <<std::flush;
     }
 }
+
+void ScopeBlock::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
+{
+    instrs.push_back(ILinstr("scu", ""));
+    for(size_t i = 0; i < branches.size(); i++)
+    {
+        branches[i]->generateIL(instrs, context, destReg);
+    }
+    instrs.push_back(ILinstr("scd", ""));
+}  
