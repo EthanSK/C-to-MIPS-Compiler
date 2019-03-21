@@ -1,9 +1,4 @@
-int getNum()
-{
-    return 2;
-}
-
 int main()
 {
-    return getNum();
+    int x, y, z;
 }

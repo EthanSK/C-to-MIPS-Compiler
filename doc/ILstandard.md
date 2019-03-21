@@ -41,4 +41,5 @@
 | fdef      | fdef x {params}    | defines function x that takes {params}                |
 | fend      | fend               | ends function definition                              |
 | fcall     | fcall y x {params} | calls function x with {params} and stores return in y |
+| decl      | decl x             | declares a non temporary variable x                   |
 
