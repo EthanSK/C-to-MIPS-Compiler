@@ -1,5 +1,6 @@
 #include "binaryModulo.hpp"
 #include "lvalue.hpp"
+#include "utils.hpp"
 #include <sstream>
 
 void BinaryModulo::printC(std::ostream &os) const

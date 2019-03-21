@@ -1,5 +1,6 @@
 #include "binaryLogicalOr.hpp"
 #include "lvalue.hpp"
+#include "utils.hpp"
 #include <sstream>
 
 void BinaryLogicalOr::printC(std::ostream &os) const

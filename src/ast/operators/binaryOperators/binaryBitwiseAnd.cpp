@@ -1,5 +1,6 @@
 #include "binaryBitwiseAnd.hpp"
 #include "lvalue.hpp"
+#include "utils.hpp"
 #include <sstream>
 
 void BinaryBitwiseAnd::printC(std::ostream &os) const

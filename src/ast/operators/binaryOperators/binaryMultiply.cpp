@@ -1,5 +1,6 @@
 #include "binaryMultiply.hpp"
 #include "lvalue.hpp"
+#include "utils.hpp"
 #include <sstream>
 
 void BinaryMultiply::printC(std::ostream &os) const

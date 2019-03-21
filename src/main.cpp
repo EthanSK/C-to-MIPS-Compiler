@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
          yyin = fopen(argv[2], "r");
     }
 
-     if (argc >= 5 && std::string(argv[1]) == "--translate")
+    if (argc >= 5 && std::string(argv[1]) == "--translate")
     {
         isTranslatingToPython = true;
         yyin = fopen(argv[2], "r");

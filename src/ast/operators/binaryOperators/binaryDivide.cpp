@@ -1,5 +1,6 @@
 #include "binaryDivide.hpp"
 #include "lvalue.hpp"
+#include "utils.hpp"
 #include <sstream>
 
 void BinaryDivide::printC(std::ostream &os) const

@@ -1,5 +1,6 @@
 #include "binaryBitwiseAndAssignment.hpp"
 #include "lvalue.hpp"
+#include "utils.hpp"
 #include <sstream>
 
 void BinaryBitwiseAndAssignment::printC(std::ostream &os) const
@@ -26,5 +27,6 @@ void BinaryBitwiseAndAssignment::generateIL(std::vector<ILinstr> &instrs, ILCont
 	getRight()->generateIL(instrs, context, rightReg);
 	instrs.push_back(ILinstr(opcode, resultReg, leftReg, rightReg));
 	instrs.push_back(ILinstr("mov", destReg, resultReg));
-	dynamic_cast<LValuePtr>(getLeft())->generateLValueStoreIL(instrs, context, resultReg);
+	LValuePtr lvalue = Utils::tryCast<LValue>(getLeft(), "LHS of an assignment must be an lvalue");
+	lvalue->generateLValueStoreIL(instrs, context, resultReg);
 }

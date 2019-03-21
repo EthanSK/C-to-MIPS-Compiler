@@ -1,5 +1,6 @@
 #include "binaryIsEqualTo.hpp"
 #include "lvalue.hpp"
+#include "utils.hpp"
 #include <sstream>
 
 void BinaryIsEqualTo::printC(std::ostream &os) const

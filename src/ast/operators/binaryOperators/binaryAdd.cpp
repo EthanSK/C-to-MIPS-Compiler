@@ -1,5 +1,6 @@
 #include "binaryAdd.hpp"
 #include "lvalue.hpp"
+#include "utils.hpp"
 #include <sstream>
 
 void BinaryAdd::printC(std::ostream &os) const

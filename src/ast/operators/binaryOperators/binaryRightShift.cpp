@@ -1,5 +1,6 @@
 #include "binaryRightShift.hpp"
 #include "lvalue.hpp"
+#include "utils.hpp"
 #include <sstream>
 
 void BinaryRightShift::printC(std::ostream &os) const
