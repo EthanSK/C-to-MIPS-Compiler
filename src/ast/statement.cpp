@@ -113,7 +113,7 @@ void Statement::writeILToFile(std::string filePath) const
     file.close();
 }
 
-void Statement::generateIL(std::vector<ILinstr> &instrs, ILContext &context) const
+void Statement::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
 {
     ILinstr instr;
     instr.opcode = "invalid";
@@ -124,7 +124,7 @@ void Statement::generateIL(std::vector<ILinstr> &instrs, ILContext &context) con
 void Statement::generateIL(std::vector<ILinstr> &instrs) const
 {
     ILContext context;
-    generateIL(instrs, context);
+    generateIL(instrs, context, "_root");
 }
 
 void Statement::generateIL(std::ostream &os) const

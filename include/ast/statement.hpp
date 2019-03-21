@@ -28,7 +28,7 @@ class Statement
 	void writePythonToFile(std::string filePath = "bin/translated.py") const;
 	void writeILToFile(std::string filePath = "bin/il.txt") const;
 
-	virtual void generateIL(std::vector<ILinstr> &instrs, ILContext &context) const;
+	virtual void generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const;
 	void generateIL(std::vector<ILinstr> &instrs) const;
 	void generateIL(std::ostream &os) const;
 
