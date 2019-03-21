@@ -115,9 +115,7 @@ void Statement::writeILToFile(std::string filePath) const
 
 void Statement::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
 {
-    ILinstr instr;
-    instr.opcode = "invalid";
-    instr.dest = typeid(*this).name();
+    ILinstr instr("no_impl", typeid(*this).name());
     instrs.push_back(instr);
 }
 
@@ -134,7 +132,7 @@ void Statement::generateIL(std::ostream &os) const
     
     for(size_t i = 0; i < instrs.size(); i++)
     {
-       os << instrs[i].label << " " << instrs[i].opcode << " " << instrs[i].dest << " " << instrs[i].in1 << " " << instrs[i].in2;
+       os << instrs[i].label << " " << instrs[i].opcode << " " << instrs[i].dest << " " << instrs[i].input1 << " " << instrs[i].input2;
        
        for(size_t j = 0; j < instrs[i].extraData.size(); j++)
        {
