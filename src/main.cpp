@@ -3,6 +3,7 @@
 
 //for testing
 #include "headers.hpp"
+#include "instrPrinter.hpp"
 #include "il2mips.hpp"
 
 StatementPtr generateTestAST();
@@ -43,6 +44,7 @@ int main(int argc, char *argv[])
         std::cerr << "\n\nMIPS CODE\n======================\n";
         std::vector<Instr> Minstrs;
         IL2MIPS::convertToMIPS(instrs, Minstrs);
+        InstrPrinter::printInstrs(std::cerr, Minstrs);
 
         if (isTranslatingToPython)
         {
