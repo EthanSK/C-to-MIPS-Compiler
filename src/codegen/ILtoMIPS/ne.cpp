@@ -1,6 +1,6 @@
 #include "il2mips.hpp"
 
-void IL2MIPS::ne(Instr instr, MIPSContext &context, std::vector<Instr> &mipsInstrs) 
+void IL2MIPS::ne(Instr instr, MIPSContext &context) 
 {
-    mipsInstrs.push_back(Instr("xor", instr.dest, instr.input1, instr.input2));
+    context.addInstr(Instr("xor", instr.dest, instr.input1, instr.input2));
 }

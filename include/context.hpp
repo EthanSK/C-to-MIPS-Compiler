@@ -24,11 +24,14 @@ class MIPSContext : public Context
 {
 public:
     Allocator& getAllocator();
-    void popFrame(std::vector<Instr> &mipsInstrs);
-    void alloc(Allocation allocation, std::vector<Instr> &mipsInstrs);
+    std::vector<Instr> dumpInstrs();
+    void popFrame();
+    void alloc(Allocation allocation);
+    void addInstr(Instr instr);
 
 private:
     Allocator _allocator;
+    std::vector<Instr> _instrs;
 };
 
 class PythonContext : public Context

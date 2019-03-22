@@ -1,7 +1,7 @@
 #include "il2mips.hpp"
 
-void IL2MIPS::fend(Instr instr, MIPSContext &context, std::vector<Instr> &mipsInstrs) 
+void IL2MIPS::fend(Instr instr, MIPSContext &context) 
 {
-    mipsInstrs.push_back(Instr("jr", "$ra"));
-    mipsInstrs.push_back(Instr("nop"));
+    context.addInstr(Instr("jr", "$ra"));
+    context.addInstr(Instr("nop"));
 }

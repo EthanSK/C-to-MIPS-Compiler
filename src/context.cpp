@@ -38,24 +38,34 @@ std::string ILContext::makeName(std::string name)
     return ss.str();
 }
 
+std::vector<Instr> MIPSContext::dumpInstrs()
+{
+    return _instrs;
+}
+
 Allocator& MIPSContext::getAllocator()
 {
     return _allocator;
 }
 
-void MIPSContext::popFrame(std::vector<Instr> &mipsInstrs)
+void MIPSContext::popFrame()
 {
     int stackSize = _allocator.stackSize();
     _allocator.popFrame();
     int frameSize = stackSize - _allocator.stackSize();
     if (frameSize > 0)
     {
-        mipsInstrs.push_back(Instr("addi", "$sp", "$sp", std::to_string(frameSize)));
+        _instrs.push_back(Instr("addi", "$sp", "$sp", std::to_string(frameSize)));
     }
 }
 
-void MIPSContext::alloc(Allocation allocation, std::vector<Instr> &mipsInstrs)
+void MIPSContext::alloc(Allocation allocation)
 {
     _allocator.allocate(allocation);
-    mipsInstrs.push_back(Instr("subi", "$sp", "$sp", std::to_string(allocation.size)));
+    _instrs.push_back(Instr("subi", "$sp", "$sp", std::to_string(allocation.size)));
+}
+
+void MIPSContext::addInstr(Instr instr)
+{
+    _instrs.push_back(instr);
 }

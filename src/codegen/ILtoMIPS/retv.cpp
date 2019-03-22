@@ -1,10 +1,10 @@
 #include "il2mips.hpp"
 
-void IL2MIPS::retv(Instr instr, MIPSContext &context, std::vector<Instr> &mipsInstrs) 
+void IL2MIPS::retv(Instr instr, MIPSContext &context) 
 {
     int stackSize = context.getAllocator().stackSize();
-    mipsInstrs.push_back(Instr("mov", "$v0", instr.dest));
-    if (stackSize > 0) { mipsInstrs.push_back(Instr("addi", "$sp", std::to_string(stackSize))); }
-    mipsInstrs.push_back(Instr("jr", "$ra"));
-    mipsInstrs.push_back(Instr("nop"));
+    context.addInstr(Instr("mov", "$v0", instr.dest));
+    if (stackSize > 0) { context.addInstr(Instr("addi", "$sp", "$sp", std::to_string(stackSize))); }
+    context.addInstr(Instr("jr", "$ra"));
+    context.addInstr(Instr("nop"));
 }

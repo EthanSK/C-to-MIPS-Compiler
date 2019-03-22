@@ -1,7 +1,7 @@
 #include "il2mips.hpp"
 
-void IL2MIPS::eq(Instr instr, MIPSContext &context, std::vector<Instr> &mipsInstrs) 
+void IL2MIPS::eq(Instr instr, MIPSContext &context) 
 {
-    mipsInstrs.push_back(Instr("xor", "$t0", instr.input1, instr.input2));
-    mipsInstrs.push_back(Instr("sltiu", instr.dest, "$t0", "1"));
+    context.addInstr(Instr("xor", "$t0", instr.input1, instr.input2));
+    context.addInstr(Instr("sltiu", instr.dest, "$t0", "1"));
 }
