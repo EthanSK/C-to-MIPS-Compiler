@@ -28,7 +28,7 @@ int AllocationFrame::getFrameSize() const
 
 int AllocationFrame::getAllocationPosition(std::string name) const
 {
-    for (int i = _allocations.size(); i >= 0; --i)
+    for (int i = _allocations.size() - 1; i >= 0; --i)
     {
         if (name == _allocations[i].name) { return i; }
     }
