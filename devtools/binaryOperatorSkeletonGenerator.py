@@ -33,12 +33,12 @@ def createCPP(op_name, symbol, py_symbol, opcode):
 
     f.write(to_write + to_write_il)
 
-if (os.path.isdir(hppPath)):
-    shutil.rmtree(hppPath)
-if (os.path.isdir(cppPath)):
-    shutil.rmtree(cppPath)
-os.mkdir(hppPath)
-os.mkdir(cppPath)
+# if (os.path.isdir(hppPath)):
+#     shutil.rmtree(hppPath)
+# if (os.path.isdir(cppPath)):
+#     shutil.rmtree(cppPath)
+# os.mkdir(hppPath)
+# os.mkdir(cppPath)
 
 txt_file = open("devtools/binaryNames.txt", "r")
 

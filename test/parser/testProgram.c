@@ -1,4 +1,4 @@
 int main()
 {
-    return sizeof("");
+    x = x + 2;
 }

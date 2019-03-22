@@ -22,7 +22,6 @@
 | or        | or x y z           | x = y \| z                                            |
 | orl       | orl x y z          | x = y \|\| z                                          |
 | xor       | xor x y z          | x = y ^ z                                             |
-| `xxx`.eq  | `xxx`.eq x y z     | compound assignement version of `xxx`                 |
 | inc       | inc x              | ++x                                                   |
 | dec       | dec x              | --x                                                   |
 | neg       | neg x y            | x = ~y                                                |
@@ -43,7 +42,7 @@
 | fdef      | fdef x {params}    | defines function x that takes {params}                |
 | fend      | fend               | ends function definition                              |
 | fcall     | fcall y x {params} | calls function x with {params} and stores return in y |
-| decl      | decl x             | declares a non temporary variable x                   |
+| decl      | decl x im          | declares a non temporary variable x of size im        |
 | load      | load x y z         | loads into x from the address y + z                   |
 | store     | store x y z        | stores the value in x to the address y + z            |
 
