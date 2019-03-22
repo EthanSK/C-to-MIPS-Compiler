@@ -5,6 +5,7 @@
 #include <vector>
 #include <unordered_map>
 #include "allocator.hpp"
+#include "instr.hpp"
 
 class Context
 {
@@ -23,6 +24,8 @@ class MIPSContext : public Context
 {
 public:
     Allocator& getAllocator();
+    void popFrame(std::vector<Instr> &mipsInstrs);
+    void alloc(Allocation allocation, std::vector<Instr> &mipsInstrs);
 
 private:
     Allocator _allocator;

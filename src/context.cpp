@@ -42,3 +42,20 @@ Allocator& MIPSContext::getAllocator()
 {
     return _allocator;
 }
+
+void MIPSContext::popFrame(std::vector<Instr> &mipsInstrs)
+{
+    int stackSize = _allocator.stackSize();
+    _allocator.popFrame();
+    int frameSize = stackSize - _allocator.stackSize();
+    if (frameSize > 0)
+    {
+        mipsInstrs.push_back(Instr("addi", "$sp", "$sp", std::to_string(frameSize)));
+    }
+}
+
+void MIPSContext::alloc(Allocation allocation, std::vector<Instr> &mipsInstrs)
+{
+    _allocator.allocate(allocation);
+    mipsInstrs.push_back(Instr("subi", "$sp", "$sp", std::to_string(allocation.size)));
+}

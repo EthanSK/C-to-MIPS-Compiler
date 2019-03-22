@@ -7,6 +7,8 @@ struct Allocation
 {
     int size;
     std::string name;
+
+    Allocation(int size, std::string name) : size(size), name(name) { }
 };
 
 #endif

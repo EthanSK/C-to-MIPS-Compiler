@@ -2,5 +2,5 @@
 
 void IL2MIPS::scd(Instr instr, MIPSContext &context, std::vector<Instr> &mipsInstrs) 
 {
-    context.getAllocator().popFrame();
+    context.popFrame(mipsInstrs);
 }
