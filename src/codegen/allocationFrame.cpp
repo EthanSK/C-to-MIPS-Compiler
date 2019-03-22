@@ -20,6 +20,11 @@ bool AllocationFrame::isAllocated(std::string name) const
     return getAllocationPosition(name) != -1;
 }
 
+int AllocationFrame::getFrameSize() const
+{
+    return _frameSize;
+}
+
 int AllocationFrame::getAllocationPosition(std::string name) const
 {
     for (int i = 0; i < _allocations.size(); ++i)

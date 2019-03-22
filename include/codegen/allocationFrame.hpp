@@ -10,6 +10,7 @@ public:
     void allocate(Allocation allocation);
     int getAllocationOffset(std::string name) const;
     bool isAllocated(std::string name) const;
+    int getFrameSize() const;
 
 private:
     int _frameSize = 0;
