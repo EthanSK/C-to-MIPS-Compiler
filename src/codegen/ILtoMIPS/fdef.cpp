@@ -1,6 +1,6 @@
 #include "ILtoMIPS.hpp"
 
-MIPSinstr ILtoMIPS::fdef(ILinstr instr) 
+void ILtoMIPS::fdef(ILinstr instr, std::vector<MIPSinstr> &mipsInstr) 
 {
     
 }
