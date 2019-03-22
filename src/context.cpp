@@ -68,6 +68,8 @@ void MIPSContext::alloc(Allocation allocation)
 void MIPSContext::addInstr(Instr instr)
 {
     std::string destName = instr.dest;
+    if (destName == "_root") { return; }
+
     bool reqStore = requiresStack(instr.dest);
 
     if (reqStore)

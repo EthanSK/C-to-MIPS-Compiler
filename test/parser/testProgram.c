@@ -1,4 +1,8 @@
 main()
 {
-    int x = 5;
+    int x;
+    {
+        int y;
+        x = 10 == x;
+    }
 }
