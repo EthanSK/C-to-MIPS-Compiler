@@ -1,10 +1,10 @@
-#ifndef frame_hpp
-#define frame_hpp
+#ifndef allocationFrame_hpp
+#define allocationFrame_hpp
 
 #include "allocation.hpp"
 #include <vector>
 
-class Frame
+class AllocationFrame
 {
 public:
     void allocate(Allocation allocation);
