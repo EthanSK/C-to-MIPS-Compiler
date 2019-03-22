@@ -44,4 +44,6 @@
 | fend      | fend               | ends function definition                              |
 | fcall     | fcall y x {params} | calls function x with {params} and stores return in y |
 | decl      | decl x             | declares a non temporary variable x                   |
+| load      | load x y z         | loads into x from the address y + z                   |
+| store     | store x y z        | stores the value in x to the address y + z            |
 
