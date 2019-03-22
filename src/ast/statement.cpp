@@ -2,6 +2,7 @@
 #include <sstream>
 #include <algorithm>
 #include "utils.hpp"
+#include "instrPrinter.hpp"
 
 std::ostream &operator<<(std::ostream &os, const Statement &statement)
 {
@@ -138,43 +139,7 @@ void Statement::generateIL(std::ostream &os) const
 {
     std::vector<Instr> instrs;
     generateIL(instrs);
-
-    std::vector<unsigned long> columnWidths = {0, 0, 0, 0, 0};
-    for(size_t i = 0; i < instrs.size(); i++)
-    {
-        if (instrs[i].hasLabel()) { instrs[i].label += ":"; }
-        columnWidths[0] = std::max(columnWidths[0], instrs[i].label.length());
-        columnWidths[1] = std::max(columnWidths[1], instrs[i].opcode.length());
-        columnWidths[2] = std::max(columnWidths[2], instrs[i].dest.length());
-        columnWidths[3] = std::max(columnWidths[3], instrs[i].input1.length());
-        columnWidths[4] = std::max(columnWidths[4], instrs[i].input2.length());
-    }
-
-    const int FIXED_PADDING = 4;
-    for (int i = 0; i < columnWidths.size(); i++)
-    {
-        if (columnWidths[i] > 0)
-        {
-            columnWidths[i] += FIXED_PADDING;
-        }
-    }
-
-    for (size_t i = 0; i < instrs.size(); i++)
-    {
-       os << Utils::padString(instrs[i].label, columnWidths[0]);
-       os << Utils::padString(instrs[i].opcode, columnWidths[1]);
-       os << Utils::padString(instrs[i].dest, columnWidths[2]);
-       os << Utils::padString(instrs[i].input1, columnWidths[3]);
-       os << Utils::padString(instrs[i].input2, columnWidths[4]);
-       
-       for(size_t j = 0; j < instrs[i].extraData.size(); j++)
-       {
-           os << " " << instrs[i].extraData[j];
-       }
-
-       os << std::endl;
-       if (instrs[i].opcode == "fend") { os << std::endl; }
-    }
+    InstrPrinter::printInstrs(os, instrs);
 }
 
 Statement::~Statement()
