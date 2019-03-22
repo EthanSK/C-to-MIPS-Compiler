@@ -1,4 +1,5 @@
 #include "arrayDeclarator.hpp"
+#include "utils.hpp"
 
 ArrayDeclarator::ArrayDeclarator(StatementPtr innerDeclarator)
 {
@@ -6,7 +7,7 @@ ArrayDeclarator::ArrayDeclarator(StatementPtr innerDeclarator)
 }  
 
 DeclaratorPtr ArrayDeclarator::getChild() const{
-    return reinterpret_cast<DeclaratorPtr>(branches[0]);
+    return Utils::tryCast<Declarator>(branches[0], "inner child of an array declarator must be a declarator");
 }
 
 std::string ArrayDeclarator::getIdentifierName() const{

@@ -49,7 +49,7 @@ int PrimitiveType::getTypeSize() const
     case PrimitiveType::_unsigned:
         return 4;
     case PrimitiveType::_long:
-        return 8;
+        return 4;
     default:
         return 0;
     } 

@@ -16,7 +16,6 @@ LogicalAnd andl && and
 BitwiseOr or |
 LogicalOr orl || or
 BitwiseXor xor ^
-Assignment mov =
 AddAssignment add +=
 SubtractAssignment sub -=
 MultiplyAssignment mul *=

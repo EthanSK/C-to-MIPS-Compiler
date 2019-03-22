@@ -25,3 +25,18 @@ StatementPtr TernaryOperator::getFalseSelect() const
 void TernaryOperator::printC(std::ostream &os) const{
     os << "(" << getCondition() << ") ? " << getTrueSelect() << " : " << getFalseSelect();
 }
+
+void TernaryOperator::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
+{
+    std::string conditionReg = context.makeName("cond");
+    std::string else_lb = context.makeName("else");
+    std::string endif_lb = context.makeName("endif");
+
+    getCondition()->generateIL(instrs, context, conditionReg);
+    instrs.push_back(ILinstr("bnez", else_lb, conditionReg));
+    getTrueSelect()->generateIL(instrs, context, destReg);
+    instrs.push_back(ILinstr("b", endif_lb));
+    instrs.push_back(ILinstr(else_lb));
+    getFalseSelect()->generateIL(instrs, context, destReg);
+    instrs.push_back(ILinstr(endif_lb));
+}
