@@ -12,7 +12,7 @@ int Allocator::getAllocationOffset(std::string name) const
         if (_frames[i].isAllocated(name))
         {
             int offset = _frames[i].getAllocationOffset(name);
-            for (int j = 0; j < i; ++j) { offset += _frames[j].getFrameSize(); }
+            for (int j = i + 1; j < _frames.size(); ++j) { offset += _frames[j].getFrameSize(); }
             return offset;
         }
     }

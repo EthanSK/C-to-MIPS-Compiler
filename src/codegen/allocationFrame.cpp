@@ -3,8 +3,9 @@
 
 void AllocationFrame::allocate(Allocation allocation)
 {
+    for (int i = 0; i < _allocations.size(); ++i) { _allocationOffsets[i] += allocation.size; }
     _allocations.push_back(allocation);
-    _allocationOffsets.push_back(_frameSize);
+    _allocationOffsets.push_back(0);
     _frameSize += allocation.size;
 }
 
@@ -27,7 +28,7 @@ int AllocationFrame::getFrameSize() const
 
 int AllocationFrame::getAllocationPosition(std::string name) const
 {
-    for (int i = 0; i < _allocations.size(); ++i)
+    for (int i = _allocations.size(); i >= 0; --i)
     {
         if (name == _allocations[i].name) { return i; }
     }
