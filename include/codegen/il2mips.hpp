@@ -21,6 +21,9 @@ private:
     static void fcall(Instr instr, MIPSContext &context, std::vector<Instr> &mipsInstrs);
     static void fend(Instr instr, MIPSContext &context, std::vector<Instr> &mipsInstrs);
     static void retv(Instr instr, MIPSContext &context, std::vector<Instr> &mipsInstrs);
+    static void mov(Instr instr, MIPSContext &context, std::vector<Instr> &mipsInstrs);
+    static void eq(Instr instr, MIPSContext &context, std::vector<Instr> &mipsInstrs);
+    static void ne(Instr instr, MIPSContext &context, std::vector<Instr> &mipsInstrs);
 };
 
 #endif
