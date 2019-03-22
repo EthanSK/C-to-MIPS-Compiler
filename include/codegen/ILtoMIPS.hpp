@@ -13,6 +13,8 @@ public:
 private:
     static void convertInstr(ILinstr &instr, MIPSContext &context, std::vector<MIPSinstr> &mipsInstrs);
 
+    static void scu(ILinstr instr, MIPSContext &context, std::vector<MIPSinstr> &mipsInstr);
+    static void scd(ILinstr instr, MIPSContext &context, std::vector<MIPSinstr> &mipsInstr);
     static void fdef(ILinstr instr, MIPSContext &context, std::vector<MIPSinstr> &mipsInstr);
     static void fcall(ILinstr instr, MIPSContext &context, std::vector<MIPSinstr> &mipsInstr);
     static void fend(ILinstr instr, MIPSContext &context, std::vector<MIPSinstr> &mipsInstr);
