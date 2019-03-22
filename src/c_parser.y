@@ -498,7 +498,7 @@ ITERATION_STATEMENT
 JUMP_STATEMENT
 	: T_CONTINUE T_SEMICOLON { $$ = new ContinueKeyword(); }
 	| T_BREAK T_SEMICOLON { $$ = new BreakKeyword(); }
-	| T_RETURN T_SEMICOLON
+	| T_RETURN T_SEMICOLON { $$ = new ReturnKeyword(new IntegerLiteral(0)); }
 	| T_RETURN EXPRESSION T_SEMICOLON { $$ = new ReturnKeyword($2); }
 	;
 
