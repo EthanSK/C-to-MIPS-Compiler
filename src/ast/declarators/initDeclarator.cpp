@@ -1,4 +1,5 @@
 #include "initDeclarator.hpp"
+#include "utils.hpp"
 
 InitDeclarator::InitDeclarator(StatementPtr declarator, StatementPtr initializer)
 {
@@ -8,7 +9,7 @@ InitDeclarator::InitDeclarator(StatementPtr declarator, StatementPtr initializer
   
 DeclaratorPtr InitDeclarator::getDeclarator() const
 {
-    return reinterpret_cast<DeclaratorPtr>(branches[0]);
+    return Utils::tryCast<Declarator>(branches[0], "inner child of an init declarator must be a declarator");
 }
 
 StatementPtr InitDeclarator::getInitializer() const
