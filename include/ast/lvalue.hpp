@@ -3,7 +3,7 @@
 
 #include <vector>
 #include "context.hpp"
-#include "Instr.hpp"
+#include "instr.hpp"
 
 class LValue;
 typedef const LValue *LValuePtr;

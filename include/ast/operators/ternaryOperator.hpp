@@ -18,7 +18,7 @@ class TernaryOperator : public Statement
     StatementPtr getTrueSelect() const;
     StatementPtr getFalseSelect() const;
 
-    void printC(std::ostream &os) const; //prints c90 code so we can compare against input code //called in << overload
+    void printC(std::ostream &os) const override; //prints c90 code so we can compare against input code //called in << overload
 };
 
 #endif

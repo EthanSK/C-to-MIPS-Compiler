@@ -7,7 +7,7 @@
 #include <fstream>
 #include <memory>
 #include "context.hpp"
-#include "Instr.hpp"
+#include "instr.hpp"
 
 class Statement;
 typedef const Statement *StatementPtr;
