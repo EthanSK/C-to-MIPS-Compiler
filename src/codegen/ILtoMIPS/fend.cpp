@@ -1,6 +1,6 @@
 #include "ILtoMIPS.hpp"
 
-void ILtoMIPS::fend(ILinstr instr, std::vector<MIPSinstr> &mipsInstr) 
+void ILtoMIPS::fend(ILinstr instr, MIPSContext &context, std::vector<MIPSinstr> &mipsInstr) 
 {
     
 }

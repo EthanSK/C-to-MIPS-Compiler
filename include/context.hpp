@@ -18,6 +18,10 @@ private:
     std::unordered_map<std::string, int> _registeredNames;
 };
 
+class MIPSContext : public Context 
+{
+};
+
 class PythonContext : public Context
 {
 public:
