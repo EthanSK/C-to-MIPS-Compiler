@@ -3,7 +3,7 @@
 
 #include <vector>
 #include "context.hpp"
-#include "ILinstr.hpp"
+#include "Instr.hpp"
 
 class LValue;
 typedef const LValue *LValuePtr;
@@ -11,7 +11,7 @@ typedef const LValue *LValuePtr;
 class LValue
 {
 public:
-    virtual void generateLValueStoreIL(std::vector<ILinstr> &instrs, ILContext &context, std::string inputReg) const = 0;
+    virtual void generateLValueStoreIL(std::vector<Instr> &instrs, ILContext &context, std::string inputReg) const = 0;
 };
 
 #endif

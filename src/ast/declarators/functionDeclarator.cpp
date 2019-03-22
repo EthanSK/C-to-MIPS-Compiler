@@ -32,8 +32,8 @@ void FunctionDeclarator::generatePython(std::ostream &os, PythonContext &context
     os << ")";
 }
 
-void FunctionDeclarator::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
+void FunctionDeclarator::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
 {
-    ILinstr instr("fdef", getIdentifierName());
+    Instr instr("fdef", getIdentifierName());
     instrs.push_back(instr);
 }

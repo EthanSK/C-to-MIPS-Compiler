@@ -25,18 +25,18 @@ void WhileLoop::generatePython(std::ostream &os, PythonContext &context, int sco
     getScopeBlock()->generatePython(os, context, scopeDepth + 1);
 }
 
-void WhileLoop::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
+void WhileLoop::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
 {
     std::string whileCond = context.makeName("cond");
     std::string while_lb = context.makeName("while");
     std::string while_end_lb = context.makeName("while_end");
 
-    instrs.push_back(ILinstr(while_lb));
+    instrs.push_back(Instr::makeLabel(while_lb));
     getCondition()->generateIL(instrs, context, whileCond);
-    instrs.push_back(ILinstr("bez", while_end_lb, whileCond));
+    instrs.push_back(Instr("bez", while_end_lb, whileCond));
 
     getScopeBlock()->generateIL(instrs, context, destReg);
-    instrs.push_back(ILinstr("b", while_lb));
-    instrs.push_back(ILinstr(while_end_lb));
+    instrs.push_back(Instr("b", while_lb));
+    instrs.push_back(Instr::makeLabel(while_end_lb));
 }
 

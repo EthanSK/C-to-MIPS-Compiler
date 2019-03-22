@@ -17,12 +17,12 @@ void Identifier::generatePython(std::ostream &os, PythonContext &context, int sc
 	os << _name;
 }
 
-void Identifier::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
+void Identifier::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
 {
-	instrs.push_back(ILinstr("mov", destReg, _name));
+	instrs.push_back(Instr("mov", destReg, _name));
 }
 
-void Identifier::generateLValueStoreIL(std::vector<ILinstr> &instrs, ILContext &context, std::string inputReg) const
+void Identifier::generateLValueStoreIL(std::vector<Instr> &instrs, ILContext &context, std::string inputReg) const
 {
-	instrs.push_back(ILinstr("mov", _name, inputReg));
+	instrs.push_back(Instr("mov", _name, inputReg));
 }

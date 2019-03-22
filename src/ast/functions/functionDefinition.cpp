@@ -31,9 +31,9 @@ void FunctionDefinition::generatePython(std::ostream &os, PythonContext &context
     context.indentStream(os, scopeDepth);
 }
 
-void FunctionDefinition::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
+void FunctionDefinition::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
 {
     getDecl()->generateIL(instrs, context, destReg);
     getScopeBlock()->generateIL(instrs, context, destReg);
-    instrs.push_back(ILinstr("fend", ""));
+    instrs.push_back(Instr("fend", ""));
 }

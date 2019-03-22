@@ -26,7 +26,7 @@ void CharLiteral::generatePython(std::ostream &os, PythonContext &context, int s
 	os << "'" << getEscapedChar() << "'";
 }
 
-void CharLiteral::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
+void CharLiteral::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
 {
-    instrs.push_back(ILinstr("li", destReg, std::to_string(_value)));
+    instrs.push_back(Instr("li", destReg, std::to_string(_value)));
 } 

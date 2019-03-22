@@ -7,7 +7,7 @@
 #include <fstream>
 #include <memory>
 #include "context.hpp"
-#include "ILinstr.hpp"
+#include "Instr.hpp"
 
 class Statement;
 typedef const Statement *StatementPtr;
@@ -30,8 +30,8 @@ class Statement
 	void writePythonToFile(std::string filePath = "bin/translated.py") const;
 	void writeILToFile(std::string filePath = "bin/intermediateLanguage.txt") const;
 
-	virtual void generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const;
-	void generateIL(std::vector<ILinstr> &instrs) const;
+	virtual void generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const;
+	void generateIL(std::vector<Instr> &instrs) const;
 	void generateIL(std::ostream &os) const;
 
   protected:

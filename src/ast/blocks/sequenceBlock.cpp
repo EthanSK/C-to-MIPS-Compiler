@@ -25,7 +25,7 @@ void SequenceBlock::generatePython(std::ostream &os, PythonContext &context, int
     os << std::flush;
 }
 
-void SequenceBlock::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
+void SequenceBlock::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
 {
     for(size_t i = 0; i < branches.size(); i++)
     {

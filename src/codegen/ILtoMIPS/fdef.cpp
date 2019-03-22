@@ -1,6 +1,6 @@
-#include "ILtoMIPS.hpp"
+#include "il2mips.hpp"
 
-void ILtoMIPS::fdef(ILinstr instr, MIPSContext &context, std::vector<MIPSinstr> &mipsInstr) 
+void IL2MIPS::fdef(Instr instr, MIPSContext &context, std::vector<Instr> &Instr) 
 {
     
 }

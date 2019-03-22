@@ -12,7 +12,7 @@ void UnaryAdd::generatePython(std::ostream &os, PythonContext &context, int scop
 	os << ")";
 }
 
-void UnaryAdd::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
+void UnaryAdd::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
 {
 	getOperand()->generateIL(instrs, context, destReg);
 }

@@ -12,8 +12,8 @@ void UnaryNot::generatePython(std::ostream &os, PythonContext &context, int scop
 	os << ")";
 }
 
-void UnaryNot::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
+void UnaryNot::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
 {
     getOperand()->generateIL(instrs, context, "$t0");
-	instrs.push_back(ILinstr("eq", destReg, "$0", "$t0"));
+	instrs.push_back(Instr("eq", destReg, "$0", "$t0"));
 }
