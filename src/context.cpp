@@ -37,3 +37,8 @@ std::string ILContext::makeName(std::string name)
     ss << "0x" << std::hex << nameCount << std::dec << "_" << name;
     return ss.str();
 }
+
+Allocator& MIPSContext::getAllocator()
+{
+    return _allocator;
+}

@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <unordered_map>
+#include "allocator.hpp"
 
 class Context
 {
@@ -20,6 +21,11 @@ private:
 
 class MIPSContext : public Context 
 {
+public:
+    Allocator& getAllocator();
+
+private:
+    Allocator _allocator;
 };
 
 class PythonContext : public Context
