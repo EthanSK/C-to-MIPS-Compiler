@@ -5,5 +5,4 @@ void IL2MIPS::decl(Instr instr, MIPSContext &context, std::vector<Instr> &mipsIn
     Allocation alloc;
     alloc.name = instr.dest;
     alloc.size = std::stoi(instr.input1);
-    
 }

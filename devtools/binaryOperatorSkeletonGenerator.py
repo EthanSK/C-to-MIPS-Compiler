@@ -33,7 +33,7 @@ def createCPP(op_name, symbol, py_symbol, opcode):
 
     f.write(to_write + to_write_il)
 
-# if (os.path.isdir(hppPath)):
+# if (os.path.isdir(hppPath)): dont undo this bby
 #     shutil.rmtree(hppPath)
 # if (os.path.isdir(cppPath)):
 #     shutil.rmtree(cppPath)
