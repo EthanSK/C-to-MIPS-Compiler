@@ -13,6 +13,7 @@ public:
 private:
     static void convertInstr(Instr &instr, MIPSContext &context, std::vector<Instr> &mipsInstrs);
 
+    static void li(Instr instr, MIPSContext &context, std::vector<Instr> &mipsInstrs);
     static void scu(Instr instr, MIPSContext &context, std::vector<Instr> &mipsInstrs);
     static void scd(Instr instr, MIPSContext &context, std::vector<Instr> &mipsInstrs);
     static void decl(Instr instr, MIPSContext &context, std::vector<Instr> &mipsInstrs);

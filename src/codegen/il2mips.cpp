@@ -23,5 +23,6 @@ void IL2MIPS::convertInstr(Instr &instr, MIPSContext &context, std::vector<Instr
     else if (instr.opcode == "scd") { IL2MIPS::scd(instr, context, mipsInstrs); }
     else if (instr.opcode == "decl") { IL2MIPS::decl(instr, context, mipsInstrs); }
     else if (instr.opcode == "retv") { IL2MIPS::retv(instr, context, mipsInstrs); }
+    else if (instr.opcode == "li") { IL2MIPS::li(instr, context, mipsInstrs); }
     else { throw std::string("Unexpected IL opcode " + instr.opcode + "."); }
 }
