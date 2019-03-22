@@ -5,7 +5,7 @@ void Allocator::allocate(Allocation allocation)
     topFrame().allocate(allocation);
 }
 
-int getAllocationOffset(std::string name) const
+int Allocator::getAllocationOffset(std::string name) const
 {
     for (int i = _frames.size() - 1; i >= 0; --i)
     {
@@ -20,11 +20,11 @@ int getAllocationOffset(std::string name) const
     throw "allocation " + name + " could not be found";
 }
 
-bool Allocator::isAllocated(std::string name)
+bool Allocator::isAllocated(std::string name) const
 {
     for (int i = 0; i < _frames.size(); ++i)
     {
-        _frames[i].isAllocated(name) { return true; }
+        if (_frames[i].isAllocated(name)) { return true; }
     }
 
     return false;
