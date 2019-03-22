@@ -1,4 +1,7 @@
 #include "binaryDivideAssignment.hpp"
+#include "lvalue.hpp"
+#include "utils.hpp"
+#include <sstream>
 
 void BinaryDivideAssignment::printC(std::ostream &os) const
 {
@@ -12,4 +15,18 @@ void BinaryDivideAssignment::generatePython(std::ostream &os, PythonContext &con
 	getLeft()->generatePython(os, context, scopeDepth);
 	os << " //= ";
 	getRight()->generatePython(os, context, scopeDepth);
+}
+
+void BinaryDivideAssignment::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
+{
+	std::string opcode = "div";
+	std::string leftReg = context.makeName(opcode + "_l");
+	std::string rightReg = context.makeName(opcode + "_r");
+	std::string resultReg = context.makeName(opcode + "_res");
+	getLeft()->generateIL(instrs, context, leftReg);
+	getRight()->generateIL(instrs, context, rightReg);
+	instrs.push_back(Instr(opcode, resultReg, leftReg, rightReg));
+	instrs.push_back(Instr("mov", destReg, resultReg));
+	LValuePtr lvalue = Utils::tryCast<LValue>(getLeft(), "Illegal " + opcode + ": " + toString() + ". LHS of an assignment must be an lvalue");
+	lvalue->generateLValueStoreIL(instrs, context, resultReg);
 }

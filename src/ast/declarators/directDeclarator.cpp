@@ -11,9 +11,7 @@ StatementPtr DirectDeclarator::getIdentifier() const{
 }
 
 std::string DirectDeclarator::getIdentifierName() const{
-    std::stringstream ss;
-    ss << getIdentifier();
-    return ss.str();
+    return getIdentifier()->toString();
 }
 
 void DirectDeclarator::printC(std::ostream &os) const
@@ -25,4 +23,10 @@ void DirectDeclarator::generatePython(std::ostream &os, PythonContext &context, 
 {
     if (scopeDepth == 0) { context.registerGlobal(getIdentifierName()); }
     getIdentifier()->generatePython(os, context, scopeDepth);
+}
+
+void DirectDeclarator::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
+{
+    Instr instr("decl", getIdentifierName(), "4");
+    instrs.push_back(instr);
 }

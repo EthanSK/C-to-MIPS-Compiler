@@ -1,4 +1,5 @@
 #include "charLiteral.hpp"
+#include <string>
 
 CharLiteral::CharLiteral(int value){
 	_value = value; 
@@ -24,3 +25,8 @@ void CharLiteral::generatePython(std::ostream &os, PythonContext &context, int s
 {
 	os << "'" << getEscapedChar() << "'";
 }
+
+void CharLiteral::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
+{
+    instrs.push_back(Instr("li", destReg, std::to_string(_value)));
+} 

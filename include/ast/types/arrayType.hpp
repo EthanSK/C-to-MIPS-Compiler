@@ -5,7 +5,6 @@
 
 class ArrayType : public Type
 { 
-
   public:
     ArrayType(StatementPtr child, int size);
     TypePtr getChild() const;

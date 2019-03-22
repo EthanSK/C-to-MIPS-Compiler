@@ -17,3 +17,15 @@ void DoWhileLoop::printC(std::ostream &os) const
 {
     os << "do" << getScopeBlock() << "while ( " << getCondition() << ")";
 }
+
+void DoWhileLoop::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
+{
+    std::string whileCond = context.makeName("cond");
+    std::string while_lb = context.makeName("while");
+
+    instrs.push_back(Instr::makeLabel(while_lb));
+    getScopeBlock()->generateIL(instrs, context, destReg);
+
+    getCondition()->generateIL(instrs, context, whileCond);
+    instrs.push_back(Instr("bnez", while_lb, whileCond));
+}

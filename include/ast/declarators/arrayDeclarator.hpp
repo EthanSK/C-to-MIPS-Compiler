@@ -10,6 +10,7 @@ public:
     std::string getIdentifierName() const override;
 
 protected:
+    virtual DeclTypeEnum declType() const override { return DeclTypeEnum::array; }
     DeclaratorPtr getChild() const;
     void printC(std::ostream &os) const override;
 };

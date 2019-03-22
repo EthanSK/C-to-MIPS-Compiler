@@ -1,4 +1,5 @@
 #include "arrayDeclaratorSized.hpp"
+#include "utils.hpp"
 
 ArrayDeclaratorSized::ArrayDeclaratorSized(StatementPtr innerDeclarator, StatementPtr sizeSpecifier)
 {
@@ -7,7 +8,7 @@ ArrayDeclaratorSized::ArrayDeclaratorSized(StatementPtr innerDeclarator, Stateme
 }  
 
 DeclaratorPtr ArrayDeclaratorSized::getChild() const{
-    return reinterpret_cast<DeclaratorPtr>(branches[0]);
+    return Utils::tryCast<Declarator>(branches[0], "inner child of an array declarator must be a declarator");
 }
 
 StatementPtr ArrayDeclaratorSized::getSizeSpecifier() const{

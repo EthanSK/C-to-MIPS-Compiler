@@ -1,4 +1,5 @@
 #include "declaration.hpp"
+#include "utils.hpp"
 
 Declaration::Declaration(StatementPtr type, DeclaratorListPtr declList)
 {
@@ -13,7 +14,7 @@ StatementPtr Declaration::getType() const
 
 DeclaratorListPtr Declaration::getDeclList() const
 {
-    return reinterpret_cast<DeclaratorListPtr>(branches[1]);
+    return Utils::tryCast<DeclaratorList>(branches[1], "RHS of a declaration must be a declarator list.");
 }
 
 void Declaration::printC(std::ostream &os) const
@@ -24,4 +25,9 @@ void Declaration::printC(std::ostream &os) const
 void Declaration::generatePython(std::ostream &os, PythonContext &context, int scopeDepth) const
 {
     getDeclList()->generatePython(os, context, scopeDepth);
+}
+
+void Declaration::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
+{
+    getDeclList()->generateIL(instrs, context, destReg);
 }

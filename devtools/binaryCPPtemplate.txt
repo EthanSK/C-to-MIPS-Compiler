@@ -1,4 +1,7 @@
 #include "binary%s.hpp"
+#include "lvalue.hpp"
+#include "utils.hpp"
+#include <sstream>
 
 void Binary%s::printC(std::ostream &os) const
 {%s

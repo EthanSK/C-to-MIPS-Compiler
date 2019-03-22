@@ -1,4 +1,5 @@
 #include "declaratorList.hpp"
+#include "utils.hpp"
 
 void DeclaratorList::printC(std::ostream &os) const
 {
@@ -12,7 +13,7 @@ void DeclaratorList::printC(std::ostream &os) const
 
 DeclaratorPtr DeclaratorList::getDeclarator(int index) const
 {
-    return reinterpret_cast<DeclaratorPtr>(branches[index]);
+    return Utils::tryCast<Declarator>(branches[index], "decl list can only contain declarators");
 }
 
 void DeclaratorList::generatePython(std::ostream &os, PythonContext &context, int scopeDepth) const
@@ -26,5 +27,13 @@ void DeclaratorList::generatePython(std::ostream &os, PythonContext &context, in
         {
             os << " = 0";
         }
+    }
+}
+
+void DeclaratorList::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
+{
+    for (int i = 0; i < branches.size(); ++i)
+    {
+        getDeclarator(i)->generateIL(instrs, context, destReg);
     }
 }

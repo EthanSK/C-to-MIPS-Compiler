@@ -6,7 +6,7 @@
 class EmptyNode : public Statement
 {
 public:
-  void generatePython(std::ostream &os, PythonContext &context, int scopeDepth = 0) const override { }
+  void generatePython(std::ostream &os, PythonContext &context, int scopeDepth = 0) const override { os << "pass"; }
 
 protected:
   void printC(std::ostream &os) const override { }

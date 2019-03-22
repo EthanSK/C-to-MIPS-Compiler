@@ -1,5 +1,8 @@
 #include "statement.hpp"
 #include <sstream>
+#include <algorithm>
+#include "utils.hpp"
+#include "instrPrinter.hpp"
 
 std::ostream &operator<<(std::ostream &os, const Statement &statement)
 {
@@ -11,6 +14,13 @@ std::ostream &operator<<(std::ostream &os, const StatementPtr statementPtr)
 {
     statementPtr->printC(os);
     return os;
+}
+
+std::string Statement::toString() const
+{
+    std::stringstream ss;
+	ss << *this;
+	return ss.str();
 }
 
 void Statement::generatePython(std::ostream &os, PythonContext &context, int scopeDepth) const
@@ -104,6 +114,32 @@ void Statement::writePythonToFile(std::string filePath) const
     std::ofstream file(filePath, std::ios::out | std::ios::trunc);
     this->generatePython(file);
     file.close();
+}
+
+void Statement::writeILToFile(std::string filePath) const
+{
+    std::ofstream file(filePath, std::ios::out | std::ios::trunc);
+    this->generateIL(file);
+    file.close();
+}
+
+void Statement::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
+{
+    Instr instr("noImpl", typeid(*this).name());
+    instrs.push_back(instr);
+}
+
+void Statement::generateIL(std::vector<Instr> &instrs) const
+{
+    ILContext context;
+    generateIL(instrs, context, "_root");
+}
+
+void Statement::generateIL(std::ostream &os) const
+{
+    std::vector<Instr> instrs;
+    generateIL(instrs);
+    InstrPrinter::printInstrs(os, instrs);
 }
 
 Statement::~Statement()

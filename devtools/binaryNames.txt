@@ -1,29 +1,28 @@
-Divide / //
-Modulo %
-Multiply *
-Add +
-Subtract -
-LeftShift <<
-RightShift >>
-LessThan <
-GreaterThan >
-LessThanOrEqualTo <=
-GreaterThanOrEqualTo >=
-IsEqualTo ==
-IsNotEqualTo !=
-BitwiseAnd &
-LogicalAnd && and
-BitwiseOr |
-LogicalOr || or
-BitwiseXor ^
-Assignment =
-AddAssignment +=
-SubtractAssignment -=
-MultiplyAssignment *=
-DivideAssignment /= //=
-ModuloAssignment %=
-BitwiseAndAssignment &=
-BitwiseOrAssignment |=
-BitwiseXorAssignment ^=
-LeftShiftAssignment <<=
-RightShiftAssignment >>=
+Divide div / //
+Modulo mod %
+Multiply mul *
+Add add +
+Subtract sub -
+LeftShift lsl <<
+RightShift lsr >>
+LessThan lt <
+GreaterThan gt >
+LessThanOrEqualTo lte <=
+GreaterThanOrEqualTo gte >=
+IsEqualTo eq ==
+IsNotEqualTo ne !=
+BitwiseAnd and &
+LogicalAnd andl && and
+BitwiseOr or |
+LogicalOr orl || or
+BitwiseXor xor ^
+AddAssignment add +=
+SubtractAssignment sub -=
+MultiplyAssignment mul *=
+DivideAssignment div /= //=
+ModuloAssignment mod %=
+BitwiseAndAssignment and &=
+BitwiseOrAssignment or |=
+BitwiseXorAssignment xor ^=
+LeftShiftAssignment lsl <<=
+RightShiftAssignment lsr >>=

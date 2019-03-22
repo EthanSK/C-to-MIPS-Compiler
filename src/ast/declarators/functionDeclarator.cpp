@@ -1,4 +1,6 @@
 #include "functionDeclarator.hpp"
+#include "parameterList.hpp"
+#include "utils.hpp"
 #include <sstream>
 
 FunctionDeclarator::FunctionDeclarator(StatementPtr identifier, StatementPtr paramList)
@@ -16,9 +18,7 @@ StatementPtr FunctionDeclarator::getParamList() const{
 }
 
 std::string FunctionDeclarator::getIdentifierName() const{
-    std::stringstream ss;
-    ss << getIdentifier();
-    return ss.str();
+    return getIdentifier()->toString();
 }
 
 void FunctionDeclarator::printC(std::ostream &os) const
@@ -32,4 +32,10 @@ void FunctionDeclarator::generatePython(std::ostream &os, PythonContext &context
     os << "(";
     getParamList()->generatePython(os, context, scopeDepth + 1);
     os << ")";
+}
+
+void FunctionDeclarator::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
+{
+    Instr instr("fdef", getIdentifierName());
+    instrs.push_back(instr);
 }
