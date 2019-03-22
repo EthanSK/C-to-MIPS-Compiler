@@ -27,8 +27,8 @@ void FunctionCall::generatePython(std::ostream &os, PythonContext &context, int 
     os << ")";
 }
 
-void FunctionCall::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
+void FunctionCall::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
 {
-    ILinstr instr("fcall", destReg, getName()->toString());
+    Instr instr("fcall", destReg, getName()->toString());
     instrs.push_back(instr);
 }

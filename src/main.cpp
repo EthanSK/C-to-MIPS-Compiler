@@ -3,6 +3,7 @@
 
 //for testing
 #include "headers.hpp"
+#include "il2mips.hpp"
 
 StatementPtr generateTestAST();
 StatementPtr generateTestFragment();
@@ -34,9 +35,14 @@ int main(int argc, char *argv[])
         ast->writeDotFile();
 
         std::cerr << "\n\nIL CODE\n======================\n";
-        std::vector<ILinstr> instrs;
+        std::vector<Instr> instrs;
         ast->generateIL(std::cerr);
+        ast->generateIL(instrs);
         ast->writeILToFile();
+
+        std::cerr << "\n\nMIPS CODE\n======================\n";
+        std::vector<Instr> Minstrs;
+        IL2MIPS::convertToMIPS(instrs, Minstrs);
 
         if (isTranslatingToPython)
         {
@@ -50,6 +56,12 @@ int main(int argc, char *argv[])
         return 0;
     }
     catch (std::string str)
+    {
+        std::cerr << "ERROR\n======================\n";
+        std::cerr << str << std::endl;
+        std::exit(-1);
+    }
+    catch (const char* str)
     {
         std::cerr << "ERROR\n======================\n";
         std::cerr << str << std::endl;

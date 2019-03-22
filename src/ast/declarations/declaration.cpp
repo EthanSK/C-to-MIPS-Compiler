@@ -27,7 +27,7 @@ void Declaration::generatePython(std::ostream &os, PythonContext &context, int s
     getDeclList()->generatePython(os, context, scopeDepth);
 }
 
-void Declaration::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
+void Declaration::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
 {
     getDeclList()->generateIL(instrs, context, destReg);
 }

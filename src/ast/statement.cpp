@@ -122,13 +122,13 @@ void Statement::writeILToFile(std::string filePath) const
     file.close();
 }
 
-void Statement::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
+void Statement::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
 {
-    ILinstr instr("noImpl", typeid(*this).name());
+    Instr instr("noImpl", typeid(*this).name());
     instrs.push_back(instr);
 }
 
-void Statement::generateIL(std::vector<ILinstr> &instrs) const
+void Statement::generateIL(std::vector<Instr> &instrs) const
 {
     ILContext context;
     generateIL(instrs, context, "_root");
@@ -136,7 +136,7 @@ void Statement::generateIL(std::vector<ILinstr> &instrs) const
 
 void Statement::generateIL(std::ostream &os) const
 {
-    std::vector<ILinstr> instrs;
+    std::vector<Instr> instrs;
     generateIL(instrs);
 
     std::vector<unsigned long> columnWidths = {0, 0, 0, 0, 0};

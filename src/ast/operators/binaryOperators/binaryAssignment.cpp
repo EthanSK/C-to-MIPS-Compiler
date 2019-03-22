@@ -17,12 +17,12 @@ void BinaryAssignment::generatePython(std::ostream &os, PythonContext &context, 
 	getRight()->generatePython(os, context, scopeDepth);
 }
 
-void BinaryAssignment::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
+void BinaryAssignment::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
 {
 	std::string opcode = "mov";
 	std::string rightReg = context.makeName(opcode + "_r");
 	getRight()->generateIL(instrs, context, rightReg);
-	instrs.push_back(ILinstr("mov", destReg, rightReg));
+	instrs.push_back(Instr("mov", destReg, rightReg));
 	LValuePtr lvalue = Utils::tryCast<LValue>(getLeft(), "Illegal " + opcode + ": " + toString() + ". LHS of an assignment must be an lvalue");
 	lvalue->generateLValueStoreIL(instrs, context, rightReg);
 }

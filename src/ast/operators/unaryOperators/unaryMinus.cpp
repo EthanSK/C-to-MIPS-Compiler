@@ -12,8 +12,8 @@ void UnaryMinus::generatePython(std::ostream &os, PythonContext &context, int sc
 	os << ")";
 }
 
-void UnaryMinus::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
+void UnaryMinus::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
 {
 	getOperand()->generateIL(instrs, context, "$t0");
-	instrs.push_back(ILinstr("subi", destReg, "$0", "$t0"));
+	instrs.push_back(Instr("subi", destReg, "$0", "$t0"));
 } 

@@ -17,7 +17,7 @@ void BinaryModuloAssignment::generatePython(std::ostream &os, PythonContext &con
 	getRight()->generatePython(os, context, scopeDepth);
 }
 
-void BinaryModuloAssignment::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
+void BinaryModuloAssignment::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
 {
 	std::string opcode = "mod";
 	std::string leftReg = context.makeName(opcode + "_l");
@@ -25,8 +25,8 @@ void BinaryModuloAssignment::generateIL(std::vector<ILinstr> &instrs, ILContext 
 	std::string resultReg = context.makeName(opcode + "_res");
 	getLeft()->generateIL(instrs, context, leftReg);
 	getRight()->generateIL(instrs, context, rightReg);
-	instrs.push_back(ILinstr(opcode, resultReg, leftReg, rightReg));
-	instrs.push_back(ILinstr("mov", destReg, resultReg));
+	instrs.push_back(Instr(opcode, resultReg, leftReg, rightReg));
+	instrs.push_back(Instr("mov", destReg, resultReg));
 	LValuePtr lvalue = Utils::tryCast<LValue>(getLeft(), "Illegal " + opcode + ": " + toString() + ". LHS of an assignment must be an lvalue");
 	lvalue->generateLValueStoreIL(instrs, context, resultReg);
 }

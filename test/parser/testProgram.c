@@ -1,9 +1,12 @@
-int foo(int a)
-{
-    return a;
-}
-
 int main()
 {
-    return foo(10);
+    int x = 1;
+    if (x > 1)
+    {
+        return 2;
+    }
+    else
+    {
+        return 5;
+    }
 }

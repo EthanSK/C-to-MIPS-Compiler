@@ -34,10 +34,10 @@ void InitDeclarator::generatePython(std::ostream &os, PythonContext &context, in
     getInitializer()->generatePython(os, context, scopeDepth);
 }
 
-void InitDeclarator::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
+void InitDeclarator::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
 {
     std::string initName = context.makeName("init");
     getDeclarator()->generateIL(instrs, context, destReg);
     getInitializer()->generateIL(instrs, context, initName);
-    instrs.push_back(ILinstr("mov", getDeclarator()->getIdentifierName(), initName));
+    instrs.push_back(Instr("mov", getDeclarator()->getIdentifierName(), initName));
 }

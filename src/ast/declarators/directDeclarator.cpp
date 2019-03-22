@@ -25,8 +25,8 @@ void DirectDeclarator::generatePython(std::ostream &os, PythonContext &context, 
     getIdentifier()->generatePython(os, context, scopeDepth);
 }
 
-void DirectDeclarator::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
+void DirectDeclarator::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
 {
-    ILinstr instr("decl", getIdentifierName());
+    Instr instr("decl", getIdentifierName(), "4");
     instrs.push_back(instr);
 }

@@ -20,7 +20,7 @@ void ParameterList::generatePython(std::ostream &os, PythonContext &context, int
     }
 }
 
-void ParameterList::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
+void ParameterList::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
 {
     for (int i = 0; i < branches.size(); ++i)
     {

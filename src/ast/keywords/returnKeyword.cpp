@@ -19,8 +19,8 @@ void ReturnKeyword::generatePython(std::ostream &os, PythonContext &context, int
     getReturnValue()->generatePython(os, context, scopeDepth);
 }
 
-void ReturnKeyword::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
+void ReturnKeyword::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
 {
     getReturnValue()->generateIL(instrs, context, "$t0");
-    instrs.push_back(ILinstr("retv", "$t0"));
+    instrs.push_back(Instr("retv", "$t0"));
 } 

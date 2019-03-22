@@ -25,7 +25,7 @@ void RootNode::generatePython(std::ostream &os, PythonContext &context, int scop
     os << "sys.exit(ret)";
 }
 
-void RootNode::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
+void RootNode::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
 {
     branches[0]->generateIL(instrs, context, destReg);
 } 
