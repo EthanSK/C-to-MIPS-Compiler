@@ -19,3 +19,11 @@ void ParameterList::generatePython(std::ostream &os, PythonContext &context, int
         initializations[i]->generatePython(os, context, scopeDepth);
     }
 }
+
+void ParameterList::generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const
+{
+    for (int i = 0; i < branches.size(); ++i)
+    {
+        branches[i]->generateIL(instrs, context, destReg);
+    }
+}

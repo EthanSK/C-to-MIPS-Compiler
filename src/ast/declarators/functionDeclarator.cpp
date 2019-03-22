@@ -1,4 +1,6 @@
 #include "functionDeclarator.hpp"
+#include "parameterList.hpp"
+#include "utils.hpp"
 #include <sstream>
 
 FunctionDeclarator::FunctionDeclarator(StatementPtr identifier, StatementPtr paramList)

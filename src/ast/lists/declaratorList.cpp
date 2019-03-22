@@ -1,4 +1,5 @@
 #include "declaratorList.hpp"
+#include "utils.hpp"
 
 void DeclaratorList::printC(std::ostream &os) const
 {
@@ -12,7 +13,7 @@ void DeclaratorList::printC(std::ostream &os) const
 
 DeclaratorPtr DeclaratorList::getDeclarator(int index) const
 {
-    return reinterpret_cast<DeclaratorPtr>(branches[index]);
+    return Utils::tryCast<Declarator>(branches[index], "decl list can only contain declarators");
 }
 
 void DeclaratorList::generatePython(std::ostream &os, PythonContext &context, int scopeDepth) const

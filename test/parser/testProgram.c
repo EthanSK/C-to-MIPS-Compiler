@@ -1,4 +1,9 @@
+int foo(int a)
+{
+    return a;
+}
+
 int main()
 {
-    x = x + 2;
+    return foo(10);
 }
