@@ -1,4 +1,5 @@
 main()
 {
-    int y, x = 1;
+    int x, y, z;
+    return 0;
 }
