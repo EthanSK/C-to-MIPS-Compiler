@@ -55,4 +55,10 @@ int main(int argc, char *argv[])
         std::cerr << str << std::endl;
         std::exit(-1);
     }
+    catch (const char* str)
+    {
+        std::cerr << "ERROR\n======================\n";
+        std::cerr << str << std::endl;
+        std::exit(-1);
+    }
 }
