@@ -96,7 +96,7 @@ void MIPSContext::addInstr(Instr instr)
 bool MIPSContext::requiresStack(std::string reg) const
 {
     if (reg.size() == 0) { return false; }
-    if (reg[0] == '$') { return false; }
+    if (reg.find('$') != std::string::npos) { return false; }
     if (std::regex_match(reg, _isNumber)) { return false; }
     return true;
 }
