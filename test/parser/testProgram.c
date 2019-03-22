@@ -1,4 +1,4 @@
 int main()
 {
-    x = y--;
+    return 2 > 1 ? 1 : 0;
 }

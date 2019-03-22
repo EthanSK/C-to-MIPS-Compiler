@@ -11,6 +11,7 @@ class TernaryOperator : public Statement
 {
   public:
     TernaryOperator(StatementPtr condition, StatementPtr trueSelect, StatementPtr falseSelect);
+    void generateIL(std::vector<ILinstr> &instrs, ILContext &context, std::string destReg) const override;
 
   protected:
     StatementPtr getCondition() const;
