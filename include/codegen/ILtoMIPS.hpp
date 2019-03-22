@@ -6,7 +6,11 @@
 
 class ILtoMIPS //one IL may map to many MIPS
 {
-    static void convertToMIPS(std::vector<ILinstr> &ilInstrs, std::vector<MIPSinstr> &mipsInstr); //might need context?
+public:
+    static void convertToMIPS(std::vector<ILinstr> &ilInstrs, std::vector<MIPSinstr> &mipsInstrs);
+    
+private:
+    static void convertInstr(ILinstr &instr, std::vector<MIPSinstr> &mipsInstrs);
 
     static void fdef(ILinstr instr, std::vector<MIPSinstr> &mipsInstr);
     static void fcall(ILinstr instr, std::vector<MIPSinstr> &mipsInstr);

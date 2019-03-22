@@ -1,20 +1,17 @@
 #include "ILtoMIPS.hpp"
 
-void ILtoMIPS::convertToMIPS(std::vector<ILinstr> &instrs, std::vector<MIPSinstr> &mipsInstr)
+void ILtoMIPS::convertToMIPS(std::vector<ILinstr> &instrs, std::vector<MIPSinstr> &mipsInstrs)
 {
     for (size_t i = 0; i < instrs.size(); i++)
     {
-        if (instrs[i].opcode == "fdef")
-        {
-            ILtoMIPS::fdef(instrs[i], mipsInstr);
-        }
-        if (instrs[i].opcode == "fend")
-        {
-            ILtoMIPS::fend(instrs[i], mipsInstr);
-        }
-        if (instrs[i].opcode == "fcall")
-        {
-            ILtoMIPS::fcall(instrs[i], mipsInstr);
-        }
+        convertInstr(instrs[i], mipsInstrs)
     }
+}
+
+void ILtoMIPS::convertInstr(ILinstr &instr, std::vector<MIPSinstr> &mipsInstr)
+{
+    if (instr.opcode == "fdef") { ILtoMIPS::fdef(instr, mipsInstr); }
+    if (instr.opcode == "fend") { ILtoMIPS::fend(instr, mipsInstr); }
+    if (instr.opcode == "fcall") { ILtoMIPS::fcall(instr, mipsInstr); }
+    else { throw std::string("Unexpected IL opcode " + instr.opcode + "."); }
 }
