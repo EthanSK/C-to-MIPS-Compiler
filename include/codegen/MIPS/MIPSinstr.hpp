@@ -10,6 +10,4 @@ struct MIPSinstr
     virtual std::string toString() const = 0;
 };
 
-
-
 #endif
