@@ -38,7 +38,7 @@ std::string ILContext::makeName(std::string name)
     return ss.str();
 }
 
-std::vector<Instr> MIPSContext::dumpInstrs()
+std::vector<Instr> MIPSContext::dumpInstrs() const
 {
     return _instrs;
 }
@@ -67,5 +67,43 @@ void MIPSContext::alloc(Allocation allocation)
 
 void MIPSContext::addInstr(Instr instr)
 {
+    std::string destName = instr.dest;
+    bool reqStore = requiresStack(instr.dest);
+
+    if (reqStore)
+    {
+        if (!_allocator.isAllocated(instr.dest))
+        {
+            Allocation allocation(4, instr.dest);
+            alloc(allocation);
+        }
+    }
+
+    instr.dest = reqStore ? "$t1" : destName;
+    instr.input1 = loadInput(instr.input1, "$t2");
+    instr.input2 = loadInput(instr.input2, "$t3");
     _instrs.push_back(instr);
+    
+    if (reqStore)
+    {
+        int regLocation = _allocator.getAllocationOffset(destName);
+        _instrs.push_back(Instr("sw", "$t1", std::to_string(regLocation) + "($sp)"));
+    }
+}
+
+bool MIPSContext::requiresStack(std::string reg) const
+{
+    if (reg.size() == 0) { return false; }
+    if (reg[0] == '$') { return false; }
+    if (std::regex_match(reg, _isNumber)) { return false; }
+    return true;
+}
+
+std::string MIPSContext::loadInput(std::string regName, std::string mipsReg)
+{
+    if (!requiresStack(regName)) { return regName; }
+
+    int regLocation = _allocator.getAllocationOffset(regName);
+    _instrs.push_back(Instr("lw", mipsReg, std::to_string(regLocation) + "($sp)"));
+    return mipsReg;
 }

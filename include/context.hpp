@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <unordered_map>
+#include <regex>
 #include "allocator.hpp"
 #include "instr.hpp"
 
@@ -24,7 +25,7 @@ class MIPSContext : public Context
 {
 public:
     Allocator& getAllocator();
-    std::vector<Instr> dumpInstrs();
+    std::vector<Instr> dumpInstrs() const;
     void popFrame();
     void alloc(Allocation allocation);
     void addInstr(Instr instr);
@@ -32,6 +33,10 @@ public:
 private:
     Allocator _allocator;
     std::vector<Instr> _instrs;
+    std::regex _isNumber = std::regex("-?[0-9]+([.][0-9]+)?");
+
+    bool requiresStack(std::string reg) const;
+    std::string loadInput(std::string regName, std::string mipsReg);
 };
 
 class PythonContext : public Context
