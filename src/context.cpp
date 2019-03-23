@@ -43,9 +43,9 @@ std::vector<Instr> MIPSContext::dumpInstrs() const
     return _instrs;
 }
 
-Allocator& MIPSContext::getAllocator()
+void MIPSContext::pushFrame()
 {
-    return _allocator;
+    _allocator.pushFrame();
 }
 
 void MIPSContext::popFrame()
@@ -61,8 +61,16 @@ void MIPSContext::popFrame()
 
 void MIPSContext::alloc(Allocation allocation)
 {
-    _allocator.allocate(allocation);
-    _instrs.push_back(Instr("subi", "$sp", "$sp", std::to_string(allocation.size)));
+    if (_allocator.frameCount() > 0)
+    {
+        _allocator.allocate(allocation);
+        _instrs.push_back(Instr("subi", "$sp", "$sp", std::to_string(allocation.size)));
+    }
+    else
+    {
+        _globals.insert(allocation.name);
+        _instrs.push_back(Instr::makeLabel(allocation.name));
+    }
 }
 
 void MIPSContext::addInstr(Instr instr)
@@ -71,10 +79,9 @@ void MIPSContext::addInstr(Instr instr)
     if (destName == "_root") { return; }
 
     bool reqStore = requiresStack(instr.dest);
-
     if (reqStore)
     {
-        if (!_allocator.isAllocated(instr.dest))
+        if (!isAllocated(instr.dest))
         {
             Allocation allocation(4, instr.dest);
             alloc(allocation);
@@ -88,8 +95,7 @@ void MIPSContext::addInstr(Instr instr)
     
     if (reqStore)
     {
-        int regLocation = _allocator.getAllocationOffset(destName);
-        _instrs.push_back(Instr("sw", "$t1", std::to_string(regLocation) + "($sp)"));
+        _instrs.push_back(Instr("sw", "$t1", getAllocationLocation(destName)));
     }
 }
 
@@ -105,7 +111,29 @@ std::string MIPSContext::loadInput(std::string regName, std::string mipsReg)
 {
     if (!requiresStack(regName)) { return regName; }
 
-    int regLocation = _allocator.getAllocationOffset(regName);
-    _instrs.push_back(Instr("lw", mipsReg, std::to_string(regLocation) + "($sp)"));
+    _instrs.push_back(Instr("lw", mipsReg, getAllocationLocation(regName)));
     return mipsReg;
+}
+
+int MIPSContext::stackSize() const
+{
+    return _allocator.stackSize();
+}
+
+std::string MIPSContext::getAllocationLocation(std::string regName) const
+{
+    if (_globals.count(regName) == 0)
+    {
+        int regLocation = _allocator.getAllocationOffset(regName);
+        return std::to_string(regLocation) + "($sp)";
+    }
+    else
+    {
+        return regName + "($gp)";
+    }   
+}
+
+bool MIPSContext::isAllocated(std::string reg) const
+{
+    return _globals.count(reg) > 0 || _allocator.isAllocated(reg);
 }
