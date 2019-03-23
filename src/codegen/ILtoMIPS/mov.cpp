@@ -2,5 +2,5 @@
 
 void IL2MIPS::mov(Instr instr, MIPSContext &context) 
 {
-    context.addInstr(instr);
+    context.addInstr(Instr("move", instr.dest, instr.input1));
 }

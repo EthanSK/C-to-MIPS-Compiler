@@ -2,7 +2,7 @@
 #include <sstream>
 #include <ios>
 
-void PythonContext::indentStream(std::ostream& os, int scopeDepth) const
+void PythonContext::indentStream(std::ostream &os, int scopeDepth) const
 {
     os << std::endl;
     for (int i = 0; i < scopeDepth * PY_INDENT_SIZE; i++)
@@ -11,7 +11,7 @@ void PythonContext::indentStream(std::ostream& os, int scopeDepth) const
     }
 }
 
-void PythonContext::dumpGlobals(std::ostream& os, int scopeDepth) const
+void PythonContext::dumpGlobals(std::ostream &os, int scopeDepth) const
 {
     if (_globalIdentifiers.size() > 0)
     {
@@ -19,7 +19,10 @@ void PythonContext::dumpGlobals(std::ostream& os, int scopeDepth) const
         os << "global ";
         for (int i = 0; i < _globalIdentifiers.size(); ++i)
         {
-            if (i > 0) { os << ", "; }
+            if (i > 0)
+            {
+                os << ", ";
+            }
             os << _globalIdentifiers[i];
         }
     }
@@ -64,7 +67,8 @@ void MIPSContext::alloc(Allocation allocation)
     if (_allocator.frameCount() > 0)
     {
         _allocator.allocate(allocation);
-        _instrs.push_back(Instr("subi", "$sp", "$sp", std::to_string(allocation.size)));
+        // _instrs.push_back(Instr("subi", "$sp", "$sp", std::to_string(allocation.size))); //doesn't compile on gcc 
+        _instrs.push_back(Instr("addi", "$sp", "$sp", "-" + std::to_string(allocation.size)));
     }
     else
     {
@@ -76,7 +80,10 @@ void MIPSContext::alloc(Allocation allocation)
 void MIPSContext::addInstr(Instr instr)
 {
     std::string destName = instr.dest;
-    if (destName == "_root") { return; }
+    if (destName == "_root")
+    {
+        return;
+    }
 
     bool reqStore = requiresStack(instr.dest);
     if (reqStore)
@@ -92,7 +99,7 @@ void MIPSContext::addInstr(Instr instr)
     instr.input1 = loadInput(instr.input1, "$t2");
     instr.input2 = loadInput(instr.input2, "$t3");
     _instrs.push_back(instr);
-    
+
     if (reqStore)
     {
         _instrs.push_back(Instr("sw", "$t1", getAllocationLocation(destName)));
@@ -101,15 +108,27 @@ void MIPSContext::addInstr(Instr instr)
 
 bool MIPSContext::requiresStack(std::string reg) const
 {
-    if (reg.size() == 0) { return false; }
-    if (reg.find('$') != std::string::npos) { return false; }
-    if (std::regex_match(reg, _isNumber)) { return false; }
+    if (reg.size() == 0)
+    {
+        return false;
+    }
+    if (reg.find('$') != std::string::npos)
+    {
+        return false;
+    }
+    if (std::regex_match(reg, _isNumber))
+    {
+        return false;
+    }
     return true;
 }
 
 std::string MIPSContext::loadInput(std::string regName, std::string mipsReg)
 {
-    if (!requiresStack(regName)) { return regName; }
+    if (!requiresStack(regName))
+    {
+        return regName;
+    }
 
     _instrs.push_back(Instr("lw", mipsReg, getAllocationLocation(regName)));
     return mipsReg;
@@ -130,7 +149,7 @@ std::string MIPSContext::getAllocationLocation(std::string regName) const
     else
     {
         return regName + "($gp)";
-    }   
+    }
 }
 
 bool MIPSContext::isAllocated(std::string reg) const
