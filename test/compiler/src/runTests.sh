@@ -22,7 +22,7 @@ summary_file="$log_dir/_summary.csv"
 c_files=$(find $tests_dir -name "*.c")
 
 #tools
-c_compiler="mips-linux-gnu-gcc" #replace this with our compiler
+c_compiler="bin/c_compiler" #replace this with our compiler
 if [[ "$1" != "" ]] ; then
     c_compiler="$1" #so we can pass in our compiler
 fi

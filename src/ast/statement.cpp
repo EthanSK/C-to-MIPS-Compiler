@@ -141,7 +141,7 @@ void Statement::generateIL(std::ostream &os) const
 {
     std::vector<Instr> instrs;
     generateIL(instrs);
-    InstrPrinter::printInstrs(os, instrs);
+    InstrPrinter::prettyPrintInstrs(os, instrs);
 }
 
 Statement::~Statement()

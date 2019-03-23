@@ -2,10 +2,10 @@
 #include "utils.hpp"
 #include <algorithm>
 
-void InstrPrinter::printInstrs(std::ostream &os, std::vector<Instr> instrs)
+void InstrPrinter::prettyPrintInstrs(std::ostream &os, std::vector<Instr> instrs)
 {
     std::vector<unsigned long> columnWidths = {0, 0, 0, 0, 0};
-    for (size_t i = 0; i < instrs.size(); i++)
+    for(size_t i = 0; i < instrs.size(); i++)
     {
         columnWidths[0] = std::max(columnWidths[0], instrs[i].label.length());
         columnWidths[1] = std::max(columnWidths[1], instrs[i].opcode.length());
@@ -26,39 +26,45 @@ void InstrPrinter::printInstrs(std::ostream &os, std::vector<Instr> instrs)
     for (size_t i = 0; i < instrs.size(); i++)
     {
         std::string label = instrs[i].label;
-
-        if (instrs[i].hasLabel())
-        {
-            //coz i dunno where the label is set. u can change this
-            label.erase(std::remove(label.begin(), label.end(), '('), label.end());
-            label.erase(std::remove(label.begin(), label.end(), ')'), label.end());
-            label += ":";
-        }
-        std::string line;
-        line += Utils::padString(label, columnWidths[0]);
-        line += Utils::padString(instrs[i].opcode, columnWidths[1]);
-        line += Utils::padString(instrs[i].dest, columnWidths[2]);
-        line += Utils::padString(instrs[i].input1, columnWidths[3]);
-        line += Utils::padString(instrs[i].input2, columnWidths[4]);
-
-        //remove trailing comma - its always RONG
-        size_t last = line.find_last_of(',');
-        if (std::string::npos != last)
-        {
-            line = line.substr(0, last);
-        }
-        os << line;
-
-        for (size_t j = 0; j < instrs[i].extraData.size(); j++)
+        if (instrs[i].hasLabel()) { label += ":"; }
+        os << Utils::padString(label, columnWidths[0]);
+        os << Utils::padString(instrs[i].opcode, columnWidths[1]);
+        os << Utils::padString(instrs[i].dest, columnWidths[2]);
+        os << Utils::padString(instrs[i].input1, columnWidths[3]);
+        os << Utils::padString(instrs[i].input2, columnWidths[4]);
+        
+        for(size_t j = 0; j < instrs[i].extraData.size(); j++)
         {
             os << " " << instrs[i].extraData[j];
         }
 
         os << std::endl;
-        if (instrs[i].opcode == "fend")
+        if (instrs[i].opcode == "fend") { os << std::endl; }
+    }
+}
+
+void InstrPrinter::printInstrs(std::ostream &os, std::vector<Instr> instrs)
+{
+    for (size_t i = 0; i < instrs.size(); i++)
+    {
+        std::string label = instrs[i].label;
+
+        if (instrs[i].hasLabel())
         {
-            os << std::endl;
+            label += ": ";
         }
+
+        os << label;
+        os << instrs[i].opcode;
+        if (instrs[i].dest.size() > 0) { os << ", " << instrs[i].dest; }
+        if (instrs[i].input1.size() > 0) { os << ", " << instrs[i].input1; }
+        if (instrs[i].input2.size() > 0) { os << ", " << instrs[i].input2; }
+
+        for (size_t j = 0; j < instrs[i].extraData.size(); j++)
+        {
+            os << ", " << instrs[i].extraData[j];
+        }
+        os << std::endl;
     }
 }
 

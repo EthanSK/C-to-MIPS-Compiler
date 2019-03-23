@@ -9,6 +9,7 @@
 class InstrPrinter
 {
   public:
+    static void prettyPrintInstrs(std::ostream &os, std::vector<Instr> instrs);
     static void printInstrs(std::ostream &os, std::vector<Instr> instrs);
     static void writeMIPStoFile(std::string filePath, std::vector<Instr> instrs);
 };
