@@ -14,11 +14,13 @@ int main(int argc, char *argv[])
     try
     {
         bool isTranslatingToPython = false;
+        bool isCompiling = false;
         // Parse the AST
         yyin = fopen("test/parser/testProgram.c", "r"); //default value for dev
 
         if (argc >= 3 && std::string(argv[1]) == "-S")
         {
+            isCompiling = true;
             yyin = fopen(argv[2], "r");
         }
 
@@ -35,17 +37,6 @@ int main(int argc, char *argv[])
         ast->writePrintCToFile();
         ast->writeDotFile();
 
-        std::cerr << "\n\nIL CODE\n======================\n";
-        std::vector<Instr> instrs;
-        ast->generateIL(std::cerr);
-        ast->generateIL(instrs);
-        ast->writeILToFile();
-
-        std::cerr << "\n\nMIPS CODE\n======================\n";
-        std::vector<Instr> Minstrs;
-        Minstrs = IL2MIPS::convertToMIPS(instrs);
-        InstrPrinter::printInstrs(std::cerr, Minstrs);
-
         if (isTranslatingToPython)
         {
             std::cerr << "\n\nPYTHON CODE\n======================\n";
@@ -53,6 +44,22 @@ int main(int argc, char *argv[])
             ast->writePythonToFile(std::string(argv[4]));
             std::cerr << std::endl;
         }
+
+        if (isCompiling)
+        {
+            std::cerr << "\n\nIL CODE\n======================\n";
+            std::vector<Instr> instrs;
+            ast->generateIL(std::cerr);
+            ast->generateIL(instrs);
+            ast->writeILToFile();
+
+            std::cerr << "\n\nMIPS CODE\n======================\n";
+            std::vector<Instr> Minstrs;
+            Minstrs = IL2MIPS::convertToMIPS(instrs);
+            InstrPrinter::printInstrs(std::cerr, Minstrs);
+            InstrPrinter::writeMIPStoFile(std::string(argv[4]), Minstrs);
+        }
+
 
         std::cerr << std::endl;
         return 0;
@@ -63,7 +70,7 @@ int main(int argc, char *argv[])
         std::cerr << str << std::endl;
         std::exit(-1);
     }
-    catch (const char* str)
+    catch (const char *str)
     {
         std::cerr << "ERROR\n======================\n";
         std::cerr << str << std::endl;

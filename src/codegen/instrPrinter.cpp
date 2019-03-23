@@ -5,7 +5,7 @@
 void InstrPrinter::printInstrs(std::ostream &os, std::vector<Instr> instrs)
 {
     std::vector<unsigned long> columnWidths = {0, 0, 0, 0, 0};
-    for(size_t i = 0; i < instrs.size(); i++)
+    for (size_t i = 0; i < instrs.size(); i++)
     {
         columnWidths[0] = std::max(columnWidths[0], instrs[i].label.length());
         columnWidths[1] = std::max(columnWidths[1], instrs[i].opcode.length());
@@ -26,19 +26,32 @@ void InstrPrinter::printInstrs(std::ostream &os, std::vector<Instr> instrs)
     for (size_t i = 0; i < instrs.size(); i++)
     {
         std::string label = instrs[i].label;
-        if (instrs[i].hasLabel()) { label += ":"; }
+        if (instrs[i].hasLabel())
+        {
+            label += ":";
+        }
         os << Utils::padString(label, columnWidths[0]);
         os << Utils::padString(instrs[i].opcode, columnWidths[1]);
         os << Utils::padString(instrs[i].dest, columnWidths[2]);
         os << Utils::padString(instrs[i].input1, columnWidths[3]);
         os << Utils::padString(instrs[i].input2, columnWidths[4]);
-        
-        for(size_t j = 0; j < instrs[i].extraData.size(); j++)
+
+        for (size_t j = 0; j < instrs[i].extraData.size(); j++)
         {
             os << " " << instrs[i].extraData[j];
         }
 
         os << std::endl;
-        if (instrs[i].opcode == "fend") { os << std::endl; }
+        if (instrs[i].opcode == "fend")
+        {
+            os << std::endl;
+        }
     }
+}
+
+void InstrPrinter::writeMIPStoFile(std::string filePath, std::vector<Instr> instrs)
+{
+    std::ofstream file(filePath, std::ios::out | std::ios::trunc);  
+    InstrPrinter::printInstrs(file, instrs);
+    file.close();
 }
