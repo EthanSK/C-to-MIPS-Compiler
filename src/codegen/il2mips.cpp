@@ -24,6 +24,13 @@ void IL2MIPS::convertInstr(Instr &instr, MIPSContext &context)
     else if (instr.opcode == "mov") { IL2MIPS::mov(instr, context); }
     else if (instr.opcode == "eq") { IL2MIPS::eq(instr, context); }
     else if (instr.opcode == "ne") { IL2MIPS::ne(instr, context); }
+    else if (instr.opcode == "add") { IL2MIPS::add(instr, context); }
+    else if (instr.opcode == "addi") { IL2MIPS::addi(instr, context); }
+    else if (instr.opcode == "sub") { IL2MIPS::sub(instr, context); }
+    else if (instr.opcode == "subi") { IL2MIPS::subi(instr, context); }
+    else if (instr.opcode == "mul") { IL2MIPS::mul(instr, context); }
+    else if (instr.opcode == "div") { IL2MIPS::mul(instr, context); }
+    else if (instr.opcode == "mod") { IL2MIPS::mod(instr, context); }
     else if (instr.opcode == "nop") { context.addInstr(instr); }
     else if (instr.opcode == "") { context.addInstr(instr); } //for labels without opcode 
     else { throw std::string("Unexpected IL opcode " + instr.opcode + "."); }
