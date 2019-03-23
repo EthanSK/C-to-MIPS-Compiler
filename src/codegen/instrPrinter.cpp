@@ -26,7 +26,7 @@ void InstrPrinter::printInstrs(std::ostream &os, std::vector<Instr> instrs)
     for (size_t i = 0; i < instrs.size(); i++)
     {
         std::string label = instrs[i].label;
-        label.erase(std::remove(label.begin(), label.end(), '('), label.end());
+        label.erase(std::remove(label.begin(), label.end(), '('), label.end()); //coz i dunno where the label is set. u can change this
         label.erase(std::remove(label.begin(), label.end(), ')'), label.end());
 
         if (instrs[i].hasLabel())

@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
     try
     {
         bool isTranslatingToPython = false;
-        bool isCompiling = false;
+        bool isCompiling = true; //true for dev
         // Parse the AST
         yyin = fopen("test/parser/testProgram.c", "r"); //default value for dev
 
