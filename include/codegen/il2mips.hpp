@@ -31,6 +31,7 @@ class IL2MIPS //one IL may map to many MIPS
     static void div(Instr instr, MIPSContext &context);
     static void mod(Instr instr, MIPSContext &context);
 
+    static void ret(MIPSContext &context);
 };
 
 #endif

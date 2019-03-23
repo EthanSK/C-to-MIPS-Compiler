@@ -1,3 +1,4 @@
+int x;
 main()
 {
     int a = 200;

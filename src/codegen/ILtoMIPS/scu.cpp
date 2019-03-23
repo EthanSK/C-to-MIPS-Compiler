@@ -2,5 +2,5 @@
 
 void IL2MIPS::scu(Instr instr, MIPSContext &context) 
 {
-    context.getAllocator().pushFrame();
+    context.pushFrame();
 }

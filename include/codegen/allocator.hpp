@@ -13,6 +13,7 @@ public:
     void popFrame();
     void pushFrame();
     int stackSize() const;
+    int frameCount() const;
 
 private:
     AllocationFrame& topFrame();
