@@ -29,9 +29,6 @@ void InstrPrinter::printInstrs(std::ostream &os, std::vector<Instr> instrs)
 
         if (instrs[i].hasLabel())
         {
-            //coz i dunno where the label is set. u can change this
-            label.erase(std::remove(label.begin(), label.end(), '('), label.end());
-            label.erase(std::remove(label.begin(), label.end(), ')'), label.end());
             label += ":";
         }
         std::string line;
@@ -40,13 +37,6 @@ void InstrPrinter::printInstrs(std::ostream &os, std::vector<Instr> instrs)
         line += Utils::padString(instrs[i].dest, columnWidths[2]);
         line += Utils::padString(instrs[i].input1, columnWidths[3]);
         line += Utils::padString(instrs[i].input2, columnWidths[4]);
-
-        //remove trailing comma - its always RONG
-        size_t last = line.find_last_of(',');
-        if (std::string::npos != last)
-        {
-            line = line.substr(0, last);
-        }
         os << line;
 
         for (size_t j = 0; j < instrs[i].extraData.size(); j++)
@@ -62,9 +52,53 @@ void InstrPrinter::printInstrs(std::ostream &os, std::vector<Instr> instrs)
     }
 }
 
+void InstrPrinter::generateInstrs(std::ostream &os, std::vector<Instr> instrs)
+{
+    for (size_t i = 0; i < instrs.size(); i++)
+    {
+        std::string label = instrs[i].label;
+
+        if (instrs[i].hasLabel())
+        {
+            label.erase(std::remove(label.begin(), label.end(), '('), label.end());
+            label.erase(std::remove(label.begin(), label.end(), ')'), label.end());
+            label += ":";
+        }
+        std::string line;
+
+        line += InstrPrinter::addCommaIfNeeded(label);
+        line += InstrPrinter::addCommaIfNeeded(instrs[i].opcode);
+        line += InstrPrinter::addCommaIfNeeded(instrs[i].dest);
+        line += InstrPrinter::addCommaIfNeeded(instrs[i].input1);
+        line += InstrPrinter::addCommaIfNeeded(instrs[i].input2);
+        size_t last = line.find_last_of(',');
+        if (std::string::npos != last)
+        {
+            line = line.substr(0, last);
+        }
+        os << line;
+
+        for (size_t j = 0; j < instrs[i].extraData.size(); j++)
+        {
+            os << ", " << instrs[i].extraData[j]; //dunno when this would be present for mips instructions
+        }
+
+        os << std::endl;
+    }
+}
+
+std::string InstrPrinter::addCommaIfNeeded(std::string &str)
+{
+    if (str != "")
+    {
+        str += ", ";
+    }
+    return str;
+}
+
 void InstrPrinter::writeMIPStoFile(std::string filePath, std::vector<Instr> instrs)
 {
     std::ofstream file(filePath, std::ios::out | std::ios::trunc);
-    InstrPrinter::printInstrs(file, instrs);
+    InstrPrinter::generateInstrs(file, instrs);
     file.close();
 }

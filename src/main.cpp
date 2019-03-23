@@ -58,6 +58,8 @@ int main(int argc, char *argv[])
             Minstrs = IL2MIPS::convertToMIPS(instrs);
             InstrPrinter::printInstrs(std::cerr, Minstrs);
             InstrPrinter::writeMIPStoFile(std::string(argv[4]), Minstrs);
+            InstrPrinter::writeMIPStoFile("bin/test.s", Minstrs);
+
         }
 
 
