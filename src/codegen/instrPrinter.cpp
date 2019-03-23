@@ -52,8 +52,8 @@ void InstrPrinter::generateInstrs(std::ostream &os, std::vector<Instr> instrs)
 
         if (instrs[i].hasLabel())
         {
-            label.erase(std::remove(label.begin(), label.end(), '('), label.end());
-            label.erase(std::remove(label.begin(), label.end(), ')'), label.end());
+            // label.erase(std::remove(label.begin(), label.end(), '('), label.end());
+            // label.erase(std::remove(label.begin(), label.end(), ')'), label.end());
             label += ":";
         }
         std::string line;
