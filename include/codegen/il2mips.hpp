@@ -23,6 +23,8 @@ private:
     static void mov(Instr instr, MIPSContext &context);
     static void eq(Instr instr, MIPSContext &context);
     static void ne(Instr instr, MIPSContext &context);
+
+    static void ret(MIPSContext &context);
 };
 
 #endif
