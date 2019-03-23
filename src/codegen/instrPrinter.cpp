@@ -43,6 +43,43 @@ void InstrPrinter::prettyPrintInstrs(std::ostream &os, std::vector<Instr> instrs
     }
 }
 
+
+void InstrPrinter::generateInstrs(std::ostream &os, std::vector<Instr> instrs)
+{
+    for (size_t i = 0; i < instrs.size(); i++)
+    {
+        std::string label = instrs[i].label;
+
+        if (instrs[i].hasLabel())
+        {
+            label.erase(std::remove(label.begin(), label.end(), '('), label.end());
+            label.erase(std::remove(label.begin(), label.end(), ')'), label.end());
+            label += ":";
+        }
+        std::string line;
+
+        line += InstrPrinter::addCommaIfNeeded(label);
+        line += InstrPrinter::addCommaIfNeeded(instrs[i].opcode);
+        line += InstrPrinter::addCommaIfNeeded(instrs[i].dest);
+        line += InstrPrinter::addCommaIfNeeded(instrs[i].input1);
+        line += InstrPrinter::addCommaIfNeeded(instrs[i].input2);
+        size_t last = line.find_last_of(',');
+        if (std::string::npos != last)
+        {
+            line = line.substr(0, last);
+        }
+        os << line;
+
+        for (size_t j = 0; j < instrs[i].extraData.size(); j++)
+        {
+            os << ", " << instrs[i].extraData[j]; //dunno when this would be present for mips instructions
+        }
+
+        os << std::endl;
+    }
+}
+
+
 std::string InstrPrinter::addCommaIfNeeded(std::string &str)
 {
     if (str != "")
