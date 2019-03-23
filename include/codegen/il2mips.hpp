@@ -6,10 +6,10 @@
 
 class IL2MIPS //one IL may map to many MIPS
 {
-public:
+  public:
     static std::vector<Instr> convertToMIPS(std::vector<Instr> &instrs);
-    
-private:
+
+  private:
     static void convertInstr(Instr &instr, MIPSContext &context);
 
     static void li(Instr instr, MIPSContext &context);
@@ -23,6 +23,14 @@ private:
     static void mov(Instr instr, MIPSContext &context);
     static void eq(Instr instr, MIPSContext &context);
     static void ne(Instr instr, MIPSContext &context);
+    static void add(Instr instr, MIPSContext &context);
+    static void addi(Instr instr, MIPSContext &context);
+    static void sub(Instr instr, MIPSContext &context);
+    static void subi(Instr instr, MIPSContext &context);
+    static void mul(Instr instr, MIPSContext &context);
+    static void div(Instr instr, MIPSContext &context);
+    static void mod(Instr instr, MIPSContext &context);
+
 };
 
 #endif
