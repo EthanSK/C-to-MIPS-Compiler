@@ -43,34 +43,18 @@ void InstrPrinter::prettyPrintInstrs(std::ostream &os, std::vector<Instr> instrs
     }
 }
 
-void InstrPrinter::printInstrs(std::ostream &os, std::vector<Instr> instrs)
+std::string InstrPrinter::addCommaIfNeeded(std::string &str)
 {
-    for (size_t i = 0; i < instrs.size(); i++)
+    if (str != "")
     {
-        std::string label = instrs[i].label;
-
-        if (instrs[i].hasLabel())
-        {
-            label += ": ";
-        }
-
-        os << label;
-        os << instrs[i].opcode;
-        if (instrs[i].dest.size() > 0) { os << ", " << instrs[i].dest; }
-        if (instrs[i].input1.size() > 0) { os << ", " << instrs[i].input1; }
-        if (instrs[i].input2.size() > 0) { os << ", " << instrs[i].input2; }
-
-        for (size_t j = 0; j < instrs[i].extraData.size(); j++)
-        {
-            os << ", " << instrs[i].extraData[j];
-        }
-        os << std::endl;
+        str += ", ";
     }
+    return str;
 }
 
 void InstrPrinter::writeMIPStoFile(std::string filePath, std::vector<Instr> instrs)
 {
     std::ofstream file(filePath, std::ios::out | std::ios::trunc);
-    InstrPrinter::printInstrs(file, instrs);
+    InstrPrinter::generateInstrs(file, instrs);
     file.close();
 }
