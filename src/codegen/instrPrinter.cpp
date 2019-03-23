@@ -59,7 +59,7 @@ void InstrPrinter::generateInstrs(std::ostream &os, std::vector<Instr> instrs)
         std::string line;
 
         line += InstrPrinter::addCommaIfNeeded(label);
-        line += InstrPrinter::addCommaIfNeeded(instrs[i].opcode);
+        line += instrs[i].opcode + " "; //no comma after opcode
         line += InstrPrinter::addCommaIfNeeded(instrs[i].dest);
         line += InstrPrinter::addCommaIfNeeded(instrs[i].input1);
         line += InstrPrinter::addCommaIfNeeded(instrs[i].input2);
