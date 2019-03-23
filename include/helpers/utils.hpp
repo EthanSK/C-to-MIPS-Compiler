@@ -6,7 +6,7 @@
 class Utils
 {
 public:
-    static std::string padString(std::string str, int maxPadding);
+    static std::string padString(std::string str, int maxPadding, bool noComma = false);
 
     template <class DestType, class SrcType>
     static bool isType(const SrcType* src)

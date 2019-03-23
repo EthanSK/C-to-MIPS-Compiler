@@ -1,11 +1,11 @@
 #include "utils.hpp"
 #include <sstream>
 
-std::string Utils::padString(std::string str, int maxPadding)
+std::string Utils::padString(std::string str, int maxPadding, bool noComma)
 {
     std::stringstream ss;
     ss << str;
-    if (str != "")
+    if (str != "" && !noComma)
     {
         ss << ",";
     }

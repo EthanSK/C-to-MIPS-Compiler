@@ -26,18 +26,28 @@ void InstrPrinter::printInstrs(std::ostream &os, std::vector<Instr> instrs)
     for (size_t i = 0; i < instrs.size(); i++)
     {
         std::string label = instrs[i].label;
-        label.erase(std::remove(label.begin(), label.end(), '('), label.end()); //coz i dunno where the label is set. u can change this
-        label.erase(std::remove(label.begin(), label.end(), ')'), label.end());
 
         if (instrs[i].hasLabel())
         {
+            //coz i dunno where the label is set. u can change this
+            label.erase(std::remove(label.begin(), label.end(), '('), label.end());
+            label.erase(std::remove(label.begin(), label.end(), ')'), label.end());
             label += ":";
         }
-        os << Utils::padString(label, columnWidths[0]);
-        os << Utils::padString(instrs[i].opcode, columnWidths[1]);
-        os << Utils::padString(instrs[i].dest, columnWidths[2]);
-        os << Utils::padString(instrs[i].input1, columnWidths[3]);
-        os << Utils::padString(instrs[i].input2, columnWidths[4]);
+        std::string line;
+        line += Utils::padString(label, columnWidths[0]);
+        line += Utils::padString(instrs[i].opcode, columnWidths[1]);
+        line += Utils::padString(instrs[i].dest, columnWidths[2]);
+        line += Utils::padString(instrs[i].input1, columnWidths[3]);
+        line += Utils::padString(instrs[i].input2, columnWidths[4]);
+
+        //remove trailing comma - its always RONG
+        size_t last = line.find_last_of(',');
+        if (std::string::npos != last)
+        {
+            line = line.substr(0, last);
+        }
+        os << line;
 
         for (size_t j = 0; j < instrs[i].extraData.size(); j++)
         {
@@ -54,7 +64,7 @@ void InstrPrinter::printInstrs(std::ostream &os, std::vector<Instr> instrs)
 
 void InstrPrinter::writeMIPStoFile(std::string filePath, std::vector<Instr> instrs)
 {
-    std::ofstream file(filePath, std::ios::out | std::ios::trunc);  
+    std::ofstream file(filePath, std::ios::out | std::ios::trunc);
     InstrPrinter::printInstrs(file, instrs);
     file.close();
 }
