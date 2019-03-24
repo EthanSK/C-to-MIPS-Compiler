@@ -77,7 +77,7 @@ for c_file in $c_files ; do #use tests_dir here to enforce correctly added tests
         printf "======================================\n${no_colour}"
     fi
     
-    $c_compiler -S $c_file -o $asm_file
+    $c_compiler -S $c_file -o $asm_file > /dev/null 2>&1
     mips-linux-gnu-gcc -mfp32 $gcc_flags_enforce_c90 -o $obj_file -c $asm_file
     mips-linux-gnu-gcc -mfp32 $gcc_flags_enforce_c90 -static -o $binary_out $obj_file $driver_file
     qemu-mips $binary_out

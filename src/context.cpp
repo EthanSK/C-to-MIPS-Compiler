@@ -137,6 +137,7 @@ std::string MIPSContext::loadInput(std::string regName, std::string mipsReg)
     if (!isAllocated(regName)) { return regName; }
 
     _instrs.push_back(Instr("lw", mipsReg, getAllocationLocation(regName)));
+    _instrs.push_back(Instr("nop"));
     return mipsReg;
 }
 
