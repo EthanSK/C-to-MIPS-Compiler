@@ -5,5 +5,6 @@ int func(int a, int b, int c, int d, int e, int f)
 
 int fcall6()
 {
-    return func(1, 2, 3, 4, 5, 6);
+    int x = 1, y = 2, z = 6;
+    return func(x, y, 3, 4, 2 + 3, z);
 }
