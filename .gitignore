@@ -13,3 +13,4 @@ test/compiler/output
 test/compiler/log
 NVM_CD_FLAGS=
 .vscode/
+TERM_PROGRAM=vscode

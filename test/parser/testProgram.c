@@ -1,4 +1,5 @@
-int fdefParams6(int a, int b, int c, int d, int e, int f)
+int lol()
 {
-    return a + b + c + d + e + f;
+    int a;
+    return a;
 }
