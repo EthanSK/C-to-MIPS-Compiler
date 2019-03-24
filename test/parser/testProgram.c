@@ -1,4 +1,5 @@
-int fdefParams4(int a, int b, int c, int d, int e)
+int factorial(int n)
 {
-    return a + b + c + d + e;
+    if (n == 0) { return 1; }
+    else { return n * factorial(n - 1); }
 }
