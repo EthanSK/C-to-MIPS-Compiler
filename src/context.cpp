@@ -54,6 +54,7 @@ std::vector<Instr> MIPSContext::dumpInstrs() const
 void MIPSContext::pushFrame()
 {
     _allocator.pushFrame();
+    _instrs.push_back(Instr("#scu"));
 }
 
 void MIPSContext::popFrame()
@@ -72,13 +73,19 @@ void MIPSContext::alloc(Allocation allocation)
     if (_allocator.frameCount() > 0)
     {
         _allocator.allocate(allocation);
-        Instr allocInstr("addi", "$sp", "$sp", "-" + std::to_string(allocation.size));
         
         std::vector<Instr>::iterator inserter = _instrs.end();
-        while (inserter != _instrs.begin() && (inserter - 1)->opcode == "") { inserter--; }
+        while (inserter != _instrs.begin() && (inserter - 1)->opcode != "#scu") { inserter--; }
 
-        //_instrs.insert(inserter, allocInstr);
-        _instrs.push_back(allocInstr);
+        if (inserter->opcode == "addi" && inserter->dest == "$sp" && inserter->input1 == "$sp")
+        {
+            inserter->input2 = std::to_string(std::stoi(inserter->input2) - allocation.size);
+        }
+        else
+        {
+            Instr allocInstr("addi", "$sp", "$sp", std::to_string(-allocation.size));
+            _instrs.insert(inserter, allocInstr);
+        }
     }
     else
     {
