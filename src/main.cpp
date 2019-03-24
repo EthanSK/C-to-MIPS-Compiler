@@ -13,10 +13,16 @@ int main(int argc, char *argv[])
 {
     try
     {
-        bool isTranslatingToPython = false;
-        bool isCompiling = true; //true for dev
+        bool isTranslatingToPython;
+        bool isCompiling;
+
         // Parse the AST
-        yyin = fopen("test/parser/testProgram.c", "r"); //default value for dev
+        if (argc >= 2 && std::string(argv[1]) == "dev")
+        {
+            isTranslatingToPython = false;
+            isCompiling = true;
+            yyin = fopen("test/parser/testProgram.c", "r");
+        }
 
         if (argc >= 3 && std::string(argv[1]) == "-S")
         {
