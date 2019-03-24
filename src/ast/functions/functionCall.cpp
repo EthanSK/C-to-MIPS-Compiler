@@ -21,6 +21,9 @@ void FunctionCall::printC(std::ostream &os) const
     os << getName() << "(" << getParameters() << ")";
 } 
 
+bool FunctionCall::isConstant() const { return false; }
+int FunctionCall::evalConst() const { throw "rvalue function call cannot be statically evaluated"; }
+
 void FunctionCall::generatePython(std::ostream &os, PythonContext &context, int scopeDepth) const
 {
     getName()->generatePython(os, context, scopeDepth);

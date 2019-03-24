@@ -5,8 +5,9 @@
 #include "statement.hpp"
 #include "identifier.hpp"
 #include "expressionList.hpp"
+#include "rvalue.h"
 
-class FunctionCall : public Statement
+class FunctionCall : public Statement, public RValue
 {
 public:
   FunctionCall(StatementPtr name, StatementPtr parameters);
@@ -19,6 +20,9 @@ public:
 
   void generatePython(std::ostream &os, PythonContext &context, int scopeDepth = 0) const override;
   void generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const override;
+
+  virtual bool isConstant() const override;
+  virtual int evalConst() const override;
 
 protected:
   void printC(std::ostream &os) const override;
