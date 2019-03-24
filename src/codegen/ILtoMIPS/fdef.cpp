@@ -14,6 +14,13 @@ void IL2MIPS::fdef(Instr instr, MIPSContext &context)
         {
             context.addInstr(Instr("move", instr.extraData[i * 2], "$a" + std::to_string(i)));
         }
+        else
+        {
+            int stackSize = context.stackSize();
+            int argOffset = stackSize + 4 * i;
+            context.addInstr(Instr("lw", "$t0", std::to_string(argOffset) + "($sp)"));
+            context.addInstr(Instr("sw", "$t0", "0($sp)"));
+        }
     }
 
     context.addInstr(Instr("move", "0_fp", "$fp"));
