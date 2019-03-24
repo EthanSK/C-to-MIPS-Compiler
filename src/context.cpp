@@ -123,6 +123,15 @@ void MIPSContext::addInstr(Instr instr)
     }
 }
 
+void MIPSContext::addBranchInstr(Instr instr)
+{
+    instr.dest = loadInput(instr.dest, "$t1");
+    instr.input1 = loadInput(instr.input1, "$t2");
+    instr.input2 = loadInput(instr.input2, "$t3");
+    _instrs.push_back(instr);
+    _instrs.push_back(Instr("nop"));
+}
+
 bool MIPSContext::requiresStack(std::string reg) const
 {
     if (reg.size() == 0) { return false; }

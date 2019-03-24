@@ -36,6 +36,7 @@ void IL2MIPS::convertInstr(Instr &instr, MIPSContext &context)
     else if (instr.opcode == "gt") { IL2MIPS::gt(instr, context); }
     else if (instr.opcode == "gte") { IL2MIPS::gte(instr, context); }
     else if (instr.opcode == "b") { IL2MIPS::b(instr, context); }
+    else if (instr.opcode == "bez") { IL2MIPS::bez(instr, context); }
     else if (instr.opcode == "bnez") { IL2MIPS::bnez(instr, context); }
     else if (instr.opcode == "nop") { context.addInstr(instr); }
     else if (instr.opcode == "") { context.addInstr(instr); } //for labels without opcode 

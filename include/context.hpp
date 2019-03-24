@@ -31,6 +31,7 @@ public:
     void popFrame();
     void alloc(Allocation allocation);
     void addInstr(Instr instr);
+    void addBranchInstr(Instr instr);
     void addRootInstr(Instr instr);
     void addRawInstr(Instr instr);
     int stackSize() const;
