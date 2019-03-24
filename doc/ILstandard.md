@@ -1,6 +1,7 @@
 | IL Opcode | Example            | Meaning                                               |
 | --------- | ------------------ | ----------------------------------------------------- |
 | mov       | mov x y            | x = y                                                 |
+| movi      | movi x im          | x = im                                                |
 | add       | add x y z          | x = y + z                                             |
 | addi      | add x y im         | x = y + im                                            |
 | sub       | sub x y z          | x = y - z                                             |
@@ -44,4 +45,5 @@
 | decl      | decl x im          | declares a non temporary variable x of size im        |
 | load      | load x y z         | loads into x from the address y + z                   |
 | store     | store x y z        | stores the value in x to the address y + z            |
+| init      | init x im          | initializes the variable x with the immediate im      |
 

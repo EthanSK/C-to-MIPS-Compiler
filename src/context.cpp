@@ -179,3 +179,8 @@ bool MIPSContext::isAllocated(std::string reg) const
 {
     return _globals.count(reg) > 0 || _allocator.isAllocated(reg);
 }
+
+bool MIPSContext::isGlobalScope() const
+{
+    return _allocator.frameCount() == 0;
+}

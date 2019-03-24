@@ -27,6 +27,7 @@ class MIPSContext : public Context
 {
 public:
     std::vector<Instr> dumpInstrs() const;
+    bool isGlobalScope() const;
     void pushFrame();
     void popFrame();
     void alloc(Allocation allocation);
