@@ -38,7 +38,7 @@ void ForLoop::generateIL(std::vector<Instr> &instrs, ILContext &context, std::st
     getInit()->generateIL(instrs, context, destReg);
 
     instrs.push_back(Instr::makeLabel(for_lb));
-    getCondition()->generateIL(instrs, context, forCond);
+    context.compileInput(getCondition(), instrs, forCond);
     instrs.push_back(Instr("bez", for_end_lb, forCond));
 
     getScopeBlock()->generateIL(instrs, context, destReg);

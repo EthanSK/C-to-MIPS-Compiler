@@ -26,6 +26,6 @@ void DoWhileLoop::generateIL(std::vector<Instr> &instrs, ILContext &context, std
     instrs.push_back(Instr::makeLabel(while_lb));
     getScopeBlock()->generateIL(instrs, context, destReg);
 
-    getCondition()->generateIL(instrs, context, whileCond);
+    context.compileInput(getCondition(), instrs, whileCond);
     instrs.push_back(Instr("bnez", while_lb, whileCond));
 }
