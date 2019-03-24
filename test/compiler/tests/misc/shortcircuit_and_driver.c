@@ -2,5 +2,5 @@ int shortcircuit_and();
 
 int main()
 {
-    return !(shortcircuit_and() == 30);
+    return !(shortcircuit_and() == 22);
 }
