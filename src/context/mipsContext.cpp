@@ -1,5 +1,6 @@
 #include "mipsContext.hpp"
 #include <sstream>
+#include <algorithm>
 
 std::vector<Instr> MIPSContext::dumpInstrs() const
 {
@@ -41,7 +42,10 @@ void MIPSContext::alloc(Allocation allocation)
         while (inserter != _instrs.begin() && (inserter - 1)->opcode != "#scu")
         {
             inserter--;
-            inserter->input1 = correctStackReference(inserter->input1, offset);
+            if (std::find(inserter->extraData.begin(), inserter->extraData.end(), "#raw") == inserter->extraData.end())
+            {
+                inserter->input1 = correctStackReference(inserter->input1, offset);
+            }
         }
 
         if (inserter != _instrs.end() && inserter->opcode == "addi" && inserter->dest == "$sp" && inserter->input1 == "$sp")
