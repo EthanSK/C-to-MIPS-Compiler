@@ -4,4 +4,5 @@ void IL2MIPS::fend(Instr instr, MIPSContext &context)
 {
     ret(context);
     context.popFrame();
+    context.addRawInstr(Instr(""));
 }

@@ -1,5 +1,6 @@
 #include "functionDeclarator.hpp"
 #include "parameterList.hpp"
+#include "declaration.hpp"
 #include "utils.hpp"
 #include <sstream>
 
@@ -37,6 +38,16 @@ void FunctionDeclarator::generatePython(std::ostream &os, PythonContext &context
 void FunctionDeclarator::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
 {
     Instr instr("fdef", getIdentifierName());
+
     ParameterListPtr paramList = Utils::tryCast<ParameterList>(getParamList(), "parameter list of a function declarator must be of type parameterList");
+    std::vector<StatementPtr> params = paramList->getNodes();
+
+    for (int i = 0; i < params.size(); ++i)
+    {
+        DeclarationPtr declaration = Utils::tryCast<Declaration>(params[i], "param in function definition must be a valid declaration");
+        DeclaratorListPtr declList = declaration->getDeclList();
+
+    }
+
     instrs.push_back(instr);
 }
