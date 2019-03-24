@@ -45,11 +45,11 @@ void TernaryOperator::printC(std::ostream &os) const{
 void TernaryOperator::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
 {
     std::string conditionReg = context.makeName("cond");
-    std::string else_lb = context.makeName("else");
-    std::string endif_lb = context.makeName("endif");
+    std::string else_lb = context.makeLabelName("else");
+    std::string endif_lb = context.makeLabelName("endif");
 
     getCondition()->generateIL(instrs, context, conditionReg);
-    instrs.push_back(Instr("bnez", else_lb, conditionReg));
+    instrs.push_back(Instr("bez", else_lb, conditionReg));
     getTrueSelect()->generateIL(instrs, context, destReg);
     instrs.push_back(Instr("b", endif_lb));
     instrs.push_back(Instr::makeLabel(else_lb));
