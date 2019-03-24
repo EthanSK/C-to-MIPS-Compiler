@@ -15,3 +15,6 @@ void UnaryPreDecrement::generateIL(std::vector<Instr> &instrs, ILContext &contex
 	LValuePtr lvalue = Utils::tryCast<LValue>(getOperand(), "Illegal ++: " + toString() + ". LHS of an increment must be an lvalue");
 	lvalue->generateLValueStoreIL(instrs, context, "$t0");
 }
+
+bool UnaryPreDecrement::isConstant() const { return false; }
+int UnaryPreDecrement::evalConst() const { throw "cannot statically evaluate a decrement"; }

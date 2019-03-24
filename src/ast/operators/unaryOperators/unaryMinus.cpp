@@ -17,3 +17,8 @@ void UnaryMinus::generateIL(std::vector<Instr> &instrs, ILContext &context, std:
 	getOperand()->generateIL(instrs, context, "$t0");
 	instrs.push_back(Instr("subi", destReg, "$0", "$t0"));
 } 
+
+int UnaryMinus::evalConst() const
+{
+	return -getOperandR()->evalConst();
+}

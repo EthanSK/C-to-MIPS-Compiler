@@ -15,3 +15,6 @@ void UnaryPostIncrement::generateIL(std::vector<Instr> &instrs, ILContext &conte
 	LValuePtr lvalue = Utils::tryCast<LValue>(getOperand(), "Illegal ++: " + toString() + ". LHS of an increment must be an lvalue");
 	lvalue->generateLValueStoreIL(instrs, context, "$t0");
 }
+
+bool UnaryPostIncrement::isConstant() const { return false; }
+int UnaryPostIncrement::evalConst() const { throw "cannot statically evaluate an increment"; }

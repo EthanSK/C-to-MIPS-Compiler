@@ -17,3 +17,8 @@ void UnaryBitwiseInvert::generateIL(std::vector<Instr> &instrs, ILContext &conte
     getOperand()->generateIL(instrs, context, "$t0");
 	instrs.push_back(Instr("neg", destReg, "$t0"));
 }
+
+int UnaryBitwiseInvert::evalConst() const
+{
+	return ~getOperandR()->evalConst();
+}

@@ -7,6 +7,7 @@ class UnarySizeofConst : public UnarySizeof
 { 
     using UnarySizeof::UnarySizeof;
     void generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const override;
+    int evalConst() const override;
 }; 
      
 #endif 

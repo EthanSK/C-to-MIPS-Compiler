@@ -16,3 +16,8 @@ void UnaryAdd::generateIL(std::vector<Instr> &instrs, ILContext &context, std::s
 {
 	getOperand()->generateIL(instrs, context, destReg);
 }
+
+int UnaryAdd::evalConst() const
+{
+	return getOperandR()->evalConst();
+}
