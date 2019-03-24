@@ -7,7 +7,7 @@
 
 cwd="devtools"
 python_tests_dir="test/pythonTranslator/tests"
-compiler_tests_dir="test/compiler/tests/fromPythonTranslator" #have under subfolder so we don't confuse manually created tests with  auto moved ones
+compiler_tests_dir="test/compiler/tests/pythonTranslator" #have under subfolder so we don't confuse manually created tests with  auto moved ones
 c_files=$(find $python_tests_dir -name "*.c")
 test_driver_template="$cwd/testDriverTemplate.txt"
 
