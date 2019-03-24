@@ -1,4 +1,5 @@
 #include "ternaryOperator.hpp"
+#include "utils.hpp"
 
 TernaryOperator::TernaryOperator(StatementPtr condition, StatementPtr trueSelect, StatementPtr falseSelect)
 {
@@ -22,6 +23,21 @@ StatementPtr TernaryOperator::getFalseSelect() const
         return branches[2];
 }
 
+RValuePtr TernaryOperator::getConditionR() const
+{
+        return Utils::tryCast<RValue>(getCondition(), "condition of a ternary operator must be an rvalue");
+}
+
+RValuePtr TernaryOperator::getTrueSelectR() const
+{
+        return Utils::tryCast<RValue>(getTrueSelect(), "true select of a ternary operator must be an rvalue");
+}
+
+RValuePtr TernaryOperator::getFalseSelectR() const
+{
+        return Utils::tryCast<RValue>(getFalseSelect(), "false of a ternary operator must be an rvalue");
+}
+
 void TernaryOperator::printC(std::ostream &os) const{
     os << "(" << getCondition() << ") ? " << getTrueSelect() << " : " << getFalseSelect();
 }
@@ -40,3 +56,6 @@ void TernaryOperator::generateIL(std::vector<Instr> &instrs, ILContext &context,
     getFalseSelect()->generateIL(instrs, context, destReg);
     instrs.push_back(Instr::makeLabel(endif_lb));
 }
+
+bool TernaryOperator::isConstant() const { return getConditionR()->isConstant() && getTrueSelectR()->isConstant() && getFalseSelectR()->isConstant(); }
+int TernaryOperator::evalConst() const { return getConditionR()->evalConst() ? getTrueSelectR()->evalConst() : getFalseSelectR()->evalConst(); }
