@@ -30,3 +30,8 @@ void BinaryIsNotEqualTo::generateIL(std::vector<Instr> &instrs, ILContext &conte
 	getRight()->generateIL(instrs, context, rightReg);
 	instrs.push_back(Instr(opcode, destReg, leftReg, rightReg));
 }
+
+int BinaryIsNotEqualTo::evalConst() const
+{
+	return getLeftR()->evalConst() != getRightR()->evalConst();
+}

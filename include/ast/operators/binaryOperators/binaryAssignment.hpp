@@ -3,10 +3,10 @@
 
 
 #include <iostream>
-#include "binaryOperator.hpp"
+#include "binaryAssignmentOperator.hpp"
 #include "context.hpp"
 
-class BinaryAssignment : public BinaryOperator
+class BinaryAssignment : public BinaryAssignmentOperator
 { 
 public:
     using BinaryOperator::BinaryOperator;

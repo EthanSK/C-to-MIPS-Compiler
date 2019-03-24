@@ -30,3 +30,8 @@ void BinarySubtract::generateIL(std::vector<Instr> &instrs, ILContext &context, 
 	getRight()->generateIL(instrs, context, rightReg);
 	instrs.push_back(Instr(opcode, destReg, leftReg, rightReg));
 }
+
+int BinarySubtract::evalConst() const
+{
+	return getLeftR()->evalConst() - getRightR()->evalConst();
+}
