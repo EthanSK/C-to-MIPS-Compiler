@@ -222,7 +222,7 @@ ASSIGNEMENT_OPERATOR
 	| T_MINUS_EQ { $$ = T_MINUS_EQ; }
 	| T_LSHIFT_EQ { $$ = T_LSHIFT_EQ; }
 	| T_RSHIFT_EQ { $$ = T_RSHIFT_EQ; }
-	| T_AND_AND { $$ = T_AND_AND; }
+	| T_AND_EQ { $$ = T_AND_EQ; }
 	| T_XOR_EQ { $$ = T_XOR_EQ; }
 	| T_OR_EQ { $$ = T_OR_EQ; }
 	;

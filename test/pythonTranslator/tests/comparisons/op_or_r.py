@@ -1,5 +1,5 @@
 def main():
-    return 0 or 2
+    return 0 or 1
 
 if __name__ == "__main__":
     import sys
