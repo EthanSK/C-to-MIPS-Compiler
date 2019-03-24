@@ -26,8 +26,8 @@ void BinaryLessThanOrEqualTo::generateIL(std::vector<Instr> &instrs, ILContext &
 	std::string opcode = "lte";
 	std::string leftReg = context.makeName(opcode + "_l");
 	std::string rightReg = context.makeName(opcode + "_r");
-	getLeft()->generateIL(instrs, context, leftReg);
-	getRight()->generateIL(instrs, context, rightReg);
+	context.compileInput(getLeft(), instrs, leftReg);
+	context.compileInput(getRight(), instrs, rightReg);
 	instrs.push_back(Instr(opcode, destReg, leftReg, rightReg));
 }
 

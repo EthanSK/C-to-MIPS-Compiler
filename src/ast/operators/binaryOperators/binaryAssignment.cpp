@@ -21,7 +21,7 @@ void BinaryAssignment::generateIL(std::vector<Instr> &instrs, ILContext &context
 {
 	std::string opcode = "mov";
 	std::string rightReg = context.makeName(opcode + "_r");
-	getRight()->generateIL(instrs, context, rightReg);
+	context.compileInput(getRight(), instrs, rightReg);
 	instrs.push_back(Instr("mov", destReg, rightReg));
 	LValuePtr lvalue = Utils::tryCast<LValue>(getLeft(), "Illegal " + opcode + ": " + toString() + ". LHS of an assignment must be an lvalue");
 	lvalue->generateLValueStoreIL(instrs, context, rightReg);
