@@ -70,7 +70,14 @@ void MIPSContext::popFrame()
 
 void MIPSContext::alloc(Allocation allocation)
 {
-    if (_allocator.frameCount() > 0)
+    if (isGlobalScope())
+    {
+        _globals.insert(allocation.name);
+        _instrs.push_back(Instr(".globl", allocation.name));
+        _instrs.push_back(Instr(".size", allocation.name, std::to_string(allocation.size)));
+        _instrs.push_back(Instr::makeLabel(allocation.name));
+    }
+    else
     {
         int offset = -allocation.size;
         _allocator.allocate(allocation);
@@ -91,11 +98,6 @@ void MIPSContext::alloc(Allocation allocation)
             Instr allocInstr("addi", "$sp", "$sp", std::to_string(offset));
             _instrs.insert(inserter, allocInstr);
         }
-    }
-    else
-    {
-        _globals.insert(allocation.name);
-        _instrs.push_back(Instr::makeLabel(allocation.name));
     }
 }
 

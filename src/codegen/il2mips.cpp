@@ -46,6 +46,7 @@ void IL2MIPS::convertInstr(Instr &instr, MIPSContext &context)
     else if (instr.opcode == "neg") { IL2MIPS::neg(instr, context); }
     else if (instr.opcode == "inc") { IL2MIPS::inc(instr, context); }
     else if (instr.opcode == "dec") { IL2MIPS::dec(instr, context); }
+    else if (instr.opcode == "init") { IL2MIPS::init(instr, context); }
     else if (instr.opcode == "nop") { context.addInstr(instr); }
     else if (instr.opcode == "") { context.addInstr(instr); } //for labels without opcode 
     else { throw std::string("Unexpected IL opcode " + instr.opcode + "."); }

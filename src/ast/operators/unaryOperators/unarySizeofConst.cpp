@@ -13,3 +13,5 @@ int UnarySizeofConst::evalConst() const
 {
 	return Utils::tryCast<Type>(getOperand(), "operand of const sizeof operator must be a type")->getTypeSize();
 }
+
+bool UnarySizeofConst::isConstant() const { return true; }

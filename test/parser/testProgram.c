@@ -1,5 +1,13 @@
-int ternary_true()
+int a = 1, b = 2, c = 3, d = 4;
+
+void set()
 {
-    int x = 1 + 1;
-    int y = x + 1;
+    b = 4;
+    c = 10;
+}
+
+int main()
+{
+    set();
+    return a + b + c + d;
 }

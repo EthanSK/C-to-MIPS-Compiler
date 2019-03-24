@@ -1,0 +1,7 @@
+#include "il2mips.hpp"
+
+void IL2MIPS::init(Instr instr, MIPSContext &context) 
+{
+    if (context.isGlobalScope()) { context.addInstr(Instr(".word", instr.input1), instr.label); }
+    else { context.addInstr(Instr("li", instr.dest, instr.input1), instr.label); }
+}
