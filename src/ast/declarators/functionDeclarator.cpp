@@ -37,5 +37,6 @@ void FunctionDeclarator::generatePython(std::ostream &os, PythonContext &context
 void FunctionDeclarator::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
 {
     Instr instr("fdef", getIdentifierName());
+    ParameterListPtr paramList = Utils::tryCast<ParameterList>(getParamList(), "parameter list of a function declarator must be of type parameterList");
     instrs.push_back(instr);
 }

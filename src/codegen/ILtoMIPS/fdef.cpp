@@ -10,4 +10,12 @@ void IL2MIPS::fdef(Instr instr, MIPSContext &context)
     context.pushFrame();
     context.addInstr(Instr("move", "0_fp", "$fp"));
     context.addInstr(Instr("move", "0_ra", "$ra"));
+
+    for (int i = 0; i < instr.extraData.size(); ++i)
+    {
+        if (i < 4)
+        {
+            context.addInstr(Instr("move", instr.extraData[i], "$a" + std::to_string(i)));
+        }
+    }
 }
