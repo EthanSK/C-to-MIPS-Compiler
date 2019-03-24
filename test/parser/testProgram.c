@@ -1,9 +1,9 @@
-int foo1(int a, int b, int c, int d)
+int MAIN_FUNCTION_empty()
 {
-    return a + b + c + d;
-}
+    if (1)
+    {
+        ;;;
+    }
 
-int foo2()
-{
-    return foo1(1, 1, 1, 1);
+    return 1;
 }
