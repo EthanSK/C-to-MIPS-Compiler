@@ -2,7 +2,7 @@
 #define il2mips_hpp
 
 #include "instr.hpp"
-#include "context.hpp"
+#include "mipsContext.hpp"
 
 class IL2MIPS //one IL may map to many MIPS
 {

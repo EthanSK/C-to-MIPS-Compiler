@@ -103,7 +103,7 @@ for c_file in $c_files ; do #use tests_dir here to enforce correctly added tests
     fi
     
 done
-printf "${blue}\n\n========================== SUMMARY ==========================\n${no_colour}"
+printf "${cyan}\n\n========================== SUMMARY ==========================\n${no_colour}"
 
 #happens regardless of verbose, otherwise script would output nothing useful
 printf "passed ${green}$passes${no_colour}/$tests tests\n\n"

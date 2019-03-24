@@ -1,13 +1,15 @@
 #ifndef statement_hpp
 #define statement_hpp
 
+#include "pythonContext.hpp"
+#include "ilContext.hpp"
+#include "mipsContext.hpp"
+#include "instr.hpp"
 #include <vector>
 #include <string>
 #include <iostream>
 #include <fstream>
 #include <memory>
-#include "context.hpp"
-#include "instr.hpp"
 
 class Statement;
 typedef const Statement *StatementPtr;

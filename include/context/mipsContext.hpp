@@ -1,27 +1,14 @@
-#ifndef context_hpp
-#define context_hpp
+#ifndef mipsContext_hpp
+#define mipsContext_hpp
 
+#include "context.hpp"
+#include "allocator.hpp"
+#include "instr.hpp"
 #include <iostream>
 #include <vector>
 #include <unordered_map>
 #include <set>
 #include <regex>
-#include "allocator.hpp"
-#include "instr.hpp"
-
-class Context
-{
-};
-
-class ILContext : public Context 
-{
-public:
-    std::string makeName(std::string name);
-    std::string makeLabelName(std::string name);
-
-private:
-    std::unordered_map<std::string, int> _registeredNames;
-};
 
 class MIPSContext : public Context 
 {
@@ -51,18 +38,6 @@ private:
     bool isAllocated(std::string reg) const;
     std::string loadInput(std::string regName, std::string mipsReg);
     std::string correctStackReference(std::string ref, int offset) const;
-};
-
-class PythonContext : public Context
-{
-public:
-    void indentStream(std::ostream& os, int scopeDepth) const;
-    void registerGlobal(std::string identifier);
-    void dumpGlobals(std::ostream& os, int scopeDepth) const;
-
-private:
-    std::vector<std::string> _globalIdentifiers;
-    const int PY_INDENT_SIZE = 4;
 };
 
 #endif

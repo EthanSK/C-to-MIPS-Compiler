@@ -1,5 +1,8 @@
 #ifndef headers_hpp
 #define headers_hpp
+#include "pythonContext.hpp"
+#include "ilContext.hpp"
+#include "mipsContext.hpp"
 #include "identifier.hpp"
 #include "declaration.hpp"
 #include "declaratorList.hpp"
