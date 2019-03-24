@@ -38,6 +38,8 @@ class IL2MIPS //one IL may map to many MIPS
     static void bez(Instr instr, MIPSContext &context);
     static void bnez(Instr instr, MIPSContext &context);
     static void xorM(Instr instr, MIPSContext &context);
+    static void andM(Instr instr, MIPSContext &context);
+    static void orM(Instr instr, MIPSContext &context);
     static void lsl(Instr instr, MIPSContext &context);
     static void lsr(Instr instr, MIPSContext &context);
     static void neg(Instr instr, MIPSContext &context);
