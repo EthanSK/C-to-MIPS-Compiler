@@ -6,7 +6,7 @@
 #include "binaryOperator.hpp"
 #include "context.hpp"
 
-class BinaryLessThanOrEqualTo : public binaryOperator
+class BinaryLessThanOrEqualTo : public BinaryOperator
 { 
 public:
     using BinaryOperator::BinaryOperator;

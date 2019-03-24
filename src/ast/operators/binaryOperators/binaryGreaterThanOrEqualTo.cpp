@@ -30,3 +30,8 @@ void BinaryGreaterThanOrEqualTo::generateIL(std::vector<Instr> &instrs, ILContex
 	getRight()->generateIL(instrs, context, rightReg);
 	instrs.push_back(Instr(opcode, destReg, leftReg, rightReg));
 }
+
+int BinaryGreaterThanOrEqualTo::evalConst() const
+{
+	return getLeftR()->evalConst() >= getRightR()->evalConst();
+}
