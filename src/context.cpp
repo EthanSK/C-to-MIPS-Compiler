@@ -75,7 +75,12 @@ void MIPSContext::alloc(Allocation allocation)
     if (_allocator.frameCount() > 0)
     {
         _allocator.allocate(allocation);
-        _instrs.push_back(Instr("addi", "$sp", "$sp", "-" + std::to_string(allocation.size)));
+        Instr allocInstr("addi", "$sp", "$sp", "-" + std::to_string(allocation.size));
+        
+        std::vector<Instr>::iterator inserter = _instrs.end();
+        while (inserter != _instrs.begin() && (inserter - 1)->opcode == "") { inserter--; }
+
+        _instrs.insert(inserter, allocInstr);
     }
     else
     {
@@ -97,10 +102,7 @@ void MIPSContext::addRawInstr(Instr instr)
 void MIPSContext::addInstr(Instr instr)
 {
     std::string destName = instr.dest;
-    if (destName == "_root")
-    {
-        return;
-    }
+    if (destName == "_root") { return; }
 
     bool reqStore = requiresStack(instr.dest);
     if (reqStore)

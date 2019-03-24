@@ -58,5 +58,5 @@ int Allocator::frameCount() const
 
 AllocationFrame& Allocator::topFrame()
 {
-    return _frames[_frames.size() - 1];
+    return _frames.back();
 }
