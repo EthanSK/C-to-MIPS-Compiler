@@ -43,10 +43,7 @@ std::string ILContext::makeName(std::string name)
 
 std::string ILContext::makeLabelName(std::string name)
 {
-    std::stringstream ss;
-    int nameCount = _registeredNames[name]++;
-    ss << "l0x" << std::hex << nameCount << std::dec << name;
-    return ss.str();
+    return "l" + makeName(name);
 }
 
 std::vector<Instr> MIPSContext::dumpInstrs() const
@@ -57,6 +54,7 @@ std::vector<Instr> MIPSContext::dumpInstrs() const
 void MIPSContext::pushFrame()
 {
     _allocator.pushFrame();
+    _instrs.push_back(Instr("#scu"));
 }
 
 void MIPSContext::popFrame()
@@ -74,20 +72,41 @@ void MIPSContext::alloc(Allocation allocation)
 {
     if (_allocator.frameCount() > 0)
     {
+        int offset = -allocation.size;
         _allocator.allocate(allocation);
-        Instr allocInstr("addi", "$sp", "$sp", "-" + std::to_string(allocation.size));
         
         std::vector<Instr>::iterator inserter = _instrs.end();
-        while (inserter != _instrs.begin() && (inserter - 1)->opcode == "") { inserter--; }
+        while (inserter != _instrs.begin() && (inserter - 1)->opcode != "#scu")
+        {
+            inserter--;
+            inserter->input1 = correctStackReference(inserter->input1, offset);
+        }
 
-        //_instrs.insert(inserter, allocInstr);
-        _instrs.push_back(allocInstr);
+        if (inserter->opcode == "addi" && inserter->dest == "$sp" && inserter->input1 == "$sp")
+        {
+            inserter->input2 = std::to_string(std::stoi(inserter->input2) + offset);
+        }
+        else
+        {
+            Instr allocInstr("addi", "$sp", "$sp", std::to_string(offset));
+            _instrs.insert(inserter, allocInstr);
+        }
     }
     else
     {
         _globals.insert(allocation.name);
         _instrs.push_back(Instr::makeLabel(allocation.name));
     }
+}
+
+std::string MIPSContext::correctStackReference(std::string ref, int offset) const
+{
+    if (!std::regex_match(ref, _isStackRef)) { return ref; }
+
+    std::string offsetStr = ref.substr(0, ref.find("("));
+    int originalOffset = std::stoi(offsetStr);
+    int correctedOffset = originalOffset - offset;
+    return std::to_string(correctedOffset) + "($sp)";
 }
 
 void MIPSContext::addRootInstr(Instr instr)
