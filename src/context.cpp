@@ -72,18 +72,23 @@ void MIPSContext::alloc(Allocation allocation)
 {
     if (_allocator.frameCount() > 0)
     {
+        int offset = -allocation.size;
         _allocator.allocate(allocation);
         
         std::vector<Instr>::iterator inserter = _instrs.end();
-        while (inserter != _instrs.begin() && (inserter - 1)->opcode != "#scu") { inserter--; }
+        while (inserter != _instrs.begin() && (inserter - 1)->opcode != "#scu")
+        {
+            inserter--;
+            inserter->input1 = correctStackReference(inserter->input1, offset);
+        }
 
         if (inserter->opcode == "addi" && inserter->dest == "$sp" && inserter->input1 == "$sp")
         {
-            inserter->input2 = std::to_string(std::stoi(inserter->input2) - allocation.size);
+            inserter->input2 = std::to_string(std::stoi(inserter->input2) + offset);
         }
         else
         {
-            Instr allocInstr("addi", "$sp", "$sp", std::to_string(-allocation.size));
+            Instr allocInstr("addi", "$sp", "$sp", std::to_string(offset));
             _instrs.insert(inserter, allocInstr);
         }
     }
@@ -92,6 +97,16 @@ void MIPSContext::alloc(Allocation allocation)
         _globals.insert(allocation.name);
         _instrs.push_back(Instr::makeLabel(allocation.name));
     }
+}
+
+std::string MIPSContext::correctStackReference(std::string ref, int offset) const
+{
+    if (!std::regex_match(ref, _isStackRef)) { return ref; }
+
+    std::string offsetStr = ref.substr(0, ref.find("("));
+    int originalOffset = std::stoi(offsetStr);
+    int correctedOffset = originalOffset - offset;
+    return std::to_string(correctedOffset) + "($sp)";
 }
 
 void MIPSContext::addRootInstr(Instr instr)
