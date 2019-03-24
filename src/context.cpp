@@ -117,27 +117,16 @@ void MIPSContext::addInstr(Instr instr)
 
 bool MIPSContext::requiresStack(std::string reg) const
 {
-    if (reg.size() == 0)
-    {
-        return false;
-    }
-    if (reg.find('$') != std::string::npos)
-    {
-        return false;
-    }
-    if (std::regex_match(reg, _isNumber))
-    {
-        return false;
-    }
+    if (reg.size() == 0) { return false; }
+    if (reg.find('$') != std::string::npos) { return false; }
+    if (std::regex_match(reg, _isNumber)) { return false; }
     return true;
 }
 
 std::string MIPSContext::loadInput(std::string regName, std::string mipsReg)
 {
-    if (!requiresStack(regName))
-    {
-        return regName;
-    }
+    if (!requiresStack(regName)) { return regName; }
+    if (!isAllocated(regName)) { return regName; }
 
     _instrs.push_back(Instr("lw", mipsReg, getAllocationLocation(regName)));
     return mipsReg;
