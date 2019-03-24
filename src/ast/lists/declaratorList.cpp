@@ -16,6 +16,11 @@ DeclaratorPtr DeclaratorList::getDeclarator(int index) const
     return Utils::tryCast<Declarator>(branches[index], "decl list can only contain declarators");
 }
 
+int DeclaratorList::getDeclCount() const
+{
+    return branches.size();
+}
+
 void DeclaratorList::generatePython(std::ostream &os, PythonContext &context, int scopeDepth) const
 {
     for (int i = 0; i < branches.size(); ++i)

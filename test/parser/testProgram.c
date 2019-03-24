@@ -1,9 +1,9 @@
-int foo1(int a)
+int foo1(int a, int b, int c, int d)
 {
-    return a;
+    return a + b + c + d;
 }
 
 int foo2()
 {
-    return foo1(1 + 1);
+    return foo1(1, 1, 1, 1);
 }

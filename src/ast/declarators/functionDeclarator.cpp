@@ -46,7 +46,12 @@ void FunctionDeclarator::generateIL(std::vector<Instr> &instrs, ILContext &conte
     {
         DeclarationPtr declaration = Utils::tryCast<Declaration>(params[i], "param in function definition must be a valid declaration");
         DeclaratorListPtr declList = declaration->getDeclList();
-
+        for (int j = 0; j < declList->getDeclCount(); ++j)
+        {
+            DeclaratorPtr decl = declList->getDeclarator(j);
+            instr.extraData.push_back(decl->getIdentifierName());
+            instr.extraData.push_back("4");
+        }
     }
 
     instrs.push_back(instr);

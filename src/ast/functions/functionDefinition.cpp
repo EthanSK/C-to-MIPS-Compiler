@@ -35,5 +35,5 @@ void FunctionDefinition::generateIL(std::vector<Instr> &instrs, ILContext &conte
 {
     getDecl()->generateIL(instrs, context, destReg);
     getScopeBlock()->generateIL(instrs, context, destReg);
-    instrs.push_back(Instr("fend", ""));
+    instrs.push_back(Instr("fend"));
 }
