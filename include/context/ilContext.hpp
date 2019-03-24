@@ -15,7 +15,7 @@ class ILContext : public Context
 public:
     std::string makeName(std::string name);
     std::string makeLabelName(std::string name);
-    void compileInput(StatementPtr input, std::vector<Instr> &instrs, std::string destReg) const;
+    void compileInput(StatementPtr input, std::vector<Instr> &instrs, std::string destReg);
 
 private:
     std::unordered_map<std::string, int> _registeredNames;

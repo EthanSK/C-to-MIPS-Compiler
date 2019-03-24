@@ -21,6 +21,6 @@ void ReturnKeyword::generatePython(std::ostream &os, PythonContext &context, int
 
 void ReturnKeyword::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
 {
-    getReturnValue()->generateIL(instrs, context, "$t0");
+    context.compileInput(getReturnValue(), instrs, "$t0");
     instrs.push_back(Instr("retv", "$t0"));
 } 

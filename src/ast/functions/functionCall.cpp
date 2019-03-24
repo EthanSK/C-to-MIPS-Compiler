@@ -42,7 +42,7 @@ void FunctionCall::generateIL(std::vector<Instr> &instrs, ILContext &context, st
     for (int i = 0; i < params.size(); ++i)
     {
         std::string paramName = context.makeName("farg" + std::to_string(i));
-        params[i]->generateIL(instrs, context, paramName);
+        context.compileInput(params[i], instrs, paramName);
         instr.extraData.push_back(paramName);
     }
 
