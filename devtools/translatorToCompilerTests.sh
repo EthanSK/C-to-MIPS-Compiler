@@ -13,8 +13,10 @@ test_driver_template="$cwd/testDriverTemplate.txt"
 
 
 new_main_name="MAIN_FUNCTION"
-
-
+SED="sed"
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    SED="gsed"
+fi
 
 #Colours!!
 no_colour='\033[0m'       # Colour Reset
@@ -47,11 +49,11 @@ for c_file in $c_files ; do
     cp -f $c_file $target_c_file #should overwrite existing files
 
     #change the name of the main() function to $new_main_name
-    sed -i '' -e "s/main/${new_main_name}_${base_name_noext}/g" $target_c_file #all functiosn need to be unique named if theyre gonna be declared in drivers
+    $SED -i''  -e "s/main/${new_main_name}_${base_name_noext}/g" $target_c_file #all functiosn need to be unique named if theyre gonna be declared in drivers
 
     #create driver file
     cp -f $test_driver_template $target_c_driver_file
-    sed -i '' -e "s/FUNC_NAME/${new_main_name}_${base_name_noext}/g" $target_c_driver_file #add function name
-    sed -i '' -e "s/FUNC_EXIT_CODE/$exit_code_py/g" $target_c_driver_file #add expected exit code
+    $SED -i'' -e "s/FUNC_NAME/${new_main_name}_${base_name_noext}/g" $target_c_driver_file #add function name
+    $SED -i''  -e "s/FUNC_EXIT_CODE/$exit_code_py/g" $target_c_driver_file #add expected exit code
 
 done
