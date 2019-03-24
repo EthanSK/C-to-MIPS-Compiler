@@ -1,4 +1,4 @@
-int main()
+int fdefParams4(int a, int b, int c, int d)
 {
-    return 1 + 1;
+    return a + b + c + d;
 }

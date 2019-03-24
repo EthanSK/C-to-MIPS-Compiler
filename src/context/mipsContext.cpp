@@ -44,7 +44,7 @@ void MIPSContext::alloc(Allocation allocation)
             inserter->input1 = correctStackReference(inserter->input1, offset);
         }
 
-        if (inserter->opcode == "addi" && inserter->dest == "$sp" && inserter->input1 == "$sp")
+        if (inserter != _instrs.end() && inserter->opcode == "addi" && inserter->dest == "$sp" && inserter->input1 == "$sp")
         {
             inserter->input2 = std::to_string(std::stoi(inserter->input2) + offset);
         }
