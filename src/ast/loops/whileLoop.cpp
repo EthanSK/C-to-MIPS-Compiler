@@ -28,8 +28,8 @@ void WhileLoop::generatePython(std::ostream &os, PythonContext &context, int sco
 void WhileLoop::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
 {
     std::string whileCond = context.makeName("cond");
-    std::string while_lb = context.makeName("while");
-    std::string while_end_lb = context.makeName("while_end");
+    std::string while_lb = context.makeLabelName("while");
+    std::string while_end_lb = context.makeLabelName("while_end");
 
     instrs.push_back(Instr::makeLabel(while_lb));
     getCondition()->generateIL(instrs, context, whileCond);

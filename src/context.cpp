@@ -41,6 +41,14 @@ std::string ILContext::makeName(std::string name)
     return ss.str();
 }
 
+std::string ILContext::makeLabelName(std::string name)
+{
+    std::stringstream ss;
+    int nameCount = _registeredNames[name]++;
+    ss << "l0x" << std::hex << nameCount << std::dec << name;
+    return ss.str();
+}
+
 std::vector<Instr> MIPSContext::dumpInstrs() const
 {
     return _instrs;

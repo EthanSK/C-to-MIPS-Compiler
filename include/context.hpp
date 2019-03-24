@@ -17,6 +17,7 @@ class ILContext : public Context
 {
 public:
     std::string makeName(std::string name);
+    std::string makeLabelName(std::string name);
 
 private:
     std::unordered_map<std::string, int> _registeredNames;

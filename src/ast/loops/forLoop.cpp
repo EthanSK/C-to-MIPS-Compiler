@@ -32,8 +32,8 @@ void ForLoop::printC(std::ostream &os) const
 void ForLoop::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
 {
     std::string forCond = context.makeName("cond");
-    std::string for_lb = context.makeName("for");
-    std::string for_end_lb = context.makeName("for_end");
+    std::string for_lb = context.makeLabelName("for");
+    std::string for_end_lb = context.makeLabelName("for_end");
 
     getInit()->generateIL(instrs, context, destReg);
 
