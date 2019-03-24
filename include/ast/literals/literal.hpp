@@ -14,7 +14,7 @@ public:
     virtual bool isConstant() const override { return true; }
 
 protected:
-    virtual void printC(std::ostream &os) const = 0;
+    virtual void printC(std::ostream &os) const override = 0;
 };
 
 #endif

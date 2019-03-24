@@ -38,7 +38,7 @@ class Statement
 	void generateIL(std::ostream &os) const;
 
   protected:
-	virtual void printC(std::ostream &os) const = 0; //prints c90 code so we can compare against input code //called in << overload
+	virtual void printC(std::ostream &os) const  = 0; //prints c90 code so we can compare against input code //called in << overload
 	std::string getGraphNodeID() const;
 	virtual std::string getGraphNodeLabel() const;
 	void generateTreeGraph(std::ostream &os) const;

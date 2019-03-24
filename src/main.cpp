@@ -63,8 +63,12 @@ int main(int argc, char *argv[])
             std::vector<Instr> Minstrs;
             Minstrs = IL2MIPS::convertToMIPS(instrs);
             InstrPrinter::prettyPrintInstrs(std::cerr, Minstrs);
-            InstrPrinter::writeMIPStoFile(std::string(argv[4]), Minstrs);
-            InstrPrinter::writeMIPStoFile("bin/test.s", Minstrs);
+            std::string mipsOut = "bin/mips.s";
+            if (argc >= 5)
+            {
+                mipsOut = std::string(argv[4]);
+            }
+            InstrPrinter::writeMIPStoFile(mipsOut, Minstrs);
         }
 
         std::cerr << std::endl;
