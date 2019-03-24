@@ -3,13 +3,13 @@
 
 void IL2MIPS::fcall(Instr instr, MIPSContext &context) 
 {
-    for (int i = 0; i < instr.extraData.size(); ++i)
+    for (size_t i = 0; i < instr.extraData.size(); ++i)
     {
         if (i < 4) { context.addInstr(Instr("move", "$a" + std::to_string(i), instr.extraData[i])); }
         else { context.addInstr(Instr("move", "_farg" + std::to_string(i), instr.extraData[i])); }    
     }
 
-    for (int i = instr.extraData.size() - 1; i > 3; --i)
+    for (size_t i = instr.extraData.size() - 1; i > 3; --i)
     {
         context.alloc(Allocation(4, "_arg" + std::to_string(i)));
         context.addInstr(Instr("move", "_arg" + std::to_string(i), "_farg" + std::to_string(i)));

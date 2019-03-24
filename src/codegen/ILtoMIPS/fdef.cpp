@@ -7,7 +7,7 @@ void IL2MIPS::fdef(Instr instr, MIPSContext &context)
     context.addInstr(Instr::makeLabel(funcSymbol));
     context.pushFrame();
 
-    for (int i = 0; i < instr.extraData.size() / 2; ++i)
+    for (size_t i = 0; i < instr.extraData.size() / 2; ++i)
     {
         context.alloc(Allocation(std::stoi(instr.extraData[i * 2 + 1]), instr.extraData[i * 2]));
         if (i < 4)
