@@ -7,7 +7,7 @@ void Allocator::allocate(Allocation allocation)
 
 int Allocator::getAllocationOffset(std::string name) const
 {
-    for (size_t i = _frames.size() - 1; i >= 0; --i)
+    for (int i = _frames.size() - 1; i >= 0; --i)
     {
         if (_frames[i].isAllocated(name))
         {

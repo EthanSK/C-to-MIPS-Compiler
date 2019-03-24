@@ -9,7 +9,7 @@ void IL2MIPS::fcall(Instr instr, MIPSContext &context)
         else { context.addInstr(Instr("move", "_farg" + std::to_string(i), instr.extraData[i])); }    
     }
 
-    for (size_t i = instr.extraData.size() - 1; i > 3; --i)
+    for (int i = instr.extraData.size() - 1; i > 3; --i)
     {
         context.alloc(Allocation(4, "_arg" + std::to_string(i)));
         context.addInstr(Instr("move", "_arg" + std::to_string(i), "_farg" + std::to_string(i)));
