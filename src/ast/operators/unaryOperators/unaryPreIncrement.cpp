@@ -4,7 +4,7 @@
 
 void UnaryPreIncrement::printC(std::ostream &os) const
 {
-	os << "++(" << getOperand() << ")";
+	os << "++" << getOperand();
 }
 
 void UnaryPreIncrement::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const

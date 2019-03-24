@@ -67,12 +67,6 @@ void InstrPrinter::generateInstrs(std::ostream &os, std::vector<Instr> instrs)
             line = line.substr(0, last);
         }
         os << line;
-
-        for (size_t j = 0; j < instrs[i].extraData.size(); j++)
-        {
-            os << ", " << instrs[i].extraData[j]; //dunno when this would be present for mips instructions
-        }
-
         os << std::endl;
     }
 }

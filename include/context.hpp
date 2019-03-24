@@ -43,11 +43,13 @@ private:
     Allocator _allocator;
     std::set<std::string> _globals;
     std::vector<Instr> _instrs;
-    std::regex _isNumber = std::regex("-?[0-9]+([.][0-9]+)?");
+    std::regex _isNumber = std::regex("-?[0-9]+");
+    std::regex _isStackRef = std::regex("-?[0-9]+\\(\\$sp\\)");
 
     bool requiresStack(std::string reg) const;
     bool isAllocated(std::string reg) const;
     std::string loadInput(std::string regName, std::string mipsReg);
+    std::string correctStackReference(std::string ref, int offset) const;
 };
 
 class PythonContext : public Context
