@@ -1,4 +1,10 @@
-int while_simple()
+int f()
 {
-   return 5;
+    return 10;
 }
+
+int MAIN_FUNCTION_f2()
+{
+    return f();
+}
+

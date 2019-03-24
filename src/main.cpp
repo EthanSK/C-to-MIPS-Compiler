@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
         bool isCompiling;
 
         // Parse the AST
-        if (argc >= 2 && std::string(argv[1]) == "dev")
+        if ((argc >= 2 && std::string(argv[1]) == "dev") || argc == 1) //argc == 0 so I can debug with cmdline args
         {
             isTranslatingToPython = false;
             isCompiling = true;
