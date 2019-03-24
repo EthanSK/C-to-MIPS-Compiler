@@ -2,7 +2,7 @@
 #include "utils.hpp"
 #include <algorithm>
 
-void InstrPrinter::printInstrs(std::ostream &os, std::vector<Instr> instrs)
+void InstrPrinter::prettyPrintInstrs(std::ostream &os, std::vector<Instr> instrs)
 {
     std::vector<unsigned long> columnWidths = {0, 0, 0, 0, 0};
     for(size_t i = 0; i < instrs.size(); i++)
@@ -41,4 +41,55 @@ void InstrPrinter::printInstrs(std::ostream &os, std::vector<Instr> instrs)
         os << std::endl;
         if (instrs[i].opcode == "fend") { os << std::endl; }
     }
+}
+
+
+void InstrPrinter::generateInstrs(std::ostream &os, std::vector<Instr> instrs)
+{
+    for (size_t i = 0; i < instrs.size(); i++)
+    {
+        std::string label = instrs[i].label;
+
+        if (instrs[i].hasLabel())
+        {
+            label += ":";
+        }
+        std::string line;
+
+        line += InstrPrinter::addCommaIfNeeded(label);
+        line += instrs[i].opcode + " "; //no comma after opcode
+        line += InstrPrinter::addCommaIfNeeded(instrs[i].dest);
+        line += InstrPrinter::addCommaIfNeeded(instrs[i].input1);
+        line += InstrPrinter::addCommaIfNeeded(instrs[i].input2);
+        size_t last = line.find_last_of(',');
+        if (std::string::npos != last)
+        {
+            line = line.substr(0, last);
+        }
+        os << line;
+
+        for (size_t j = 0; j < instrs[i].extraData.size(); j++)
+        {
+            os << ", " << instrs[i].extraData[j]; //dunno when this would be present for mips instructions
+        }
+
+        os << std::endl;
+    }
+}
+
+
+std::string InstrPrinter::addCommaIfNeeded(std::string &str)
+{
+    if (str != "")
+    {
+        str += ", ";
+    }
+    return str;
+}
+
+void InstrPrinter::writeMIPStoFile(std::string filePath, std::vector<Instr> instrs)
+{
+    std::ofstream file(filePath, std::ios::out | std::ios::trunc);
+    InstrPrinter::generateInstrs(file, instrs);
+    file.close();
 }

@@ -51,7 +51,12 @@ int Allocator::stackSize() const
     return size;
 }
 
+int Allocator::frameCount() const
+{
+    return _frames.size();
+}
+
 AllocationFrame& Allocator::topFrame()
 {
-    return _frames[_frames.size() - 1];
+    return _frames.back();
 }

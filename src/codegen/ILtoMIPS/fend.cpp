@@ -2,6 +2,7 @@
 
 void IL2MIPS::fend(Instr instr, MIPSContext &context) 
 {
-    context.addInstr(Instr("jr", "$ra"));
-    context.addInstr(Instr("nop"));
+    ret(context);
+    context.popFrame();
+    context.addRawInstr(Instr(""));
 }

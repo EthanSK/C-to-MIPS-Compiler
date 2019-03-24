@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <unordered_map>
+#include <set>
 #include <regex>
 #include "allocator.hpp"
 #include "instr.hpp"
@@ -16,6 +17,7 @@ class ILContext : public Context
 {
 public:
     std::string makeName(std::string name);
+    std::string makeLabelName(std::string name);
 
 private:
     std::unordered_map<std::string, int> _registeredNames;
@@ -24,18 +26,27 @@ private:
 class MIPSContext : public Context 
 {
 public:
-    Allocator& getAllocator();
     std::vector<Instr> dumpInstrs() const;
+    void pushFrame();
     void popFrame();
     void alloc(Allocation allocation);
     void addInstr(Instr instr);
+    void addInstr(Instr instr, std::string label);
+    void addBranchInstr(Instr instr);
+    void addBranchInstr(Instr instr, std::string label);
+    void addRootInstr(Instr instr);
+    void addRawInstr(Instr instr);
+    int stackSize() const;
+    std::string getAllocationLocation(std::string regName) const;
 
 private:
     Allocator _allocator;
+    std::set<std::string> _globals;
     std::vector<Instr> _instrs;
     std::regex _isNumber = std::regex("-?[0-9]+([.][0-9]+)?");
 
     bool requiresStack(std::string reg) const;
+    bool isAllocated(std::string reg) const;
     std::string loadInput(std::string regName, std::string mipsReg);
 };
 

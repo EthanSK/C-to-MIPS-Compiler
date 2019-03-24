@@ -8,3 +8,4 @@ std::string Utils::padString(std::string str, int maxPadding)
     for (int i = 0; i < maxPadding - str.size(); i++) { ss << " "; }
     return ss.str();
 }
+

@@ -13,12 +13,20 @@ int main(int argc, char *argv[])
 {
     try
     {
-        bool isTranslatingToPython = false;
+        bool isTranslatingToPython;
+        bool isCompiling;
+
         // Parse the AST
-        yyin = fopen("test/parser/testProgram.c", "r"); //default value for dev
+        if (argc >= 2 && std::string(argv[1]) == "dev")
+        {
+            isTranslatingToPython = false;
+            isCompiling = true;
+            yyin = fopen("test/parser/testProgram.c", "r");
+        }
 
         if (argc >= 3 && std::string(argv[1]) == "-S")
         {
+            isCompiling = true;
             yyin = fopen(argv[2], "r");
         }
 
@@ -35,23 +43,30 @@ int main(int argc, char *argv[])
         ast->writePrintCToFile();
         ast->writeDotFile();
 
-        std::cerr << "\n\nIL CODE\n======================\n";
-        std::vector<Instr> instrs;
-        ast->generateIL(std::cerr);
-        ast->generateIL(instrs);
-        ast->writeILToFile();
-
-        std::cerr << "\n\nMIPS CODE\n======================\n";
-        std::vector<Instr> Minstrs;
-        Minstrs = IL2MIPS::convertToMIPS(instrs);
-        InstrPrinter::printInstrs(std::cerr, Minstrs);
-
         if (isTranslatingToPython)
         {
             std::cerr << "\n\nPYTHON CODE\n======================\n";
             ast->generatePython(std::cerr);
             ast->writePythonToFile(std::string(argv[4]));
             std::cerr << std::endl;
+        }
+
+        if (isCompiling)
+        {
+            std::cerr << "\n\nIL CODE\n======================\n";
+            std::vector<Instr> instrs;
+            ast->generateIL(std::cerr);
+            ast->generateIL(instrs);
+            ast->writeILToFile();
+
+            std::cerr << "\n\nMIPS CODE\n======================\n";
+            std::vector<Instr> Minstrs;
+            Minstrs = IL2MIPS::convertToMIPS(instrs);
+            InstrPrinter::prettyPrintInstrs(std::cerr, Minstrs);
+            std::cerr << "\n\nMIPS CODE (raw)\n======================\n";
+            InstrPrinter::generateInstrs(std::cout, Minstrs);
+            InstrPrinter::writeMIPStoFile(std::string(argv[4]), Minstrs);
+            InstrPrinter::writeMIPStoFile("bin/test.s", Minstrs);
         }
 
         std::cerr << std::endl;
@@ -63,7 +78,7 @@ int main(int argc, char *argv[])
         std::cerr << str << std::endl;
         std::exit(-1);
     }
-    catch (const char* str)
+    catch (const char *str)
     {
         std::cerr << "ERROR\n======================\n";
         std::cerr << str << std::endl;

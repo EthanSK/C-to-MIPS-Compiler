@@ -2,9 +2,6 @@
 
 void IL2MIPS::retv(Instr instr, MIPSContext &context) 
 {
-    int stackSize = context.getAllocator().stackSize();
-    context.addInstr(Instr("mov", "$v0", instr.dest));
-    if (stackSize > 0) { context.addInstr(Instr("addi", "$sp", "$sp", std::to_string(stackSize))); }
-    context.addInstr(Instr("jr", "$ra"));
-    context.addInstr(Instr("nop"));
+    context.addInstr(Instr("move", "$v0", instr.dest), instr.label);
+    ret(context);
 }

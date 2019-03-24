@@ -4,6 +4,9 @@
 #include "statement.hpp"
 #include "declaratorList.hpp"
 
+class Declaration;
+typedef const Declaration* DeclarationPtr;
+
 class Declaration : public Statement
 {
 public:
@@ -13,11 +16,10 @@ public:
     Declaration(StatementPtr type) : Declaration(type, std::vector<StatementPtr>{}) { }
     void generatePython(std::ostream &os, PythonContext &context, int scopeDepth = 0) const override;
     void generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const override;
-  
-protected:
     StatementPtr getType() const;
     DeclaratorListPtr getDeclList() const;
-
+  
+protected:
     virtual void printC(std::ostream &os) const override;
 };
 

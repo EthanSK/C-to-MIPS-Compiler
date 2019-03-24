@@ -24,6 +24,29 @@ void IL2MIPS::convertInstr(Instr &instr, MIPSContext &context)
     else if (instr.opcode == "mov") { IL2MIPS::mov(instr, context); }
     else if (instr.opcode == "eq") { IL2MIPS::eq(instr, context); }
     else if (instr.opcode == "ne") { IL2MIPS::ne(instr, context); }
+    else if (instr.opcode == "add") { IL2MIPS::add(instr, context); }
+    else if (instr.opcode == "addi") { IL2MIPS::addi(instr, context); }
+    else if (instr.opcode == "sub") { IL2MIPS::sub(instr, context); }
+    else if (instr.opcode == "subi") { IL2MIPS::subi(instr, context); }
+    else if (instr.opcode == "mul") { IL2MIPS::mul(instr, context); }
+    else if (instr.opcode == "div") { IL2MIPS::mul(instr, context); }
+    else if (instr.opcode == "mod") { IL2MIPS::mod(instr, context); }
+    else if (instr.opcode == "lt") { IL2MIPS::lt(instr, context); }
+    else if (instr.opcode == "lte") { IL2MIPS::lte(instr, context); }
+    else if (instr.opcode == "gt") { IL2MIPS::gt(instr, context); }
+    else if (instr.opcode == "gte") { IL2MIPS::gte(instr, context); }
+    else if (instr.opcode == "b") { IL2MIPS::b(instr, context); }
+    else if (instr.opcode == "bez") { IL2MIPS::bez(instr, context); }
+    else if (instr.opcode == "bnez") { IL2MIPS::bnez(instr, context); }
+    else if (instr.opcode == "xor") { IL2MIPS::xorM(instr, context); }
+    else if (instr.opcode == "and") { IL2MIPS::andM(instr, context); }
+    else if (instr.opcode == "or") { IL2MIPS::orM(instr, context); }
+    else if (instr.opcode == "lsl") { IL2MIPS::lsl(instr, context); }
+    else if (instr.opcode == "lsr") { IL2MIPS::lsr(instr, context); }
+    else if (instr.opcode == "neg") { IL2MIPS::neg(instr, context); }
+    else if (instr.opcode == "inc") { IL2MIPS::inc(instr, context); }
+    else if (instr.opcode == "dec") { IL2MIPS::dec(instr, context); }
+    else if (instr.opcode == "nop") { context.addInstr(instr); }
     else if (instr.opcode == "") { context.addInstr(instr); } //for labels without opcode 
     else { throw std::string("Unexpected IL opcode " + instr.opcode + "."); }
 }

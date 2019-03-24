@@ -123,6 +123,8 @@ void Statement::writeILToFile(std::string filePath) const
     file.close();
 }
 
+
+
 void Statement::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
 {
     Instr instr("noImpl", typeid(*this).name());
@@ -139,7 +141,7 @@ void Statement::generateIL(std::ostream &os) const
 {
     std::vector<Instr> instrs;
     generateIL(instrs);
-    InstrPrinter::printInstrs(os, instrs);
+    InstrPrinter::prettyPrintInstrs(os, instrs);
 }
 
 Statement::~Statement()

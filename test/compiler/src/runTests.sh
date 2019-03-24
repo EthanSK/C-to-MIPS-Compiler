@@ -22,7 +22,7 @@ summary_file="$log_dir/_summary.csv"
 c_files=$(find $tests_dir -name "*.c")
 
 #tools
-c_compiler="mips-linux-gnu-gcc" #replace this with our compiler
+c_compiler="bin/c_compiler" #replace this with our compiler
 if [[ "$1" != "" ]] ; then
     c_compiler="$1" #so we can pass in our compiler
 fi
@@ -55,7 +55,8 @@ white='\033[0;37m'        # White
 
 
 #============================================FUNCTIONALITY================================================
-
+tests=0
+passes=0
 
 #run test
 for c_file in $c_files ; do #use tests_dir here to enforce correctly added tests only
@@ -76,13 +77,15 @@ for c_file in $c_files ; do #use tests_dir here to enforce correctly added tests
         printf "======================================\n${no_colour}"
     fi
     
-    $c_compiler -S $c_file -o $asm_file
+    $c_compiler -S $c_file -o $asm_file > /dev/null 2>&1
     mips-linux-gnu-gcc -mfp32 $gcc_flags_enforce_c90 -o $obj_file -c $asm_file
     mips-linux-gnu-gcc -mfp32 $gcc_flags_enforce_c90 -static -o $binary_out $obj_file $driver_file
     qemu-mips $binary_out
     exit_code=$?
     
+    ((tests+=1))
     if [[ $exit_code == 0 ]]; then
+        ((passes+=1))
         outcome="Pass"
         colour=$green
     else
@@ -100,7 +103,8 @@ for c_file in $c_files ; do #use tests_dir here to enforce correctly added tests
     fi
     
 done
-printf "${blue}\n\n========================== SUMMARY ==========================\n\n${no_colour}"
+printf "${blue}\n\n========================== SUMMARY ==========================\n${no_colour}"
 
 #happens regardless of verbose, otherwise script would output nothing useful
+printf "passed ${green}$passes${no_colour}/$tests tests\n\n"
 cat $summary_file | column -t -s, | grep -E --color=auto 'Fail|$$'
