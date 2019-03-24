@@ -32,6 +32,8 @@ void IL2MIPS::convertInstr(Instr &instr, MIPSContext &context)
     else if (instr.opcode == "div") { IL2MIPS::mul(instr, context); }
     else if (instr.opcode == "mod") { IL2MIPS::mod(instr, context); }
     else if (instr.opcode == "lt") { IL2MIPS::lt(instr, context); }
+    else if (instr.opcode == "lte") { IL2MIPS::lt(instr, context); }
+    else if (instr.opcode == "gt") { IL2MIPS::gte(instr, context); }
     else if (instr.opcode == "gte") { IL2MIPS::gte(instr, context); }
     else if (instr.opcode == "nop") { context.addInstr(instr); }
     else if (instr.opcode == "") { context.addInstr(instr); } //for labels without opcode 
