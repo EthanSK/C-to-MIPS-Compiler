@@ -6,10 +6,14 @@
 #include <iostream>
 #include <memory>
 #include "statement.hpp"
+#include "rvalue.hpp"
 
-class Literal : public Statement //Literal is an interface for all the literal types
+class Literal : public Statement, public RValue //Literal is an interface for all the literal types
 {
-  protected:
+public:
+    virtual bool isConstant() const override { return true; }
+
+protected:
     virtual void printC(std::ostream &os) const = 0;
 };
 
