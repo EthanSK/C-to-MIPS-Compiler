@@ -4,7 +4,7 @@
 
 void UnaryPreDecrement::printC(std::ostream &os) const
 {
-	os << "--(" << getOperand() << ")";
+	os << "--" << getOperand();
 }
 
 void UnaryPreDecrement::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
