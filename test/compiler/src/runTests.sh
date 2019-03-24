@@ -55,7 +55,8 @@ white='\033[0;37m'        # White
 
 
 #============================================FUNCTIONALITY================================================
-
+tests=0
+passes=0
 
 #run test
 for c_file in $c_files ; do #use tests_dir here to enforce correctly added tests only
@@ -82,7 +83,9 @@ for c_file in $c_files ; do #use tests_dir here to enforce correctly added tests
     qemu-mips $binary_out
     exit_code=$?
     
+    ((tests+=1))
     if [[ $exit_code == 0 ]]; then
+        ((passes+=1))
         outcome="Pass"
         colour=$green
     else
@@ -100,7 +103,8 @@ for c_file in $c_files ; do #use tests_dir here to enforce correctly added tests
     fi
     
 done
-printf "${blue}\n\n========================== SUMMARY ==========================\n\n${no_colour}"
+printf "${blue}\n\n========================== SUMMARY ==========================\n${no_colour}"
 
 #happens regardless of verbose, otherwise script would output nothing useful
+printf "passed ${green}$passes${no_colour}/$tests tests\n\n"
 cat $summary_file | column -t -s, | grep -E --color=auto 'Fail|$$'
