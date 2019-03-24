@@ -56,7 +56,8 @@ int main(int argc, char *argv[])
             std::cerr << "\n\nMIPS CODE\n======================\n";
             std::vector<Instr> Minstrs;
             Minstrs = IL2MIPS::convertToMIPS(instrs);
-            //InstrPrinter::prettyPrintInstrs(std::cerr, Minstrs);
+            InstrPrinter::prettyPrintInstrs(std::cerr, Minstrs);
+            std::cerr << "\n\nMIPS CODE (raw)\n======================\n";
             InstrPrinter::generateInstrs(std::cout, Minstrs);
             InstrPrinter::writeMIPStoFile(std::string(argv[4]), Minstrs);
             InstrPrinter::writeMIPStoFile("bin/test.s", Minstrs);

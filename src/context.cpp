@@ -67,7 +67,6 @@ void MIPSContext::alloc(Allocation allocation)
     if (_allocator.frameCount() > 0)
     {
         _allocator.allocate(allocation);
-        // _instrs.push_back(Instr("subi", "$sp", "$sp", std::to_string(allocation.size))); //doesn't compile on gcc 
         _instrs.push_back(Instr("addi", "$sp", "$sp", "-" + std::to_string(allocation.size)));
     }
     else
