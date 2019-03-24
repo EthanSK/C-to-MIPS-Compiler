@@ -80,7 +80,8 @@ void MIPSContext::alloc(Allocation allocation)
         std::vector<Instr>::iterator inserter = _instrs.end();
         while (inserter != _instrs.begin() && (inserter - 1)->opcode == "") { inserter--; }
 
-        _instrs.insert(inserter, allocInstr);
+        //_instrs.insert(inserter, allocInstr);
+        _instrs.push_back(allocInstr);
     }
     else
     {
