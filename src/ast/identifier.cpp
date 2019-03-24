@@ -27,5 +27,5 @@ void Identifier::generateLValueStoreIL(std::vector<Instr> &instrs, ILContext &co
 	instrs.push_back(Instr("mov", _name, inputReg));
 }
 
-bool Identifier::isConstant() const { return "false"; }
+bool Identifier::isConstant() const { return false; }
 int Identifier::evalConst() const { throw "cannot statically evaluate an identifier"; }

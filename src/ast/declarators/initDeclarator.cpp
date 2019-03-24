@@ -1,5 +1,6 @@
 #include "initDeclarator.hpp"
 #include "utils.hpp"
+#include "rvalue.hpp"
 
 InitDeclarator::InitDeclarator(StatementPtr declarator, StatementPtr initializer)
 {
@@ -38,6 +39,16 @@ void InitDeclarator::generateIL(std::vector<Instr> &instrs, ILContext &context, 
 {
     std::string initName = context.makeName("init");
     getDeclarator()->generateIL(instrs, context, destReg);
-    getInitializer()->generateIL(instrs, context, initName);
-    instrs.push_back(Instr("mov", getDeclarator()->getIdentifierName(), initName));
+
+    RValuePtr rvalue = Utils::tryCast<RValue>(getInitializer(), "rhs of an initializer must be an rvalue");
+    if (rvalue->isConstant())
+    {
+        int value = rvalue->evalConst();
+        instrs.push_back(Instr("init", getDeclarator()->getIdentifierName(), std::to_string(value)));
+    }
+    else
+    {
+        getInitializer()->generateIL(instrs, context, initName);
+        instrs.push_back(Instr("mov", getDeclarator()->getIdentifierName(), initName));
+    }
 }
