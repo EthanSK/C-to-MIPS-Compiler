@@ -15,7 +15,7 @@ void InstrPrinter::prettyPrintInstrs(std::ostream &os, std::vector<Instr> instrs
     }
 
     const int FIXED_PADDING = 4;
-    for (int i = 0; i < columnWidths.size(); i++)
+    for (size_t i = 0; i < columnWidths.size(); i++)
     {
         if (columnWidths[i] > 0)
         {

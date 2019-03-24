@@ -139,7 +139,7 @@ int column = 0;
 int row = 0;
 void count()
 {
-	for (int i = 0; i < strlen(yytext); ++i)
+	for (size_t i = 0; i < strlen(yytext); ++i)
   {
 		if (yytext[i] == '\n') { column = 0; row++; }
 		else if (yytext[i] == '\t') { column += 8 - (column % 8); }

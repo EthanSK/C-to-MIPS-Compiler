@@ -42,11 +42,11 @@ void FunctionDeclarator::generateIL(std::vector<Instr> &instrs, ILContext &conte
     ParameterListPtr paramList = Utils::tryCast<ParameterList>(getParamList(), "parameter list of a function declarator must be of type parameterList");
     std::vector<StatementPtr> params = paramList->getNodes();
 
-    for (int i = 0; i < params.size(); ++i)
+    for (size_t i = 0; i < params.size(); ++i)
     {
         DeclarationPtr declaration = Utils::tryCast<Declaration>(params[i], "param in function definition must be a valid declaration");
         DeclaratorListPtr declList = declaration->getDeclList();
-        for (int j = 0; j < declList->getDeclCount(); ++j)
+        for (size_t j = 0; j < declList->getDeclCount(); ++j)
         {
             DeclaratorPtr decl = declList->getDeclarator(j);
             instr.extraData.push_back(decl->getIdentifierName());

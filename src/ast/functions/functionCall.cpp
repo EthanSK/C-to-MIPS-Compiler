@@ -39,7 +39,7 @@ void FunctionCall::generateIL(std::vector<Instr> &instrs, ILContext &context, st
     NodeListPtr paramList = Utils::tryCast<NodeList>(getParameters(), "arguments of a function call must be a list");
     std::vector<StatementPtr> params = paramList->getNodes();
 
-    for (int i = 0; i < params.size(); ++i)
+    for (size_t i = 0; i < params.size(); ++i)
     {
         std::string paramName = context.makeName("farg" + std::to_string(i));
         context.compileInput(params[i], instrs, paramName);

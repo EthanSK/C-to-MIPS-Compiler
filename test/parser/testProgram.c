@@ -1,5 +1,4 @@
-int lol()
+int while_simple()
 {
-    int a;
-    return a;
+   return 5;
 }

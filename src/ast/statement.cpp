@@ -37,7 +37,7 @@ void Statement::generatePython(std::ostream &os) const
 void Statement::printTree(std::ostream &os, int scopeDepth) const
 {
     const int INDENT_SIZE = 2;
-    for (int i = 0; i < scopeDepth * INDENT_SIZE; ++i)
+    for (size_t i = 0; i < scopeDepth * INDENT_SIZE; ++i)
     {
         os << " ";
     }
@@ -45,7 +45,7 @@ void Statement::printTree(std::ostream &os, int scopeDepth) const
     if (branches.size() > 0)
     {
         os << ":";
-        for (int i = 0; i < branches.size(); ++i)
+        for (size_t i = 0; i < branches.size(); ++i)
         {
             os << std::endl;
             branches[i]->printTree(os, scopeDepth + 1);
@@ -86,7 +86,7 @@ std::string Statement::getGraphNodeLabel() const
 void Statement::generateTreeGraph(std::ostream &os) const
 {
     os << getGraphNodeID() << " [label=" << getGraphNodeLabel() << "]" << std::endl;
-    for (int i = 0; i < branches.size(); ++i)
+    for (size_t i = 0; i < branches.size(); ++i)
     {
         os << getGraphNodeID() << " -> " << branches[i]->getGraphNodeID() << ";" << std::endl;
         branches[i]->generateTreeGraph(os);
