@@ -76,6 +76,16 @@ void MIPSContext::alloc(Allocation allocation)
     }
 }
 
+void MIPSContext::addRootInstr(Instr instr)
+{
+    _instrs.insert(_instrs.begin(), instr);
+}
+
+void MIPSContext::addRawInstr(Instr instr)
+{
+    _instrs.push_back(instr);
+}
+
 void MIPSContext::addInstr(Instr instr)
 {
     std::string destName = instr.dest;

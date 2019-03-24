@@ -30,6 +30,8 @@ public:
     void popFrame();
     void alloc(Allocation allocation);
     void addInstr(Instr instr);
+    void addRootInstr(Instr instr);
+    void addRawInstr(Instr instr);
     int stackSize() const;
     std::string getAllocationLocation(std::string regName) const;
 
