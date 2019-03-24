@@ -2,5 +2,5 @@
 
 void IL2MIPS::b(Instr instr, MIPSContext &context) 
 {
-    context.addBranchInstr(Instr("j", instr.dest));
+    context.addBranchInstr(Instr("j", instr.dest), instr.label);
 }

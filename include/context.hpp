@@ -31,7 +31,9 @@ public:
     void popFrame();
     void alloc(Allocation allocation);
     void addInstr(Instr instr);
+    void addInstr(Instr instr, std::string label);
     void addBranchInstr(Instr instr);
+    void addBranchInstr(Instr instr, std::string label);
     void addRootInstr(Instr instr);
     void addRawInstr(Instr instr);
     int stackSize() const;

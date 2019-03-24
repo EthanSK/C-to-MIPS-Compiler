@@ -2,5 +2,5 @@
 
 void IL2MIPS::bez(Instr instr, MIPSContext &context) 
 {
-    context.addBranchInstr(Instr("beq", instr.input1, "$0", instr.dest));
+    context.addBranchInstr(Instr("beq", instr.input1, "$0", instr.dest), instr.label);
 }

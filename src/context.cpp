@@ -99,7 +99,8 @@ void MIPSContext::addRawInstr(Instr instr)
     _instrs.push_back(instr);
 }
 
-void MIPSContext::addInstr(Instr instr)
+void MIPSContext::addInstr(Instr instr) { addInstr(instr, instr.label); }
+void MIPSContext::addInstr(Instr instr, std::string label)
 {
     std::string destName = instr.dest;
     if (destName == "_root") { return; }
@@ -114,6 +115,7 @@ void MIPSContext::addInstr(Instr instr)
         }
     }
 
+    instr.label = label;
     instr.dest = reqStore ? "$t1" : destName;
     instr.input1 = loadInput(instr.input1, "$t2");
     instr.input2 = loadInput(instr.input2, "$t3");
@@ -125,8 +127,10 @@ void MIPSContext::addInstr(Instr instr)
     }
 }
 
-void MIPSContext::addBranchInstr(Instr instr)
+void MIPSContext::addBranchInstr(Instr instr) { addBranchInstr(instr, instr.label); }
+void MIPSContext::addBranchInstr(Instr instr, std::string label)
 {
+    instr.label = label;
     instr.dest = loadInput(instr.dest, "$t1");
     instr.input1 = loadInput(instr.input1, "$t2");
     instr.input2 = loadInput(instr.input2, "$t3");
