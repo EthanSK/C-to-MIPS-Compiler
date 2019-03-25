@@ -1,4 +1,4 @@
-int while_break()
+int while_break_nested()
 {
     int x = 100;
     int z = 100;
@@ -11,7 +11,8 @@ int while_break()
         {
             int trash;
             int y = 15;
-            if (--z == y) { break; }
+            if (z == y) { break; }
+            --z;
             trash = x + y + 10 * 25 - z;
         }
         if (--x == y) { break; }
