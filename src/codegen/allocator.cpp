@@ -2,7 +2,7 @@
 
 void Allocator::allocate(Allocation allocation)
 {
-    topFrame().allocate(allocation);
+    _frames.back().allocate(allocation);
 }
 
 int Allocator::getAllocationOffset(std::string name) const
@@ -56,7 +56,7 @@ int Allocator::frameCount() const
     return _frames.size();
 }
 
-AllocationFrame& Allocator::topFrame()
+const AllocationFrame& Allocator::topFrame() const
 {
     return _frames.back();
 }

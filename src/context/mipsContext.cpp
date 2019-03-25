@@ -11,6 +11,10 @@ std::vector<Instr> MIPSContext::dumpInstrs() const
         if (finalInstrs[i].opcode == "move" && finalInstrs[i].dest == finalInstrs[i].input1) { finalInstrs.erase(finalInstrs.begin() + i); continue; }
         if (finalInstrs[i].opcode == "move" && finalInstrs[i].dest == "$0") { finalInstrs.erase(finalInstrs.begin() + i); continue; }
         if (finalInstrs[i].opcode == "#scu" || finalInstrs[i].opcode == "#scd") { finalInstrs.erase(finalInstrs.begin() + i); continue; }
+        if (finalInstrs[i].opcode == "addi" && finalInstrs[i].dest == finalInstrs[i].input1 && finalInstrs[i].dest == "$sp")
+        {
+            if (finalInstrs[i].input2 == "0" ) { finalInstrs.erase(finalInstrs.begin() + i); continue; }
+        }
 
         finalInstrs[i].extraData.clear();
     }
@@ -26,14 +30,10 @@ void MIPSContext::pushFrame()
 
 void MIPSContext::popFrame()
 {
-    int stackSize = _allocator.stackSize();
+    int frameSize = _allocator.topFrame().getFrameSize();
     _allocator.popFrame();
     _instrs.push_back(Instr("#scd"));
-    int frameSize = stackSize - _allocator.stackSize();
-    if (frameSize > 0)
-    {
-        _instrs.push_back(Instr("addi", "$sp", "$sp", std::to_string(frameSize)));
-    }
+    _instrs.push_back(Instr("addi", "$sp", "$sp", std::to_string(frameSize)));
 }
 
 void MIPSContext::alloc(Allocation allocation)
@@ -171,11 +171,6 @@ std::string MIPSContext::loadInput(std::string regName, std::string mipsReg)
     return mipsReg;
 }
 
-int MIPSContext::stackSize() const
-{
-    return _allocator.stackSize();
-}
-
 std::string MIPSContext::getAllocationLocation(std::string regName) const
 {
     if (_globals.count(regName) == 0)
@@ -207,4 +202,9 @@ bool MIPSContext::isAllocated(std::string reg) const
 bool MIPSContext::isGlobalScope() const
 {
     return _allocator.frameCount() == 0;
+}
+
+const Allocator& MIPSContext::getAllocator() const
+{
+    return _allocator;
 }
