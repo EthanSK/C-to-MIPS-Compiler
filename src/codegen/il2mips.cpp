@@ -8,6 +8,7 @@ std::vector<Instr> IL2MIPS::convertToMIPS(std::vector<Instr> &instrs)
         convertInstr(instrs[i], context);
     }
 
+    context.postProcessInstrs();
     return context.dumpInstrs();
 }
 

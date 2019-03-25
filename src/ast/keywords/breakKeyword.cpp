@@ -9,6 +9,5 @@ void BreakKeyword::generateIL(std::vector<Instr> &instrs, ILContext &context, st
 {
     //need to jump to label of end of function, which can be found in context
     std::string endLoopLabel = std::get<1>(context.getLastLoopLabel());
-    instrs.push_back(Instr("pop"));
-    instrs.push_back(Instr("b", endLoopLabel));
+    instrs.push_back(Instr("b", endLoopLabel, "", "", {"#break"}));
 }

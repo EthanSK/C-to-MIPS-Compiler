@@ -6,6 +6,7 @@
 std::vector<Instr> MIPSContext::dumpInstrs() const
 {
     std::vector<Instr> finalInstrs = _instrs;
+    return _instrs;
     for (int i = finalInstrs.size() - 1; i >= 0; --i)
     {
         if (finalInstrs[i].opcode == "move" && finalInstrs[i].dest == finalInstrs[i].input1) { finalInstrs.erase(finalInstrs.begin() + i); continue; }
@@ -245,4 +246,41 @@ bool MIPSContext::isGlobalScope() const
 const Allocator& MIPSContext::getAllocator() const
 {
     return _allocator;
+}
+
+void MIPSContext::postProcessInstrs()
+{
+    for (size_t i = 0; i < _instrs.size(); ++i)
+    {
+        if (Utils::vectorContains(_instrs[i].extraData, std::string("#break")))
+        {
+            int scopeDepth = 0;
+            int deallocSize = 0;
+            for (size_t j = i + 1; j < _instrs.size(); ++j)
+            {
+                if (_instrs[j].opcode == "#scu") { scopeDepth++; }
+                if (_instrs[j].opcode == "#scd")
+                {
+                    scopeDepth--;
+                    if (scopeDepth <= 0)
+                    {
+                        if (_instrs[j + 1].opcode == "addi" && _instrs[j + 1].dest == "$sp" && _instrs[j + 1].input1 == "$sp")
+                        {
+                            if (!Utils::vectorContains(_instrs[j + 1].extraData, std::string("#raw")))
+                            {
+                                deallocSize += std::stoi(_instrs[j + 1].input2);
+                            }
+                        }
+                    }
+                }
+
+                if (_instrs[j].label == _instrs[i].dest)
+                {
+                    Instr instr("addi", "$sp", "$sp", std::to_string(deallocSize));
+                    _instrs.insert(_instrs.begin() + i++, instr);
+                    break;
+                }
+            }
+        }
+    }
 }

@@ -1,5 +1,11 @@
-int array[5];
 int main()
 {
-    return array[1];
+    int x = 10;
+    while (x < 10)
+    {
+        if (x < 5) { break; }
+        x--;
+    }
+
+    return x;
 }
