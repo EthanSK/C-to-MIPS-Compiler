@@ -1,12 +1,6 @@
 int fScopeReturn()
 {
-    int a = 6;
-    if (a > 5)
-    {
-        return a;
-    }
-    else
-    {
-        return -1;
-    }
+    int x = 1;
+    int y = 2;
+    return y > 1;
 }
