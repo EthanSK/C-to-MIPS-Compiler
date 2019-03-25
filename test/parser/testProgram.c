@@ -1,4 +1,8 @@
-int x;
+int array2[32];
+int glob;
 
-int* getPtr() { return &x; }
-int getVal() { return x; }
+int main()
+{
+    array2[20] = glob;
+    return array2[10];
+}

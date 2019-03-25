@@ -37,7 +37,6 @@ void InitDeclarator::generatePython(std::ostream &os, PythonContext &context, in
 
 void InitDeclarator::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
 {
-    std::string initName = context.makeName("init");
     getDeclarator()->generateIL(instrs, context, destReg);
 
     RValuePtr rvalue = Utils::tryCast<RValue>(getInitializer(), "rhs of an initializer must be an rvalue");
@@ -48,6 +47,7 @@ void InitDeclarator::generateIL(std::vector<Instr> &instrs, ILContext &context, 
     }
     else
     {
+        std::string initName = context.makeName("init");
         getInitializer()->generateIL(instrs, context, initName);
         instrs.push_back(Instr("mov", getDeclarator()->getIdentifierName(), initName));
     }

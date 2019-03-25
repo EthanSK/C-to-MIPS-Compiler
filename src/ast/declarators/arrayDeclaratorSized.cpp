@@ -1,5 +1,6 @@
 #include "arrayDeclaratorSized.hpp"
 #include "utils.hpp"
+#include "rvalue.hpp"
 
 ArrayDeclaratorSized::ArrayDeclaratorSized(StatementPtr innerDeclarator, StatementPtr sizeSpecifier)
 {
@@ -26,5 +27,11 @@ void ArrayDeclaratorSized::printC(std::ostream &os) const
 
 void ArrayDeclaratorSized::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
 {
-    
+    RValuePtr rvalue = Utils::tryCast<RValue>(getSizeSpecifier(), "size specifer of an array must be an rvalue");
+    if (!rvalue->isConstant()) { throw "size specifier of an array must be a constant"; }
+
+    std::string arrayName = context.makeName(getIdentifierName());
+    int arraySize = rvalue->evalConst();
+    instrs.push_back(Instr("decl", arrayName, std::to_string(arraySize * 4)));
+    instrs.push_back(Instr("loc", getIdentifierName(), arrayName));
 }
