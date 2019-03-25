@@ -1,4 +1,4 @@
-int whileContinue()
+int while_continue()
 {
     int sum1 = 0;
     int sum2 = 0;

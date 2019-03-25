@@ -1,4 +1,4 @@
-int forNested()
+int for_nested()
 {
     int sum = 0;
     int i;
