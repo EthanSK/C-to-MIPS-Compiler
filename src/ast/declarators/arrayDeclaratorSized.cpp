@@ -32,6 +32,5 @@ void ArrayDeclaratorSized::generateIL(std::vector<Instr> &instrs, ILContext &con
 
     std::string arrayName = context.makeName(getIdentifierName());
     int arraySize = rvalue->evalConst();
-    instrs.push_back(Instr("decl", arrayName, std::to_string(arraySize * 4)));
-    instrs.push_back(Instr("loc", getIdentifierName(), arrayName));
+    instrs.push_back(Instr("decla", arrayName, std::to_string(arraySize * 4)));
 }
