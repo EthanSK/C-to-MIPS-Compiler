@@ -1,11 +1,12 @@
-int forBreak()
+int fScopeReturn()
 {
-    int i;
-    for (i = 0; i < 20; ++i) 
+    int a = 6;
+    if (a > 5)
     {
-        if (i == 10)
-        {
-        }
+        return a;
     }
-    return i; 
+    else
+    {
+        return -1;
+    }
 }
