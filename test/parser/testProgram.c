@@ -1,5 +1,6 @@
 int main()
 {
     int x = 5;
-    return *&x;
+    *&x = 10;
+    return x;
 }
