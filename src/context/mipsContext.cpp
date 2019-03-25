@@ -179,14 +179,14 @@ std::string MIPSContext::getAllocationLocation(std::string regName) const
     }
 }
 
-void MIPSContext::loadAddress(std::string varName, std::string destReg)
+void MIPSContext::loadAddress(std::string destReg, std::string varName)
 {
-    if (_globals.count(varName) == 0) { _instrs.push_back(Instr("la", destReg, varName)); }
-    else
+    if (_globals.count(varName) == 0)
     {
         int regLocation = _allocator.getAllocationOffset(varName);
         _instrs.push_back(Instr("addi", destReg, "$sp", std::to_string(regLocation), {"#pop"}));
     }
+    else { _instrs.push_back(Instr("la", destReg, varName)); }
 }
 
 bool MIPSContext::isAllocated(std::string reg) const

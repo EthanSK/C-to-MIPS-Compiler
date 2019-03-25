@@ -2,5 +2,5 @@
 
 void IL2MIPS::loc(Instr instr, MIPSContext &context) 
 {
-    context.loadAddress(instr.input1, instr.dest);
+    context.loadAddress(instr.dest, instr.input1);
 }
