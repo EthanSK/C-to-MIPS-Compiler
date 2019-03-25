@@ -40,6 +40,7 @@ void IL2MIPS::convertInstr(Instr &instr, MIPSContext &context)
     else if (instr.opcode == "bnez") { IL2MIPS::bnez(instr, context); }
     else if (instr.opcode == "xor") { IL2MIPS::xorM(instr, context); }
     else if (instr.opcode == "and") { IL2MIPS::andM(instr, context); }
+    else if (instr.opcode == "andl") { IL2MIPS::andl(instr, context); }
     else if (instr.opcode == "or") { IL2MIPS::orM(instr, context); }
     else if (instr.opcode == "orl") { IL2MIPS::orl(instr, context); }
     else if (instr.opcode == "lsl") { IL2MIPS::lsl(instr, context); }
