@@ -2,6 +2,8 @@
 #define utils_hpp
 
 #include <string>
+#include <vector>
+#include <algorithm>
 
 class Utils
 {
@@ -20,6 +22,12 @@ public:
         const DestType* dest= dynamic_cast<const DestType*>(src);
         if (dest) { return dest; }
         else { throw errorOnFail; }
+    }
+
+    template <class T>
+    static const bool vectorContains(const std::vector<T> &v, const T &item)
+    {
+        return std::find(v.begin(), v.end(), item) != v.end();
     }
 };
 

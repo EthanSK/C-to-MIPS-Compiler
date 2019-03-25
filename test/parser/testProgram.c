@@ -1,6 +1,8 @@
-int fScopeReturn()
+int IF_F()
 {
-    int x = 1;
-    int y = 2;
-    return y > 1;
+    if (0)
+    {
+        return 666;
+    }
+    return 2019;
 }

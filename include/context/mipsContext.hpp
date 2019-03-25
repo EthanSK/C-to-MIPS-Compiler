@@ -38,6 +38,7 @@ private:
     bool isAllocated(std::string reg) const;
     std::string loadInput(std::string regName, std::string mipsReg);
     std::string correctStackReference(std::string ref, int offset) const;
+    std::string correctStackPop(std::string popRef, int offset) const;
 };
 
 #endif

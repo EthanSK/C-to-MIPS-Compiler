@@ -16,7 +16,7 @@ StatementPtr DoWhileLoop::getCondition() const
 
 void DoWhileLoop::printC(std::ostream &os) const
 {
-    os << "do" << getScopeBlock() << "while ( " << getCondition() << ")";
+    os << "do" << getScopeBlock() << "while (" << getCondition() << ")";
 }
 
 void DoWhileLoop::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const

@@ -1,4 +1,5 @@
 #include "mipsContext.hpp"
+#include "utils.hpp"
 #include <sstream>
 #include <algorithm>
 
@@ -17,6 +18,7 @@ void MIPSContext::popFrame()
 {
     int stackSize = _allocator.stackSize();
     _allocator.popFrame();
+    _instrs.push_back(Instr("#scd"));
     int frameSize = stackSize - _allocator.stackSize();
     if (frameSize > 0)
     {
@@ -38,13 +40,25 @@ void MIPSContext::alloc(Allocation allocation)
         int offset = -allocation.size;
         _allocator.allocate(allocation);
         
+        int remainingHits = 1;
         std::vector<Instr>::iterator inserter = _instrs.end();
-        while (inserter != _instrs.begin() && (inserter - 1)->opcode != "#scu")
+        while (inserter != _instrs.begin() && remainingHits > 0)
         {
             inserter--;
-            if (std::find(inserter->extraData.begin(), inserter->extraData.end(), "#raw") == inserter->extraData.end())
+            if (inserter != _instrs.begin())
+            {
+                if (inserter->opcode == "#scu") { remainingHits--; }
+                if (inserter->opcode == "#scd") { remainingHits++; }
+                if (remainingHits == 0) { inserter++; break; }
+            }
+
+            if (!Utils::vectorContains(inserter->extraData, std::string("#raw")))
             {
                 inserter->input1 = correctStackReference(inserter->input1, offset);
+            }
+            if (Utils::vectorContains(inserter->extraData, std::string("#sp")))
+            {
+                inserter->input2 = correctStackPop(inserter->input2, offset);
             }
         }
 
@@ -68,6 +82,15 @@ std::string MIPSContext::correctStackReference(std::string ref, int offset) cons
     int originalOffset = std::stoi(offsetStr);
     int correctedOffset = originalOffset - offset;
     return std::to_string(correctedOffset) + "($sp)";
+}
+
+std::string MIPSContext::correctStackPop(std::string popRef, int offset) const
+{
+    if (!std::regex_match(popRef, _isNumber)) { return popRef; }
+
+    int originalSize = std::stoi(popRef);
+    int correctedSize = originalSize - offset;
+    return std::to_string(correctedSize);
 }
 
 void MIPSContext::addRootInstr(Instr instr)
