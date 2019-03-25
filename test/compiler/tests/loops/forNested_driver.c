@@ -1,6 +1,6 @@
-int for_simple();
+int forNested();
 
 int main()
 {
-    return !(while_simple() == 20);
+    return !(forNested() == 20);
 }
