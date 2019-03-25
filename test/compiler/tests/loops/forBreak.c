@@ -9,5 +9,5 @@ int forBreak()
             break;
         }
     }
-    return i; 
+    return sum; 
 }
