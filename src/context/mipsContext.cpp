@@ -85,6 +85,28 @@ void MIPSContext::alloc(Allocation allocation)
     }
 }
 
+void MIPSContext::allocArray(Allocation allocation)
+{
+    if (isGlobalScope())
+    {
+        throw "global arrays are currently unsupported";
+    }
+    else
+    {
+        Allocation arrAlloc = allocation;
+        Allocation ptrAlloc = allocation;
+
+        arrAlloc.name = "__" + arrAlloc.name + "__";
+        ptrAlloc.size = 4;
+
+        alloc(arrAlloc);
+        alloc(ptrAlloc);
+
+        loadAddress(ptrAlloc.name, arrAlloc.name);
+    }
+    
+}
+
 std::string MIPSContext::correctStackReference(std::string ref, int offset) const
 {
     if (!std::regex_match(ref, _isStackRef)) { return ref; }

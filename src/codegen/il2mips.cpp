@@ -19,6 +19,7 @@ void IL2MIPS::convertInstr(Instr &instr, MIPSContext &context)
     else if (instr.opcode == "scu") { IL2MIPS::scu(instr, context); }
     else if (instr.opcode == "scd") { IL2MIPS::scd(instr, context); }
     else if (instr.opcode == "decl") { IL2MIPS::decl(instr, context); }
+    else if (instr.opcode == "decla") { IL2MIPS::decl(instr, context); }
     else if (instr.opcode == "retv") { IL2MIPS::retv(instr, context); }
     else if (instr.opcode == "li") { IL2MIPS::li(instr, context); }
     else if (instr.opcode == "mov") { IL2MIPS::mov(instr, context); }

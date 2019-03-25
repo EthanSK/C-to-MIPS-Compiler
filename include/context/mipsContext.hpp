@@ -18,6 +18,7 @@ public:
     void pushFrame();
     void popFrame();
     void alloc(Allocation allocation);
+    void allocArray(Allocation allocation);
     void addInstr(Instr instr);
     void addInstr(Instr instr, std::string label);
     void addBranchInstr(Instr instr);

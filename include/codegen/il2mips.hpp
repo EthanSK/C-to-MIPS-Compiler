@@ -16,6 +16,7 @@ class IL2MIPS //one IL may map to many MIPS
     static void scu(Instr instr, MIPSContext &context);
     static void scd(Instr instr, MIPSContext &context);
     static void decl(Instr instr, MIPSContext &context);
+    static void decla(Instr instr, MIPSContext &context);
     static void fdef(Instr instr, MIPSContext &context);
     static void fcall(Instr instr, MIPSContext &context);
     static void fend(Instr instr, MIPSContext &context);
