@@ -56,7 +56,7 @@ void MIPSContext::alloc(Allocation allocation)
             {
                 inserter->input1 = correctStackReference(inserter->input1, offset);
             }
-            if (Utils::vectorContains(inserter->extraData, std::string("#sp")))
+            if (Utils::vectorContains(inserter->extraData, std::string("#pop")))
             {
                 inserter->input2 = correctStackPop(inserter->input2, offset);
             }
