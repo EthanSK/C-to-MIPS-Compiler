@@ -12,6 +12,7 @@ class LValue
 {
 public:
     virtual void generateLValueStoreIL(std::vector<Instr> &instrs, ILContext &context, std::string inputReg) const = 0;
+    virtual void generateLValueLocateIL(std::vector<Instr> &instrs, ILContext &context, std::string inputReg) const = 0;
 };
 
 #endif

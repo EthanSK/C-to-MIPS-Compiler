@@ -16,6 +16,7 @@ public:
   void generatePython(std::ostream &os, PythonContext &context, int scopeDepth = 0) const override;
   void generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const override;
   void generateLValueStoreIL(std::vector<Instr> &instrs, ILContext &context, std::string inputReg) const override;
+  void generateLValueLocateIL(std::vector<Instr> &instrs, ILContext &context, std::string inputReg) const override;
   bool isConstant() const override;
   int evalConst() const override;
 

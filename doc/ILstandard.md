@@ -43,8 +43,8 @@
 | fend      | fend               | ends function definition                              |
 | fcall     | fcall y x {params} | calls function x with {params} and stores return in y |
 | decl      | decl x im          | declares a non temporary variable x of size im        |
-| load      | load x y z         | loads into x from the address y + z                   |
-| store     | store x y z        | stores the value in x to the address y + z            |
+| load      | load x y im        | loads into x from the address y + im                  |
+| store     | store x y im       | stores the value in x to the address y + im           |
 | init      | init x im          | initializes the variable x with the immediate im      |
 | loc       | loc x y            | x = &y                                                |
 
