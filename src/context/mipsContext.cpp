@@ -9,6 +9,7 @@ std::vector<Instr> MIPSContext::dumpInstrs() const
     for (int i = finalInstrs.size() - 1; i >= 0; --i)
     {
         if (finalInstrs[i].opcode == "move" && finalInstrs[i].dest == finalInstrs[i].input1) { finalInstrs.erase(finalInstrs.begin() + i); continue; }
+        if (finalInstrs[i].opcode == "move" && finalInstrs[i].dest == "$0") { finalInstrs.erase(finalInstrs.begin() + i); continue; }
         if (finalInstrs[i].opcode == "#scu" || finalInstrs[i].opcode == "#scd") { finalInstrs.erase(finalInstrs.begin() + i); continue; }
 
         finalInstrs[i].extraData.clear();
