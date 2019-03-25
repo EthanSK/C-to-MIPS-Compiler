@@ -14,9 +14,9 @@ public:
     void pushFrame();
     int stackSize() const;
     int frameCount() const;
+    const AllocationFrame& topFrame() const;
 
 private:
-    AllocationFrame& topFrame();
     std::vector<AllocationFrame> _frames;
 };
 

@@ -1,4 +1,4 @@
-int forBreak()
+int for_break()
 {
     int i;
     for (i = 0; i < 20; ++i) 

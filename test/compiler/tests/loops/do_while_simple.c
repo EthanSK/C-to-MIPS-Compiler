@@ -1,4 +1,4 @@
-int doWhileSimple()
+int do_while_simple()
 {
     int num;
     num = 0;
