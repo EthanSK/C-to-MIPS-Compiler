@@ -29,7 +29,7 @@ void Identifier::generateLValueStoreIL(std::vector<Instr> &instrs, ILContext &co
 
 void Identifier::generateLValueLocateIL(std::vector<Instr> &instrs, ILContext &context, std::string inputReg) const
 {
-	instrs.push_back(Instr("loc", _name, inputReg));
+	instrs.push_back(Instr("loc", inputReg, _name));
 }
 
 bool Identifier::isConstant() const { return false; }
