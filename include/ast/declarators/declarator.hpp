@@ -16,7 +16,8 @@ public:
         func = 2,
         init = 3,
         param = 4,
-        array = 5
+        array = 5,
+        pointer = 6
     };
 
     virtual std::string getIdentifierName() const = 0;

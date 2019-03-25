@@ -1,5 +1,4 @@
-int main()
-{
-    int x = 5;
-    return *&*&x;
-}
+int x;
+
+int* getPtr() { return &x; }
+int getVal() { return x; }

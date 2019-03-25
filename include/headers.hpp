@@ -13,6 +13,7 @@
 #include "directDeclarator.hpp"
 #include "arrayDeclaratorSized.hpp"
 #include "arrayDeclarator.hpp"
+#include "pointerDeclarator.hpp"
 #include "functionDeclarator.hpp"
 #include "emptyNode.hpp"
 #include "qualifiedType.hpp"
