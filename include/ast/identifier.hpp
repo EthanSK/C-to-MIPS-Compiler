@@ -5,6 +5,9 @@
 #include "lvalue.hpp"
 #include "rvalue.hpp"
 
+class Identifier;
+typedef const Identifier* IdentifierPtr;
+
 class Identifier : public Statement, public LValue, public RValue
 {
 public:
