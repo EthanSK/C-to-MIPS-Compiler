@@ -136,13 +136,13 @@ void MIPSContext::addRawInstr(Instr instr)
     _instrs.push_back(instr);
 }
 
-void MIPSContext::addInstr(Instr instr) { addInstr(instr, instr.label); }
-void MIPSContext::addInstr(Instr instr, std::string label)
+void MIPSContext::addInstr(Instr instr, bool ignoreDest, bool ignoreInput1, bool ignoreInput2) { addInstr(instr, instr.label, ignoreDest, ignoreInput1, ignoreInput2); }
+void MIPSContext::addInstr(Instr instr, std::string label, bool ignoreDest, bool ignoreInput1, bool ignoreInput2)
 {
     std::string destName = instr.dest;
     if (destName == "_root") { return; }
 
-    bool reqStore = requiresStack(instr.dest);
+    bool reqStore = !ignoreDest && requiresStack(instr.dest);
     if (reqStore)
     {
         if (!isAllocated(instr.dest))
@@ -154,8 +154,8 @@ void MIPSContext::addInstr(Instr instr, std::string label)
 
     instr.label = label;
     instr.dest = reqStore ? "$t1" : destName;
-    instr.input1 = loadInput(instr.input1, "$t2");
-    instr.input2 = loadInput(instr.input2, "$t3");
+    if (!ignoreInput1) { instr.input1 = loadInput(instr.input1, "$t2"); }
+    if (!ignoreInput2) { instr.input2 = loadInput(instr.input2, "$t3"); }
     _instrs.push_back(instr);
 
     if (reqStore)
@@ -216,9 +216,12 @@ void MIPSContext::loadAddress(std::string destReg, std::string varName)
     if (_globals.count(varName) == 0)
     {
         int regLocation = _allocator.getAllocationOffset(varName);
-        addInstr(Instr("addi", destReg, "$sp", std::to_string(regLocation), {"#pop"}));
+        addInstr(Instr("addi", destReg, "$sp", std::to_string(regLocation), {"#pop"}), false, true, true);
     }
-    else { _instrs.push_back(Instr("la", destReg, varName)); }
+    else
+    {
+        addInstr(Instr("la", destReg, varName), false, true, true);
+    }
 }
 
 bool MIPSContext::isAllocated(std::string reg) const

@@ -19,8 +19,8 @@ public:
     void popFrame();
     void alloc(Allocation allocation);
     void allocArray(Allocation allocation);
-    void addInstr(Instr instr);
-    void addInstr(Instr instr, std::string label);
+    void addInstr(Instr instr, bool ignoreDest = false, bool ignoreInput1 = false, bool ignoreInput2 = false);
+    void addInstr(Instr instr, std::string label, bool ignoreDest = false, bool ignoreInput1 = false, bool ignoreInput2 = false);
     void addBranchInstr(Instr instr);
     void addBranchInstr(Instr instr, std::string label);
     void addRootInstr(Instr instr);
