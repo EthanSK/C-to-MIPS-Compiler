@@ -1,11 +1,22 @@
-int main()
+int while_break()
 {
-    int x = 10;
-    while (x < 10)
+    int x = 100;
+    int z = 100;
+    while (x > 0)
     {
-        if (x < 5) { break; }
-        x--;
+        int trash;
+        int y = 35;
+
+        while (z > 0)
+        {
+            int trash;
+            int y = 15;
+            if (--z == y) { break; }
+            trash = x + y + 10 * 25 - z;
+        }
+        if (--x == y) { break; }
+        trash = x + y + 10 * 25 - z;
     }
 
-    return x;
+    return x + z;
 }

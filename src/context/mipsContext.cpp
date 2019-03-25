@@ -254,29 +254,20 @@ void MIPSContext::postProcessInstrs()
     {
         if (Utils::vectorContains(_instrs[i].extraData, std::string("#break")))
         {
-            int scopeDepth = 0;
             int deallocSize = 0;
             for (size_t j = i + 1; j < _instrs.size(); ++j)
             {
-                if (_instrs[j].opcode == "#scu") { scopeDepth++; }
-                if (_instrs[j].opcode == "#scd")
+                if (_instrs[j].opcode == "addi" && _instrs[j].dest == "$sp" && _instrs[j].input1 == "$sp")
                 {
-                    scopeDepth--;
-                    if (scopeDepth <= 0)
+                    if (!Utils::vectorContains(_instrs[j].extraData, std::string("#raw")))
                     {
-                        if (_instrs[j + 1].opcode == "addi" && _instrs[j + 1].dest == "$sp" && _instrs[j + 1].input1 == "$sp")
-                        {
-                            if (!Utils::vectorContains(_instrs[j + 1].extraData, std::string("#raw")))
-                            {
-                                deallocSize += std::stoi(_instrs[j + 1].input2);
-                            }
-                        }
+                        deallocSize += std::stoi(_instrs[j].input2);
                     }
                 }
 
                 if (_instrs[j].label == _instrs[i].dest)
                 {
-                    Instr instr("addi", "$sp", "$sp", std::to_string(deallocSize));
+                    Instr instr("addi", "$sp", "$sp", std::to_string(deallocSize), {"#raw"});
                     _instrs.insert(_instrs.begin() + i++, instr);
                     break;
                 }
