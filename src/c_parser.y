@@ -205,7 +205,7 @@ ASSIGNMENT_EXPRESSION
 		case T_MINUS_EQ: $$ = new BinarySubtractAssignment($1, $3); break;
 		case T_LSHIFT_EQ: $$ = new BinaryLeftShiftAssignment($1, $3); break;
 		case T_RSHIFT_EQ: $$ = new BinaryRightShiftAssignment($1, $3); break;
-		case T_AND_AND: $$ = new BinaryBitwiseAndAssignment($1, $3); break;
+		case T_AND_EQ: $$ = new BinaryBitwiseAndAssignment($1, $3); break;
 		case T_XOR_EQ: $$ = new BinaryBitwiseXorAssignment($1, $3); break;
 		case T_OR_EQ: $$ = new BinaryBitwiseOrAssignment($1, $3); break;
 		default: break;
@@ -222,7 +222,7 @@ ASSIGNEMENT_OPERATOR
 	| T_MINUS_EQ { $$ = T_MINUS_EQ; }
 	| T_LSHIFT_EQ { $$ = T_LSHIFT_EQ; }
 	| T_RSHIFT_EQ { $$ = T_RSHIFT_EQ; }
-	| T_AND_AND { $$ = T_AND_AND; }
+	| T_AND_EQ { $$ = T_AND_EQ; }
 	| T_XOR_EQ { $$ = T_XOR_EQ; }
 	| T_OR_EQ { $$ = T_OR_EQ; }
 	;
