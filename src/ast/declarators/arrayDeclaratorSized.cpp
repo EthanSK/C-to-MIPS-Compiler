@@ -30,7 +30,6 @@ void ArrayDeclaratorSized::generateIL(std::vector<Instr> &instrs, ILContext &con
     RValuePtr rvalue = Utils::tryCast<RValue>(getSizeSpecifier(), "size specifer of an array must be an rvalue");
     if (!rvalue->isConstant()) { throw "size specifier of an array must be a constant"; }
 
-    std::string arrayName = context.makeName(getIdentifierName());
     int arraySize = rvalue->evalConst();
-    instrs.push_back(Instr("decla", arrayName, std::to_string(arraySize * 4)));
+    instrs.push_back(Instr("decla", getIdentifierName(), std::to_string(arraySize * 4)));
 }
