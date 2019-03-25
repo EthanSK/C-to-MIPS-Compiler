@@ -23,3 +23,8 @@ void ArrayDeclaratorSized::printC(std::ostream &os) const
 {
     os << getChild() << "[" << getSizeSpecifier() << "]";
 } 
+
+void ArrayDeclaratorSized::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
+{
+    
+}

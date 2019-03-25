@@ -18,3 +18,8 @@ void ArrayDeclarator::printC(std::ostream &os) const
 {
     os << getChild() << "[]";
 } 
+
+void ArrayDeclarator::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
+{
+    
+}

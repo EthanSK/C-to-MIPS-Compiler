@@ -20,3 +20,7 @@ void ArrayElementReference::printC(std::ostream &os) const
 {
     os << getArr() << "[" << getIndex() << "]";
 }
+
+void ArrayElementReference::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
+{
+}
