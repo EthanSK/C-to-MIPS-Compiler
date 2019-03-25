@@ -6,7 +6,6 @@
 std::vector<Instr> MIPSContext::dumpInstrs() const
 {
     std::vector<Instr> finalInstrs = _instrs;
-    return _instrs;
     for (int i = finalInstrs.size() - 1; i >= 0; --i)
     {
         if (finalInstrs[i].opcode == "move" && finalInstrs[i].dest == finalInstrs[i].input1) { finalInstrs.erase(finalInstrs.begin() + i); continue; }
