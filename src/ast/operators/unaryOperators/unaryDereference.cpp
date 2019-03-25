@@ -8,7 +8,7 @@ void UnaryDereference::printC(std::ostream &os) const
 void UnaryDereference::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
 {
     getOperand()->generateIL(instrs, context, "$t0");
-	instrs.push_back(Instr("load", destReg, "$t0", "$0"));
+	instrs.push_back(Instr("load", destReg, "$t0", "0"));
 }
 
 bool UnaryDereference::isConstant() const { return false; }
