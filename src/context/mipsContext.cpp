@@ -273,5 +273,27 @@ void MIPSContext::postProcessInstrs()
                 }
             }
         }
+
+        if (Utils::vectorContains(_instrs[i].extraData, std::string("#continue")))
+        {
+            int allocSize = 0;
+            for (size_t j = i - 1; j >= 0; --j)
+            {
+                if (_instrs[j].opcode == "addi" && _instrs[j].dest == "$sp" && _instrs[j].input1 == "$sp")
+                {
+                    if (!Utils::vectorContains(_instrs[j].extraData, std::string("#raw")))
+                    {
+                        allocSize -= std::stoi(_instrs[j].input2);
+                    }
+                }
+
+                if (_instrs[j].label == _instrs[i].dest)
+                {
+                    Instr instr("addi", "$sp", "$sp", std::to_string(allocSize), {"#raw"});
+                    _instrs.insert(_instrs.begin() + i++, instr);
+                    break;
+                }
+            }
+        }
     }
 }

@@ -1,22 +1,16 @@
-int while_break()
+int while_continue()
 {
-    int x = 100;
-    int z = 100;
-    while (x > 0)
+    int sum1 = 0;
+    int sum2 = 0;
+    while (sum1 < 30)
     {
-        int trash;
-        int y = 35;
-
-        while (z > 0)
+        sum1++;
+        if (sum1 > 15)
         {
-            int trash;
-            int y = 15;
-            if (--z == y) { break; }
-            trash = x + y + 10 * 25 - z;
+            continue;
         }
-        if (--x == y) { break; }
-        trash = x + y + 10 * 25 - z;
+        sum2++;
     }
 
-    return x + z;
+    return sum1 + sum2;
 }
