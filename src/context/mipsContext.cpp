@@ -5,7 +5,16 @@
 
 std::vector<Instr> MIPSContext::dumpInstrs() const
 {
-    return _instrs;
+    std::vector<Instr> finalInstrs = _instrs;
+    for (int i = finalInstrs.size() - 1; i >= 0; --i)
+    {
+        if (finalInstrs[i].opcode == "move" && finalInstrs[i].dest == finalInstrs[i].input1) { finalInstrs.erase(finalInstrs.begin() + i); continue; }
+        if (finalInstrs[i].opcode == "#scu" || finalInstrs[i].opcode == "#scd") { finalInstrs.erase(finalInstrs.begin() + i); continue; }
+
+        finalInstrs[i].extraData.clear();
+    }
+
+    return finalInstrs;
 }
 
 void MIPSContext::pushFrame()
