@@ -89,7 +89,11 @@ void MIPSContext::allocArray(Allocation allocation)
 {
     if (isGlobalScope())
     {
-        throw "global arrays are currently unsupported";
+        _globals.insert(allocation.name);
+        _instrs.push_back(Instr(".data"));
+        _instrs.push_back(Instr(".globl", allocation.name));
+        _instrs.push_back(Instr(".comm", allocation.name, std::to_string(allocation.size)));
+        _instrs.push_back(Instr::makeLabel(allocation.name));
     }
     else
     {

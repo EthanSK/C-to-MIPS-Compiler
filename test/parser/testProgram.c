@@ -1,17 +1,5 @@
-int *a;
-int **b;
-int ***c;
-
-int func(int ****ptr)
+int array[5];
+int main()
 {
-    return ****ptr;
-}
-
-int ptr_chain()
-{
-    int x = 30;
-    a = &x;
-    b = &a;
-    c = &b;
-    return func(&c);
+    return array[1];
 }
