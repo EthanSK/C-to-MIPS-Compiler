@@ -34,7 +34,7 @@ void ForLoop::generateIL(std::vector<Instr> &instrs, ILContext &context, std::st
     std::string forCond = context.makeName("cond");
     std::string for_lb = context.makeLabelName("for");
     std::string for_end_lb = context.makeLabelName("for_end");
-
+    context.pushLoopLabels(for_lb, for_end_lb);
     getInit()->generateIL(instrs, context, destReg);
 
     instrs.push_back(Instr::makeLabel(for_lb));
@@ -45,4 +45,5 @@ void ForLoop::generateIL(std::vector<Instr> &instrs, ILContext &context, std::st
     getIncrement()->generateIL(instrs, context, destReg);
     instrs.push_back(Instr("b", for_lb));
     instrs.push_back(Instr::makeLabel(for_end_lb));
+    context.popLoopLabels();
 }

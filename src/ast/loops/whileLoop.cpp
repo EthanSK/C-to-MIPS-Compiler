@@ -30,6 +30,7 @@ void WhileLoop::generateIL(std::vector<Instr> &instrs, ILContext &context, std::
     std::string whileCond = context.makeName("cond");
     std::string while_lb = context.makeLabelName("while");
     std::string while_end_lb = context.makeLabelName("while_end");
+    context.pushLoopLabels(while_lb, while_end_lb);
 
     instrs.push_back(Instr::makeLabel(while_lb));
     context.compileInput(getCondition(), instrs, whileCond);
@@ -38,5 +39,6 @@ void WhileLoop::generateIL(std::vector<Instr> &instrs, ILContext &context, std::
     getScopeBlock()->generateIL(instrs, context, destReg);
     instrs.push_back(Instr("b", while_lb));
     instrs.push_back(Instr::makeLabel(while_end_lb));
+    context.popLoopLabels();
 }
 

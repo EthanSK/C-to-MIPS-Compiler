@@ -16,7 +16,7 @@ public:
 protected:
   StatementPtr getArr() const;
   StatementPtr getIndex() const;
-  void printC(std::ostream &os) const;
+  void printC(std::ostream &os) const override;
 };
 
 #endif

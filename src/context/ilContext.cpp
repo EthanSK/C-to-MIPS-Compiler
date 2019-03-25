@@ -26,5 +26,23 @@ void ILContext::compileInput(StatementPtr input, std::vector<Instr> &instrs, std
         int result = rvalue->evalConst();
         instrs.push_back(Instr("li", destReg, std::to_string(result)));
     }
-    else { input->generateIL(instrs, *this, destReg); }
+    else
+    {
+        input->generateIL(instrs, *this, destReg);
+    }
+}
+
+void ILContext::pushLoopLabels(std::string startLabel, std::string endLabel)
+{
+    _loopLabelStack.push_back(std::make_tuple(startLabel, endLabel));
+}
+
+void ILContext::popLoopLabels()
+{
+    _loopLabelStack.pop_back();
+}
+
+std::tuple<std::string, std::string> ILContext::getLastLoopLabel()
+{
+    return _loopLabelStack.back();
 }
