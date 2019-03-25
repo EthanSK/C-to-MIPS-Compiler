@@ -46,4 +46,5 @@
 | load      | load x y z         | loads into x from the address y + z                   |
 | store     | store x y z        | stores the value in x to the address y + z            |
 | init      | init x im          | initializes the variable x with the immediate im      |
+| loc       | loc x y            | x = &y                                                |
 
