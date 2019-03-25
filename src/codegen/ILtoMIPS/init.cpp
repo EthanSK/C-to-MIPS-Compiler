@@ -2,6 +2,10 @@
 
 void IL2MIPS::init(Instr instr, MIPSContext &context) 
 {
-    if (context.isGlobalScope()) { context.addInstr(Instr(".word", instr.input1), instr.label); }
+    if (context.isGlobalScope())
+    {
+        context.addRawInstr(Instr(".word", instr.input1));
+        context.addRawInstr(Instr(".align", "2"));
+    }
     else { context.addInstr(Instr("li", instr.dest, instr.input1), instr.label); }
 }

@@ -3,6 +3,7 @@
 void IL2MIPS::fdef(Instr instr, MIPSContext &context) 
 {
     std::string funcSymbol = instr.dest;
+    context.addRawInstr(Instr(".text"));
     context.addRawInstr(Instr(".globl", funcSymbol));
     context.addInstr(Instr::makeLabel(funcSymbol));
     context.pushFrame();

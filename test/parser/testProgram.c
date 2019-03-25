@@ -1,8 +1,6 @@
-int IF_F()
+int a = 10;
+
+int main()
 {
-    if (0)
-    {
-        return 666;
-    }
-    return 2019;
+    return a;
 }
