@@ -24,6 +24,7 @@ public:
     void addBranchInstr(Instr instr, std::string label);
     void addRootInstr(Instr instr);
     void addRawInstr(Instr instr);
+    void loadAddress(std::string varName, std::string destReg);
     int stackSize() const;
     std::string getAllocationLocation(std::string regName) const;
 

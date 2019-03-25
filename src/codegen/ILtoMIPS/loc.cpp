@@ -2,13 +2,5 @@
 
 void IL2MIPS::init(Instr instr, MIPSContext &context) 
 {
-    if (context.isGlobalScope())
-    {
-        context.addRawInstr(Instr("la", "$t0", instr.input2));
-        context.addInstr(Instr("move", instr.input1, "$t0"));
-    }
-    else
-    {
-        
-    }
+    context.loadAddress(instr.input1, instr.dest);
 }
