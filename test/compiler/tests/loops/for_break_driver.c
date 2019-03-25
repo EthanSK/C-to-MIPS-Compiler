@@ -2,5 +2,5 @@ int for_break();
 
 int main()
 {
-    return !(for_break() == 20);
+    return !(for_break() == 10);
 }
