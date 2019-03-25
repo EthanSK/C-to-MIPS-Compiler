@@ -19,6 +19,7 @@ public:
 
 private:
     std::unordered_map<std::string, int> _registeredNames;
+    std::vector<std::string> _labelStack; //to keep track of labels for break and continue for eg
 };
 
 #endif
