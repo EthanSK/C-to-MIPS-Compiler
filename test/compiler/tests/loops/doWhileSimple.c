@@ -6,6 +6,6 @@ int doWhileSimple()
     {
         num++;
     } while (num < 200);
-    
+
     return num;
 }

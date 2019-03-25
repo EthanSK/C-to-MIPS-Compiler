@@ -1,6 +1,5 @@
 int forBreak()
 {
-    int sum;
     int i;
     for (i = 0; i < 20; ++i) 
     {
@@ -9,5 +8,5 @@ int forBreak()
             break;
         }
     }
-    return sum; 
+    return i; 
 }
