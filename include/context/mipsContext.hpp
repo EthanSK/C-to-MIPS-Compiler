@@ -32,6 +32,7 @@ public:
 private:
     Allocator _allocator;
     std::set<std::string> _globals;
+    std::set<std::string> _arrays;
     std::vector<Instr> _instrs;
     std::regex _isNumber = std::regex("-?[0-9]+");
     std::regex _isStackRef = std::regex("-?[0-9]+\\(\\$sp\\)");
