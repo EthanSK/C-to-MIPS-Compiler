@@ -87,13 +87,15 @@ void MIPSContext::alloc(Allocation allocation)
 
 void MIPSContext::allocArray(Allocation allocation)
 {
+    _arrays.insert(allocation.name);
+    
     if (isGlobalScope())
     {
         _globals.insert(allocation.name);
         _instrs.push_back(Instr(".data"));
         _instrs.push_back(Instr(".globl", allocation.name));
-        _instrs.push_back(Instr(".comm", allocation.name, std::to_string(allocation.size)));
         _instrs.push_back(Instr::makeLabel(allocation.name));
+        _instrs.push_back(Instr(".space", std::to_string(allocation.size)));
     }
     else
     {
@@ -108,7 +110,6 @@ void MIPSContext::allocArray(Allocation allocation)
 
         loadAddress(ptrAlloc.name, arrAlloc.name);
     }
-    
 }
 
 std::string MIPSContext::correctStackReference(std::string ref, int offset) const
@@ -192,8 +193,16 @@ std::string MIPSContext::loadInput(std::string regName, std::string mipsReg)
     if (!requiresStack(regName)) { return regName; }
     if (!isAllocated(regName)) { return regName; }
 
-    _instrs.push_back(Instr("lw", mipsReg, getAllocationLocation(regName)));
-    _instrs.push_back(Instr("nop"));
+    if (_globals.count(regName) > 0 && _arrays.count(regName) > 0)
+    {
+        _instrs.push_back(Instr("la", mipsReg, regName));
+    }
+    else
+    {
+        _instrs.push_back(Instr("lw", mipsReg, getAllocationLocation(regName)));
+        _instrs.push_back(Instr("nop"));
+    }
+    
     return mipsReg;
 }
 
