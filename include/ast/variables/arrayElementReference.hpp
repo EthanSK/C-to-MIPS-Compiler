@@ -9,14 +9,14 @@
 
 class ArrayElementReference : public Statement
 {
-  public:
-    ArrayElementReference(StatementPtr arr, StatementPtr index);
+public:
+  ArrayElementReference(StatementPtr arr, StatementPtr index);
+  void generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const override;
 
-  protected:
-    StatementPtr getArr() const;
-    StatementPtr getIndex() const;
-    void printC(std::ostream &os) const;
+protected:
+  StatementPtr getArr() const;
+  StatementPtr getIndex() const;
+  void printC(std::ostream &os) const;
 };
 
 #endif
-

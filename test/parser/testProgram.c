@@ -1,10 +1,10 @@
-int f()
+int test()
 {
-    return 10;
+    int myarray[5];
+    int i;
+    for(i = 0; i < 3; i++)
+    {
+       break;
+    }
+    
 }
-
-int MAIN_FUNCTION_f2()
-{
-    return f();
-}
-
