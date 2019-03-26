@@ -1,4 +1,5 @@
-int sizeof_long()
+int sizeof_array_local()
 {
-    return sizeof(int**);
+    int x[5];
+    return sizeof(x[3]);
 }
