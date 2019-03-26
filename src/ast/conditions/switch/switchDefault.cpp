@@ -8,7 +8,7 @@ SwitchDefault::SwitchDefault(StatementPtr scopeBlock) : SwitchCase(new IntegerLi
 
 StatementPtr SwitchDefault::getScopeBlock() const
 {
-    return branches[0];
+    return branches[1];
 }
 
 void SwitchDefault::printC(std::ostream &os) const
