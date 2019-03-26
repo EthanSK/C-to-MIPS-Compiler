@@ -1,11 +1,14 @@
-int main()
+int not(int arg)
 {
-    int x, y, z;
-    while (x > 0)
-    {
-        break;
-        return 10;
-    }
+    return !arg;
+}
 
-    return 1;
+int neg(int arg)
+{
+    return -arg;
+}
+
+int inv(int arg)
+{
+    return ~arg;
 }
