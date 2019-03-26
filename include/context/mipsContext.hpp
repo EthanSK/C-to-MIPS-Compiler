@@ -28,6 +28,7 @@ public:
     void loadAddress(std::string varName, std::string destReg);
     void postProcessInstrs();
     void removeGlobalInits(std::string symbol);
+    int getAllocationSize(std::string regName) const;
     std::string getAllocationLocation(std::string regName) const;
     const Allocator& getAllocator() const;
 

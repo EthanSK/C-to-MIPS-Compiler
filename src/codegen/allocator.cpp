@@ -20,6 +20,19 @@ int Allocator::getAllocationOffset(std::string name) const
     throw "allocation " + name + " could not be found";
 }
 
+int Allocator::getAllocationSize(std::string name) const
+{
+    for (int i = _frames.size() - 1; i >= 0; --i)
+    {
+        if (_frames[i].isAllocated(name))
+        {
+            return _frames[i].getAllocationSize(name);
+        }
+    }
+
+    throw "allocation " + name + " could not be found";
+}
+
 bool Allocator::isAllocated(std::string name) const
 {
     for (size_t i = 0; i < _frames.size(); ++i)

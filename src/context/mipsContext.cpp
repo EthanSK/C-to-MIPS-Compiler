@@ -265,6 +265,19 @@ std::string MIPSContext::getAllocationLocation(std::string regName) const
     }
 }
 
+int MIPSContext::getAllocationSize(std::string regName) const
+{
+    if (_globals.count(regName) == 0)
+    {
+        return 4;
+    }
+    else
+    {
+        if (_arrays.count(regName) == 0) { return _allocator.getAllocationSize(regName); }
+        else { return _allocator.getAllocationSize("__" + regName + "__"); }
+    }
+}
+
 void MIPSContext::loadAddress(std::string destReg, std::string varName)
 {
     if (_globals.count(varName) == 0)

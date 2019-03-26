@@ -16,6 +16,13 @@ int AllocationFrame::getAllocationOffset(std::string name) const
     return _allocationOffsets[pos];
 }
 
+int AllocationFrame::getAllocationSize(std::string name) const
+{
+    int pos = getAllocationPosition(name);
+    if (pos < 0) { throw "allocation " + name + " could not be found"; }
+    return _allocations[pos].size;
+}
+
 bool AllocationFrame::isAllocated(std::string name) const
 {
     return getAllocationPosition(name) != -1;

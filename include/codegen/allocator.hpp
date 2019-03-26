@@ -9,6 +9,7 @@ class Allocator
 public:
     void allocate(Allocation allocation);
     int getAllocationOffset(std::string name) const;
+    int getAllocationSize(std::string name) const;
     bool isAllocated(std::string name) const;
     void popFrame();
     void pushFrame();
