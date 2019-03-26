@@ -54,6 +54,7 @@ void IL2MIPS::convertInstr(Instr &instr, MIPSContext &context)
     else if (instr.opcode == "init") { IL2MIPS::init(instr, context); }
     else if (instr.opcode == "inita") { IL2MIPS::inita(instr, context); }
     else if (instr.opcode == "loc") { IL2MIPS::loc(instr, context); }
+    else if (instr.opcode == "size") { IL2MIPS::size(instr, context); }
     else if (instr.opcode == "load") { IL2MIPS::load(instr, context); }
     else if (instr.opcode == "store") { IL2MIPS::store(instr, context); }
     else if (instr.opcode == "pop") { IL2MIPS::pop(instr, context); }

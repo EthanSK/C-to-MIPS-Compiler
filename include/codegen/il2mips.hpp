@@ -52,6 +52,7 @@ class IL2MIPS //one IL may map to many MIPS
     static void init(Instr instr, MIPSContext &context);
     static void inita(Instr instr, MIPSContext &context);
     static void loc(Instr instr, MIPSContext &context);
+    static void size(Instr instr, MIPSContext &context);
     static void load(Instr instr, MIPSContext &context);
     static void store(Instr instr, MIPSContext &context);
     static void pop(Instr instr, MIPSContext &context);
