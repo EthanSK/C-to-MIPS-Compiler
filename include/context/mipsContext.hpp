@@ -41,6 +41,7 @@ private:
 
     bool requiresStack(std::string reg) const;
     bool isAllocated(std::string reg) const;
+    void allocIfRequired(std::string reg);
     std::string loadInput(std::string regName, std::string mipsReg);
     std::string correctStackReference(std::string ref, int offset) const;
     std::string correctStackPop(std::string popRef, int offset) const;

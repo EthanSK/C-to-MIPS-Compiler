@@ -6,6 +6,7 @@
 std::vector<Instr> MIPSContext::dumpInstrs() const
 {
     std::vector<Instr> finalInstrs = _instrs;
+    return _instrs;
     for (int i = finalInstrs.size() - 1; i >= 0; --i)
     {
         if (finalInstrs[i].opcode == "move" && finalInstrs[i].dest == finalInstrs[i].input1) { finalInstrs.erase(finalInstrs.begin() + i); continue; }
@@ -199,14 +200,7 @@ void MIPSContext::addInstr(Instr instr, std::string label, bool ignoreDest, bool
     if (destName == "_root") { return; }
 
     bool reqStore = !ignoreDest && requiresStack(instr.dest);
-    if (reqStore)
-    {
-        if (!isAllocated(instr.dest))
-        {
-            Allocation allocation(4, instr.dest);
-            alloc(allocation);
-        }
-    }
+    if (reqStore) { allocIfRequired(instr.dest); }
 
     instr.label = label;
     instr.dest = reqStore ? "$t1" : destName;
@@ -274,12 +268,25 @@ void MIPSContext::loadAddress(std::string destReg, std::string varName)
 {
     if (_globals.count(varName) == 0)
     {
+        allocIfRequired(destReg);
         int regLocation = _allocator.getAllocationOffset(varName);
         addInstr(Instr("addi", destReg, "$sp", std::to_string(regLocation), {"#pop"}), false, true, true);
     }
     else
     {
         addInstr(Instr("la", destReg, varName), false, true, true);
+    }
+}
+
+void MIPSContext::allocIfRequired(std::string reg)
+{
+    if (requiresStack(reg))
+    {
+        if (!isAllocated(reg))
+        {
+            Allocation allocation(4, reg);
+            alloc(allocation);
+        }
     }
 }
 
@@ -327,7 +334,7 @@ void MIPSContext::postProcessInstrs()
         if (Utils::vectorContains(_instrs[i].extraData, std::string("#continue")))
         {
             int allocSize = 0;
-            for (size_t j = i - 1; j >= 0; --j)
+            for (int j = i - 1; j >= 0; --j)
             {
                 if (_instrs[j].opcode == "addi" && _instrs[j].dest == "$sp" && _instrs[j].input1 == "$sp")
                 {
