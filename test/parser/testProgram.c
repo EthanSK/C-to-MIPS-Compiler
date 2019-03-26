@@ -1,14 +1,5 @@
-int not(int arg)
+int main()
 {
-    return !arg;
-}
-
-int neg(int arg)
-{
-    return -arg;
-}
-
-int inv(int arg)
-{
-    return ~arg;
+    int a[1];
+    int *ptr = &a[1];
 }
