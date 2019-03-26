@@ -6,7 +6,7 @@
 std::vector<Instr> MIPSContext::dumpInstrs() const
 {
     std::vector<Instr> finalInstrs = _instrs;
-    return _instrs;
+    //return _instrs;
     for (int i = finalInstrs.size() - 1; i >= 0; --i)
     {
         if (finalInstrs[i].opcode == "move" && finalInstrs[i].dest == finalInstrs[i].input1) { finalInstrs.erase(finalInstrs.begin() + i); continue; }
@@ -79,6 +79,7 @@ void MIPSContext::alloc(Allocation allocation)
         _instrs.push_back(Instr(".globl", allocation.name));
         _instrs.push_back(Instr(".size", allocation.name, std::to_string(allocation.size)));
         _instrs.push_back(Instr::makeLabel(allocation.name));
+        _instrs.push_back(Instr(".word", "0"));
     }
     else
     {
