@@ -1,6 +1,6 @@
 int main()
 {
-    int z = 5;
-    int y[] = {1, 2, z, z + 2};
+    int x = 1;
+    int x[] = {1, 2, 3};
     return 0;
 }

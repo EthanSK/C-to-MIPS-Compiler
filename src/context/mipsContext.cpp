@@ -124,6 +124,7 @@ void MIPSContext::allocArray(Allocation allocation)
         _globals.insert(allocation.name);
         _instrs.push_back(Instr(".data"));
         _instrs.push_back(Instr(".globl", allocation.name));
+        _instrs.push_back(Instr(".size", allocation.name, std::to_string(allocation.size)));
         _instrs.push_back(Instr::makeLabel(allocation.name));
         _instrs.push_back(Instr(".space", std::to_string(allocation.size)));
     }
