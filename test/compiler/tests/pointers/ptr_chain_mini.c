@@ -1,14 +1,13 @@
 int *a;
-int **b;
-int ***c;
 
-int func(int *ptr)
+int func(int **ptr)
 {
-    return *ptr;
+    return **ptr;
 }
 
 int ptr_chain_mini()
 {
     int x = 30;
-    return func(&x);
+    a = &x;
+    return func(&a);
 }
