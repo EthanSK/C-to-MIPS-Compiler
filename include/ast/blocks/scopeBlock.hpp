@@ -3,6 +3,8 @@
 
 #include "sequenceBlock.hpp"
 
+class ScopeBlock;
+typedef const ScopeBlock* ScopeBlockPtr;
 
 class ScopeBlock : public SequenceBlock //aka compound statement, used to represent content between curly braces everywhere eg loops, conditions, pure scope, etc...
 {

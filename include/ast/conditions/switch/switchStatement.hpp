@@ -7,9 +7,11 @@
 #include <memory>
 #include "statement.hpp"
 #include "scopeBlock.hpp"
-#include "switchCase.hpp"
+
 #include "utils.hpp" 
 
+class SwitchStatement;
+typedef const SwitchStatement* SwitchStatementPtr;
 
 class SwitchStatement : public Statement 
 {

@@ -9,17 +9,19 @@
 #include "rvalue.hpp"
 #include "utils.hpp"
 
+class SwitchCase;
+typedef const SwitchCase *SwitchCasePtr;
+
 class SwitchCase : public Statement
 {
-public:
+  public:
     SwitchCase(StatementPtr condition, StatementPtr scopeBlock);
-    void generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const override;
+    virtual void generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const override;
+    StatementPtr getCondition() const;  //the thing for the case that it needs to equal to
+    StatementPtr getScopeBlock() const; //execution block
 
-protected:
-    StatementPtr getCondition() const; //the thing for the case that it needs to equal to
-	StatementPtr getScopeBlock() const; //execution block 
-    
-    void printC(std::ostream &os) const override;
+  protected:
+    virtual void printC(std::ostream &os) const override;
 };
 
 #endif

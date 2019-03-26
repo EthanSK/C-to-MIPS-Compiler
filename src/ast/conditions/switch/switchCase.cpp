@@ -21,24 +21,9 @@ void SwitchCase::printC(std::ostream &os) const
 
 void SwitchCase::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
 {
-
-    //getScopeBlock->generateIL(instrs, context, destReg);
-    // instrs.push_back(Instr::makeLabel(case_lb));
-
     RValuePtr rvalue = Utils::tryCast<RValue>(getCondition(), "condition of switch case must be an rvalue");
     if (!rvalue->isConstant()) { throw "condition of switch case must be a constant"; }
 
     int caseConstant = rvalue->evalConst();
     instrs.push_back(Instr("li", destReg, std::to_string(caseConstant)));//switch case returned through destReg
-    // getScopeBlock()->generateIL(instrs, context, "_root"); //because switch block can have switch cases or regular ndes, the IL gen should be done from the scope block
-
-    // std::string caseSkip_lb = context.makeLabelName("caseSkip_" + std::to_string(caseConstant)); //caseConstant for prettyness
-    // std::string switchCaseReg = context.makeName("switchCase");                          //the a in switch (a)            //the b in case b:
-    // context.getLastSwitchCase()->generateIL(instrs, context, switchCaseReg);             //evaluate and put in temp reg (like defining a variable)
-    // // put caseConstant in temp reg too (with li)
-    // instrs.push_back(Instr("li", "$t0", std::to_string(caseConstant)));
-    // // then compare the two reg's
-    // instrs.push_back(Instr("bne", caseSkip_lb, switchCaseReg, "$t0"));
-    // getScopeBlock()->generateIL(instrs, context, destReg);
-    // instrs.push_back(Instr::makeLabel(caseSkip_lb));
 }

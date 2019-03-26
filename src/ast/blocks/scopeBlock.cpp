@@ -38,7 +38,6 @@ void ScopeBlock::generateIL(std::vector<Instr> &instrs, ILContext &context, std:
     instrs.push_back(Instr("scd"));
 }
 
-
 std::vector<StatementPtr> ScopeBlock::getBranches() const
 {
     return branches;

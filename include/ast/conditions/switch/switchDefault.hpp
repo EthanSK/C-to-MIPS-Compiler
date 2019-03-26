@@ -5,9 +5,12 @@
 #include <string>
 #include <iostream>
 #include <memory>
-#include "statement.hpp"
+#include "switchCase.hpp"
 
-class SwitchDefault : public Statement
+class SwitchDefault; 
+typedef const SwitchDefault* SwitchDefaultPtr;
+
+class SwitchDefault : public SwitchCase
 {
 public:
     SwitchDefault(StatementPtr scopeBlock);
