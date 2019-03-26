@@ -47,7 +47,7 @@
 | load      | load x y im        | loads into x from the address y + im                         |
 | store     | store x y im       | stores the value in x to the address y + im                  |
 | init      | init x im          | initializes the variable x with the immediate im             |
-| inita     | inita x {items}    | initializes the array x with the items {items}               |
+| inita     | inita x {ims}      | initializes the array x with the immediates {ims}            |
 | loc       | loc x y            | x = &y                                                       |
 | pop       | pop                | pops the current stack frame. Use if you are going to jump over an scd |
 

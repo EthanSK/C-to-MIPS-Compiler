@@ -74,6 +74,7 @@
 #include "unaryBitwiseInvert.hpp"
 #include "unarySizeofConst.hpp"
 #include "initializerList.hpp"
+#include "arrayInitDeclarator.hpp"
 #include "arrayElementReference.hpp"
 #include "ifElseStatement.hpp"
 #include "functionCall.hpp"

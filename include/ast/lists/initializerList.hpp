@@ -6,12 +6,8 @@
 
 #include "literal.hpp"
 
-/*
-
-The parser should read init list literals recursively. {{5, 3}, 2, {{3, 3}, {5, 3}}} is valid
-Init lists are used for structs, as well as arrays. (don't have to do unions)
-
-*/
+class InitializerList;
+typedef const InitializerList* InitializerListPtr;
 
 class InitializerList : public Statement
 {
@@ -19,6 +15,7 @@ class InitializerList : public Statement
     InitializerList(std::vector<StatementPtr> elements);
     std::vector<StatementPtr> getElements() const;
     void printC(std::ostream &os) const override;
+    bool isConstant() const;
 };
 
 #endif
