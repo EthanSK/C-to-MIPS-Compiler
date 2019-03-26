@@ -311,7 +311,10 @@ void MIPSContext::postProcessInstrs()
                 {
                     if (!Utils::vectorContains(_instrs[j].extraData, std::string("#raw")))
                     {
-                        deallocSize += std::stoi(_instrs[j].input2);
+                        if (!Utils::vectorContains(_instrs[j].extraData, std::string("#pop")))
+                        {
+                            deallocSize += std::stoi(_instrs[j].input2);
+                        }
                     }
                 }
 
@@ -333,7 +336,10 @@ void MIPSContext::postProcessInstrs()
                 {
                     if (!Utils::vectorContains(_instrs[j].extraData, std::string("#raw")))
                     {
-                        allocSize -= std::stoi(_instrs[j].input2);
+                        if (!Utils::vectorContains(_instrs[j].extraData, std::string("#pop")))
+                        {
+                            allocSize -= std::stoi(_instrs[j].input2);
+                        }
                     }
                 }
 
