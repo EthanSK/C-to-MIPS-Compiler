@@ -13,18 +13,23 @@ typedef const Statement *StatementPtr;
 
 class ILContext : public Context
 {
-  public:
-    std::string makeName(std::string name);
-    std::string makeLabelName(std::string name);
-    void compileInput(StatementPtr input, std::vector<Instr> &instrs, std::string destReg);
+public:
+  std::string makeName(std::string name);
+  std::string makeLabelName(std::string name);
+  void compileInput(StatementPtr input, std::vector<Instr> &instrs, std::string destReg);
 
-    void pushLoopLabels(std::string startLabel, std::string endLabel); 
-    void popLoopLabels();                                              //pops last element
-    std::tuple<std::string, std::string> getLastLoopLabel();
+  void pushLoopLabels(std::string startLabel, std::string endLabel);
+  void popLoopLabels(); //pops last element
+  std::tuple<std::string, std::string> getLastLoopLabel();
 
-  private:
-    std::unordered_map<std::string, int> _registeredNames;
-    std::vector<std::tuple<std::string, std::string> > _loopLabelStack; //to keep track of labels for break and continue for eg. - tuple.0 is loop start label and tuple.1 is loop end label
+  void pushSwitchCase(StatementPtr caseValue);
+  void popSwitchCase();
+  StatementPtr getLastSwitchCase() const;
+
+private:
+  std::unordered_map<std::string, int> _registeredNames;
+  std::vector<std::tuple<std::string, std::string>> _loopLabelStack; //to keep track of labels for break and continue for eg. - tuple.0 is loop start label and tuple.1 is loop end label
+  std::vector<StatementPtr> _switchCaseStack;                        //so we can feed the switchCase genIL the correct case value to compare against
 };
 
 #endif

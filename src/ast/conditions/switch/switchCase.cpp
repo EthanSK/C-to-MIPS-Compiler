@@ -21,14 +21,15 @@ void SwitchCase::printC(std::ostream &os) const
 
 void SwitchCase::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
 {
-    // std::string else_lb = context.makeLabelName("else");
-    // std::string endif_lb = context.makeLabelName("endif");
+    RValuePtr rvalue = Utils::tryCast<RValue>(getCondition(), "condition of switch case must be an rvalue");
+    if (!rvalue->isConstant()) 
+    {
+        throw "condition of switch case must be a constant";
+    }
 
-    // context.compileInput(getCondition(), instrs, "$t0");
-    // instrs.push_back(Instr("bez", else_lb,  "$t0"));
-    // getIfScopeBlock()->generateIL(instrs, context, destReg);
-    // instrs.push_back(Instr("b", endif_lb));
-    // instrs.push_back(Instr::makeLabel(else_lb));
-    // getElseScopeBlock()->generateIL(instrs, context, destReg);
-    // instrs.push_back(Instr::makeLabel(endif_lb));
+    int caseConstant = rvalue->evalConst();
+    std::string case_lb = context.makeLabelName("case_" + std::to_string(caseConstant)); //caseConstant for prettyness
+    //getScopeBlock()->generateIL(instrs, context, destReg);
+
+    // instrs.push_back(Instr("decla", getIdentifierName(), std::to_string(arraySize * 4)));
 }

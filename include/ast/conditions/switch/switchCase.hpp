@@ -6,6 +6,8 @@
 #include <iostream>
 #include <memory>
 #include "statement.hpp"
+#include "rvalue.hpp"
+#include "utils.hpp"
 
 class SwitchCase : public Statement
 {
