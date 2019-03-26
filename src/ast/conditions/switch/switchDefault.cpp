@@ -1,25 +1,21 @@
-#include "switchStatement.hpp"
+#include "switchDefault.hpp"
 
-SwitchStatement::SwitchStatement(StatementPtr caseExpr, StatementPtr scopeBlock)
+SwitchDefault::SwitchDefault(StatementPtr scopeBlock)
 {
-    branches.push_back(caseExpr);
     branches.push_back(scopeBlock);
-}
+} 
 
-StatementPtr SwitchStatement::getCase() const
+StatementPtr SwitchDefault::getScopeBlock() const
 {
     return branches[0];
 }
-StatementPtr SwitchStatement::getScopeBlock() const
+
+void SwitchDefault::printC(std::ostream &os) const
 {
-    return branches[1];
-}
-void SwitchStatement::printC(std::ostream &os) const
-{
-    os << "switch (" << getCase() << ")" << getScopeBlock();;
+    os << "default: " << getScopeBlock(); 
 }
 
-void SwitchStatement::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
+void SwitchDefault::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
 {
     // std::string else_lb = context.makeLabelName("else");
     // std::string endif_lb = context.makeLabelName("endif");

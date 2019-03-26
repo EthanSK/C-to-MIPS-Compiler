@@ -1,22 +1,20 @@
-#ifndef switch_hpp
-#define switch_hpp
+#ifndef switchDefault_hpp
+#define switchDefault_hpp
 
 #include <vector>
 #include <string>
 #include <iostream>
 #include <memory>
 #include "statement.hpp"
-#include "scopeBlock.hpp"
 
-class SwitchStatement : public Statement 
+class SwitchDefault : public Statement
 {
 public:
-    SwitchStatement(StatementPtr caseExpr, StatementPtr scopeBlock);
+    SwitchDefault(StatementPtr scopeBlock);
     void generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const override;
 
 protected:
-    StatementPtr getCase() const; //as in the a in switch(a)
-    StatementPtr getScopeBlock() const;
+	StatementPtr getScopeBlock() const; //execution block 
 
     void printC(std::ostream &os) const override;
 };

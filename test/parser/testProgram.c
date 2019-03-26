@@ -1,6 +1,14 @@
-int main()
+int switch_simple()
 {
-    int a = 20;
-    int b = 3;
-    return a % b;
+    int a = 69;
+    switch (a)
+    {
+    case 69:
+        return 69;
+        break;
+
+    default:
+        break;
+    }
+    return 68;
 }
