@@ -2,9 +2,9 @@
 #include "integerLiteral.hpp"
 
 SwitchDefault::SwitchDefault(StatementPtr scopeBlock) : SwitchCase(new IntegerLiteral(1), scopeBlock)
-{ 
-    branches.push_back(scopeBlock);
-} 
+{
+
+}
 
 StatementPtr SwitchDefault::getScopeBlock() const
 {
