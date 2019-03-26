@@ -4,5 +4,5 @@ int SELF_RECURSION(int r)
     {
         return 12345;
     }
-    return SELF_RECURSION(r - 1);
+    return SELF_RECURSION(0);
 }

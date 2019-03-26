@@ -1,7 +1,7 @@
 
 double atof(const char* str);
 
-double ATOF()
+double ATOF(const char* str)
 {
-    return atof("2.7182818");
+    return atof(str);
 }
