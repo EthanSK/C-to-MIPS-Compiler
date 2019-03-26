@@ -36,6 +36,16 @@ std::vector<Instr> MIPSContext::dumpInstrs() const
             }
         }
 
+        if (i > 0 && finalInstrs[i].opcode == "move" && finalInstrs[i - 1].opcode == "li")
+        {
+            if (finalInstrs[i].input1 == finalInstrs[i - 1].dest)
+            {
+                finalInstrs[i - 1].dest = finalInstrs[i].dest;
+                finalInstrs.erase(finalInstrs.begin() + i);
+                continue;
+            }
+        }
+
         finalInstrs[i].extraData.clear();
     }
 
