@@ -4,6 +4,7 @@ void IL2MIPS::inita(Instr instr, MIPSContext &context)
 {
     if (context.isGlobalScope())
     {
+        context.removeGlobalInits(instr.dest);
         for (size_t i = 0; i < instr.extraData.size(); ++i)
         {
             context.addRawInstr(Instr(".word", instr.extraData[i]));

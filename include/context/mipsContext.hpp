@@ -27,6 +27,7 @@ public:
     void addRawInstr(Instr instr);
     void loadAddress(std::string varName, std::string destReg);
     void postProcessInstrs();
+    void removeGlobalInits(std::string symbol);
     std::string getAllocationLocation(std::string regName) const;
     const Allocator& getAllocator() const;
 

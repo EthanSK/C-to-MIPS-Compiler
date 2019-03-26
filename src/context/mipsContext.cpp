@@ -143,6 +143,23 @@ void MIPSContext::allocArray(Allocation allocation)
     }
 }
 
+void MIPSContext::removeGlobalInits(std::string symbol)
+{
+    std::string foundSymbol;
+    for (size_t i = 0; i < _instrs.size(); ++i)
+    {
+        if (_instrs[i].hasLabel()) { foundSymbol = _instrs[i].label; }
+        if (foundSymbol == symbol)
+        {
+            if (_instrs[i].opcode == ".word" || _instrs[i].opcode == ".space")
+            {
+                _instrs.erase(_instrs.begin() + i);
+                continue;
+            }
+        }
+    }
+}
+
 std::string MIPSContext::correctStackReference(std::string ref, int offset) const
 {
     if (!std::regex_match(ref, _isStackRef)) { return ref; }
