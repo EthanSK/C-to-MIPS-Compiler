@@ -26,9 +26,19 @@ void BinaryLogicalOr::generateIL(std::vector<Instr> &instrs, ILContext &context,
 	std::string opcode = "orl";
 	std::string leftReg = context.makeName(opcode + "_l");
 	std::string rightReg = context.makeName(opcode + "_r");
+	std::string shortCircuit_lb = context.makeLabelName(opcode + "_sc");
+	std::string end_lb = context.makeLabelName(opcode + "_end");
+
 	context.compileInput(getLeft(), instrs, leftReg);
+	instrs.push_back(Instr("bgz", shortCircuit_lb, leftReg));
+
 	context.compileInput(getRight(), instrs, rightReg);
 	instrs.push_back(Instr(opcode, destReg, leftReg, rightReg));
+	instrs.push_back(Instr("b", end_lb));
+
+	instrs.push_back(Instr::makeLabel(shortCircuit_lb));
+	instrs.push_back(Instr("li", destReg, "1"));
+	instrs.push_back(Instr::makeLabel(end_lb));
 }
 
 int BinaryLogicalOr::evalConst() const

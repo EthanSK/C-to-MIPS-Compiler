@@ -3,6 +3,6 @@
 void IL2MIPS::andl(Instr instr, MIPSContext &context) 
 {
     context.addInstr(Instr("and", "$t0", instr.input1, instr.input2), instr.label);
-    context.addInstr(Instr("addi", "$t0", "$t0", "$1"), instr.label);
+    context.addInstr(Instr("addi", "$t0", "$t0", "1"), instr.label);
     context.addInstr(Instr("sltu", instr.dest, "$0", "$t0"), instr.label);
 }

@@ -39,6 +39,7 @@ void IL2MIPS::convertInstr(Instr &instr, MIPSContext &context)
     else if (instr.opcode == "gte") { IL2MIPS::gte(instr, context); }
     else if (instr.opcode == "b") { IL2MIPS::b(instr, context); }
     else if (instr.opcode == "bez") { IL2MIPS::bez(instr, context); }
+    else if (instr.opcode == "bgz") { IL2MIPS::bgz(instr, context); }
     else if (instr.opcode == "bnez") { IL2MIPS::bnez(instr, context); }
     else if (instr.opcode == "xor") { IL2MIPS::xorM(instr, context); }
     else if (instr.opcode == "and") { IL2MIPS::andM(instr, context); }
