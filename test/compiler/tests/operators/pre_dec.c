@@ -1,8 +1,8 @@
-int preInc()
+int pre_dec()
 {
     int x = 1;
     int y = 0;
 
-    y = ++x;
+    y = --x;
     return x + y;
 }
