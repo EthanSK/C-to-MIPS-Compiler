@@ -3,7 +3,7 @@
 void ScopeBlock::printC(std::ostream &os) const
 {
     os << "\n{\n";
-    for(size_t i = 0; i < branches.size(); i++)
+    for (size_t i = 0; i < branches.size(); i++)
     {
         os << branches[i] << ";\n";
     }
@@ -19,21 +19,26 @@ void ScopeBlock::generatePython(std::ostream &os, PythonContext &context, int sc
     }
     else
     {
-        for(size_t i = 0; i < branches.size(); i++)
+        for (size_t i = 0; i < branches.size(); i++)
         {
             context.indentStream(os, scopeDepth);
             branches[i]->generatePython(os, context, scopeDepth);
         }
-        os <<std::flush;
+        os << std::flush;
     }
 }
 
 void ScopeBlock::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
 {
     instrs.push_back(Instr("scu"));
-    for(size_t i = 0; i < branches.size(); i++)
+    for (size_t i = 0; i < branches.size(); i++)
     {
         branches[i]->generateIL(instrs, context, destReg);
     }
     instrs.push_back(Instr("scd"));
-}  
+}
+
+std::vector<StatementPtr> ScopeBlock::getBranches() const
+{
+    return branches;
+}
