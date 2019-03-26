@@ -1,6 +1,6 @@
-int switch_break_driver();
+int switch_break();
 
 int main()
 {
-    return !(switch_break_driver() == 70);
+    return !(switch_break() == 70);
 }
