@@ -1,4 +1,6 @@
 #include "unarySizeof.hpp"
+#include "identifier.hpp"
+#include "utils.hpp"
 
 void UnarySizeof::printC(std::ostream &os) const
 {
@@ -7,7 +9,17 @@ void UnarySizeof::printC(std::ostream &os) const
 
 void UnarySizeof::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
 {
-    instrs.push_back(Instr("li", destReg, "4"));
+    try
+    {
+        IdentifierPtr id = Utils::tryCast<Identifier>(getOperand(), "");
+        instrs.push_back(Instr("size", destReg, id->getName()));
+    }
+    catch(std::string)
+    {
+        getOperand()->generateIL(instrs, context, "_root");
+        instrs.push_back(Instr("li", destReg, "4"));
+    }
+    
 }
 
 bool UnarySizeof::isConstant() const { return false; }

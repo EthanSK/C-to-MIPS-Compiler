@@ -1,5 +1,6 @@
-int ptr_op_chain()
+int sizeof_long()
 {
-    int x = 5;
-    return *&*&x;
+    int x;
+    int arr[4];
+    return sizeof(arr);
 }
