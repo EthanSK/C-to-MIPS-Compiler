@@ -2,5 +2,6 @@
 
 void IL2MIPS::size(Instr instr, MIPSContext &context) 
 {
-    context.addInstr(Instr("li", instr.dest, "4"), instr.label);
+    int allocSize = context.getAllocationSize(instr.input1);
+    context.addInstr(Instr("li", instr.dest, std::to_string(allocSize)), instr.label);
 }

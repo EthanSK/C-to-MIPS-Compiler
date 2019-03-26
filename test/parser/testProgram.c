@@ -1,5 +1,6 @@
-int sizeof_array_local()
+int x[10];
+
+int main()
 {
-    int x[5];
-    return sizeof(x[3]);
+    return sizeof(x);
 }

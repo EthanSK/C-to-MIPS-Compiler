@@ -269,12 +269,20 @@ int MIPSContext::getAllocationSize(std::string regName) const
 {
     if (_globals.count(regName) == 0)
     {
-        return 4;
+        if (_arrays.count(regName) == 0) { return _allocator.getAllocationSize(regName); }
+        else { return _allocator.getAllocationSize("__" + regName + "__"); }
     }
     else
     {
-        if (_arrays.count(regName) == 0) { return _allocator.getAllocationSize(regName); }
-        else { return _allocator.getAllocationSize("__" + regName + "__"); }
+        for (size_t i = 0; i < _instrs.size(); ++i)
+        {
+            if (_instrs[i].opcode == ".size" && _instrs[i].dest == regName)
+            {
+                return std::stoi(_instrs[i].input1);
+            }
+        }
+
+        throw "global allocation " + regName + " not found";
     }
 }
 
