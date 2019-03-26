@@ -37,22 +37,25 @@ void FunctionDeclarator::generatePython(std::ostream &os, PythonContext &context
 
 void FunctionDeclarator::generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const
 {
-    Instr instr("fdef", getIdentifierName());
-
-    ParameterListPtr paramList = Utils::tryCast<ParameterList>(getParamList(), "parameter list of a function declarator must be of type parameterList");
-    std::vector<StatementPtr> params = paramList->getNodes();
-
-    for (size_t i = 0; i < params.size(); ++i)
+    if (context.isFuncSymbolDefined(getIdentifierName()))
     {
-        DeclarationPtr declaration = Utils::tryCast<Declaration>(params[i], "param in function definition must be a valid declaration");
-        DeclaratorListPtr declList = declaration->getDeclList();
-        for (size_t j = 0; j < declList->getDeclCount(); ++j)
-        {
-            DeclaratorPtr decl = declList->getDeclarator(j);
-            instr.extraData.push_back(decl->getIdentifierName());
-            instr.extraData.push_back("4");
-        }
-    }
+        Instr instr("fdef", getIdentifierName());
 
-    instrs.push_back(instr);
+        ParameterListPtr paramList = Utils::tryCast<ParameterList>(getParamList(), "parameter list of a function declarator must be of type parameterList");
+        std::vector<StatementPtr> params = paramList->getNodes();
+
+        for (size_t i = 0; i < params.size(); ++i)
+        {
+            DeclarationPtr declaration = Utils::tryCast<Declaration>(params[i], "param in function definition must be a valid declaration");
+            DeclaratorListPtr declList = declaration->getDeclList();
+            for (size_t j = 0; j < declList->getDeclCount(); ++j)
+            {
+                DeclaratorPtr decl = declList->getDeclarator(j);
+                instr.extraData.push_back(decl->getIdentifierName());
+                instr.extraData.push_back("4");
+            }
+        }
+
+        instrs.push_back(instr);
+    }
 }

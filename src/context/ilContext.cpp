@@ -32,6 +32,16 @@ void ILContext::compileInput(StatementPtr input, std::vector<Instr> &instrs, std
     }
 }
 
+void ILContext::registerFuncSymbol(std::string symbolName)
+{
+    _funcSymbols.insert(symbolName);
+}
+
+bool ILContext::isFuncSymbolDefined(std::string symbolName) const
+{
+    return _funcSymbols.count(symbolName) > 0;
+}
+
 void ILContext::pushLoopLabels(std::string startLabel, std::string endLabel)
 {
     _loopLabelStack.push_back(std::make_tuple(startLabel, endLabel));
