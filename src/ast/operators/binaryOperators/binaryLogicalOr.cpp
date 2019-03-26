@@ -30,7 +30,7 @@ void BinaryLogicalOr::generateIL(std::vector<Instr> &instrs, ILContext &context,
 	std::string end_lb = context.makeLabelName(opcode + "_end");
 
 	context.compileInput(getLeft(), instrs, leftReg);
-	instrs.push_back(Instr("bgz", shortCircuit_lb, leftReg));
+	instrs.push_back(Instr("bnez", shortCircuit_lb, leftReg));
 
 	context.compileInput(getRight(), instrs, rightReg);
 	instrs.push_back(Instr(opcode, destReg, leftReg, rightReg));
