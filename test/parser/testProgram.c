@@ -5,18 +5,18 @@ int main()
     switch (a)
     {
         b = 4; 
-    case 69:
-    {
-        return 69;
-        break;
+        case 69:
+        {
+            return 69;
+        }
+        case 3:
+        {
+            b = 5;
+            a = b + 6;
+        }
+        default:
+            return 2;
     }
-    case 3:
-    {
-        b = 5;
-        a = b + 6;
-    }
-    default:
-        break;
-    }
+
     return 68;
 }
