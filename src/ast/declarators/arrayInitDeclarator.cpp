@@ -20,4 +20,12 @@ void ArrayInitDeclarator::generateIL(std::vector<Instr> &instrs, ILContext &cont
 
         instrs.push_back(instr);
     }
+    else
+    {
+        for (size_t i = 0; i < initializers.size(); ++i)
+        {
+            context.compileInput(initializers[i], instrs, "$t0");
+            instrs.push_back(Instr("store", "$t0", getIdentifierName(), std::to_string(i * 4)));
+        }
+    }
 }
