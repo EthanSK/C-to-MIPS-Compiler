@@ -16,7 +16,7 @@ DeclaratorPtr DeclaratorList::getDeclarator(int index) const
     return Utils::tryCast<Declarator>(branches[index], "decl list can only contain declarators");
 }
 
-int DeclaratorList::getDeclCount() const
+size_t DeclaratorList::getDeclCount() const
 {
     return branches.size();
 }
