@@ -25,7 +25,7 @@ void SwitchStatement::generateIL(std::vector<Instr> &instrs, ILContext &context,
 {
     ScopeBlockPtr switchBlock = Utils::tryCast<ScopeBlock>(getSwitchBlock(), "switch block must be a scope block"); //just to get access to branches
     std::vector<StatementPtr> switchBlockBranches = switchBlock->getBranches();
-    std::string switchEnd_lb = context.makeName("switchEnd"); //the a in switch (a)
+    std::string switchEnd_lb = context.makeLabelName("switchEnd"); //the a in switch (a)
     context.pushLoopLabels("NULL", switchEnd_lb);
 
     //we could set up labels and scope blocks first, the branch past all that, then beq back...nah would mess up at the end.
