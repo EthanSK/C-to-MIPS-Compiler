@@ -17,7 +17,7 @@ public:
 
 protected:
     StatementPtr getCase() const; //as in the a in switch(a)
-	StatementPtr getSwitchBlock() const; //contains cases and maybe default
+	StatementPtr getSwitchBlock() const; //contains cases and maybe default. just a regular scope block
 
     void printC(std::ostream &os) const override;
 };
