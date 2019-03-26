@@ -452,7 +452,7 @@ STATEMENT
 
 //Switch statements
 LABELED_STATEMENT
-	: T_IDENTIFIER T_COLON STATEMENT
+	: T_IDENTIFIER T_COLON STATEMENT { $$ = new SwitchCase($1, $3); }
 	| T_CASE CONSTANT_EXPRESSION T_COLON STATEMENT { $$ = new SwitchCase($2, $4); }
 	| T_DEFAULT T_COLON STATEMENT { $$ = new SwitchDefault($3); }
 	;
