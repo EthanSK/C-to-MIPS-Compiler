@@ -1,4 +1,4 @@
-int main()
+int switch_break()
 {
     int a = 69;
     switch (a)
