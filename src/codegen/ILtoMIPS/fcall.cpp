@@ -17,7 +17,8 @@ void IL2MIPS::fcall(Instr instr, MIPSContext &context)
 
     int argFrameSize = 4 * 4;
     context.addRawInstr(Instr("addi", "$sp", "$sp", std::to_string(-argFrameSize), {"#raw"}));
-    context.addRawInstr(Instr("lw", "$gp", "__gnu_local_gp"));
+    context.addRawInstr(Instr("lui", "$gp", "%hi(__gnu_local_gp)"));
+    context.addRawInstr(Instr("addiu", "$gp", "$gp", "%lo(__gnu_local_gp)"));
     context.addRawInstr(Instr("lw", "$t0", "%call16(" + instr.input1 + ")($gp)"));
     context.addRawInstr(Instr("nop"));
     context.addRawInstr(Instr("jalr", "$t0"));
