@@ -91,4 +91,7 @@
 #include "continueKeyword.hpp"
 #include "returnKeyword.hpp"
 #include "breakKeyword.hpp"
+#include "switchStatement.hpp"
+#include "switchCase.hpp"
+#include "switchDefault.hpp"
 #endif

@@ -14,10 +14,10 @@ typedef const Statement *StatementPtr;
 
 class ILContext : public Context
 {
-  public:
-    std::string makeName(std::string name);
-    std::string makeLabelName(std::string name);
-    void compileInput(StatementPtr input, std::vector<Instr> &instrs, std::string destReg);
+public:
+  std::string makeName(std::string name);
+  std::string makeLabelName(std::string name);
+  void compileInput(StatementPtr input, std::vector<Instr> &instrs, std::string destReg);
 
     void registerFuncSymbol(std::string symbolName);
     bool isFuncSymbolDefined(std::string symbolName) const;

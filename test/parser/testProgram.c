@@ -1,8 +1,22 @@
 int postInc()
 {
-    int x = 1;
-    int y = 0;
+    int a = 69;
+    int b;
+    switch (a)
+    {
+        b = 4; 
+        case 69:
+        {
+            return 69;
+        }
+        case 3:
+        {
+            b = 5;
+            a = b + 6;
+        }
+        default:
+            return 2;
+    }
 
-    y = x++;
-    return x + y;
+    return 68;
 }

@@ -56,3 +56,17 @@ std::tuple<std::string, std::string> ILContext::getLastLoopLabel()
 {
     return _loopLabelStack.back();
 }
+
+
+  void ILContext::pushSwitchCase(StatementPtr caseValue)
+  {
+      _switchCaseStack.push_back(caseValue);
+  }
+  void ILContext::popSwitchCase()
+  {
+      _switchCaseStack.pop_back();
+  }
+  StatementPtr ILContext::getLastSwitchCase() const
+  {
+      return _switchCaseStack.back();
+  }
