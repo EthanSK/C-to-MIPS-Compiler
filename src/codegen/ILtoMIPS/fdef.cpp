@@ -19,7 +19,8 @@ void IL2MIPS::fdef(Instr instr, MIPSContext &context)
         {
             int stackSize = context.getAllocator().stackSize();
             int argOffset = stackSize + 4 * i;
-            context.addInstr(Instr("lw", "$t0", std::to_string(argOffset) + "($sp)"));
+            context.addRawInstr(Instr("lw", "$t0", std::to_string(argOffset) + "($sp)"));
+            context.addRawInstr(Instr("nop"));
             context.addInstr(Instr("sw", "$t0", "0($sp)"));
         }
     }
