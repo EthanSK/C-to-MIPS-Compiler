@@ -17,7 +17,7 @@ public:
   void generateIL(std::vector<Instr> &instrs, ILContext &context, std::string destReg) const override; 
 
 protected:
-  void printC(std::ostream &os) const override;
+  virtual void printC(std::ostream &os) const override;
 };
 
 #endif

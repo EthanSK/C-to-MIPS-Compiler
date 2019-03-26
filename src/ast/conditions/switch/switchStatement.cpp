@@ -54,37 +54,36 @@ void SwitchStatement::generateIL(std::vector<Instr> &instrs, ILContext &context,
     //wait what am i on about, we need to know the case at runtime not compile time. it needs to generate labels ad blocks for every case, and do an eq on the genIL on the case dest reg  (return value) and the constant of the switch conditions
     //and that is why we need a for loop, the eq needs to be done on every case (because cases are known at compile time, the are just constants)
 
-    auto switchBlock = Utils::tryCast<ScopeBlock>(getSwitchBlock(), "switch block must be a scope block"); //just to get access to branches
+    // auto switchBlock = Utils::tryCast<ScopeBlock>(getSwitchBlock(), "switch block must be a scope block"); //just to get access to branches
     // switcblock->branches contain all the cases / default
 
-    for (size_t i = 0; i < switchBlock->branches.size(); i++)
-    {
-        //make a label and block for each switch case (check if its actually a switch case)
-        try
-        { //doing try because dead code is still valid and compilation should continue
-            auto switchCase = Utils::tryCast<SwitchCase>(switchBlock->branches[i], "node is not a switch case, it is either dead code or invalid");
-            std::string case_lb = context.makeLabelName("case");
-            instrs.push_back(Instr::makeLabel(else_lb));
-            switchCase->generateIL(instrs, context, destReg);
-        }
-        catch (const std::exception &e)
-        {
-            std::cerr << e.what() << '\n';
-        }
-    }
+    // for (size_t i = 0; i < switchBlock->branches.size(); i++)
+    // {
+    //     //make a label and block for each switch case (check if its actually a switch case)
+    //     try
+    //     { //doing try because dead code is still valid and compilation should continue
+    //         auto switchCase = Utils::tryCast<SwitchCase>(switchBlock->branches[i], "node is not a switch case, it is either dead code or invalid");
+    //         std::string case_lb = context.makeLabelName("case");
+    //         //beq getCase == switchCase.getCondition to case_lb
+    //         //this ^ can be done inside the switchCase genIL, if the context feeds it the correct getCase to check against.
+    //         instrs.push_back(Instr::makeLabel(case_lb));
+    //         switchCase->generateIL(instrs, context, destReg);
+    //     }
+    //     catch (const std::exception &e)
+    //     {
+    //         std::cerr << e.what() << '\n';
+    //     }
+    // }
     //then after we have set all the labels with their blocks, we need to do an eq to jump to the correct block
     //we can do a beq as it is in our IL spec. 
     //we need to beq to the label if the switch case constant value is eq to the getCase constant value .that should actually be done i nthe for loop as we need to check it for each case.
 
-    context.compileInput(getCase(), instrs, "$t0"); //case we wanna match against is stored in t0. we wanna do an eq
-    instrs.push_back(Instr("eq", "$t1", "$t0"));
+    // context.compileInput(getCase(), instrs, "$t0"); //case we wanna match against is stored in t0. we wanna do an eq
+    // instrs.push_back(Instr("eq", "$t1", "$t0"));
 
-    // 	std::string opcode = "eq";
-    // std::string leftReg = context.makeName(opcode + "_l");
-    // std::string rightReg = context.makeName(opcode + "_r");
-    // context.compileInput(getLeft(), instrs, leftReg);
-    // context.compileInput(getRight(), instrs, rightReg);
-    // instrs.push_back(Instr(opcode, destReg, leftReg, rightReg));
+    context.pushSwitchCase(getCase());
 
-    getSwitchBlock()->generateIL(instrs, context, destReg);
+    getSwitchBlock()->generateIL(instrs, context, destReg); //will be switchBlock implementeation of genIL, which loops through all VALID cases and genIL on those
+
+    context.popSwitchCase();
 }
