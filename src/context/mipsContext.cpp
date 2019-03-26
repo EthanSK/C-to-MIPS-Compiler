@@ -22,6 +22,7 @@ std::vector<Instr> MIPSContext::dumpInstrs() const
             {
                 finalInstrs[i].dest = finalInstrs[i - 1].input1;
                 finalInstrs.erase(finalInstrs.begin() + i - 1);
+                i--;
                 continue;
             }
         }
@@ -32,6 +33,7 @@ std::vector<Instr> MIPSContext::dumpInstrs() const
             {
                 finalInstrs[i - 2].dest = finalInstrs[i].dest;
                 finalInstrs.erase(finalInstrs.begin() + i);
+                i -= 2;
                 continue;
             }
         }
@@ -42,6 +44,7 @@ std::vector<Instr> MIPSContext::dumpInstrs() const
             {
                 finalInstrs[i - 1].dest = finalInstrs[i].dest;
                 finalInstrs.erase(finalInstrs.begin() + i);
+                i--;
                 continue;
             }
         }

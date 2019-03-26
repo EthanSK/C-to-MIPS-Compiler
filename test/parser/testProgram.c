@@ -1,6 +1,8 @@
-int x[] = {1, 2, 3};
-
-int main()
+int postInc()
 {
-    return 0;
+    int x = 1;
+    int y = 0;
+
+    y = x++;
+    return x + y;
 }
