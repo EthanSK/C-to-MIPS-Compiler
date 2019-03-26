@@ -75,8 +75,8 @@ void SwitchStatement::generateIL(std::vector<Instr> &instrs, ILContext &context,
         //if there is corresponding label for node, make label
         try
         { //is a switch case or default
-            deadCode = false;
             SwitchCasePtr switchCase = Utils::tryCast<SwitchCase>(switchBlockBranches[i], "node is not a switch case");
+            deadCode = false;
             std::string label = labels[labelIndex++];
             instrs.push_back(Instr::makeLabel(label));
             switchCase->getScopeBlock()->generateIL(instrs, context, destReg);
