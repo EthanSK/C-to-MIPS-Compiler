@@ -69,11 +69,13 @@ void SwitchStatement::generateIL(std::vector<Instr> &instrs, ILContext &context,
 
     //now set up the branch labels with the corresponding block IL
     int labelIndex = 0;
+    bool deadCode = true;
     for (size_t i = 0; i < switchBlockBranches.size(); i++)
     {
         //if there is corresponding label for node, make label
         try
         { //is a switch case or default
+            deadCode = false;
             SwitchCasePtr switchCase = Utils::tryCast<SwitchCase>(switchBlockBranches[i], "node is not a switch case");
             std::string label = labels[labelIndex++];
             instrs.push_back(Instr::makeLabel(label));
@@ -82,7 +84,10 @@ void SwitchStatement::generateIL(std::vector<Instr> &instrs, ILContext &context,
         }
         catch (std::string)
         { //not a switch case or default
-            switchBlockBranches[i]->generateIL(instrs, context, destReg);
+            if (!deadCode)
+            {
+                switchBlockBranches[i]->generateIL(instrs, context, destReg);
+            }
         }
     }
     instrs.push_back(Instr::makeLabel(switchEnd_lb));
