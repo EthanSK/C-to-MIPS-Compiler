@@ -48,7 +48,13 @@ void ArrayElementReference::generateLValueStoreIL(std::vector<Instr> &instrs, IL
 
 void ArrayElementReference::generateLValueLocateIL(std::vector<Instr> &instrs, ILContext &context, std::string inputReg) const
 {
-    throw "array value locate not yet supported";
+    std::string offsetName = context.makeName("arr_offset");
+    std::string locName = context.makeName("arr_loc");
+
+    getArr()->generateIL(instrs, context, locName);
+    context.compileInput(getIndex(), instrs, offsetName);
+    instrs.push_back(Instr("lsl", "$t0", offsetName, "2"));
+    instrs.push_back(Instr("add", inputReg, "$t0", locName));
 }
 
 bool ArrayElementReference::isConstant() const { return false; }
