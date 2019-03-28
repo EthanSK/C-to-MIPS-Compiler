@@ -6,7 +6,7 @@
 - It uses Flex for lexical analysis, and Bison (3.3.2) for parsing to an AST.
 - The target environment is Ubuntu 16, however a lot of the features may work on Unix based systems such as MacOS (exempt features are mentioned below).
 - The compiler conforms to this specification: http://port70.net/~nsz/c/c89/c89-draft.html
-- The projcet conforms to this specification: https://github.com/LangProc/langproc-2018-cw  
+- The project conforms to this specification: https://github.com/LangProc/langproc-2018-cw  
 - It assumes the input C is perfectly valid, well-formed, pre-processed C90. It performs some minimal optimization and error checking but do not rely on it for anything useful.
 - Also includes a basic C to Python translator
 
