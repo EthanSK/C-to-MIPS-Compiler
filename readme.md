@@ -13,7 +13,7 @@
 ### Usage
 
 Make the project:  
-```make clean``` 
+```make clean```   
 ```make bin/c_compiler```
 
 To compile a C file into MIPS, simply run   
@@ -102,11 +102,11 @@ The compiler currently passes 172/177 tests
 ### Extras
 
 We added some cool features:   
-- View diagram of AST with Graphviz (or an online dot file viewer, like https://dreampuf.github.io/GraphvizOnline)(dot file can be found in ```bin/ast.dot``` once compiler has been run as described in Usage section) 
+- View diagram of AST with Graphviz (or an online dot file viewer, like https://dreampuf.github.io/GraphvizOnline) (dot file can be found in ```bin/ast.dot``` once compiler has been run as described in Usage section) 
 - View the AST that the Clang compiler generates on any C file you give it using ```playground/ast/generateAST.sh <program_name.c>```
 
 ### Credits
 
-The creators of this project are:
-EthanSK https://github.com/EthanSK
-QFSW https://github.com/QFSW
+The creators of this project are:   
+EthanSK https://github.com/EthanSK   
+QFSW https://github.com/QFSW   
